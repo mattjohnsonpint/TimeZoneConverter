@@ -1,0 +1,29 @@
+﻿{
+    "version": "1.0.0-*",
+    "title": "TimeZoneConverter",
+    "description": "Lightweight library to convert quickly between Windows time zone IDs and IANA Time Zone names.",
+    "authors": [ "Matt Johnson" ],
+
+    "packOptions": {
+        "projectUrl": "https://github.com/mj1856/TimeZoneConverter",
+        "licenseUrl": "https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt",
+        "tags": [ "timezone", "time", "zone", "time zone", "iana", "tzdb", "olson", "timezoneinfo" ]
+    },
+
+    "buildOptions": {
+        "embed": {
+            "includeFiles": [ "Data/Mapping.csv.gz", "Data/Aliases.csv.gz" ]
+        }
+    },
+
+    "dependencies": {
+        "System.Runtime": "4.0.0",
+        "System.IO.Compression": "4.0.0"
+    },
+
+    "frameworks": {
+        "netstandard1.1": {
+            "imports": "dnxcore50"
+        }
+    }
+}
