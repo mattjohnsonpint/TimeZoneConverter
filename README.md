@@ -30,18 +30,21 @@ it is recommended that you always use the most current revision, and check for u
 ## Example Usage
 
 Convert an IANA time zone name to the best fitting Windows time zone ID.
+
 ```csharp
 string tz = TZConvert.IanaToWindows("America/Los_Angeles");
 // Result:  "Eastern Standard Time"
 ```
 
 Convert a Windows time zone name to the best fitting IANA time zone ID.
+
 ```csharp
 string tz = TZConvert.WindowsToIana("Eastern Standard Time");
 // result:  "America/New_York"
 ```
 
 Convert a Windows time zone name to the best fitting IANA time zone ID, with regard to a specific country.
+
 ```csharp
 string tz = TZConvert.WindowsToIana("Eastern Standard Time", "CA");
 // result:  "America/Toronto"
@@ -49,6 +52,7 @@ string tz = TZConvert.WindowsToIana("Eastern Standard Time", "CA");
 
 Get a `TimeZoneInfo` object from .NET Core, regardless of what OS you are running on:  
 *Helps with .NET CoreFX issue [#11897][5]*
+
 ```csharp
 using System.Runtime.InteropServices;
 using TimeZoneConverter;
@@ -72,6 +76,7 @@ public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
     }
 }
 ```
+
 ## License
 
 This library is provided free of charge, under the terms of the [MIT license][6].
