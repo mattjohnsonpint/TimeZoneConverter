@@ -24,7 +24,7 @@ This library uses a combination of data sources to achieve its goals:
 Usually, the latter is reserved for edge cases, and for newly-introduced zones that may
 or may not have been published to official sources yet.
 
-**Important:** Since this data can change whenver new time zones are introduced from any of these sources,
+**Important:** Since this data can change whenever new time zones are introduced from any of these sources,
 it is recommended that you always use the most current revision, and check for updates regularly.
 
 ## Example Usage
@@ -32,7 +32,7 @@ it is recommended that you always use the most current revision, and check for u
 Convert an IANA time zone name to the best fitting Windows time zone ID.
 
 ```csharp
-string tz = TZConvert.IanaToWindows("America/Los_Angeles");
+string tz = TZConvert.IanaToWindows("America/New_York");
 // Result:  "Eastern Standard Time"
 ```
 
