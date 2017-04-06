@@ -1,4 +1,4 @@
-TimeZoneConverter
+TimeZoneConverter  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter/) 
 =================
 
 Lightweight library to convert quickly between Windows time zone IDs and IANA Time Zone names.
