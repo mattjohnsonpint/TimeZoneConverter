@@ -77,7 +77,10 @@ namespace TimeZoneConverter.DataBuilder
                         target = ianaCanonicalZone;
                     }
 
-                    data.Add(target, string.Join(" ", aliases));
+                    if (data.ContainsKey(target))
+                        data[target] += " " + string.Join(" ", aliases);
+                    else
+                        data.Add(target, string.Join(" ", aliases));
                 }
             }
 
