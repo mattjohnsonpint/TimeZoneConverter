@@ -52,6 +52,23 @@ namespace TimeZoneConverter.Tests
             Assert.Equal("Europe/Budapest", result3);
         }
 
+        [Fact]
+        public void Can_Convert_UTC_Aliases()
+        {
+            var result1 = TZConvert.WindowsToIana("UTC");
+            Assert.Equal("Etc/UTC", result1);
+
+            var utcAliases = "Etc/UTC Etc/UCT Etc/Universal Etc/Zulu UCT UTC Universal Zulu".Split();
+            var gmtAliases = "Etc/GMT Etc/GMT+0 Etc/GMT-0 Etc/GMT0 Etc/Greenwich GMT GMT+0 GMT-0 GMT0 Greenwich".Split();
+            var aliases = utcAliases.Concat(gmtAliases);
+
+            foreach (var alias in aliases)
+            {
+                var result2 = TZConvert.IanaToWindows(alias);
+                Assert.Equal(alias + ":UTC", alias + ":" + result2);
+            }
+        }
+
         private static IEnumerable<string> GetWindowsTimeZoneIds()
         {
             // TODO: get from elsewhere for crosplat testing
