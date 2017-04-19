@@ -9,8 +9,13 @@
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo</PackageTags>
     <PackageProjectUrl>https://github.com/mj1856/TimeZoneConverter</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt</PackageLicenseUrl>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
     <Version>1.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
