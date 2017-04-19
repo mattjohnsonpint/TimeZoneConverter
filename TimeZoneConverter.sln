@@ -1,24 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C922A24-67F8-4E45-B079-130DDAC3B5A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1300AFFC-DE69-49E1-A95F-9BB30D947EDA}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TimeZoneConverter", "src\TimeZoneConverter\TimeZoneConverter.xproj", "{0914D600-682C-4409-A3BD-09E1B31244A0}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TimeZoneConverter.DataBuilder", "src\TimeZoneConverter.DataBuilder\TimeZoneConverter.DataBuilder.xproj", "{DD8E4767-23A4-4AB0-BA08-EBBCECDE7068}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{62E4880C-D978-413C-AB12-E74B2E47426E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TimeZoneConverter.Tests", "test\TimeZoneConverter.Tests\TimeZoneConverter.Tests.xproj", "{902AFB31-8432-4C34-89AB-2CFF4DD27B93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter", "src\TimeZoneConverter\TimeZoneConverter.csproj", "{0914D600-682C-4409-A3BD-09E1B31244A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter.DataBuilder", "src\TimeZoneConverter.DataBuilder\TimeZoneConverter.DataBuilder.csproj", "{DD8E4767-23A4-4AB0-BA08-EBBCECDE7068}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter.Tests", "test\TimeZoneConverter.Tests\TimeZoneConverter.Tests.csproj", "{902AFB31-8432-4C34-89AB-2CFF4DD27B93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
