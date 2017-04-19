@@ -42,7 +42,14 @@ namespace TimeZoneConverter.DataBuilder
                 var aliases = DataExtractor.LoadAliases(cldrPath, links);
 
                 // Apply overrides
-                mapping.Add("Turkey Standard Time,CY,Asia/Famagusta");
+                mapping.Add("Magallanes Standard Time,001,America/Punta_Arenas");
+                mapping.Add("Magallanes Standard Time,CL,America/Punta_Arenas");
+
+                mapping.Add("Saratov Standard Time,001,Europe/Saratov");
+                mapping.Add("Saratov Standard Time,RU,Europe/Saratov");
+
+                mapping.Add("UTC+13,001,Etc/GMT-13");
+                mapping.Add("UTC+13,ZZ,Etc/GMT-13");
 
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
