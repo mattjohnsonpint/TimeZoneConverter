@@ -13,6 +13,10 @@
     <Version>1.1.0</Version>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\TimeZoneConverter.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Data\Mapping.csv.gz;Data\Aliases.csv.gz" />
   </ItemGroup>
