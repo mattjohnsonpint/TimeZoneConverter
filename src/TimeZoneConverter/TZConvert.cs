@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace TimeZoneConverter
 {
@@ -55,6 +56,31 @@ namespace TimeZoneConverter
             }
 
             throw new InvalidTimeZoneException($"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID.");
+        }
+
+        /// <summary>
+        /// Retrieves a <see cref="TimeZoneInfo"/>  object given a valid Windows or IANA time zone idenfifier,
+        /// regardless of which platform the application is running on.
+        /// </summary>
+        /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
+        /// <returns>A <see cref="TimeZoneInfo"/> object.</returns>
+        public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
+        {
+            try
+            {
+                // Try a direct approach first
+                return TimeZoneInfo.FindSystemTimeZoneById(windowsOrIanaTimeZoneId);
+            }
+            catch
+            {
+                // We have to convert to the opposite platform
+                var tzid = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    ? TZConvert.IanaToWindows(windowsOrIanaTimeZoneId)
+                    : TZConvert.WindowsToIana(windowsOrIanaTimeZoneId);
+
+                // Try with the converted ID
+                return TimeZoneInfo.FindSystemTimeZoneById(tzid);
+            }
         }
     }
 }

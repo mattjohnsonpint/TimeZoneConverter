@@ -9,7 +9,7 @@ Lightweight library to convert quickly between Windows time zone IDs and IANA Ti
 PM> Install-Package TimeZoneConverter
 ```
 
-This library is targeting .NET Standard 1.1.  
+This library is targeting .NET Standard 1.3, or .NET 4.5.
 See the [.NET Standard Platform Support Matrix][1] for further details.
 
 ## Notes
@@ -54,27 +54,9 @@ Get a `TimeZoneInfo` object from .NET Core, regardless of what OS you are runnin
 *Helps with .NET CoreFX issue [#11897][5]*
 
 ```csharp
-using System.Runtime.InteropServices;
-using TimeZoneConverter;
-
-public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
-{
-    try
-    {
-        // Try a direct approach first
-        return TimeZoneInfo.FindSystemTimeZoneById(windowsOrIanaTimeZoneId);
-    }
-    catch
-    {
-        // We have to convert to the opposite platform
-        var tzid = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            ? TZConvert.IanaToWindows(windowsOrIanaTimeZoneId)
-            : TZConvert.WindowsToIana(windowsOrIanaTimeZoneId);
-
-        // Try with the converted ID
-        return TimeZoneInfo.FindSystemTimeZoneById(tzid);
-    }
-}
+// Either of these will work on any platform:
+TimeZoneInfo tzi = TZConvert.GetTimeZoneInfo("Eastern Standard Time");
+TimeZoneInfo tzi = TZConvert.GetTimeZoneInfo("America/New_York");
 ```
 
 ## License
