@@ -119,7 +119,7 @@ namespace TimeZoneConverter.DataBuilder
             return data;
         }
 
-        public static IList<string> LoadRailsMapping(string railsPath, IDictionary<string, string> tzdbLinks)
+        public static IList<string> LoadRailsMapping(string railsPath)
         {
             var data = new List<string>();
             using (var stream = File.OpenRead(Path.Combine(railsPath, "time_zone.rb")))

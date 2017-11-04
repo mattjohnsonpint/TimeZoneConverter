@@ -44,7 +44,7 @@ namespace TimeZoneConverter.DataBuilder
                 var aliases = DataExtractor.LoadAliases(cldrPath, links);
 
                 // Extract Rails mappings and aliases from Rails data
-                var railsMapping = DataExtractor.LoadRailsMapping(railsPath, links);
+                var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply overrides
                 mapping.Remove("E. Africa Standard Time,SD,Africa/Khartoum");
