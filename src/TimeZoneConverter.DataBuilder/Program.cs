@@ -42,29 +42,14 @@ namespace TimeZoneConverter.DataBuilder
                 var aliases = DataExtractor.LoadAliases(cldrPath, links);
 
                 // Apply overrides
-                mapping.Remove("SA Eastern Standard Time,CL,America/Punta_Arenas");
-                mapping.Add("Magallanes Standard Time,001,America/Punta_Arenas");
-                mapping.Add("Magallanes Standard Time,CL,America/Punta_Arenas");
+                mapping.Remove("E. Africa Standard Time,SD,Africa/Khartoum");
+                mapping.Add("Sudan Standard Time,001,Africa/Khartoum");
+                mapping.Add("Sudan Standard Time,SD,Africa/Khartoum");
 
-                mapping.Remove("SA Eastern Standard Time,AQ,Antarctica/Rothera Antarctica/Palmer");
-                mapping.Add("SA Eastern Standard Time,AQ,Antarctica/Rothera");
-                mapping.Add("Magallanes Standard Time,AQ,Antarctica/Palmer");
+                mapping.Remove("GTB Standard Time,CY,Asia/Nicosia");
+                mapping.Remove("Turkey Standard Time,CY,Asia/Famagusta");
+                mapping.Add("GTB Standard Time,CY,Asia/Nicosia Asia/Famagusta");
 
-                mapping.Remove("Astrakhan Standard Time,RU,Europe/Astrakhan Europe/Saratov Europe/Ulyanovsk");
-                mapping.Add("Astrakhan Standard Time,RU,Europe/Astrakhan Europe/Ulyanovsk");
-                mapping.Add("Saratov Standard Time,001,Europe/Saratov");
-                mapping.Add("Saratov Standard Time,RU,Europe/Saratov");
-
-                mapping.Remove("Tonga Standard Time,ZZ,Etc/GMT-13");
-                mapping.Add("UTC+13,001,Etc/GMT-13");
-                mapping.Add("UTC+13,ZZ,Etc/GMT-13");
-
-                mapping.Remove("Tonga Standard Time,KI,Pacific/Enderbury");
-                mapping.Add("UTC+13,KI,Pacific/Enderbury");
-
-                mapping.Remove("Tonga Standard Time,TK,Pacific/Fakaofo");
-                mapping.Add("UTC+13,TK,Pacific/Fakaofo");
-                
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
                 mapping.Add("Greenwich Standard Time,AC,Atlantic/St_Helena");
