@@ -21,7 +21,7 @@ namespace TimeZoneConverter
         /// Converts an IANA time zone name to the equivalent Windows time zone ID.
         /// </summary>
         /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
-        /// <returns>A Windows time zone name.</returns>
+        /// <returns>A Windows time zone ID.</returns>
         /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Windows zone.</exception>
         public static string IanaToWindows(string ianaTimeZoneName)
         {
@@ -39,7 +39,7 @@ namespace TimeZoneConverter
         /// An optional two-letter ISO Country/Region code, used to get a a specific mapping.
         /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
         /// </param>
-        /// <returns>An IANA time zone ID.</returns>
+        /// <returns>An IANA time zone name.</returns>
         /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent IANA zone.</exception>
         public static string WindowsToIana(string windowsTimeZoneId, string territoryCode = "001")
         {
@@ -57,7 +57,7 @@ namespace TimeZoneConverter
         }
 
         /// <summary>
-        /// Retrieves a <see cref="TimeZoneInfo"/>  object given a valid Windows or IANA time zone idenfifier,
+        /// Retrieves a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone idenfifier,
         /// regardless of which platform the application is running on.
         /// </summary>
         /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
