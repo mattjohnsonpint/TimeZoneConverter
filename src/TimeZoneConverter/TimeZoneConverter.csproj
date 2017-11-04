@@ -3,8 +3,7 @@
   <PropertyGroup>
     <Description>Lightweight library to convert quickly between Windows time zone IDs and IANA Time Zone names.</Description>
     <Authors>Matt Johnson</Authors>
-    <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-win+net45+wp8+win81+wpa8</PackageTargetFallback>
+    <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
     <PackageId>TimeZoneConverter</PackageId>
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo</PackageTags>
     <PackageProjectUrl>https://github.com/mj1856/TimeZoneConverter</PackageProjectUrl>
@@ -26,7 +25,7 @@
     <EmbeddedResource Include="Data\Mapping.csv.gz;Data\Aliases.csv.gz" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
   </ItemGroup>
 
@@ -36,6 +35,7 @@
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
 
