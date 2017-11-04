@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Data\Mapping.csv.gz;Data\Aliases.csv.gz" />
+    <EmbeddedResource Include="Data\*" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">

@@ -26,6 +26,12 @@ namespace TimeZoneConverter.DataBuilder
             await DownloadAndExtractAsync(url, dir);
         }
 
+        public static async Task DownloadRailsTzMappingAsync(string dir)
+        {
+            const string url = "https://raw.githubusercontent.com/rails/rails/master/activesupport/lib/active_support/values/time_zone.rb";
+            await DownloadAsync(url, dir);
+        }
+
         public static string GetTempDir()
         {
             return Path.GetTempPath() + Path.GetRandomFileName().Substring(0, 8);

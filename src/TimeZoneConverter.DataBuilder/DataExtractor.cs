@@ -118,5 +118,30 @@ namespace TimeZoneConverter.DataBuilder
 
             return data;
         }
+
+        public static IList<string> LoadRailsMapping(string railsPath, IDictionary<string, string> tzdbLinks)
+        {
+            var data = new List<string>();
+            using (var stream = File.OpenRead(Path.Combine(railsPath, "time_zone.rb")))
+            using (var reader = new StreamReader(stream))
+            {
+                var inMappingSection = false;
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine().Trim();
+                    if (inMappingSection)
+                    {
+                        if (line == "}")
+                            break;
+
+                        var parts = line.Split("=>");
+                        data.Add(parts[0].Trim() + "," + parts[1].Trim().TrimEnd(','));
+                    }
+                    else if (line == "MAPPING = {")
+                        inMappingSection = true;
+                }
+            }
+            return data;
+        }
     }
 }

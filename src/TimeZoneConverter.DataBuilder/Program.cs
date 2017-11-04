@@ -17,13 +17,15 @@ namespace TimeZoneConverter.DataBuilder
             {
                 var cldrPath = Path.Combine(tempDir, "cldr");
                 var tzdbPath = Path.Combine(tempDir, "tzdb");
+                var railsPath = Path.Combine(tempDir, "rails");
 
                 // Download Data
                 if (!Directory.Exists(tempDir))
                 {
                     var t1 = Downloader.DownloadCldrAsync(cldrPath);
                     var t2 = Downloader.DownloadTzdbAsync(tzdbPath);
-                    Task.WaitAll(t1, t2);
+                    var t3 = Downloader.DownloadRailsTzMappingAsync(railsPath);
+                    Task.WaitAll(t1, t2, t3);
                 }
 
                 // Extract links from TZDB
@@ -40,6 +42,9 @@ namespace TimeZoneConverter.DataBuilder
                 // Extract mappings and aliases from CLDR
                 var mapping = DataExtractor.LoadMapping(cldrPath, links);
                 var aliases = DataExtractor.LoadAliases(cldrPath, links);
+
+                // Extract Rails mappings and aliases from Rails data
+                var railsMapping = DataExtractor.LoadRailsMapping(railsPath, links);
 
                 // Apply overrides
                 mapping.Remove("E. Africa Standard Time,SD,Africa/Khartoum");
@@ -71,6 +76,7 @@ namespace TimeZoneConverter.DataBuilder
                 // Write to source files in the main library
                 WriteAllLinesToCompressedFile(@"..\TimeZoneConverter\Data\Mapping.csv.gz", mapping);
                 WriteAllLinesToCompressedFile(@"..\TimeZoneConverter\Data\Aliases.csv.gz", aliases);
+                WriteAllLinesToCompressedFile(@"..\TimeZoneConverter\Data\RailsMapping.csv.gz", railsMapping);
             }
             finally
             {
