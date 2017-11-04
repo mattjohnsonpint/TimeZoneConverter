@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace TimeZoneConverter.DataBuilder
 {
@@ -15,21 +16,16 @@ namespace TimeZoneConverter.DataBuilder
             {
                 var doc = XDocument.Load(stream);
 
-                var mapZoneElements = doc
-                    .Element("supplementalData")
-                    .Element("windowsZones")
-                    .Element("mapTimezones")
-                    .Elements("mapZone");
+                var mapZoneElements = doc.XPathSelectElements("/supplementalData/windowsZones/mapTimezones/mapZone");
 
                 foreach (var element in mapZoneElements)
                 {
-                    var windowsZone = element.Attribute("other").Value;
-                    var territory = element.Attribute("territory").Value;
-                    var ianaZones = element.Attribute("type").Value.Split();
+                    var windowsZone = element.Attribute("other")?.Value;
+                    var territory = element.Attribute("territory")?.Value;
+                    var ianaZones = element.Attribute("type")?.Value.Split() ?? new string[0];
                     for (int i = 0; i < ianaZones.Length; i++)
                     {
-                        string canonicalIanaZone;
-                        if (tzdbLinks.TryGetValue(ianaZones[i], out canonicalIanaZone))
+                        if (tzdbLinks.TryGetValue(ianaZones[i], out var canonicalIanaZone))
                             ianaZones[i] = canonicalIanaZone;
                     }
 
@@ -47,11 +43,7 @@ namespace TimeZoneConverter.DataBuilder
             {
                 var doc = XDocument.Load(stream);
 
-                var typeElements = doc
-                    .Element("ldmlBCP47")
-                    .Element("keyword")
-                    .Element("key")
-                    .Elements("type");
+                var typeElements = doc.XPathSelectElements("/ldmlBCP47/keyword/key/type");
 
                 foreach (var element in typeElements)
                 {
@@ -66,8 +58,7 @@ namespace TimeZoneConverter.DataBuilder
                     var target = zones[0];
                     var aliases = zones.Skip(1).ToArray();
 
-                    string ianaCanonicalZone;
-                    if (tzdbLinks.TryGetValue(target, out ianaCanonicalZone))
+                    if (tzdbLinks.TryGetValue(target, out var ianaCanonicalZone))
                     {
                         for (int i = 0; i < aliases.Length; i++)
                         {

@@ -32,8 +32,7 @@ namespace TimeZoneConverter
                 var ianaZones = parts[2].Split();
 
                 // Create the Windows map entry
-                string value;
-                if (!links.TryGetValue(ianaZones[0], out value))
+                if (!links.TryGetValue(ianaZones[0], out var value))
                     value = ianaZones[0];
 
                 var key = $"{territory}|{windowsZone}";

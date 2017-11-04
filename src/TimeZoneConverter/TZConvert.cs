@@ -25,8 +25,7 @@ namespace TimeZoneConverter
         /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Windows zone.</exception>
         public static string IanaToWindows(string ianaTimeZoneName)
         {
-            string windowsTimeZoneId;
-            if (IanaMap.TryGetValue(ianaTimeZoneName, out windowsTimeZoneId))
+            if (IanaMap.TryGetValue(ianaTimeZoneName, out var windowsTimeZoneId))
                 return windowsTimeZoneId;
 
             throw new InvalidTimeZoneException($"\"{ianaTimeZoneName}\" was not recognized as a valid IANA time zone name, or has no equivalant Windows time zone.");
@@ -45,8 +44,7 @@ namespace TimeZoneConverter
         public static string WindowsToIana(string windowsTimeZoneId, string territoryCode = "001")
         {
             var key = $"{territoryCode}|{windowsTimeZoneId}";
-            string ianaTimeZoneName;
-            if (WindowsMap.TryGetValue(key, out ianaTimeZoneName))
+            if (WindowsMap.TryGetValue(key, out var ianaTimeZoneName))
                 return ianaTimeZoneName;
 
             if (territoryCode != "001")
@@ -75,8 +73,8 @@ namespace TimeZoneConverter
             {
                 // We have to convert to the opposite platform
                 var tzid = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                    ? TZConvert.IanaToWindows(windowsOrIanaTimeZoneId)
-                    : TZConvert.WindowsToIana(windowsOrIanaTimeZoneId);
+                    ? IanaToWindows(windowsOrIanaTimeZoneId)
+                    : WindowsToIana(windowsOrIanaTimeZoneId);
 
                 // Try with the converted ID
                 return TimeZoneInfo.FindSystemTimeZoneById(tzid);
