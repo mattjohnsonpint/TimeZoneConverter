@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
+using System.Resources;
 
 namespace TimeZoneConverter
 {
@@ -60,7 +61,7 @@ namespace TimeZoneConverter
         private static IEnumerable<string> GetEmbeddedData(string resourceName)
         {
             var assembly = typeof(DataLoader).GetTypeInfo().Assembly;
-            using (var compressedStream = assembly.GetManifestResourceStream(resourceName))
+            using (var compressedStream = assembly.GetManifestResourceStream(resourceName) ?? throw new MissingManifestResourceException())
             using (var stream = new GZipStream(compressedStream, CompressionMode.Decompress))
             using (var reader = new StreamReader(stream))
             {
