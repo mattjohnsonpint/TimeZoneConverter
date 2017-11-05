@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
 
@@ -8,13 +9,12 @@ namespace TimeZoneConverter
 {
     internal static class DataLoader
     {
-        public static void Populate(
-            IDictionary<string, string> ianaMap,
-            IDictionary<string, string> windowsMap)
+        public static void Populate(IDictionary<string, string> ianaMap, IDictionary<string, string> windowsMap, IDictionary<string, string> railsMap, IDictionary<string, IList<string>> inverseRailsMap)
         {
             var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
             var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
-            
+            var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
+
             var links = new Dictionary<string, string>();
             foreach (var link in aliases)
             {
@@ -23,7 +23,8 @@ namespace TimeZoneConverter
                 foreach (var key in parts[1].Split())
                     links.Add(key, value);
             }
-
+            
+            var similarIanaZones = new Dictionary<string, IList<string>>();
             foreach (var item in mapping)
             {
                 var parts = item.Split(',');
@@ -44,6 +45,12 @@ namespace TimeZoneConverter
                     if (!ianaMap.ContainsKey(ianaZone))
                         ianaMap.Add(ianaZone, windowsZone);
                 }
+
+                if (ianaZones.Length > 1)
+                {
+                    foreach (var ianaZone in ianaZones)
+                        similarIanaZones.Add(ianaZone, ianaZones.Except(new[] {ianaZone}).ToArray());
+                }
             }
 
             // Expand the IANA map to include all links
@@ -54,6 +61,49 @@ namespace TimeZoneConverter
 
                 ianaMap.Add(link.Key, ianaMap[link.Value]);
             }
+
+            foreach (var item in railsMapping)
+            {
+                var parts = item.Split(',');
+                var railsZone = parts[0].Trim('"');
+                var ianaZone = parts[1].Trim('"');
+                railsMap.Add(railsZone, ianaZone);
+            }
+
+            foreach (var grouping in railsMap.GroupBy(x => x.Value, x => x.Key))
+            {
+                inverseRailsMap.Add(grouping.Key, grouping.ToList());
+            }
+
+            // Expand the Inverse Rails map to include similar IANA zones
+            foreach (var ianaZone in ianaMap.Keys)
+            {
+                if (inverseRailsMap.ContainsKey(ianaZone) || links.ContainsKey(ianaZone))
+                    continue;
+
+                if (similarIanaZones.TryGetValue(ianaZone, out var similarZones))
+                {
+                    foreach (var otherZone in similarZones)
+                    {
+                        if (inverseRailsMap.TryGetValue(otherZone, out var railsZones))
+                        {
+                            inverseRailsMap.Add(ianaZone, railsZones);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Expand the Inverse Rails map to include links
+            foreach (var link in links)
+            {
+                if (inverseRailsMap.ContainsKey(link.Key))
+                    continue;
+
+                if (inverseRailsMap.TryGetValue(link.Value, out var railsZone))
+                    inverseRailsMap.Add(link.Key, railsZone);
+            }
+
             
         }
 

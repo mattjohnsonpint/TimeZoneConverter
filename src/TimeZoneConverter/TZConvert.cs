@@ -12,10 +12,12 @@ namespace TimeZoneConverter
     {
         private static readonly IDictionary<string, string> IanaMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private static readonly IDictionary<string, string> WindowsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, string> RailsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, IList<string>> InverseRailsMap = new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
         static TZConvert()
         {
-            DataLoader.Populate(IanaMap, WindowsMap);
+            DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap);
         }
 
         /// <summary>
@@ -95,6 +97,74 @@ namespace TimeZoneConverter
                 // Try with the converted ID
                 return TimeZoneInfo.FindSystemTimeZoneById(tzid);
             }
+        }
+
+        /// <summary>
+        /// Converts an IANA time zone name to one or more equivalent Rails time zone names.
+        /// </summary>
+        /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
+        /// <returns>One or more equivalent Rails time zone names.</returns>
+        /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Rails zone.</exception>
+        public static IList<string> IanaToRails(string ianaTimeZoneName)
+        {
+            // try directly first
+            if (InverseRailsMap.TryGetValue(ianaTimeZoneName, out var railsTimeZoneNames))
+                return railsTimeZoneNames;
+
+            // try again with the Windows golden zone
+            try
+            {
+                var goldenZone = WindowsToIana(IanaToWindows(ianaTimeZoneName));
+                if (InverseRailsMap.TryGetValue(goldenZone, out railsTimeZoneNames))
+                    return railsTimeZoneNames;
+            }
+            catch (InvalidTimeZoneException) { }
+
+            throw new InvalidTimeZoneException($"\"{ianaTimeZoneName}\" was not recognized as a valid IANA time zone name, or has no equivalant Rails time zone.");
+        }
+
+        /// <summary>
+        /// Converts a Rails time zone name to an equivalent IANA time zone name.
+        /// </summary>
+        /// <param name="railsTimeZoneName">The Rails time zone name to convert.</param>
+        /// <returns>An IANA time zone name.</returns>
+        /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent IANA zone.</exception>
+        public static string RailsToIana(string railsTimeZoneName)
+        {
+            if (RailsMap.TryGetValue(railsTimeZoneName, out var ianaTimeZoneName))
+                return ianaTimeZoneName;
+
+            throw new InvalidTimeZoneException($"\"{railsTimeZoneName}\" was not recognized as a valid Rails time zone name.");
+        }
+
+        /// <summary>
+        /// Converts a Rails time zone name to an equivalent Windows time zone ID.
+        /// </summary>
+        /// <param name="railsTimeZoneName">The Rails time zone name to convert.</param>
+        /// <returns>A Windows time zone ID.</returns>
+        /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Windows zone.</exception>
+        public static string RailsToWindows(string railsTimeZoneName)
+        {
+            var ianaZoneName = RailsToIana(railsTimeZoneName);
+            var windowsZoneId = IanaToWindows(ianaZoneName);
+            return windowsZoneId;
+        }
+
+        /// <summary>
+        /// Converts a Windows time zone ID to one ore more equivalent Rails time zone names.
+        /// </summary>
+        /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
+        /// <param name="territoryCode">
+        /// An optional two-letter ISO Country/Region code, used to get a a specific mapping.
+        /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
+        /// </param>
+        /// <returns>One or more equivalent Rails time zone names.</returns>
+        /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Rails zone.</exception>
+        public static IList<string> WindowsToRails(string windowsTimeZoneId, string territoryCode = "001")
+        {
+            var ianaTimeZoneName = WindowsToIana(windowsTimeZoneId, territoryCode);
+            var railsTimeZoneNames = IanaToRails(ianaTimeZoneName);
+            return railsTimeZoneNames;
         }
     }
 }
