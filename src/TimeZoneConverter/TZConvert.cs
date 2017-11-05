@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace TimeZoneConverter
@@ -16,6 +17,21 @@ namespace TimeZoneConverter
         {
             DataLoader.Populate(IanaMap, WindowsMap);
         }
+
+        /// <summary>
+        /// Gets a collection of all IANA time zone names known to this library.
+        /// </summary>
+        public static ICollection<string> KnownIanaTimeZoneNames { get; } = IanaMap.Keys;
+
+        /// <summary>
+        /// Gets a collection of all Windows time zone IDs known to this library.
+        /// </summary>
+        public static ICollection<string> KnownWindowsTimeZoneIds { get; } = WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct().ToArray();
+
+        /// <summary>
+        /// Gets a collection of all Rails time zone names known to this library.
+        /// </summary>
+        public static ICollection<string> KnownRailsTimeZoneNames { get; } = RailsMap.Keys;
 
         /// <summary>
         /// Converts an IANA time zone name to the equivalent Windows time zone ID.
