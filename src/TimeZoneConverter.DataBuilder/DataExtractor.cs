@@ -22,11 +22,17 @@ namespace TimeZoneConverter.DataBuilder
                 {
                     var windowsZone = element.Attribute("other")?.Value;
                     var territory = element.Attribute("territory")?.Value;
-                    var ianaZones = element.Attribute("type")?.Value.Split() ?? new string[0];
-                    for (int i = 0; i < ianaZones.Length; i++)
+                    var ianaZones = (element.Attribute("type")?.Value.Split() ?? new string[0]).ToList();
+                    for (int i = 0; i < ianaZones.Count; i++)
                     {
                         if (tzdbLinks.TryGetValue(ianaZones[i], out var canonicalIanaZone))
                             ianaZones[i] = canonicalIanaZone;
+
+                        if (i > 0 && ianaZones[i] == ianaZones[0])
+                        {
+                            ianaZones.RemoveAt(i);
+                            i--;
+                        }
                     }
 
                     list.Add($"{windowsZone},{territory},{string.Join(" ", ianaZones)}");
