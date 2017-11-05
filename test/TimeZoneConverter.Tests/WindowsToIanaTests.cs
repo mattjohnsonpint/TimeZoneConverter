@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -19,7 +18,7 @@ namespace TimeZoneConverter.Tests
         public void Can_Convert_Windows_Zones_To_Iana_Golden_Zones()
         {
             var errors = 0;
-            var windowsZones = GetWindowsTimeZoneIds();
+            var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
 
             foreach (var windowsZone in windowsZones)
             {
@@ -67,14 +66,6 @@ namespace TimeZoneConverter.Tests
                 var result2 = TZConvert.IanaToWindows(alias);
                 Assert.Equal(alias + ":UTC", alias + ":" + result2);
             }
-        }
-
-        private static IEnumerable<string> GetWindowsTimeZoneIds()
-        {
-            // TODO: get from elsewhere for crosplat testing
-            return TimeZoneInfo.GetSystemTimeZones()
-                .OrderBy(x => x.Id)
-                .Select(x => x.Id);
         }
     }
 }
