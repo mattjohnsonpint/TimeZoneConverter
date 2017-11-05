@@ -5,7 +5,7 @@
     <Authors>Matt Johnson</Authors>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
     <PackageId>TimeZoneConverter</PackageId>
-    <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo</PackageTags>
+    <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo,rails</PackageTags>
     <PackageProjectUrl>https://github.com/mj1856/TimeZoneConverter</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt</PackageLicenseUrl>
     <IncludeSource>True</IncludeSource>
