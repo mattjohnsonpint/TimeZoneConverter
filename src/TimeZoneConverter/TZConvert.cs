@@ -21,22 +21,26 @@ namespace TimeZoneConverter
         static TZConvert()
         {
             DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap);
+
+            KnownIanaTimeZoneNames = IanaMap.Keys;
+            KnownWindowsTimeZoneIds = WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct().ToArray();
+            KnownRailsTimeZoneNames = RailsMap.Keys;
         }
 
         /// <summary>
         /// Gets a collection of all IANA time zone names known to this library.
         /// </summary>
-        public static ICollection<string> KnownIanaTimeZoneNames { get; } = IanaMap.Keys;
+        public static ICollection<string> KnownIanaTimeZoneNames { get; }
 
         /// <summary>
         /// Gets a collection of all Windows time zone IDs known to this library.
         /// </summary>
-        public static ICollection<string> KnownWindowsTimeZoneIds { get; } = WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct().ToArray();
+        public static ICollection<string> KnownWindowsTimeZoneIds { get; }
 
         /// <summary>
         /// Gets a collection of all Rails time zone names known to this library.
         /// </summary>
-        public static ICollection<string> KnownRailsTimeZoneNames { get; } = RailsMap.Keys;
+        public static ICollection<string> KnownRailsTimeZoneNames { get; }
 
         /// <summary>
         /// Converts an IANA time zone name to the equivalent Windows time zone ID.
