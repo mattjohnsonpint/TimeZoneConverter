@@ -9,7 +9,7 @@ Lightweight library to convert quickly between IANA, Windows, and Rails time zon
 PM> Install-Package TimeZoneConverter
 ```
 
-This library is targeting .NET Standard 2.0, 1.3, and .NET 4.5.
+This library is targeting .NET Standard 2.0, 1.3, 1.1, and .NET 4.5.
 See the [.NET Standard Platform Support Matrix][1] for further details.
 
 ## Notes
@@ -52,7 +52,8 @@ string tz = TZConvert.WindowsToIana("Eastern Standard Time", "CA");
 ```
 
 Get a `TimeZoneInfo` object from .NET Core, regardless of what OS you are running on:  
-*Helps with .NET CoreFX issue [#11897][6]*
+*Helps with .NET CoreFX issue [#11897][6]*  
+***This function is only available for .NET Standard 1.3+ or full .NET Framework targets***
 
 ```csharp
 // Either of these will work on any platform:

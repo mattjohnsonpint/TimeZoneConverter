@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#if !NETSTANDARD1_1
 using System.Runtime.InteropServices;
+#endif
 
 namespace TimeZoneConverter
 {
@@ -74,6 +77,8 @@ namespace TimeZoneConverter
             throw new InvalidTimeZoneException($"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID.");
         }
 
+#if !NETSTANDARD1_1
+
         /// <summary>
         /// Retrieves a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone idenfifier,
         /// regardless of which platform the application is running on.
@@ -98,6 +103,7 @@ namespace TimeZoneConverter
                 return TimeZoneInfo.FindSystemTimeZoneById(tzid);
             }
         }
+#endif
 
         /// <summary>
         /// Converts an IANA time zone name to one or more equivalent Rails time zone names.
