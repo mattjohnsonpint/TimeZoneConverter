@@ -28,6 +28,10 @@ or may not have been published to official sources yet.
 **Important:** Since this data can change whenever new time zones are introduced from any of these sources,
 it is recommended that you always use the most current revision, and check for updates regularly.
 
+Additionally, this library does not attempt to determine if the time zone IDs provided are actually present on the computer where the code is running.  It is assumed that the computer is kept current with time zone updates.
+
+For example, if one attempts to convert `Africa/Khartoum` to a Windows time zone ID, they will get `Sudan Standard Time`.  If it is then used on a Windows computer that does not yet have [`KB4051956`](https://support.microsoft.com/en-us/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton) installed (which created this time zone), they will likely get a `TimeZoneNotFoundException`.
+
 ## Example Usage
 
 Convert an IANA time zone name to the best fitting Windows time zone ID.
