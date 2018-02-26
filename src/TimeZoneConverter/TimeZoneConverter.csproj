@@ -3,14 +3,14 @@
   <PropertyGroup>
     <Description>Lightweight library to convert quickly between Windows time zone IDs and IANA Time Zone names.</Description>
     <Authors>Matt Johnson</Authors>
-    <TargetFrameworks>netstandard2.0;netstandard1.3;netstandard1.1;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.3;netstandard1.1;net45;net40;net35</TargetFrameworks>
     <PackageId>TimeZoneConverter</PackageId>
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo,rails</PackageTags>
     <PackageProjectUrl>https://github.com/mj1856/TimeZoneConverter</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt</PackageLicenseUrl>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>2.2.1</Version>
+    <Version>2.3.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">

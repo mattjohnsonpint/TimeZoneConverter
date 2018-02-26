@@ -98,8 +98,15 @@ namespace TimeZoneConverter
             }
             catch
             {
+                
+#if NET35 || NET40
+                const bool isWindows = true;
+#else
+                bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+#endif
+
                 // We have to convert to the opposite platform
-                var tzid = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                var tzid = isWindows
                     ? IanaToWindows(windowsOrIanaTimeZoneId)
                     : WindowsToIana(windowsOrIanaTimeZoneId);
 
