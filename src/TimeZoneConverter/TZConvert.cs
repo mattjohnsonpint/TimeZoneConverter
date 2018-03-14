@@ -18,6 +18,16 @@ namespace TimeZoneConverter
         private static readonly IDictionary<string, string> RailsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private static readonly IDictionary<string, IList<string>> InverseRailsMap = new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
+#if NET35 || NET40 || NETSTANDARD1_1
+        private const bool IsWindows = true;
+#else
+        private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+#endif
+
+#if !NETSTANDARD1_1
+        private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+#endif
+
         static TZConvert()
         {
             DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap);
@@ -91,28 +101,25 @@ namespace TimeZoneConverter
         /// <returns>A <see cref="TimeZoneInfo"/> object.</returns>
         public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
         {
-            try
-            {
-                // Try a direct approach first
-                return TimeZoneInfo.FindSystemTimeZoneById(windowsOrIanaTimeZoneId);
-            }
-            catch
-            {
-                
-#if NET35 || NET40
-                const bool isWindows = true;
+            // Try a direct approach first
+            if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out var timeZoneInfo))
+                return timeZoneInfo;
+            
+            // We have to convert to the opposite platform
+            var tzid = IsWindows
+                ? IanaToWindows(windowsOrIanaTimeZoneId)
+                : WindowsToIana(windowsOrIanaTimeZoneId);
+
+            // Try with the converted ID
+            if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+                return timeZoneInfo;
+
+#if !NETSTANDARD1_3
+            throw new TimeZoneNotFoundException();
 #else
-                bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            // this will also throw, but we can't throw directly because TimeZoneNotFoundException is not available in .NET Standard 1.3
+            return TimeZoneInfo.FindSystemTimeZoneById(tzid);
 #endif
-
-                // We have to convert to the opposite platform
-                var tzid = isWindows
-                    ? IanaToWindows(windowsOrIanaTimeZoneId)
-                    : WindowsToIana(windowsOrIanaTimeZoneId);
-
-                // Try with the converted ID
-                return TimeZoneInfo.FindSystemTimeZoneById(tzid);
-            }
         }
 #endif
 
