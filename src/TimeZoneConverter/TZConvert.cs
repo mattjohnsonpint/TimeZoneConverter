@@ -101,6 +101,9 @@ namespace TimeZoneConverter
         /// <returns>A <see cref="TimeZoneInfo"/> object.</returns>
         public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
         {
+            if (string.Equals(windowsOrIanaTimeZoneId, "UTC", StringComparison.OrdinalIgnoreCase))
+                return TimeZoneInfo.Utc;
+    
             // Try a direct approach first
             if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out var timeZoneInfo))
                 return timeZoneInfo;
