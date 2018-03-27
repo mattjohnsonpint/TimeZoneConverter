@@ -25,7 +25,8 @@ namespace TimeZoneConverter
 #endif
 
 #if !NETSTANDARD1_1
-        private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+		private static readonly IDictionary<string, TimeZoneInfo> SystemTimeZones = new Dictionary<string, TimeZoneInfo> (TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x)) 
+		{ { TimeZoneInfo.Utc.Id, TimeZoneInfo.Utc } };
 #endif
 
         static TZConvert()
@@ -101,9 +102,6 @@ namespace TimeZoneConverter
         /// <returns>A <see cref="TimeZoneInfo"/> object.</returns>
         public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
         {
-            if (string.Equals(windowsOrIanaTimeZoneId, "UTC", StringComparison.OrdinalIgnoreCase))
-                return TimeZoneInfo.Utc;
-    
             // Try a direct approach first
             if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out var timeZoneInfo))
                 return timeZoneInfo;
@@ -114,8 +112,14 @@ namespace TimeZoneConverter
                 : WindowsToIana(windowsOrIanaTimeZoneId);
 
             // Try with the converted ID
-            if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
-                return timeZoneInfo;
+			if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+			{
+				// Add the original ID to dictionary for perf improvements 
+				if(!SystemTimeZones.ContainsKey(windowsOrIanaTimeZoneId))
+				    SystemTimeZones[windowsOrIanaTimeZoneId] = timeZoneInfo;
+				
+                return timeZoneInfo;            
+			}
 
 #if !NETSTANDARD1_3
             throw new TimeZoneNotFoundException();
