@@ -112,14 +112,13 @@ namespace TimeZoneConverter
                 : WindowsToIana(windowsOrIanaTimeZoneId);
 
             // Try with the converted ID
-			if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
-			{
-				// Add the original ID to dictionary for perf improvements 
-				if(!SystemTimeZones.ContainsKey(windowsOrIanaTimeZoneId))
-				    SystemTimeZones[windowsOrIanaTimeZoneId] = timeZoneInfo;
-				
+            if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+	    {
+                // Add the original ID to dictionary for perf improvements 
+		if(!SystemTimeZones.ContainsKey(windowsOrIanaTimeZoneId))
+                    SystemTimeZones[windowsOrIanaTimeZoneId] = timeZoneInfo;
                 return timeZoneInfo;            
-			}
+            }
 
 #if !NETSTANDARD1_3
             throw new TimeZoneNotFoundException();
