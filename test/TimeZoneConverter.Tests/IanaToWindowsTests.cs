@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,16 +23,15 @@ namespace TimeZoneConverter.Tests
 
             foreach (var ianaZone in ianaZones.Except(unmapable))
             {
-                try
+                if (TZConvert.TryIanaToWindows(ianaZone, out var windowsZone))
                 {
-                    var windowsZone = TZConvert.IanaToWindows(ianaZone);
                     Assert.NotNull(windowsZone);
                     Assert.NotEqual(string.Empty, windowsZone);
                 }
-                catch (InvalidTimeZoneException e)
+                else
                 {
                     errors++;
-                    _output.WriteLine(e.Message);
+                    _output.WriteLine($"Failed to convert \"{ianaZone}\"");
                 }
             }
 

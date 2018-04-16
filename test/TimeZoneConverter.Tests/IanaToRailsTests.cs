@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -23,15 +22,15 @@ namespace TimeZoneConverter.Tests
 
             foreach (var ianaZone in ianaZones.Except(UnmappableZones))
             {
-                try
+                if (TZConvert.TryIanaToRails(ianaZone, out var railsZones))
                 {
-                    var railsZones = TZConvert.IanaToRails(ianaZone);
                     Assert.NotNull(railsZones);
+                    Assert.NotEmpty(railsZones);
                 }
-                catch (InvalidTimeZoneException e)
+                else
                 {
                     errors++;
-                    _output.WriteLine(e.Message);
+                    _output.WriteLine($"Failed to convert \"{ianaZone}\"");
                 }
             }
 
