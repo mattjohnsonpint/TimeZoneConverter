@@ -74,9 +74,13 @@ namespace TimeZoneConverter.DataBuilder
                 aliases.Sort(StringComparer.Ordinal);
 
                 // Write to source files in the main library
-                WriteAllLinesToCompressedFile(@"..\TimeZoneConverter\Data\Mapping.csv.gz", mapping);
-                WriteAllLinesToCompressedFile(@"..\TimeZoneConverter\Data\Aliases.csv.gz", aliases);
-                WriteAllLinesToCompressedFile(@"..\TimeZoneConverter\Data\RailsMapping.csv.gz", railsMapping);
+                var projectPath = Path.GetFullPath(".");
+                while (!File.Exists(Path.Combine(projectPath, "TimeZoneConverter.sln")))
+                    projectPath = Path.GetFullPath(Path.Combine(projectPath, ".."));
+                var dataPath = Path.Combine(projectPath, "src", "TimeZoneConverter", "Data");
+                WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Mapping.csv.gz"), mapping);
+                WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Aliases.csv.gz"), aliases);
+                WriteAllLinesToCompressedFile(Path.Combine(dataPath, "RailsMapping.csv.gz"), railsMapping);
             }
             finally
             {
