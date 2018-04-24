@@ -47,9 +47,9 @@ namespace TimeZoneConverter.DataBuilder
                 var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply overrides
-                mapping.Remove("E. Africa Standard Time,SD,Africa/Khartoum");
-                mapping.Add("Sudan Standard Time,001,Africa/Khartoum");
-                mapping.Add("Sudan Standard Time,SD,Africa/Khartoum");
+                mapping.Remove("W. Central Africa Standard Time,ST,Africa/Sao_Tome");
+                mapping.Add("Sao Tome Standard Time,001,Africa/Sao_Tome");
+                mapping.Add("Sao Tome Standard Time,ST,Africa/Sao_Tome");
 
                 mapping.Remove("GTB Standard Time,CY,Asia/Nicosia");
                 mapping.Remove("Turkey Standard Time,CY,Asia/Famagusta");
