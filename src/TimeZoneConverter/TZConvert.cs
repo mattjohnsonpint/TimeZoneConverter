@@ -32,9 +32,9 @@ namespace TimeZoneConverter
         {
             DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap);
 
-            KnownIanaTimeZoneNames = IanaMap.Keys;
-            KnownWindowsTimeZoneIds = WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct().ToArray();
-            KnownRailsTimeZoneNames = RailsMap.Keys;
+            KnownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
+            KnownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
+            KnownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
         }
 
         /// <summary>
