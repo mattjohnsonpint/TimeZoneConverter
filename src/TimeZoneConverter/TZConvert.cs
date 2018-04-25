@@ -25,7 +25,8 @@ namespace TimeZoneConverter
 #endif
 
 #if !NETSTANDARD1_1
-        private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+        private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
+
 #endif
 
         static TZConvert()
@@ -35,6 +36,10 @@ namespace TimeZoneConverter
             KnownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
             KnownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
             KnownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
+
+#if !NETSTANDARD1_1
+            SystemTimeZones = GetSystemTimeZones();
+#endif
         }
 
         /// <summary>
@@ -297,5 +302,42 @@ namespace TimeZoneConverter
             railsTimeZoneNames = new string[0];
             return false;
         }
+
+#if !NETSTANDARD1_1
+        private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
+        {
+            if (IsWindows)
+                return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+            
+            var zones = GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x);
+
+            // Include special case to resolve deleted link
+            zones.Add("Canada/East-Saskatchewan", TimeZoneInfo.FindSystemTimeZoneById("Canada/Saskatchewan"));
+
+            return zones;
+        }
+
+        private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesLinux()
+        {
+            // Don't trust TimeZoneInfo.GetSystemTimeZones on Non-Windows
+            // Because it doesn't return any links, or any Etc zones
+
+            foreach (var name in KnownIanaTimeZoneNames)
+            {
+                TimeZoneInfo tzi = null;
+
+                try
+                {
+                    tzi = TimeZoneInfo.FindSystemTimeZoneById(name);
+                }
+                catch (TimeZoneNotFoundException)
+                {
+                }
+
+                if (tzi != null)
+                    yield return tzi;
+            }
+        }
+#endif
     }
 }
