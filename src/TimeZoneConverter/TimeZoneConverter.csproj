@@ -10,7 +10,7 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt</PackageLicenseUrl>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>2.3.2</Version>
+    <Version>2.4.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
