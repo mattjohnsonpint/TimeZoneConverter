@@ -324,7 +324,17 @@ namespace TimeZoneConverter
             var zones = GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x);
 
             // Include special case to resolve deleted link
-            zones.Add("Canada/East-Saskatchewan", TimeZoneInfo.FindSystemTimeZoneById("Canada/Saskatchewan"));
+            if (!zones.ContainsKey("Canada/East-Saskatchewan"))
+            {
+                try
+                {
+                    var tzi = TimeZoneInfo.FindSystemTimeZoneById("Canada/Saskatchewan");
+                    zones.Add("Canada/East-Saskatchewan", tzi);
+                }
+                catch
+                {
+                }
+            }
 
             return zones;
         }
