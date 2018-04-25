@@ -134,27 +134,14 @@ namespace TimeZoneConverter
 #if !NETSTANDARD1_1
 
         /// <summary>
-        /// Retrieves a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone idenfifier,
+        /// Retrieves a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone identifier,
         /// regardless of which platform the application is running on.
         /// </summary>
         /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
         /// <returns>A <see cref="TimeZoneInfo"/> object.</returns>
         public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
         {
-            if (string.Equals(windowsOrIanaTimeZoneId, "UTC", StringComparison.OrdinalIgnoreCase))
-                return TimeZoneInfo.Utc;
-
-            // Try a direct approach first
-            if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out var timeZoneInfo))
-                return timeZoneInfo;
-
-            // We have to convert to the opposite platform
-            var tzid = IsWindows
-                ? IanaToWindows(windowsOrIanaTimeZoneId)
-                : WindowsToIana(windowsOrIanaTimeZoneId);
-
-            // Try with the converted ID
-            if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+            if (TryGetTimeZoneInfo(windowsOrIanaTimeZoneId, out var timeZoneInfo))
                 return timeZoneInfo;
 
 #if !NETSTANDARD1_3
@@ -163,6 +150,31 @@ namespace TimeZoneConverter
             // this will also throw, but we can't throw directly because TimeZoneNotFoundException is not available in .NET Standard 1.3
             return TimeZoneInfo.FindSystemTimeZoneById(tzid);
 #endif
+        }
+
+        /// <summary>
+        /// Attempts to retrieve a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone identifier,
+        /// regardless of which platform the application is running on.
+        /// </summary>
+        /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
+        /// <param name="timeZoneInfo">A <see cref="TimeZoneInfo"/> object.</param>
+        /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+        public static bool TryGetTimeZoneInfo(string windowsOrIanaTimeZoneId, out TimeZoneInfo timeZoneInfo)
+        {
+            if (string.Equals(windowsOrIanaTimeZoneId, "UTC", StringComparison.OrdinalIgnoreCase))
+            {
+                timeZoneInfo = TimeZoneInfo.Utc;
+                return true;
+            }
+
+            // Try a direct approach 
+            if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out timeZoneInfo))
+                return true;
+
+            // Convert to the opposite platform and try again
+            return (IsWindows && TryIanaToWindows(windowsOrIanaTimeZoneId, out var tzid) ||
+                    TryWindowsToIana(windowsOrIanaTimeZoneId, out tzid)) &&
+                   SystemTimeZones.TryGetValue(tzid, out timeZoneInfo);
         }
 #endif
 
@@ -308,7 +320,7 @@ namespace TimeZoneConverter
         {
             if (IsWindows)
                 return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
-            
+
             var zones = GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x);
 
             // Include special case to resolve deleted link
