@@ -148,7 +148,7 @@ namespace TimeZoneConverter
             throw new TimeZoneNotFoundException();
 #else
             // this will also throw, but we can't throw directly because TimeZoneNotFoundException is not available in .NET Standard 1.3
-            return TimeZoneInfo.FindSystemTimeZoneById(tzid);
+            return TimeZoneInfo.FindSystemTimeZoneById(windowsOrIanaTimeZoneId);
 #endif
         }
 
@@ -342,7 +342,7 @@ namespace TimeZoneConverter
                 {
                     tzi = TimeZoneInfo.FindSystemTimeZoneById(name);
                 }
-                catch (TimeZoneNotFoundException)
+                catch 
                 {
                 }
 
