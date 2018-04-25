@@ -63,7 +63,7 @@ namespace TimeZoneConverter
             if (TryIanaToWindows(ianaTimeZoneName, out var windowsTimeZoneId))
                 return windowsTimeZoneId;
 
-            throw new InvalidTimeZoneException($"\"{ianaTimeZoneName}\" was not recognized as a valid IANA time zone name, or has no equivalant Windows time zone.");
+            throw new InvalidTimeZoneException($"\"{ianaTimeZoneName}\" was not recognized as a valid IANA time zone name, or has no equivalent Windows time zone.");
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace TimeZoneConverter
             if (TryIanaToRails(ianaTimeZoneName, out var railsTimeZoneNames))
                 return railsTimeZoneNames;
 
-            throw new InvalidTimeZoneException($"\"{ianaTimeZoneName}\" was not recognized as a valid IANA time zone name, or has no equivalant Rails time zone.");
+            throw new InvalidTimeZoneException($"\"{ianaTimeZoneName}\" was not recognized as a valid IANA time zone name, or has no equivalent Rails time zone.");
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace TimeZoneConverter
             if (TryWindowsToRails(windowsTimeZoneId, territoryCode, out var railsTimeZoneNames))
                 return railsTimeZoneNames;
 
-            throw new InvalidTimeZoneException($"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID, or has no equivalant Rails time zone.");
+            throw new InvalidTimeZoneException($"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID, or has no equivalent Rails time zone.");
         }
 
         /// <summary>
