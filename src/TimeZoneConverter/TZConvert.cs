@@ -318,6 +318,9 @@ namespace TimeZoneConverter
 #if !NETSTANDARD1_1
         private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
         {
+#if NET35 || NET40
+            return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+#else
             if (IsWindows)
                 return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
 
@@ -337,6 +340,7 @@ namespace TimeZoneConverter
             }
 
             return zones;
+#endif
         }
 
         private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesLinux()
