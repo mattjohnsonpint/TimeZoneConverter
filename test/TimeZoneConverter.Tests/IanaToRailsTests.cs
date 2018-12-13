@@ -81,6 +81,7 @@ namespace TimeZoneConverter.Tests
             "America/Grand_Turk",
             "America/Havana",
             "America/Maceio",
+            "America/Metlakatla",
             "America/Miquelon",
             "America/Noronha",
             "America/Paramaribo",
