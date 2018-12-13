@@ -47,14 +47,6 @@ namespace TimeZoneConverter.DataBuilder
                 var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply overrides
-                mapping.Remove("W. Central Africa Standard Time,ST,Africa/Sao_Tome");
-                mapping.Add("Sao Tome Standard Time,001,Africa/Sao_Tome");
-                mapping.Add("Sao Tome Standard Time,ST,Africa/Sao_Tome");
-
-                mapping.Remove("GTB Standard Time,CY,Asia/Nicosia");
-                mapping.Remove("Turkey Standard Time,CY,Asia/Famagusta");
-                mapping.Add("GTB Standard Time,CY,Asia/Nicosia Asia/Famagusta");
-
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
                 mapping.Add("Greenwich Standard Time,AC,Atlantic/St_Helena");
