@@ -52,6 +52,10 @@ namespace TimeZoneConverter.DataBuilder
                 mapping.Add("Volgograd Standard Time,001,Europe/Volgograd");
                 mapping.Add("Volgograd Standard Time,RU,Europe/Volgograd");
 
+                mapping.Remove("Alaskan Standard Time,US,America/Anchorage America/Juneau America/Metlakatla America/Nome America/Sitka America/Yakutat");
+                mapping.Add("Alaskan Standard Time,US,America/Anchorage America/Juneau America/Nome America/Sitka America/Yakutat");
+                mapping.Add("UTC-08,US,America/Metlakatla");
+
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
                 mapping.Add("Greenwich Standard Time,AC,Atlantic/St_Helena");
