@@ -47,6 +47,11 @@ namespace TimeZoneConverter.DataBuilder
                 var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply overrides
+                mapping.Remove("Russian Standard Time,RU,Europe/Moscow Europe/Kirov Europe/Volgograd");
+                mapping.Add("Russian Standard Time,RU,Europe/Moscow Europe/Kirov");
+                mapping.Add("Volgograd Standard Time,001,Europe/Volgograd");
+                mapping.Add("Volgograd Standard Time,RU,Europe/Volgograd");
+
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
                 mapping.Add("Greenwich Standard Time,AC,Atlantic/St_Helena");
