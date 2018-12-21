@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter.DataBuild
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter.Tests", "test\TimeZoneConverter.Tests\TimeZoneConverter.Tests.csproj", "{902AFB31-8432-4C34-89AB-2CFF4DD27B93}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter.Posix", "src\TimeZoneConverter.Posix\TimeZoneConverter.Posix.csproj", "{6E9924D5-04AA-4063-AD77-02C68112D612}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeZoneConverter.Posix.Tests", "test\TimeZoneConverter.Posix.Tests\TimeZoneConverter.Posix.Tests.csproj", "{3EF2A004-2823-4C13-AB04-8A7B415B49C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{902AFB31-8432-4C34-89AB-2CFF4DD27B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{902AFB31-8432-4C34-89AB-2CFF4DD27B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{902AFB31-8432-4C34-89AB-2CFF4DD27B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9924D5-04AA-4063-AD77-02C68112D612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9924D5-04AA-4063-AD77-02C68112D612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9924D5-04AA-4063-AD77-02C68112D612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9924D5-04AA-4063-AD77-02C68112D612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,5 +57,10 @@ Global
 		{0914D600-682C-4409-A3BD-09E1B31244A0} = {9C922A24-67F8-4E45-B079-130DDAC3B5A7}
 		{DD8E4767-23A4-4AB0-BA08-EBBCECDE7068} = {9C922A24-67F8-4E45-B079-130DDAC3B5A7}
 		{902AFB31-8432-4C34-89AB-2CFF4DD27B93} = {62E4880C-D978-413C-AB12-E74B2E47426E}
+		{6E9924D5-04AA-4063-AD77-02C68112D612} = {9C922A24-67F8-4E45-B079-130DDAC3B5A7}
+		{3EF2A004-2823-4C13-AB04-8A7B415B49C7} = {62E4880C-D978-413C-AB12-E74B2E47426E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {404E04B4-C30C-452D-8705-DDF6C17AE7D0}
 	EndGlobalSection
 EndGlobal
