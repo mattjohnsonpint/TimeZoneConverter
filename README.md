@@ -1,7 +1,8 @@
-TimeZoneConverter  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter/)
+## TimeZoneConverter  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter/)
 
-TimeZoneConverter.Posix  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.Posix.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter.Posix/)
-=================
+## TimeZoneConverter.Posix  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.Posix.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter.Posix/)
+
+--------------------------------
 
 - TimeZoneConverter is a lightweight library to convert quickly between IANA, Windows, and Rails time zone names.
 - TimeZoneConverter.Posix adds support for generating POSIX time zone strings, which are useful in certain scenarios such as IoT.
