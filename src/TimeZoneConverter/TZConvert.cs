@@ -18,10 +18,10 @@ namespace TimeZoneConverter
         private static readonly IDictionary<string, string> RailsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private static readonly IDictionary<string, IList<string>> InverseRailsMap = new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
-#if NET35 || NET40 || NETSTANDARD1_1
-        private const bool IsWindows = true;
-#else
+#if NETSTANDARD2_0 || NETSTANDARD1_3
         private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+#else
+        private const bool IsWindows = true;
 #endif
 
 #if !NETSTANDARD1_1
