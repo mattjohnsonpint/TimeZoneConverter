@@ -119,10 +119,10 @@ namespace TimeZoneConverter.Posix
                     sb.Append(dltOffsetString);
                 }
 
-                var stdTransitionString = GetPosixTransitionString(stdInterval);
+                var stdTransitionString = GetPosixTransitionString(stdInterval, tz);
                 sb.Append("," + stdTransitionString);
 
-                var dltTransitionString = GetPosixTransitionString(dltInterval);
+                var dltTransitionString = GetPosixTransitionString(dltInterval, tz);
                 sb.Append("," + dltTransitionString);
             }
 
@@ -140,12 +140,35 @@ namespace TimeZoneConverter.Posix
             return negated.ToString("-H:mm", CultureInfo.InvariantCulture).Replace(":00", "");
         }
 
-        private static string GetPosixTransitionString(ZoneInterval interval)
+        private static string GetPosixTransitionString(ZoneInterval interval, DateTimeZone tz)
         {
             if (!interval.HasEnd) return "J365/25";
 
             var transition = interval.IsoLocalEnd;
-            var datePart = $"M{transition.Month}.{(transition.Day - 1) / 7 + 1}.{(int)transition.DayOfWeek.ToDayOfWeek()}";
+            var transitionOccurrence = (transition.Day - 1) / 7 + 1;
+
+            // return "last occurrence" (5) when appropriate
+            if (transitionOccurrence == 4)
+            {
+                for (int i = 1; i <= 7; i++)
+                {
+                    var futureInstant = interval.IsoLocalEnd.PlusYears(i).InZoneLeniently(tz).ToInstant();
+                    var futureInterval = tz.GetZoneInterval(futureInstant);
+                    var occurrence = (futureInterval.IsoLocalEnd.Day - 1) / 7 + 1;
+                    if (occurrence < 4)
+                    {
+                        transitionOccurrence = 4;
+                        break;
+                    }
+
+                    if (occurrence == 5)
+                    {
+                        transitionOccurrence = 5;
+                    }
+                }
+            }
+
+            var datePart = $"M{transition.Month}.{transitionOccurrence}.{(int)transition.DayOfWeek.ToDayOfWeek()}";
 
             if (transition.TimeOfDay == new LocalTime(2, 0)) return datePart;
             if (transition.Minute == 0 && transition.Second == 0) return $"{datePart}/{transition.Hour}";
