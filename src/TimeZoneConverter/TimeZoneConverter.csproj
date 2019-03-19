@@ -21,6 +21,7 @@
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\TimeZoneConverter.xml</DocumentationFile>
     <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>mj1856_oss.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +30,6 @@
 
   <PropertyGroup>
     <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35'">$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
-    <AssemblyOriginatorKeyFile>mj1856_oss.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
     
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
