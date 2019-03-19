@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-#if !NETSTANDARD1_1
+#if NETSTANDARD2_0 || NETSTANDARD1_3
 using System.Runtime.InteropServices;
 #endif
 
@@ -318,9 +318,7 @@ namespace TimeZoneConverter
 #if !NETSTANDARD1_1
         private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
         {
-#if NET35 || NET40
-            return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
-#else
+#if NETSTANDARD2_0 || NETSTANDARD1_3
             if (IsWindows)
                 return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
 
@@ -340,9 +338,12 @@ namespace TimeZoneConverter
             }
 
             return zones;
+#else
+            return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
 #endif
         }
 
+#if NETSTANDARD2_0 || NETSTANDARD1_3
         private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesLinux()
         {
             // Don't trust TimeZoneInfo.GetSystemTimeZones on Non-Windows
@@ -364,6 +365,7 @@ namespace TimeZoneConverter
                     yield return tzi;
             }
         }
+#endif
 #endif
     }
 }
