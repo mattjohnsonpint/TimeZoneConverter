@@ -25,8 +25,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="2.4.2" />
-    <PackageReference Include="TimeZoneConverter" Version="2.5.1" />
+    <PackageReference Include="NodaTime" Version="2.4.4" />
+    <PackageReference Include="TimeZoneConverter" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
