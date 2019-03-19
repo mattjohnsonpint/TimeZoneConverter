@@ -85,19 +85,19 @@ namespace TimeZoneConverter.Posix
             var tz = DateTimeZoneProviders.Tzdb[timeZoneName];
 
             var jan = new LocalDate(year, 1, 1).AtStartOfDayInZone(tz);
-            var jun = new LocalDate(year, 6, 1).AtStartOfDayInZone(tz);
+            var jul = new LocalDate(year, 7, 1).AtStartOfDayInZone(tz);
 
             var janInterval = tz.GetZoneInterval(jan.ToInstant());
-            var junInterval = tz.GetZoneInterval(jun.ToInstant());
+            var julInterval = tz.GetZoneInterval(jul.ToInstant());
 
             var stdInterval = janInterval.Savings == Offset.Zero
                 ? janInterval
-                : junInterval;
+                : julInterval;
 
             var dltInterval = janInterval.Savings != Offset.Zero
                 ? janInterval
-                : junInterval.Savings != Offset.Zero
-                    ? junInterval
+                : julInterval.Savings != Offset.Zero
+                    ? julInterval
                     : null;
 
             var sb = new StringBuilder();
