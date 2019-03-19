@@ -37,5 +37,12 @@ namespace TimeZoneConverter.Tests
 
             Assert.Equal(0, errors);
         }
+
+        [Fact]
+        public void Can_Convert_Asia_Qostanay_To_Windows()
+        {
+            var result = TZConvert.IanaToWindows("Asia/Qostanay");
+            Assert.Equal("Central Asia Standard Time", result);
+        }
     }
 }
