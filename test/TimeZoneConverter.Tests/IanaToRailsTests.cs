@@ -102,6 +102,7 @@ namespace TimeZoneConverter.Tests
             "Asia/Hovd",
             "Asia/Omsk",
             "Asia/Pyongyang",
+            "Asia/Qyzylorda",
             "Asia/Sakhalin",
             "Asia/Tomsk",
             "Asia/Yangon",

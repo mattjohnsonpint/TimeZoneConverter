@@ -44,5 +44,12 @@ namespace TimeZoneConverter.Tests
             var result = TZConvert.IanaToWindows("Asia/Qostanay");
             Assert.Equal("Central Asia Standard Time", result);
         }
+
+        [Fact]
+        public void Can_Convert_Asia_Qyzylorda_To_Windows()
+        {
+            var result = TZConvert.IanaToWindows("Asia/Qyzylorda");
+            Assert.Equal("Qyzylorda Standard Time", result);
+        }
     }
 }

@@ -47,6 +47,11 @@ namespace TimeZoneConverter.DataBuilder
                 var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply overrides
+                mapping.Remove("West Asia Standard Time,KZ,Asia/Oral Asia/Aqtau Asia/Aqtobe Asia/Atyrau Asia/Qyzylorda");
+                mapping.Add("West Asia Standard Time,KZ,Asia/Oral Asia/Aqtau Asia/Aqtobe Asia/Atyrau");
+                mapping.Add("Qyzylorda Standard Time,001,Asia/Qyzylorda");
+                mapping.Add("Qyzylorda Standard Time,KZ,Asia/Qyzylorda");
+
                 mapping.Remove("Russian Standard Time,RU,Europe/Moscow Europe/Kirov Europe/Volgograd");
                 mapping.Add("Russian Standard Time,RU,Europe/Moscow Europe/Kirov");
                 mapping.Add("Volgograd Standard Time,001,Europe/Volgograd");
