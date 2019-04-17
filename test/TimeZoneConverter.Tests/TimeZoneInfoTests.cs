@@ -12,5 +12,13 @@ namespace TimeZoneConverter.Tests
 
             Assert.Equal(TimeZoneInfo.Utc, tz);
         }
+
+        [Fact]
+        public void CanGetEasternTimeZone_LowerCase()
+        {
+            var tz = TZConvert.GetTimeZoneInfo("eastern standard time");
+
+            Assert.Equal("Eastern Standard Time", tz.Id);
+        }
     }
 }

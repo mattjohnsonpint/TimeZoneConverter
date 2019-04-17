@@ -320,9 +320,9 @@ namespace TimeZoneConverter
         {
 #if NETSTANDARD2_0 || NETSTANDARD1_3
             if (IsWindows)
-                return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+                return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 
-            var zones = GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x);
+            var zones = GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 
             // Include special case to resolve deleted link
             if (!zones.ContainsKey("Canada/East-Saskatchewan"))
@@ -339,7 +339,7 @@ namespace TimeZoneConverter
 
             return zones;
 #else
-            return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x);
+            return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 #endif
         }
 
