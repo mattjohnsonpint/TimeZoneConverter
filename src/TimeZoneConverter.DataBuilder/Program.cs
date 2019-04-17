@@ -35,7 +35,7 @@ namespace TimeZoneConverter.DataBuilder
                 links.Add("Etc/GMT", "Etc/UTC");
                 foreach (var tzdbLink in links.ToList())
                 {
-                    if (tzdbLink.Value == "Etc/GMT" || tzdbLink.Value == "Etc/UCT")
+                    if (tzdbLink.Value == "Etc/GMT")
                         links[tzdbLink.Key] = "Etc/UTC";
                 }
 
