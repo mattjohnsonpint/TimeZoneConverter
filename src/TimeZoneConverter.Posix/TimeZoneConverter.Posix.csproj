@@ -11,7 +11,7 @@
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -25,8 +25,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="2.4.4" />
-    <PackageReference Include="TimeZoneConverter" Version="3.0.0" />
+    <PackageReference Include="NodaTime" Version="2.4.5" />
+    <PackageReference Include="TimeZoneConverter" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
