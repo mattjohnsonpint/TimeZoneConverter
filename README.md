@@ -145,7 +145,7 @@ This library is provided free of charge, under the terms of the [MIT license][9]
 [2]: https://nodatime.org
 [3]: http://cldr.unicode.org
 [4]: https://iana.org/time-zones
-[5]: https://blogs.technet.microsoft.com/dst2007
+[5]: https://aka.ms/dstblog
 [6]: https://github.com/rails/rails/blob/master/activesupport/lib/active_support/values/time_zone.rb
 [7]: https://support.microsoft.com/en-us/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton
 [8]: https://github.com/dotnet/corefx/issues/11897
