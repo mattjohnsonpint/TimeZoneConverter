@@ -74,9 +74,6 @@ namespace TimeZoneConverter.DataBuilder
                 mapping.Add("Central Europe Standard Time,XK,Europe/Belgrade");
                 mapping.Add("Central Asia Standard Time,DG,Indian/Chagos");
 
-                mapping.Add("Kamchatka Standard Time,001,Asia/Kamchatka");
-                mapping.Add("Mid-Atlantic Standard Time,001,Etc/GMT+2");
-
                 // Add a few aliases for IANA abbreviated zones not tracked by CLDR
                 aliases.Add("Europe/Paris,CET");
                 aliases.Add("Europe/Bucharest,EET");
@@ -85,6 +82,10 @@ namespace TimeZoneConverter.DataBuilder
 
                 mapping.Sort(StringComparer.Ordinal);
                 aliases.Sort(StringComparer.Ordinal);
+
+                // Support mapping deprecated Windows zones, but after sorting so they are not used as primary results
+                mapping.Add("Kamchatka Standard Time,001,Asia/Kamchatka");
+                mapping.Add("Mid-Atlantic Standard Time,001,Etc/GMT+2");
 
                 // Write to source files in the main library
                 var projectPath = Path.GetFullPath(".");

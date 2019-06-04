@@ -65,5 +65,12 @@ namespace TimeZoneConverter.Tests
                 Assert.Equal(alias + ":UTC", alias + ":" + result2);
             }
         }
+
+        [Fact]
+        public void Can_Convert_Asia_RTZ11_To_IANA()
+        {
+            var result = TZConvert.WindowsToIana("Russia Time Zone 11");
+            Assert.Equal("Asia/Kamchatka", result);
+        }
     }
 }

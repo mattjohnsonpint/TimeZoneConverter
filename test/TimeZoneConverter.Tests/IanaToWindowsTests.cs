@@ -51,5 +51,12 @@ namespace TimeZoneConverter.Tests
             var result = TZConvert.IanaToWindows("Asia/Qyzylorda");
             Assert.Equal("Qyzylorda Standard Time", result);
         }
+
+        [Fact]
+        public void Can_Convert_Asia_Kamchatka_To_Windows()
+        {
+            var result = TZConvert.IanaToWindows("Asia/Kamchatka");
+            Assert.Equal("Russia Time Zone 11", result);
+        }
     }
 }
