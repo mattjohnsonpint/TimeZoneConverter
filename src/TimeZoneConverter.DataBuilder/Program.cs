@@ -46,22 +46,27 @@ namespace TimeZoneConverter.DataBuilder
                 // Extract Rails mappings and aliases from Rails data
                 var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
-                // Apply overrides
+                // Apply override mappings for zones not yet in the CLDR trunk we pulled in
+
+                // Asia/Qyzylorda => Qyzylorda Standard Time
                 mapping.Remove("West Asia Standard Time,KZ,Asia/Oral Asia/Aqtau Asia/Aqtobe Asia/Atyrau Asia/Qyzylorda");
                 mapping.Add("West Asia Standard Time,KZ,Asia/Oral Asia/Aqtau Asia/Aqtobe Asia/Atyrau");
                 mapping.Add("Qyzylorda Standard Time,001,Asia/Qyzylorda");
                 mapping.Add("Qyzylorda Standard Time,KZ,Asia/Qyzylorda");
 
+                // Europe/Volgograd => Volgograd Standard Time
                 mapping.Remove("Russian Standard Time,RU,Europe/Moscow Europe/Kirov Europe/Volgograd");
                 mapping.Add("Russian Standard Time,RU,Europe/Moscow Europe/Kirov");
                 mapping.Add("Volgograd Standard Time,001,Europe/Volgograd");
                 mapping.Add("Volgograd Standard Time,RU,Europe/Volgograd");
 
+                // America/Metlakatla => Alaskan Standard Time
                 mapping.Remove("Alaskan Standard Time,US,America/Anchorage America/Juneau America/Nome America/Sitka America/Yakutat");
                 mapping.Add("Alaskan Standard Time,US,America/Anchorage America/Juneau America/Metlakatla America/Nome America/Sitka America/Yakutat");
                 mapping.Remove("Pacific Standard Time,US,America/Los_Angeles America/Metlakatla");
                 mapping.Add("Pacific Standard Time,US,America/Los_Angeles");
 
+                // Add mappings for ISO country codes that aren't used in CLDR
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
                 mapping.Add("Greenwich Standard Time,AC,Atlantic/St_Helena");
@@ -72,6 +77,7 @@ namespace TimeZoneConverter.DataBuilder
                 mapping.Add("Kamchatka Standard Time,001,Asia/Kamchatka");
                 mapping.Add("Mid-Atlantic Standard Time,001,Etc/GMT+2");
 
+                // Add a few aliases for IANA abbreviated zones not tracked by CLDR
                 aliases.Add("Europe/Paris,CET");
                 aliases.Add("Europe/Bucharest,EET");
                 aliases.Add("Europe/Berlin,MET");
