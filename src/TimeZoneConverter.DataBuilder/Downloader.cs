@@ -12,8 +12,8 @@ namespace TimeZoneConverter.DataBuilder
 
         public static async Task DownloadCldrAsync(string dir)
         {
-            const string url1 = "http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml";
-            const string url2 = "http://unicode.org/repos/cldr/trunk/common/bcp47/timezone.xml";
+            const string url1 = "https://raw.githubusercontent.com/unicode-org/cldr/master/common/supplemental/windowsZones.xml";
+            const string url2 = "https://raw.githubusercontent.com/unicode-org/cldr/master/common/bcp47/timezone.xml";
 
             var t1 = DownloadAsync(url1, dir);
             var t2 = DownloadAsync(url2, dir);
@@ -22,7 +22,7 @@ namespace TimeZoneConverter.DataBuilder
         
         public static async Task DownloadTzdbAsync(string dir)
         {
-            const string url = "http://www.iana.org/time-zones/repository/tzdata-latest.tar.gz";
+            const string url = "https://data.iana.org/time-zones/tzdata-latest.tar.gz";
             await DownloadAndExtractAsync(url, dir);
         }
 
