@@ -1,0 +1,6 @@
+extraction:
+  csharp:
+    index:
+      solution: "src/TimeZoneConverter/TimeZoneConverter.csproj"
+      dotnet:
+        arguments: "-f netstandard2.0"
