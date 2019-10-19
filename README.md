@@ -20,11 +20,11 @@ and please raise an issue if you encounter any compatibility errors.
 #### Note on OS Data Dependencies
 
 Some functions, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
-time zone data of the operating system.  On Windows, this data comes from the registry and is mainted via Windows Updates.
+time zone data of the operating system.  On Windows, this data comes from the registry and is maintained via Windows Updates.
 
 On OSX and Linux, this data comes from a distribution of the [IANA time zone database](https://www.iana.org/time-zones),  usually via the `tzdata` package.  If your environment does not have the `tzdata` package installed, you will need to install it for `TZConvert.GetTimeZoneInfo` to work correctly.
 
-For example, the Alpine Linux Docker images for .NET Core no longer ship with `tzdata`.  See [dotnet/dotnet-docker#1366](https://github.com/dotnet/dotnet-docker/issues/1366) for instructions on how to add it back to your Docker images.
+For example, the Alpine Linux Docker images for .NET Core no longer ship with `tzdata`.  See [dotnet/dotnet-docker#1366](https://github.com/dotnet/dotnet-docker/issues/1366) for instructions on how to add it to your Docker images.
 
 ## TimeZoneConverter.Posix Installation
 
