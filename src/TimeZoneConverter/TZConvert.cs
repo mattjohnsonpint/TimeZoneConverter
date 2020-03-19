@@ -13,10 +13,11 @@ namespace TimeZoneConverter
     /// </summary>
     public static class TZConvert
     {
-        private static readonly IDictionary<string, string> IanaMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        private static readonly IDictionary<string, string> WindowsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        private static readonly IDictionary<string, string> RailsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        private static readonly IDictionary<string, IList<string>> InverseRailsMap = new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, string>          IanaMap            = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, HashSet<string>> IanaTerritoriesMap = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, string>          WindowsMap         = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, string>          RailsMap           = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly IDictionary<string, IList<string>>   InverseRailsMap    = new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
 #if NETSTANDARD2_0 || NETSTANDARD1_3
         private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
@@ -31,11 +32,12 @@ namespace TimeZoneConverter
 
         static TZConvert()
         {
-            DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap);
+            DataLoader.Populate(IanaMap, IanaTerritoriesMap, WindowsMap, RailsMap, InverseRailsMap);
 
-            KnownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
-            KnownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
-            KnownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
+            KnownIanaTimeZoneNames       = new HashSet<string>(IanaMap.Select(x => x.Key));
+            KnownWindowsTimeZoneIds      = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
+            KnownRailsTimeZoneNames      = new HashSet<string>(RailsMap.Select(x => x.Key));
+            IanaTimeZoneNamesByTerritory = IanaTerritoriesMap.ToDictionary(kvp => kvp.Key, kvp => (ICollection<string>)kvp.Value);
 
 #if !NETSTANDARD1_1
             SystemTimeZones = GetSystemTimeZones();
@@ -56,6 +58,11 @@ namespace TimeZoneConverter
         /// Gets a collection of all Rails time zone names known to this library.
         /// </summary>
         public static ICollection<string> KnownRailsTimeZoneNames { get; }
+
+         /// <summary>
+        /// Gets a dictionary that has an unsorted collection of IANA time zone names keyed by IANA time zone territory name.
+        /// </summary>
+        public static IDictionary<string, ICollection<string>> IanaTimeZoneNamesByTerritory { get; }
 
         /// <summary>
         /// Converts an IANA time zone name to the equivalent Windows time zone ID.

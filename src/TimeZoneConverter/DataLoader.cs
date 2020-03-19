@@ -9,10 +9,10 @@ namespace TimeZoneConverter
 {
     internal static class DataLoader
     {
-        public static void Populate(IDictionary<string, string> ianaMap, IDictionary<string, string> windowsMap, IDictionary<string, string> railsMap, IDictionary<string, IList<string>> inverseRailsMap)
+        public static void Populate(IDictionary<string, string> ianaMap, IDictionary<string, HashSet<string>> ianaTerritoryZones, IDictionary<string, string> windowsMap, IDictionary<string, string> railsMap, IDictionary<string, IList<string>> inverseRailsMap)
         {
-            var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
-            var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
+            var mapping      = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
+            var aliases      = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
             var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
 
             var links = new Dictionary<string, string>();
@@ -27,14 +27,16 @@ namespace TimeZoneConverter
             var similarIanaZones = new Dictionary<string, IList<string>>();
             foreach (var item in mapping)
             {
-                var parts = item.Split(',');
-                var windowsZone = parts[0];
-                var territory = parts[1];
-                var ianaZones = parts[2].Split();
+                var parts       = item.Split(',');
+                var windowsZone = parts[0];         // e.g. "Pacific Standard Time"
+                var territory   = parts[1];         // e.g. "US"
+                var ianaZones   = parts[2].Split(); // e.g. "America/Vancouver America/Dawson America/Whitehorse" -> `new String[] { "America/Vancouver", "America/Dawson", "America/Whitehorse" }`
 
                 // Create the Windows map entry
                 if (!links.TryGetValue(ianaZones[0], out var value))
+                {
                     value = ianaZones[0];
+                }
 
                 var key = $"{territory}|{windowsZone}";
                 windowsMap.Add(key, value);
@@ -43,7 +45,11 @@ namespace TimeZoneConverter
                 foreach (var ianaZone in ianaZones)
                 {
                     if (!ianaMap.ContainsKey(ianaZone))
+                    {
                         ianaMap.Add(ianaZone, windowsZone);
+                    }
+                        
+                    AddZoneToTerritory(ianaTerritoryZones, territory, ianaZone);
                 }
 
                 if (ianaZones.Length > 1)
@@ -105,6 +111,18 @@ namespace TimeZoneConverter
             }
 
             
+        }
+
+        private static void AddZoneToTerritory(IDictionary<string, HashSet<string>> ianaTerritoryZones, string territory, string ianaZone)
+        {
+            if(ianaTerritoryZones.TryGetValue(territory, out HashSet<string> zones))
+            {
+                zones.Add(ianaZone);
+            }
+            else
+            {
+                ianaTerritoryZones.Add(territory, new HashSet<string>(System.StringComparer.OrdinalIgnoreCase) { ianaZone });
+            }
         }
 
         private static IEnumerable<string> GetEmbeddedData(string resourceName)
