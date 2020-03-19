@@ -40,7 +40,7 @@ namespace TimeZoneConverter
 
                 var key = $"{territory}|{windowsZone}";
                 windowsMap.Add(key, value);
-                
+
                 // Create the IANA map entries
                 foreach (var ianaZone in ianaZones)
                 {
@@ -48,8 +48,11 @@ namespace TimeZoneConverter
                     {
                         ianaMap.Add(ianaZone, windowsZone);
                     }
-                        
-                    AddZoneToTerritory(ianaTerritoryZones, territory, ianaZone);
+
+                    if (territory != "001")
+                    {
+                        AddZoneToTerritory(ianaTerritoryZones, territory, ianaZone);
+                    }
                 }
 
                 if (ianaZones.Length > 1)
