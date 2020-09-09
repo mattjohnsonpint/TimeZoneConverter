@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Lightweight library to convert quickly between Windows time zone IDs and IANA Time Zone names.</Description>
-    <Authors>Matt Johnson</Authors>
+    <Authors>Matt Johnson-Pint</Authors>
     <TargetFrameworks>netstandard2.0;netstandard1.3;netstandard1.1;net471;net461;net45;net40;net35</TargetFrameworks>
     <PackageId>TimeZoneConverter</PackageId>
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo,rails</PackageTags>

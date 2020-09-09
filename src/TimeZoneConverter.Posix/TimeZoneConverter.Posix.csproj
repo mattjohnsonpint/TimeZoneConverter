@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Generates a POSIX time zone string from standard time zone identifiers.</Description>
-    <Authors>Matt Johnson</Authors>
+    <Authors>Matt Johnson-Pint</Authors>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net471;net461;net45</TargetFrameworks>
     <PackageId>TimeZoneConverter.Posix</PackageId>
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo,posix</PackageTags>

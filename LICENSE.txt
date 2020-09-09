@@ -1,5 +1,5 @@
 TimeZoneConverter
-Copyright (c) 2017 Matt Johnson
+Copyright (c) 2017 Matt Johnson-Pint
 https://github.com/mj1856/TimeZoneConverter
 
 While we certainly hope this software is useful, none of the authors or
