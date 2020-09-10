@@ -9,23 +9,21 @@ namespace TimeZoneConverter.DataBuilder
 {
     public static class DataExtractor
     {
-        public static List<string> LoadMapping(string cldrDirectoryPath, IDictionary<string, string> tzdbLinks)
+        public static List<string> LoadMapping(string cldrDirectoryPath)
         {
             var list = new List<string>();
-            using (var stream = File.OpenRead(Path.Combine(cldrDirectoryPath, "windowsZones.xml")))
+            using FileStream stream = File.OpenRead(Path.Combine(cldrDirectoryPath, "windowsZones.xml"));
+            var doc = XDocument.Load(stream);
+
+            IEnumerable<XElement> mapZoneElements = doc.XPathSelectElements("/supplementalData/windowsZones/mapTimezones/mapZone");
+
+            foreach (XElement element in mapZoneElements)
             {
-                var doc = XDocument.Load(stream);
+                string windowsZone = element.Attribute("other")?.Value;
+                string territory = element.Attribute("territory")?.Value;
+                var ianaZones = (element.Attribute("type")?.Value.Split() ?? new string[0]).ToList();
 
-                var mapZoneElements = doc.XPathSelectElements("/supplementalData/windowsZones/mapTimezones/mapZone");
-
-                foreach (var element in mapZoneElements)
-                {
-                    var windowsZone = element.Attribute("other")?.Value;
-                    var territory = element.Attribute("territory")?.Value;
-                    var ianaZones = (element.Attribute("type")?.Value.Split() ?? new string[0]).ToList();
-
-                    list.Add($"{windowsZone},{territory},{string.Join(" ", ianaZones)}");
-                }
+                list.Add($"{windowsZone},{territory},{string.Join(" ", ianaZones)}");
             }
 
             return list;
@@ -34,28 +32,28 @@ namespace TimeZoneConverter.DataBuilder
         public static List<string> LoadAliases(string cldrDirectoryPath, IDictionary<string, string> tzdbLinks)
         {
             var data = new Dictionary<string, string>();
-            using (var stream = File.OpenRead(Path.Combine(cldrDirectoryPath, "timezone.xml")))
+            using (FileStream stream = File.OpenRead(Path.Combine(cldrDirectoryPath, "timezone.xml")))
             {
                 var doc = XDocument.Load(stream);
 
-                var typeElements = doc.XPathSelectElements("/ldmlBCP47/keyword/key/type");
+                IEnumerable<XElement> typeElements = doc.XPathSelectElements("/ldmlBCP47/keyword/key/type");
 
-                foreach (var element in typeElements)
+                foreach (XElement element in typeElements)
                 {
-                    var aliasAttribute = element.Attribute("alias");
+                    XAttribute aliasAttribute = element.Attribute("alias");
                     if (aliasAttribute == null)
                         continue;
 
-                    var zones = aliasAttribute.Value.Split();
+                    string[] zones = aliasAttribute.Value.Split();
                     if (zones.Length <= 1)
                         continue;
 
-                    var target = zones[0];
-                    var aliases = zones.Skip(1).ToArray();
+                    string target = zones[0];
+                    string[] aliases = zones.Skip(1).ToArray();
 
-                    if (tzdbLinks.TryGetValue(target, out var ianaCanonicalZone))
+                    if (tzdbLinks.TryGetValue(target, out string ianaCanonicalZone))
                     {
-                        for (int i = 0; i < aliases.Length; i++)
+                        for (var i = 0; i < aliases.Length; i++)
                         {
                             if (aliases[i] == ianaCanonicalZone)
                                 aliases[i] = target;
@@ -70,7 +68,7 @@ namespace TimeZoneConverter.DataBuilder
                 }
             }
 
-            foreach (var link in tzdbLinks)
+            foreach (KeyValuePair<string, string> link in tzdbLinks)
             {
                 if (!data.ContainsKey(link.Value))
                 {
@@ -89,7 +87,7 @@ namespace TimeZoneConverter.DataBuilder
                 .Select(x => $"{x.Key},{x.Value}")
                 .ToList();
         }
-        
+
         public static IDictionary<string, string> LoadTzdbLinks(string tzdbDirectoryPath)
         {
             string[] dataFiles =
@@ -99,14 +97,14 @@ namespace TimeZoneConverter.DataBuilder
             };
 
             var data = new Dictionary<string, string>();
-            foreach (var file in dataFiles)
+            foreach (string file in dataFiles)
             {
-                var lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, file));
-                foreach (var line in lines.Where(x => x.StartsWith("Link")))
+                IEnumerable<string> lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, file));
+                foreach (string line in lines.Where(x => x.StartsWith("Link")))
                 {
-                    var parts = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                    var target = parts[1];
-                    var link = parts[2];
+                    string[] parts = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                    string target = parts[1];
+                    string link = parts[2];
                     data.Add(link, target);
                 }
             }
@@ -117,25 +115,24 @@ namespace TimeZoneConverter.DataBuilder
         public static IList<string> LoadRailsMapping(string railsPath)
         {
             var data = new List<string>();
-            using (var stream = File.OpenRead(Path.Combine(railsPath, "time_zone.rb")))
-            using (var reader = new StreamReader(stream))
+            using FileStream stream = File.OpenRead(Path.Combine(railsPath, "time_zone.rb"));
+            using var reader = new StreamReader(stream);
+            var inMappingSection = false;
+            while (!reader.EndOfStream)
             {
-                var inMappingSection = false;
-                while (!reader.EndOfStream)
+                string line = reader.ReadLine()!.Trim();
+                if (inMappingSection)
                 {
-                    var line = reader.ReadLine().Trim();
-                    if (inMappingSection)
-                    {
-                        if (line == "}")
-                            break;
+                    if (line == "}")
+                        break;
 
-                        var parts = line.Split("=>");
-                        data.Add(parts[0].Trim(' ', '"') + "," + parts[1].TrimEnd(',').Trim(' ', '"'));
-                    }
-                    else if (line == "MAPPING = {")
-                        inMappingSection = true;
+                    string[] parts = line.Split("=>");
+                    data.Add(parts[0].Trim(' ', '"') + "," + parts[1].TrimEnd(',').Trim(' ', '"'));
                 }
+                else if (line == "MAPPING = {")
+                    inMappingSection = true;
             }
+
             return data;
         }
     }

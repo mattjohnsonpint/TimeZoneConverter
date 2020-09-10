@@ -11,40 +11,40 @@ namespace TimeZoneConverter.DataBuilder
     {
         public static void Main(string[] args)
         {
-            var tempDir = Downloader.GetTempDir();
+            string tempDir = Downloader.GetTempDir();
 
             try
             {
-                var cldrPath = Path.Combine(tempDir, "cldr");
-                var tzdbPath = Path.Combine(tempDir, "tzdb");
-                var railsPath = Path.Combine(tempDir, "rails");
+                string cldrPath = Path.Combine(tempDir, "cldr");
+                string tzdbPath = Path.Combine(tempDir, "tzdb");
+                string railsPath = Path.Combine(tempDir, "rails");
 
                 // Download Data
                 if (!Directory.Exists(tempDir))
                 {
-                    var t1 = Downloader.DownloadCldrAsync(cldrPath);
-                    var t2 = Downloader.DownloadTzdbAsync(tzdbPath);
-                    var t3 = Downloader.DownloadRailsTzMappingAsync(railsPath);
+                    Task t1 = Downloader.DownloadCldrAsync(cldrPath);
+                    Task t2 = Downloader.DownloadTzdbAsync(tzdbPath);
+                    Task t3 = Downloader.DownloadRailsTzMappingAsync(railsPath);
                     Task.WaitAll(t1, t2, t3);
                 }
 
                 // Extract links from TZDB
-                var links = DataExtractor.LoadTzdbLinks(tzdbPath);
+                IDictionary<string, string> links = DataExtractor.LoadTzdbLinks(tzdbPath);
 
                 // Fixup UTC equivalencies.  Prefer Etc/UTC.
                 links.Add("Etc/GMT", "Etc/UTC");
-                foreach (var tzdbLink in links.ToList())
+                foreach (KeyValuePair<string, string> tzdbLink in links.ToList())
                 {
                     if (tzdbLink.Value == "Etc/GMT")
                         links[tzdbLink.Key] = "Etc/UTC";
                 }
 
                 // Extract mappings and aliases from CLDR
-                var mapping = DataExtractor.LoadMapping(cldrPath, links);
-                var aliases = DataExtractor.LoadAliases(cldrPath, links);
+                List<string> mapping = DataExtractor.LoadMapping(cldrPath);
+                List<string> aliases = DataExtractor.LoadAliases(cldrPath, links);
 
                 // Extract Rails mappings and aliases from Rails data
-                var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
+                IList<string> railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply override mappings for zones not yet in the CLDR trunk we pulled in
 
@@ -79,10 +79,10 @@ namespace TimeZoneConverter.DataBuilder
                 mapping.Add("Mid-Atlantic Standard Time,001,Etc/GMT+2");
 
                 // Write to source files in the main library
-                var projectPath = Path.GetFullPath(".");
+                string projectPath = Path.GetFullPath(".");
                 while (!File.Exists(Path.Combine(projectPath, "TimeZoneConverter.sln")))
                     projectPath = Path.GetFullPath(Path.Combine(projectPath, ".."));
-                var dataPath = Path.Combine(projectPath, "src", "TimeZoneConverter", "Data");
+                string dataPath = Path.Combine(projectPath, "src", "TimeZoneConverter", "Data");
                 WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Mapping.csv.gz"), mapping);
                 WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Aliases.csv.gz"), aliases);
                 WriteAllLinesToCompressedFile(Path.Combine(dataPath, "RailsMapping.csv.gz"), railsMapping);
@@ -96,13 +96,11 @@ namespace TimeZoneConverter.DataBuilder
 
         private static void WriteAllLinesToCompressedFile(string path, IEnumerable<string> lines)
         {
-            using (var stream = File.Create(path))
-            using (var compressedStream = new GZipStream(stream, CompressionLevel.Optimal))
-            using (var writer = new StreamWriter(compressedStream))
-            {
-                foreach (var line in lines)
-                    writer.WriteLine(line);
-            }
+            using FileStream stream = File.Create(path);
+            using var compressedStream = new GZipStream(stream, CompressionLevel.Optimal);
+            using var writer = new StreamWriter(compressedStream);
+            foreach (string line in lines)
+                writer.WriteLine(line);
         }
     }
 }

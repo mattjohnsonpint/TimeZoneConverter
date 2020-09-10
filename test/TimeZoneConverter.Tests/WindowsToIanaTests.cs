@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Xunit;
@@ -21,11 +22,11 @@ namespace TimeZoneConverter.Tests
             Skip.IfNot(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "OS is not Windows.");
 
             var errors = 0;
-            var windowsZones = TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id);
+            IEnumerable<string> windowsZones = TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id);
 
-            foreach (var windowsZone in windowsZones)
+            foreach (string windowsZone in windowsZones)
             {
-                if (TZConvert.TryWindowsToIana(windowsZone, out var ianaZone))
+                if (TZConvert.TryWindowsToIana(windowsZone, out string ianaZone))
                 {
                     Assert.NotNull(ianaZone);
                     Assert.NotEqual(string.Empty, ianaZone);
@@ -44,11 +45,11 @@ namespace TimeZoneConverter.Tests
         public void Can_Convert_Windows_Zones_To_Iana_Golden_Zones()
         {
             var errors = 0;
-            var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
+            ICollection<string> windowsZones = TZConvert.KnownWindowsTimeZoneIds;
 
-            foreach (var windowsZone in windowsZones)
+            foreach (string windowsZone in windowsZones)
             {
-                if (TZConvert.TryWindowsToIana(windowsZone, out var ianaZone))
+                if (TZConvert.TryWindowsToIana(windowsZone, out string ianaZone))
                 {
                     Assert.NotNull(ianaZone);
                     Assert.NotEqual(string.Empty, ianaZone);
@@ -66,29 +67,29 @@ namespace TimeZoneConverter.Tests
         [Fact]
         public void Can_Convert_Windows_Zones_To_Iana_Regional_Zones()
         {
-            var result1 = TZConvert.WindowsToIana("Central Europe Standard Time", "CZ");
+            string result1 = TZConvert.WindowsToIana("Central Europe Standard Time", "CZ");
             Assert.Equal("Europe/Prague", result1);
 
-            var result2 = TZConvert.WindowsToIana("Central Europe Standard Time", "foo");
+            string result2 = TZConvert.WindowsToIana("Central Europe Standard Time", "foo");
             Assert.Equal("Europe/Budapest", result2);
 
-            var result3 = TZConvert.WindowsToIana("Central Europe Standard Time");
+            string result3 = TZConvert.WindowsToIana("Central Europe Standard Time");
             Assert.Equal("Europe/Budapest", result3);
         }
 
         [Fact]
         public void Can_Convert_UTC_Aliases()
         {
-            var result1 = TZConvert.WindowsToIana("UTC");
+            string result1 = TZConvert.WindowsToIana("UTC");
             Assert.Equal("Etc/UTC", result1);
 
-            var utcAliases = "Etc/UTC Etc/UCT Etc/Universal Etc/Zulu UCT UTC Universal Zulu".Split();
-            var gmtAliases = "Etc/GMT Etc/GMT+0 Etc/GMT-0 Etc/GMT0 Etc/Greenwich GMT GMT+0 GMT-0 GMT0 Greenwich".Split();
-            var aliases = utcAliases.Concat(gmtAliases);
+            string[] utcAliases = "Etc/UTC Etc/UCT Etc/Universal Etc/Zulu UCT UTC Universal Zulu".Split();
+            string[] gmtAliases = "Etc/GMT Etc/GMT+0 Etc/GMT-0 Etc/GMT0 Etc/Greenwich GMT GMT+0 GMT-0 GMT0 Greenwich".Split();
+            IEnumerable<string> aliases = utcAliases.Concat(gmtAliases);
 
-            foreach (var alias in aliases)
+            foreach (string alias in aliases)
             {
-                var result2 = TZConvert.IanaToWindows(alias);
+                string result2 = TZConvert.IanaToWindows(alias);
                 Assert.Equal(alias + ":UTC", alias + ":" + result2);
             }
         }
@@ -96,14 +97,14 @@ namespace TimeZoneConverter.Tests
         [Fact]
         public void Can_Convert_Asia_RTZ11_To_IANA()
         {
-            var result = TZConvert.WindowsToIana("Russia Time Zone 11");
+            string result = TZConvert.WindowsToIana("Russia Time Zone 11");
             Assert.Equal("Asia/Kamchatka", result);
         }
 
         [Fact]
         public void Can_Convert_Yukon_Standard_Time_To_IANA()
         {
-            var result = TZConvert.WindowsToIana("Yukon Standard Time");
+            string result = TZConvert.WindowsToIana("Yukon Standard Time");
             Assert.Equal("America/Whitehorse", result);
         }
     }

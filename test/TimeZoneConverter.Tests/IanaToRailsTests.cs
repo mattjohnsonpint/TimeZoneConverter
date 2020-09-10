@@ -18,11 +18,11 @@ namespace TimeZoneConverter.Tests
         public void Can_Convert_Iana_Zones_To_Rails_Zones()
         {
             var errors = new List<string>();
-            var ianaZones = TZConvert.KnownIanaTimeZoneNames.OrderBy(x => x);
+            IOrderedEnumerable<string> ianaZones = TZConvert.KnownIanaTimeZoneNames.OrderBy(x => x);
 
-            foreach (var ianaZone in ianaZones.Except(UnmappableZones))
+            foreach (string ianaZone in ianaZones.Except(UnmappableZones))
             {
-                if (TZConvert.TryIanaToRails(ianaZone, out var railsZones))
+                if (TZConvert.TryIanaToRails(ianaZone, out IList<string> railsZones))
                 {
                     Assert.NotNull(railsZones);
                     Assert.NotEmpty(railsZones);
@@ -36,7 +36,7 @@ namespace TimeZoneConverter.Tests
             int errorsCount = errors.Count;
             if (errorsCount > 0)
             {
-                _output.WriteLine($"Failed to convert:\n");
+                _output.WriteLine("Failed to convert:\n");
                 _output.WriteLine(string.Join(",\n", errors.Select(x => $"\"{x}\"")));
             }
 

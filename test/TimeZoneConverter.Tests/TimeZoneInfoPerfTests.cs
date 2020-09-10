@@ -11,7 +11,7 @@ namespace TimeZoneConverter.Tests
         {
             var sw = Stopwatch.StartNew();
 
-            for (int i = 0; i < 1000000; i++)
+            for (var i = 0; i < 1000000; i++)
                 TZConvert.GetTimeZoneInfo("Europe/Warsaw");
 
             sw.Stop();
@@ -23,7 +23,7 @@ namespace TimeZoneConverter.Tests
         {
             var sw = Stopwatch.StartNew();
 
-            for (int i = 0; i < 1000000; i++)
+            for (var i = 0; i < 1000000; i++)
                 TZConvert.GetTimeZoneInfo("Pacific Standard Time");
 
             sw.Stop();

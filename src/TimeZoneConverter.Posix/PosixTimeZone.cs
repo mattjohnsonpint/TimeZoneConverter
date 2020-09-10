@@ -69,8 +69,8 @@ namespace TimeZoneConverter.Posix
         /// <returns>A POSIX time zone string.</returns>
         public static string FromIanaTimeZoneName(string timeZoneName)
         {
-            var tz = DateTimeZoneProviders.Tzdb[timeZoneName];
-            var today = SystemClock.Instance.InZone(tz).GetCurrentDate();
+            DateTimeZone tz = DateTimeZoneProviders.Tzdb[timeZoneName];
+            LocalDate today = SystemClock.Instance.InZone(tz).GetCurrentDate();
             return FromIanaTimeZoneName(timeZoneName, today.Year);
         }
 
@@ -82,19 +82,19 @@ namespace TimeZoneConverter.Posix
         /// <returns>A POSIX time zone string.</returns>
         public static string FromIanaTimeZoneName(string timeZoneName, int year)
         {
-            var tz = DateTimeZoneProviders.Tzdb[timeZoneName];
+            DateTimeZone tz = DateTimeZoneProviders.Tzdb[timeZoneName];
 
-            var jan = new LocalDate(year, 1, 1).AtStartOfDayInZone(tz);
-            var jul = new LocalDate(year, 7, 1).AtStartOfDayInZone(tz);
+            ZonedDateTime jan = new LocalDate(year, 1, 1).AtStartOfDayInZone(tz);
+            ZonedDateTime jul = new LocalDate(year, 7, 1).AtStartOfDayInZone(tz);
 
-            var janInterval = tz.GetZoneInterval(jan.ToInstant());
-            var julInterval = tz.GetZoneInterval(jul.ToInstant());
+            ZoneInterval janInterval = tz.GetZoneInterval(jan.ToInstant());
+            ZoneInterval julInterval = tz.GetZoneInterval(jul.ToInstant());
 
-            var stdInterval = janInterval.Savings == Offset.Zero
+            ZoneInterval stdInterval = janInterval.Savings == Offset.Zero
                 ? janInterval
                 : julInterval;
 
-            var dltInterval = janInterval.Savings != Offset.Zero
+            ZoneInterval dltInterval = janInterval.Savings != Offset.Zero
                 ? janInterval
                 : julInterval.Savings != Offset.Zero
                     ? julInterval
@@ -102,27 +102,27 @@ namespace TimeZoneConverter.Posix
 
             var sb = new StringBuilder();
 
-            var stdAbbreviation = GetPosixAbbreviation(stdInterval.Name);
+            string stdAbbreviation = GetPosixAbbreviation(stdInterval.Name);
             sb.Append(stdAbbreviation);
 
-            var stdOffsetString = GetPosixOffsetString(stdInterval.WallOffset);
+            string stdOffsetString = GetPosixOffsetString(stdInterval.WallOffset);
             sb.Append(stdOffsetString);
 
             if (dltInterval != null)
             {
-                var dltAbbreviation = GetPosixAbbreviation(dltInterval.Name);
+                string dltAbbreviation = GetPosixAbbreviation(dltInterval.Name);
                 sb.Append(dltAbbreviation);
 
                 if (dltInterval.Savings != Offset.FromHours(1))
                 {
-                    var dltOffsetString = GetPosixOffsetString(dltInterval.WallOffset);
+                    string dltOffsetString = GetPosixOffsetString(dltInterval.WallOffset);
                     sb.Append(dltOffsetString);
                 }
 
-                var stdTransitionString = GetPosixTransitionString(stdInterval, tz);
+                string stdTransitionString = GetPosixTransitionString(stdInterval, tz);
                 sb.Append("," + stdTransitionString);
 
-                var dltTransitionString = GetPosixTransitionString(dltInterval, tz);
+                string dltTransitionString = GetPosixTransitionString(dltInterval, tz);
                 sb.Append("," + dltTransitionString);
             }
 
@@ -136,7 +136,7 @@ namespace TimeZoneConverter.Posix
 
         private static string GetPosixOffsetString(Offset offset)
         {
-            var negated = -offset;
+            Offset negated = -offset;
             return negated.ToString("-H:mm", CultureInfo.InvariantCulture).Replace(":00", "");
         }
 
@@ -144,17 +144,17 @@ namespace TimeZoneConverter.Posix
         {
             if (!interval.HasEnd) return "J365/25";
 
-            var transition = interval.IsoLocalEnd;
-            var transitionOccurrence = (transition.Day - 1) / 7 + 1;
+            LocalDateTime transition = interval.IsoLocalEnd;
+            int transitionOccurrence = (transition.Day - 1) / 7 + 1;
 
             // return "last occurrence" (5) when appropriate
             if (transitionOccurrence == 4)
             {
-                for (int i = 1; i <= 7; i++)
+                for (var i = 1; i <= 7; i++)
                 {
                     var futureInstant = interval.IsoLocalEnd.PlusYears(i).InZoneLeniently(tz).ToInstant();
-                    var futureInterval = tz.GetZoneInterval(futureInstant);
-                    var occurrence = (futureInterval.IsoLocalEnd.Day - 1) / 7 + 1;
+                    ZoneInterval futureInterval = tz.GetZoneInterval(futureInstant);
+                    int occurrence = (futureInterval.IsoLocalEnd.Day - 1) / 7 + 1;
                     if (occurrence < 4)
                     {
                         transitionOccurrence = 4;

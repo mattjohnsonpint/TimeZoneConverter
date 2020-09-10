@@ -8,7 +8,7 @@ namespace TimeZoneConverter.Tests
         [Fact]
         public void CanGetUtcTimeZone()
         {
-            var tz = TZConvert.GetTimeZoneInfo("UTC");
+            TimeZoneInfo tz = TZConvert.GetTimeZoneInfo("UTC");
 
             Assert.Equal(TimeZoneInfo.Utc, tz);
         }
@@ -16,7 +16,7 @@ namespace TimeZoneConverter.Tests
         [Fact]
         public void CanGetEasternTimeZone_LowerCase()
         {
-            var tz = TZConvert.GetTimeZoneInfo("eastern standard time");
+            TimeZoneInfo tz = TZConvert.GetTimeZoneInfo("eastern standard time");
 
             Assert.Equal("Eastern Standard Time", tz.Id);
         }
