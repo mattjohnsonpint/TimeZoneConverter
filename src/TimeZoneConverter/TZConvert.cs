@@ -37,6 +37,9 @@ namespace TimeZoneConverter
             KnownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
             KnownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
 
+            // Special case - not in any map.
+            KnownIanaTimeZoneNames.Add("Antarctica/Troll");
+
 #if !NETSTANDARD1_1
             SystemTimeZones = GetSystemTimeZones();
 #endif

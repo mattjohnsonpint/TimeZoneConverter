@@ -96,6 +96,7 @@ namespace TimeZoneConverter.Tests
             "America/Santarem",
             "Antarctica/Palmer",
             "Antarctica/Rothera",
+            "Antarctica/Troll",
             "Asia/Amman",
             "Asia/Barnaul",
             "Asia/Beirut",

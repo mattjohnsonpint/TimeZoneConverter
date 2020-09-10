@@ -21,5 +21,11 @@ namespace TimeZoneConverter.Tests
         {
             Assert.NotEmpty(TZConvert.KnownRailsTimeZoneNames);
         }
+
+        [Fact]
+        public void Known_IANA_TimeZones_Includes_Unmappable_Zones()
+        {
+            Assert.Contains(TZConvert.KnownIanaTimeZoneNames, x => x == "Antarctica/Troll");
+        }
     }
 }
