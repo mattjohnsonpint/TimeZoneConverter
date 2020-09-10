@@ -53,13 +53,17 @@ namespace TimeZoneConverter
                 }
             }
 
-            // Expand the IANA map to include all links
+            // Expand the IANA map to include all links (both directions)
             foreach (var link in links)
             {
-                if (ianaMap.ContainsKey(link.Key))
-                    continue;
-
-                ianaMap.Add(link.Key, ianaMap[link.Value]);
+                if (!ianaMap.ContainsKey(link.Key) && ianaMap.ContainsKey(link.Value))
+                {
+                    ianaMap.Add(link.Key, ianaMap[link.Value]);
+                }
+                else if (!ianaMap.ContainsKey(link.Value) && ianaMap.ContainsKey(link.Key))
+                {
+                    ianaMap.Add(link.Value, ianaMap[link.Key]);
+                }
             }
 
             foreach (var item in railsMapping)
