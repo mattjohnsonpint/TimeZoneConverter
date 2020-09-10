@@ -23,7 +23,7 @@ namespace TimeZoneConverter
                 foreach (var key in parts[1].Split())
                     links.Add(key, value);
             }
-            
+
             var similarIanaZones = new Dictionary<string, IList<string>>();
             foreach (var item in mapping)
             {
@@ -38,7 +38,7 @@ namespace TimeZoneConverter
 
                 var key = $"{territory}|{windowsZone}";
                 windowsMap.Add(key, value);
-                
+
                 // Create the IANA map entries
                 foreach (var ianaZone in ianaZones)
                 {
@@ -49,7 +49,7 @@ namespace TimeZoneConverter
                 if (ianaZones.Length > 1)
                 {
                     foreach (var ianaZone in ianaZones)
-                        similarIanaZones.Add(ianaZone, ianaZones.Except(new[] {ianaZone}).ToArray());
+                        similarIanaZones.Add(ianaZone, ianaZones.Except(new[] { ianaZone }).ToArray());
                 }
             }
 
@@ -127,7 +127,7 @@ namespace TimeZoneConverter
                                 inverseRailsMap.Add(ianaZone, railsZones);
             }
 
-            
+
         }
 
         private static IEnumerable<string> GetEmbeddedData(string resourceName)
