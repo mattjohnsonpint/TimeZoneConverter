@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -11,6 +13,31 @@ namespace TimeZoneConverter.Tests
         public WindowsToIanaTests(ITestOutputHelper output)
         {
             _output = output;
+        }
+
+        [SkippableFact]
+        public void Can_Convert_Windows_System_Zones_To_Iana()
+        {
+            Skip.IfNot(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "OS is not Windows.");
+
+            var errors = 0;
+            var windowsZones = TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id);
+
+            foreach (var windowsZone in windowsZones)
+            {
+                if (TZConvert.TryWindowsToIana(windowsZone, out var ianaZone))
+                {
+                    Assert.NotNull(ianaZone);
+                    Assert.NotEqual(string.Empty, ianaZone);
+                }
+                else
+                {
+                    errors++;
+                    _output.WriteLine($"Failed to convert \"{windowsZone}\"");
+                }
+            }
+
+            Assert.Equal(0, errors);
         }
 
         [Fact]
@@ -71,6 +98,13 @@ namespace TimeZoneConverter.Tests
         {
             var result = TZConvert.WindowsToIana("Russia Time Zone 11");
             Assert.Equal("Asia/Kamchatka", result);
+        }
+
+        [Fact]
+        public void Can_Convert_Yukon_Standard_Time_To_IANA()
+        {
+            var result = TZConvert.WindowsToIana("Yukon Standard Time");
+            Assert.Equal("America/Whitehorse", result);
         }
     }
 }
