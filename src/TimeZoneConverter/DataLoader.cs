@@ -65,9 +65,17 @@ namespace TimeZoneConverter
             foreach (var item in railsMapping)
             {
                 var parts = item.Split(',');
-                var railsZone = parts[0].Trim('"');
-                var ianaZone = parts[1].Trim('"');
-                railsMap.Add(railsZone, ianaZone);
+                var railsZone = parts[0];
+                var ianaZones = parts[1].Split();
+
+                for (int i = 0; i < ianaZones.Length; i++)
+                {
+                    var ianaZone = ianaZones[i];
+                    if (i == 0)
+                        railsMap.Add(railsZone, ianaZone);
+                    else
+                        inverseRailsMap.Add(ianaZone, new[] { railsZone });
+                }
             }
 
             foreach (var grouping in railsMap.GroupBy(x => x.Value, x => x.Key))
@@ -94,14 +102,29 @@ namespace TimeZoneConverter
                 }
             }
 
-            // Expand the Inverse Rails map to include links
+            // Expand the Inverse Rails map to include links (in either direction)
             foreach (var link in links)
             {
-                if (inverseRailsMap.ContainsKey(link.Key))
-                    continue;
+                if (!inverseRailsMap.ContainsKey(link.Key))
+                {
+                    if (inverseRailsMap.TryGetValue(link.Value, out var railsZone))
+                        inverseRailsMap.Add(link.Key, railsZone);
+                }
+                else if (!inverseRailsMap.ContainsKey(link.Value))
+                {
+                    if (inverseRailsMap.TryGetValue(link.Key, out var railsZone))
+                        inverseRailsMap.Add(link.Value, railsZone);
+                }
+            }
 
-                if (inverseRailsMap.TryGetValue(link.Value, out var railsZone))
-                    inverseRailsMap.Add(link.Key, railsZone);
+            // Expand the Inverse Rails map to use CLDR golden zones
+            foreach (var ianaZone in ianaMap.Keys)
+            {
+                if (!inverseRailsMap.ContainsKey(ianaZone))
+                    if (ianaMap.TryGetValue(ianaZone, out var windowsZone))
+                        if (windowsMap.TryGetValue("001|" + windowsZone, out var goldenZone))
+                            if (inverseRailsMap.TryGetValue(goldenZone, out var railsZones))
+                                inverseRailsMap.Add(ianaZone, railsZones);
             }
 
             

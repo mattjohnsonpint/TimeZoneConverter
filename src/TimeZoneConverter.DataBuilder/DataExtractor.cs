@@ -141,7 +141,7 @@ namespace TimeZoneConverter.DataBuilder
                             break;
 
                         var parts = line.Split("=>");
-                        data.Add(parts[0].Trim() + "," + parts[1].Trim().TrimEnd(','));
+                        data.Add(parts[0].Trim(' ', '"') + "," + parts[1].TrimEnd(',').Trim(' ', '"'));
                     }
                     else if (line == "MAPPING = {")
                         inMappingSection = true;

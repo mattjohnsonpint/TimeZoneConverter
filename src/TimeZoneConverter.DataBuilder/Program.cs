@@ -53,6 +53,10 @@ namespace TimeZoneConverter.DataBuilder
                 mapping.Add("Yukon Standard Time,001,America/Whitehorse");
                 mapping.Add("Yukon Standard Time,CA,America/Whitehorse America/Creston America/Dawson America/Dawson_Creek America/Fort_Nelson");
 
+                // Add missing Rails mappings where they make sense
+                railsMapping.Remove("Arizona,America/Phoenix");
+                railsMapping.Add("Arizona,America/Phoenix America/Whitehorse");
+
                 // Add mappings for ISO country codes that aren't used in CLDR
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
                 mapping.Add("GMT Standard Time,IC,Atlantic/Canary");
