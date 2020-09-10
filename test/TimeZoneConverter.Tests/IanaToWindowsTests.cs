@@ -94,5 +94,12 @@ namespace TimeZoneConverter.Tests
             var result = TZConvert.IanaToWindows("America/Nuuk");
             Assert.Equal("Greenland Standard Time", result);
         }
+
+        [Fact]
+        public void Can_Convert_Europe_Skopje_To_Windows()
+        {
+            var result = TZConvert.IanaToWindows("Europe/Skopje");
+            Assert.Equal("Central European Standard Time", result);
+        }
     }
 }
