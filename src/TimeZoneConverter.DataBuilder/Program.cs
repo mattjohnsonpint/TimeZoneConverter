@@ -48,23 +48,10 @@ namespace TimeZoneConverter.DataBuilder
 
                 // Apply override mappings for zones not yet in the CLDR trunk we pulled in
 
-                // Asia/Qyzylorda => Qyzylorda Standard Time
-                mapping.Remove("West Asia Standard Time,KZ,Asia/Oral Asia/Aqtau Asia/Aqtobe Asia/Atyrau Asia/Qyzylorda");
-                mapping.Add("West Asia Standard Time,KZ,Asia/Oral Asia/Aqtau Asia/Aqtobe Asia/Atyrau");
-                mapping.Add("Qyzylorda Standard Time,001,Asia/Qyzylorda");
-                mapping.Add("Qyzylorda Standard Time,KZ,Asia/Qyzylorda");
-
-                // Europe/Volgograd => Volgograd Standard Time
-                mapping.Remove("Russian Standard Time,RU,Europe/Moscow Europe/Kirov Europe/Volgograd");
-                mapping.Add("Russian Standard Time,RU,Europe/Moscow Europe/Kirov");
-                mapping.Add("Volgograd Standard Time,001,Europe/Volgograd");
-                mapping.Add("Volgograd Standard Time,RU,Europe/Volgograd");
-
-                // America/Metlakatla => Alaskan Standard Time
-                mapping.Remove("Alaskan Standard Time,US,America/Anchorage America/Juneau America/Nome America/Sitka America/Yakutat");
-                mapping.Add("Alaskan Standard Time,US,America/Anchorage America/Juneau America/Metlakatla America/Nome America/Sitka America/Yakutat");
-                mapping.Remove("Pacific Standard Time,US,America/Los_Angeles America/Metlakatla");
-                mapping.Add("Pacific Standard Time,US,America/Los_Angeles");
+                // Yukon Standard Time
+                mapping.Remove("US Mountain Standard Time,CA,America/Whitehorse America/Creston America/Dawson America/Dawson_Creek America/Fort_Nelson");
+                mapping.Add("Yukon Standard Time,001,America/Whitehorse");
+                mapping.Add("Yukon Standard Time,CA,America/Whitehorse America/Creston America/Dawson America/Dawson_Creek America/Fort_Nelson");
 
                 // Add mappings for ISO country codes that aren't used in CLDR
                 mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
