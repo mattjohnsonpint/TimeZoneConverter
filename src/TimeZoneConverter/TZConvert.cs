@@ -40,6 +40,16 @@ namespace TimeZoneConverter
             // Special case - not in any map.
             KnownIanaTimeZoneNames.Add("Antarctica/Troll");
 
+            // Remove zones from KnownIanaTimeZoneNames that have been removed from IANA data.
+            // (They should still map to Windows zones correctly.)
+            KnownIanaTimeZoneNames.Remove("Canada/East-Saskatchewan");   // Removed in 2017c
+            KnownIanaTimeZoneNames.Remove("US/Pacific-New");             // Removed in 2018a
+
+            // Remove zones from KnownWindowsTimeZoneIds that are marked obsolete in the Windows Registry.
+            // (They should still map to IANA zones correctly.)
+            KnownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
+            KnownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
+
 #if !NETSTANDARD1_1
             SystemTimeZones = GetSystemTimeZones();
 #endif
@@ -325,23 +335,7 @@ namespace TimeZoneConverter
             if (IsWindows)
                 return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 
-            var zones = GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
-
-            // Include special case to resolve deleted link
-            if (!zones.ContainsKey("Canada/East-Saskatchewan"))
-            {
-                try
-                {
-                    var tzi = TimeZoneInfo.FindSystemTimeZoneById("Canada/Saskatchewan");
-                    zones.Add("Canada/East-Saskatchewan", tzi);
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
-
-            return zones;
+            return GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 #else
             return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 #endif

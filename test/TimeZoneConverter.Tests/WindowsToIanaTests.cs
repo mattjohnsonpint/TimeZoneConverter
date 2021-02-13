@@ -107,5 +107,19 @@ namespace TimeZoneConverter.Tests
             string result = TZConvert.WindowsToIana("Yukon Standard Time");
             Assert.Equal("America/Whitehorse", result);
         }
+
+        [Fact]
+        public void Can_Convert_Kamchatka_Standard_Time_To_IANA()
+        {
+            string result = TZConvert.WindowsToIana("Kamchatka Standard Time");
+            Assert.Equal("Asia/Kamchatka", result);
+        }
+
+        [Fact]
+        public void Can_Convert_Mid_Atlantic_Standard_Time_To_IANA()
+        {
+            string result = TZConvert.WindowsToIana("Mid-Atlantic Standard Time");
+            Assert.Equal("Etc/GMT+2", result);
+        }
     }
 }

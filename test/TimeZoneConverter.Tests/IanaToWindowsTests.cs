@@ -102,5 +102,19 @@ namespace TimeZoneConverter.Tests
             string result = TZConvert.IanaToWindows("Europe/Skopje");
             Assert.Equal("Central European Standard Time", result);
         }
+
+        [Fact]
+        public void Can_Convert_East_Saskatchewan_To_Windows()
+        {
+            string result = TZConvert.IanaToWindows("Canada/East-Saskatchewan");
+            Assert.Equal("Canada Central Standard Time", result);
+        }
+
+        [Fact]
+        public void Can_Convert_Pacific_New_To_Windows()
+        {
+            string result = TZConvert.IanaToWindows("US/Pacific-New");
+            Assert.Equal("Pacific Standard Time", result);
+        }
     }
 }
