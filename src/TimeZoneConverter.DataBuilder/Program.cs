@@ -48,11 +48,6 @@ namespace TimeZoneConverter.DataBuilder
 
                 // Apply override mappings for zones not yet in the CLDR trunk we pulled in
 
-                // Yukon Standard Time
-                mapping.Remove("US Mountain Standard Time,CA,America/Whitehorse America/Creston America/Dawson America/Dawson_Creek America/Fort_Nelson");
-                mapping.Add("Yukon Standard Time,001,America/Whitehorse");
-                mapping.Add("Yukon Standard Time,CA,America/Whitehorse America/Creston America/Dawson America/Dawson_Creek America/Fort_Nelson");
-
                 // Add missing Rails mappings where they make sense
                 railsMapping.Remove("Arizona,America/Phoenix");
                 railsMapping.Add("Arizona,America/Phoenix America/Whitehorse");
