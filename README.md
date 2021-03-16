@@ -158,4 +158,4 @@ This library is provided free of charge, under the terms of the [MIT license][9]
 [6]: https://github.com/rails/rails/blob/master/activesupport/lib/active_support/values/time_zone.rb
 [7]: https://support.microsoft.com/en-us/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton
 [8]: https://github.com/dotnet/corefx/issues/11897
-[9]: https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt
+[9]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/LICENSE.txt
