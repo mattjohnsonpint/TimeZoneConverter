@@ -33,11 +33,14 @@ namespace TimeZoneConverter
                 string[] ianaZones = parts[2].Split();
 
                 // Create the Windows map entry
-                if (!links.TryGetValue(ianaZones[0], out string value))
-                    value = ianaZones[0];
+                string originalIanaZone = ianaZones[0];
+                string canonicalIanaZone = links.ContainsKey(originalIanaZone) ? links[originalIanaZone] : originalIanaZone;
 
-                var key = $"{territory}|{windowsZone}";
-                windowsMap.Add(key, value);
+                var originalKey = $"{territory}|{windowsZone}|original";
+                var canonicalKey = $"{territory}|{windowsZone}|canonical";
+
+                windowsMap.Add(originalKey, originalIanaZone);
+                windowsMap.Add(canonicalKey, canonicalIanaZone);
 
                 // Create the IANA map entries
                 foreach (string ianaZone in ianaZones)
@@ -126,7 +129,7 @@ namespace TimeZoneConverter
             {
                 if (!inverseRailsMap.ContainsKey(ianaZone))
                     if (ianaMap.TryGetValue(ianaZone, out string windowsZone))
-                        if (windowsMap.TryGetValue("001|" + windowsZone, out string goldenZone))
+                        if (windowsMap.TryGetValue("001|" + windowsZone + "|canonical", out string goldenZone))
                             if (inverseRailsMap.TryGetValue(goldenZone, out IList<string> railsZones))
                                 inverseRailsMap.Add(ianaZone, railsZones);
             }

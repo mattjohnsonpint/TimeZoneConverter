@@ -103,11 +103,12 @@ namespace TimeZoneConverter
         /// An optional two-letter ISO Country/Region code, used to get a a specific mapping.
         /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
         /// </param>
+        /// <param name="resolveCanonical">true = resolve Unicode CLDR golden Iana zone to canonical Iana zone when it's an alias, false = do not resolve Unicode CLDR golden Iana zone</param>
         /// <returns>An IANA time zone name.</returns>
         /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent IANA zone.</exception>
-        public static string WindowsToIana(string windowsTimeZoneId, string territoryCode = "001")
+        public static string WindowsToIana(string windowsTimeZoneId, string territoryCode = "001", bool resolveCanonical = true)
         {
-            if (TryWindowsToIana(windowsTimeZoneId, territoryCode, out string ianaTimeZoneName))
+            if (TryWindowsToIana(windowsTimeZoneId, territoryCode, out string ianaTimeZoneName, resolveCanonical))
                 return ianaTimeZoneName;
 
             throw new InvalidTimeZoneException($"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID.");
@@ -119,10 +120,11 @@ namespace TimeZoneConverter
         /// </summary>
         /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
         /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
+        /// <param name="resolveCanonical">true = resolve Unicode CLDR golden Iana zone to canonical Iana zone when it's an alias, false = do not resolve Unicode CLDR golden Iana zone</param>
         /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-        public static bool TryWindowsToIana(string windowsTimeZoneId, out string ianaTimeZoneName)
+        public static bool TryWindowsToIana(string windowsTimeZoneId, out string ianaTimeZoneName, bool resolveCanonical = true)
         {
-            return TryWindowsToIana(windowsTimeZoneId, "001", out ianaTimeZoneName);
+            return TryWindowsToIana(windowsTimeZoneId, "001", out ianaTimeZoneName, resolveCanonical);
         }
 
         /// <summary>
@@ -133,15 +135,16 @@ namespace TimeZoneConverter
         /// An optional two-letter ISO Country/Region code, used to get a a specific mapping.
         /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
         /// </param>
+        /// <param name="resolveCanonical">true = resolve Unicode CLDR golden Iana zone to canonical Iana zone when it's an alias, false = do not resolve Unicode CLDR golden Iana zone</param>
         /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
         /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-        public static bool TryWindowsToIana(string windowsTimeZoneId, string territoryCode, out string ianaTimeZoneName)
+        public static bool TryWindowsToIana(string windowsTimeZoneId, string territoryCode, out string ianaTimeZoneName, bool resolveCanonical = true)
         {
-            if (WindowsMap.TryGetValue($"{territoryCode}|{windowsTimeZoneId}", out ianaTimeZoneName))
+            if (WindowsMap.TryGetValue($"{territoryCode}|{windowsTimeZoneId}|{(resolveCanonical ? "canonical" : "original")}", out ianaTimeZoneName))
                 return true;
 
             // use the golden zone when not found with a particular region
-            return territoryCode != "001" && WindowsMap.TryGetValue($"001|{windowsTimeZoneId}", out ianaTimeZoneName);
+            return territoryCode != "001" && WindowsMap.TryGetValue($"001|{windowsTimeZoneId}|{(resolveCanonical ? "canonical" : "original")}", out ianaTimeZoneName);
         }
 
 #if !NETSTANDARD1_1

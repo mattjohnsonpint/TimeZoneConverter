@@ -95,6 +95,32 @@ namespace TimeZoneConverter.Tests
         }
 
         [Fact]
+        public void Can_Convert_Non_Canonical()
+        {
+            string result1 = TZConvert.WindowsToIana("US Eastern Standard Time",resolveCanonical:false);
+            Assert.Equal("America/Indianapolis", result1);
+
+            string result2 = TZConvert.WindowsToIana("India Standard Time", resolveCanonical: false);
+            Assert.Equal("Asia/Calcutta", result2);
+
+            string result3 = TZConvert.WindowsToIana("Nepal Standard Time", resolveCanonical: false);
+            Assert.Equal("Asia/Katmandu", result3);
+        }
+
+        [Fact]
+        public void Can_Convert_Canonical()
+        {
+            string result1 = TZConvert.WindowsToIana("US Eastern Standard Time");
+            Assert.Equal("America/Indiana/Indianapolis", result1);
+
+            string result2 = TZConvert.WindowsToIana("India Standard Time");
+            Assert.Equal("Asia/Kolkata", result2);
+
+            string result3 = TZConvert.WindowsToIana("Nepal Standard Time");
+            Assert.Equal("Asia/Kathmandu", result3);
+        }
+
+        [Fact]
         public void Can_Convert_Asia_RTZ11_To_IANA()
         {
             string result = TZConvert.WindowsToIana("Russia Time Zone 11");
