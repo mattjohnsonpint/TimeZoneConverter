@@ -17,6 +17,16 @@ This library should be compatible with .NET Standard 1.1 and greater, as well as
 See the [.NET Standard Platform Support Matrix][1] for further details about .NET Standard,
 and please raise an issue if you encounter any compatibility errors.
 
+#### Note on newer .NET Versions
+
+.NET 6 will have built-in support for IANA and Windows time zones in a cross-platform manner, removing the need for the TimeZoneConverter library.
+If you are planning to use .NET 6 (or higher), you should also plan to *not* use the TimeZoneConverter library.
+
+This work is being tracked in these two issues:
+
+- https://github.com/dotnet/runtime/pull/49412 - Implicit conversion when calling `TimeZoneInfo.FindSystemTimeZoneById` (completed)
+- https://github.com/dotnet/runtime/issues/49407 - Explicit conversion via new APIs
+
 #### Note on OS Data Dependencies
 
 Some functions, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
@@ -82,7 +92,7 @@ string tz = TZConvert.WindowsToIana("Eastern Standard Time", "CA");
 ```
 
 Get a `TimeZoneInfo` object from .NET Core, regardless of what OS you are running on:  
-*Helps with .NET CoreFX issue [#11897][8]*  
+*Helps with .NET Runtime issue [#18644][8]*  
 ***This function is only available for .NET Standard 1.3+ or full .NET Framework targets***
 
 ```csharp
@@ -157,5 +167,5 @@ This library is provided free of charge, under the terms of the [MIT license][9]
 [5]: https://aka.ms/dstblog
 [6]: https://github.com/rails/rails/blob/master/activesupport/lib/active_support/values/time_zone.rb
 [7]: https://support.microsoft.com/en-us/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton
-[8]: https://github.com/dotnet/corefx/issues/11897
+[8]: https://github.com/dotnet/runtime/issues/18644
 [9]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/LICENSE.txt
