@@ -17,19 +17,17 @@ This library should be compatible with .NET Standard 1.1 and greater, as well as
 See the [.NET Standard Platform Support Matrix][1] for further details about .NET Standard,
 and please raise an issue if you encounter any compatibility errors.
 
-#### Note on newer .NET Versions
+#### Important note on .NET 6+
 
 .NET 6 will have built-in support for IANA and Windows time zones in a cross-platform manner, removing the need for the TimeZoneConverter library.
-If you are planning to use .NET 6 (or higher), you should also plan to *not* use the TimeZoneConverter library.
+**If you are planning to use .NET 6 (or higher), you don't need to use the TimeZoneConverter library!**
 
-This work is being tracked in these two issues:
-
-- https://github.com/dotnet/runtime/pull/49412 - Implicit conversion when calling `TimeZoneInfo.FindSystemTimeZoneById` (completed)
-- https://github.com/dotnet/runtime/issues/49407 - Explicit conversion via new APIs
+Both automatic time zone conversion and APIs for manual time zone conversion are included with .NET as of .NET 6 Preview 4.
+You can read more about it in [the blog post here](https://devblogs.microsoft.com/dotnet/date-time-and-time-zone-enhancements-in-net-6/#time-zone-conversion-apis).
 
 #### Note on OS Data Dependencies
 
-Some functions, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
+Some functions in TimeZoneConverter, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
 time zone data of the operating system.  On Windows, this data comes from the registry and is maintained via Windows Updates.
 
 On OSX and Linux, this data comes from a distribution of the [IANA time zone database](https://www.iana.org/time-zones),  usually via the `tzdata` package.  If your environment does not have the `tzdata` package installed, you will need to install it for `TZConvert.GetTimeZoneInfo` to work correctly.
