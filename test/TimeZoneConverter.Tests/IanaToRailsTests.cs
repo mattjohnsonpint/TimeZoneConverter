@@ -56,6 +56,7 @@ namespace TimeZoneConverter.Tests
             "Africa/Dakar",
             "Africa/Douala",
             "Africa/Freetown",
+            "Africa/Juba",
             "Africa/Khartoum",
             "Africa/Kinshasa",
             "Africa/Lagos",
