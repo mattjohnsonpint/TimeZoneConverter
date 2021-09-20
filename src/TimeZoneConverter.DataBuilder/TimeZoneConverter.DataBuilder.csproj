@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpCompress" Version="0.28.1" />
+    <PackageReference Include="SharpCompress" Version="0.29.0" />
   </ItemGroup>
 
 </Project>
