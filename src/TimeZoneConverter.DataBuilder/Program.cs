@@ -47,9 +47,7 @@ namespace TimeZoneConverter.DataBuilder
                 IList<string> railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
                 // Apply override mappings for zones not yet in the CLDR trunk we pulled in
-                mapping.Remove("South Africa Standard Time,SS,Africa/Juba");
-                mapping.Add("South Sudan Standard Time,001,Africa/Juba");
-                mapping.Add("South Sudan Standard Time,SS,Africa/Juba");
+                // (NONE PRESENTLY)
 
                 // Add missing Rails mappings where they make sense
                 railsMapping.Remove("Arizona,America/Phoenix");
