@@ -130,5 +130,12 @@ namespace TimeZoneConverter.Tests
             string result = TZConvert.IanaToWindows("America/Creston");
             Assert.Equal("US Mountain Standard Time", result);
         }
+
+        [Fact]
+        public void Can_Convert_Kanton_To_Windows()
+        {
+            string result = TZConvert.IanaToWindows("Pacific/Kanton");
+            Assert.Equal("UTC+13", result);
+        }
     }
 }
