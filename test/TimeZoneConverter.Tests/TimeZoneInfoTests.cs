@@ -16,9 +16,10 @@ namespace TimeZoneConverter.Tests
         [Fact]
         public void CanGetEasternTimeZone_LowerCase()
         {
-            TimeZoneInfo tz = TZConvert.GetTimeZoneInfo("eastern standard time");
+            TimeZoneInfo tz1 = TZConvert.GetTimeZoneInfo("eastern standard time");
+            TimeZoneInfo tz2 = TZConvert.GetTimeZoneInfo("Eastern Standard Time");
 
-            Assert.Equal("Eastern Standard Time", tz.Id);
+            Assert.Equal(tz2.Id, tz1.Id);
         }
     }
 }
