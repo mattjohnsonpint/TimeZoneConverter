@@ -136,11 +136,7 @@ namespace TimeZoneConverter
 
         private static IEnumerable<string> GetEmbeddedData(string resourceName)
         {
-#if NET35 || NET40
-            Assembly assembly = typeof(DataLoader).Assembly;
-#else
             Assembly assembly = typeof(DataLoader).GetTypeInfo().Assembly;
-#endif
             using (Stream compressedStream = assembly.GetManifestResourceStream(resourceName) ?? throw new MissingManifestResourceException())
             using (var stream = new GZipStream(compressedStream, CompressionMode.Decompress))
             using (var reader = new StreamReader(stream))

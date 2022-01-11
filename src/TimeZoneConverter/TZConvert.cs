@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-#if NETSTANDARD2_0 || NETSTANDARD1_3
+#if NETSTANDARD
 using System.Runtime.InteropServices;
 #endif
 
@@ -18,16 +18,13 @@ namespace TimeZoneConverter
         private static readonly IDictionary<string, string> RailsMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private static readonly IDictionary<string, IList<string>> InverseRailsMap = new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
-#if NETSTANDARD2_0 || NETSTANDARD1_3
+#if NETSTANDARD
         private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #else
         private const bool IsWindows = true;
 #endif
 
-#if !NETSTANDARD1_1
         private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
-
-#endif
 
         static TZConvert()
         {
@@ -50,9 +47,7 @@ namespace TimeZoneConverter
             KnownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
             KnownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
 
-#if !NETSTANDARD1_1
             SystemTimeZones = GetSystemTimeZones();
-#endif
         }
 
         /// <summary>
@@ -144,8 +139,6 @@ namespace TimeZoneConverter
             return territoryCode != "001" && WindowsMap.TryGetValue($"001|{windowsTimeZoneId}", out ianaTimeZoneName);
         }
 
-#if !NETSTANDARD1_1
-
         /// <summary>
         /// Retrieves a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone identifier,
         /// regardless of which platform the application is running on.
@@ -157,12 +150,7 @@ namespace TimeZoneConverter
             if (TryGetTimeZoneInfo(windowsOrIanaTimeZoneId, out TimeZoneInfo timeZoneInfo))
                 return timeZoneInfo;
 
-#if !NETSTANDARD1_3
             throw new TimeZoneNotFoundException();
-#else
-            // this will also throw, but we can't throw directly because TimeZoneNotFoundException is not available in .NET Standard 1.3
-            return TimeZoneInfo.FindSystemTimeZoneById(windowsOrIanaTimeZoneId);
-#endif
         }
 
         /// <summary>
@@ -189,7 +177,6 @@ namespace TimeZoneConverter
                     TryWindowsToIana(windowsOrIanaTimeZoneId, out tzid)) &&
                    SystemTimeZones.TryGetValue(tzid, out timeZoneInfo);
         }
-#endif
 
         /// <summary>
         /// Converts an IANA time zone name to one or more equivalent Rails time zone names.
@@ -328,20 +315,26 @@ namespace TimeZoneConverter
             return false;
         }
 
-#if !NETSTANDARD1_1
         private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
         {
-#if NETSTANDARD2_0 || NETSTANDARD1_3
-            if (IsWindows)
-                return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
-
-            return GetSystemTimeZonesLinux().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
+            IEnumerable<TimeZoneInfo> systemTimeZones;
+#if NETFRAMEWORK
+            systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 #else
-            return TimeZoneInfo.GetSystemTimeZones().ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
 #endif
+
+#if NETSTANDARD
+            if (IsWindows)
+                systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
+
+            systemTimeZones =  GetSystemTimeZonesLinux();
+#else
+            systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
+#endif
+            return systemTimeZones.ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
         }
 
-#if NETSTANDARD2_0 || NETSTANDARD1_3
+#if NETSTANDARD
         private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesLinux()
         {
             // Don't trust TimeZoneInfo.GetSystemTimeZones on Non-Windows
@@ -364,7 +357,6 @@ namespace TimeZoneConverter
                     yield return tzi;
             }
         }
-#endif
 #endif
     }
 }
