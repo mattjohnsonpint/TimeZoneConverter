@@ -47,7 +47,7 @@ namespace TimeZoneConverter.Tests
         public void Can_Convert_Iana_Zones_To_Windows_Zones()
         {
             var errors = 0;
-            ICollection<string> ianaZones = TZConvert.KnownIanaTimeZoneNames;
+            ICollection<string> ianaZones = TZConvert.KnownIanaTimeZoneNames.ToList();
 
             string[] unmappable = { "Antarctica/Troll" };
 

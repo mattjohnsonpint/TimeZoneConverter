@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,7 +18,7 @@ namespace TimeZoneConverter.Tests
         public void Can_Convert_Rails_Zones_To_Iana_Zones()
         {
             var errors = 0;
-            ICollection<string> railsZones = TZConvert.KnownRailsTimeZoneNames;
+            ICollection<string> railsZones = TZConvert.KnownRailsTimeZoneNames.ToList();
 
             foreach (string railsZone in railsZones)
             {

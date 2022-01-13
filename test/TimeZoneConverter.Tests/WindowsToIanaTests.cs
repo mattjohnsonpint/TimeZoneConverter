@@ -45,7 +45,7 @@ namespace TimeZoneConverter.Tests
         public void Can_Convert_Windows_Zones_To_Iana_Golden_Zones()
         {
             var errors = 0;
-            ICollection<string> windowsZones = TZConvert.KnownWindowsTimeZoneIds;
+            ICollection<string> windowsZones = TZConvert.KnownWindowsTimeZoneIds.ToList();
 
             foreach (string windowsZone in windowsZones)
             {
