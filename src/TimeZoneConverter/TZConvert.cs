@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 #if NETSTANDARD
@@ -30,22 +31,26 @@ namespace TimeZoneConverter
         {
             DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap);
 
-            KnownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
-            KnownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
-            KnownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
+            var knownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
+            var knownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
+            var knownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
 
             // Special case - not in any map.
-            KnownIanaTimeZoneNames.Add("Antarctica/Troll");
+            knownIanaTimeZoneNames.Add("Antarctica/Troll");
 
             // Remove zones from KnownIanaTimeZoneNames that have been removed from IANA data.
             // (They should still map to Windows zones correctly.)
-            KnownIanaTimeZoneNames.Remove("Canada/East-Saskatchewan");   // Removed in 2017c
-            KnownIanaTimeZoneNames.Remove("US/Pacific-New");             // Removed in 2018a
+            knownIanaTimeZoneNames.Remove("Canada/East-Saskatchewan");   // Removed in 2017c
+            knownIanaTimeZoneNames.Remove("US/Pacific-New");             // Removed in 2018a
 
             // Remove zones from KnownWindowsTimeZoneIds that are marked obsolete in the Windows Registry.
             // (They should still map to IANA zones correctly.)
-            KnownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
-            KnownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
+            knownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
+            knownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
+
+            KnownIanaTimeZoneNames = knownIanaTimeZoneNames;
+            KnownWindowsTimeZoneIds = knownWindowsTimeZoneIds;
+            KnownRailsTimeZoneNames = knownRailsTimeZoneNames;
 
             SystemTimeZones = GetSystemTimeZones();
         }
@@ -53,17 +58,17 @@ namespace TimeZoneConverter
         /// <summary>
         /// Gets a collection of all IANA time zone names known to this library.
         /// </summary>
-        public static ICollection<string> KnownIanaTimeZoneNames { get; }
+        public static IReadOnlyCollection<string> KnownIanaTimeZoneNames { get; }
 
         /// <summary>
         /// Gets a collection of all Windows time zone IDs known to this library.
         /// </summary>
-        public static ICollection<string> KnownWindowsTimeZoneIds { get; }
+        public static IReadOnlyCollection<string> KnownWindowsTimeZoneIds { get; }
 
         /// <summary>
         /// Gets a collection of all Rails time zone names known to this library.
         /// </summary>
-        public static ICollection<string> KnownRailsTimeZoneNames { get; }
+        public static IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
 
         /// <summary>
         /// Converts an IANA time zone name to the equivalent Windows time zone ID.
