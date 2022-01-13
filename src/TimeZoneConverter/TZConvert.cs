@@ -318,16 +318,8 @@ namespace TimeZoneConverter
         private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
         {
             IEnumerable<TimeZoneInfo> systemTimeZones;
-#if NETFRAMEWORK
-            systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-#else
-#endif
-
 #if NETSTANDARD
-            if (IsWindows)
-                systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-
-            systemTimeZones =  GetSystemTimeZonesLinux();
+            systemTimeZones = IsWindows ? TimeZoneInfo.GetSystemTimeZones() : GetSystemTimeZonesLinux();
 #else
             systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 #endif
