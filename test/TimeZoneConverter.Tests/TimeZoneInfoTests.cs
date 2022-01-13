@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace TimeZoneConverter.Tests
@@ -20,6 +23,33 @@ namespace TimeZoneConverter.Tests
             TimeZoneInfo tz2 = TZConvert.GetTimeZoneInfo("Eastern Standard Time");
 
             Assert.Equal(tz2.Id, tz1.Id);
+        }
+
+        [Fact]
+        public void CanGetAllKnownWindowsTimeZones()
+        {
+            foreach (var id in TZConvert.KnownWindowsTimeZoneIds)
+            {
+                var result = TZConvert.TryGetTimeZoneInfo(id, out var tzi);
+                Assert.True(result, $"Windows time zone \"{id}\" or an equivalent was not found.");
+            }
+        }
+
+        [Fact]
+        public void CanGetAllKnownIANATimeZones()
+        {
+            var names = TZConvert.KnownIanaTimeZoneNames.ToList();
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // Don't attempt unmappable zones
+                names.Remove("Antarctica/Troll");
+            }
+
+            foreach (var name in names)
+            {
+                var result = TZConvert.TryGetTimeZoneInfo(name, out var tzi);
+                Assert.True(result, $"IANA time zone \"{name}\" or an equivalent was not found.");
+            }
         }
     }
 }
