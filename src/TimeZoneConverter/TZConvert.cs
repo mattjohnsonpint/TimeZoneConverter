@@ -328,7 +328,7 @@ namespace TimeZoneConverter
 #else
             systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 #endif
-            return systemTimeZones.Where(x => !String.IsNullOrWhiteSpace(x.Id)).ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
+            return systemTimeZones.Distinct(new TimeZoneIdEqualityComparer()).ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
         }
 
 #if NETSTANDARD
@@ -355,5 +355,20 @@ namespace TimeZoneConverter
             }
         }
 #endif
+        private class TimeZoneIdEqualityComparer : IEqualityComparer<TimeZoneInfo>
+        {
+            public bool Equals(TimeZoneInfo x, TimeZoneInfo y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                return x.Id.Equals(y.Id, StringComparison.OrdinalIgnoreCase);
+            }
+
+            public int GetHashCode(TimeZoneInfo obj)
+            {
+                return obj.Id.GetHashCode();
+            }
+        }
     }
 }
