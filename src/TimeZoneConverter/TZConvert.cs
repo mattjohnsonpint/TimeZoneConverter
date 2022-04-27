@@ -328,7 +328,7 @@ namespace TimeZoneConverter
 #else
             systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 #endif
-            return systemTimeZones.ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
+            return systemTimeZones.Where(x => !String.IsNullOrWhiteSpace(x.Id)).ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
         }
 
 #if NETSTANDARD
