@@ -65,6 +65,17 @@ internal static class DataLoader
             {
                 ianaMap.Add(link.Value, ianaMap[link.Key]);
             }
+            else if (!ianaMap.ContainsKey(link.Key) && !ianaMap.ContainsKey(link.Value))
+            {
+                foreach (var item in links)
+                {
+                    if (item.Key != link.Key && item.Value == link.Value && ianaMap.ContainsKey(item.Key))
+                    {
+                        ianaMap.Add(link.Key, ianaMap[item.Key]);
+                        break;
+                    }
+                }
+            }
         }
 
         foreach (var item in railsMapping)
