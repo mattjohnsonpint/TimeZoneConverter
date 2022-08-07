@@ -1,0 +1,537 @@
+{
+  (Afghanistan Standard Time, 001): [
+    Kabul
+  ],
+  (Alaskan Standard Time, 001): [
+    Alaska
+  ],
+  (Aleutian Standard Time, 001): null,
+  (Altai Standard Time, 001): null,
+  (Arab Standard Time, 001): [
+    Riyadh
+  ],
+  (Arabian Standard Time, 001): [
+    Abu Dhabi,
+    Muscat
+  ],
+  (Arabic Standard Time, 001): [
+    Baghdad
+  ],
+  (Argentina Standard Time, 001): [
+    Buenos Aires
+  ],
+  (Astrakhan Standard Time, 001): null,
+  (Atlantic Standard Time, 001): [
+    Atlantic Time (Canada)
+  ],
+  (AUS Central Standard Time, 001): [
+    Darwin
+  ],
+  (Aus Central W. Standard Time, 001): null,
+  (AUS Eastern Standard Time, 001): [
+    Sydney
+  ],
+  (Azerbaijan Standard Time, 001): [
+    Baku
+  ],
+  (Azores Standard Time, 001): [
+    Azores
+  ],
+  (Bahia Standard Time, 001): null,
+  (Bangladesh Standard Time, 001): [
+    Astana,
+    Dhaka
+  ],
+  (Belarus Standard Time, 001): [
+    Minsk
+  ],
+  (Bougainville Standard Time, 001): null,
+  (Canada Central Standard Time, 001): [
+    Saskatchewan
+  ],
+  (Cape Verde Standard Time, 001): [
+    Cape Verde Is.
+  ],
+  (Caucasus Standard Time, 001): [
+    Yerevan
+  ],
+  (Cen. Australia Standard Time, 001): [
+    Adelaide
+  ],
+  (Central America Standard Time, 001): [
+    Central America
+  ],
+  (Central Asia Standard Time, 001): [
+    Almaty
+  ],
+  (Central Asia Standard Time, CN): [
+    Urumqi
+  ],
+  (Central Brazilian Standard Time, 001): null,
+  (Central Europe Standard Time, 001): [
+    Budapest
+  ],
+  (Central Europe Standard Time, CZ): [
+    Prague
+  ],
+  (Central Europe Standard Time, ME): [
+    Belgrade
+  ],
+  (Central Europe Standard Time, RS): [
+    Belgrade
+  ],
+  (Central Europe Standard Time, SI): [
+    Belgrade
+  ],
+  (Central Europe Standard Time, SK): [
+    Prague
+  ],
+  (Central Europe Standard Time, XK): [
+    Belgrade
+  ],
+  (Central European Standard Time, 001): [
+    Warsaw
+  ],
+  (Central European Standard Time, BA): [
+    Belgrade
+  ],
+  (Central European Standard Time, HR): [
+    Belgrade
+  ],
+  (Central European Standard Time, MK): [
+    Belgrade
+  ],
+  (Central Pacific Standard Time, 001): [
+    Solomon Is.
+  ],
+  (Central Pacific Standard Time, NC): [
+    New Caledonia
+  ],
+  (Central Standard Time, 001): [
+    Central Time (US & Canada)
+  ],
+  (Central Standard Time (Mexico), 001): [
+    Guadalajara,
+    Mexico City
+  ],
+  (Chatham Islands Standard Time, 001): [
+    Chatham Is.
+  ],
+  (China Standard Time, 001): [
+    Beijing
+  ],
+  (China Standard Time, HK): [
+    Hong Kong
+  ],
+  (Cuba Standard Time, 001): null,
+  (Dateline Standard Time, 001): [
+    International Date Line West
+  ],
+  (E. Africa Standard Time, 001): [
+    Nairobi
+  ],
+  (E. Australia Standard Time, 001): [
+    Brisbane
+  ],
+  (E. Europe Standard Time, 001): null,
+  (E. South America Standard Time, 001): [
+    Brasilia
+  ],
+  (Easter Island Standard Time, 001): null,
+  (Eastern Standard Time, 001): [
+    Eastern Time (US & Canada)
+  ],
+  (Eastern Standard Time (Mexico), 001): null,
+  (Egypt Standard Time, 001): [
+    Cairo
+  ],
+  (Ekaterinburg Standard Time, 001): [
+    Ekaterinburg
+  ],
+  (Fiji Standard Time, 001): [
+    Fiji
+  ],
+  (FLE Standard Time, 001): [
+    Kyiv
+  ],
+  (FLE Standard Time, AX): [
+    Helsinki
+  ],
+  (FLE Standard Time, BG): [
+    Sofia
+  ],
+  (FLE Standard Time, EE): [
+    Tallinn
+  ],
+  (FLE Standard Time, FI): [
+    Helsinki
+  ],
+  (FLE Standard Time, LT): [
+    Vilnius
+  ],
+  (FLE Standard Time, LV): [
+    Riga
+  ],
+  (Georgian Standard Time, 001): [
+    Tbilisi
+  ],
+  (GMT Standard Time, 001): [
+    Edinburgh,
+    London
+  ],
+  (GMT Standard Time, IE): [
+    Dublin
+  ],
+  (GMT Standard Time, PT): [
+    Lisbon
+  ],
+  (Greenland Standard Time, 001): [
+    Greenland
+  ],
+  (Greenwich Standard Time, 001): null,
+  (GTB Standard Time, 001): [
+    Bucharest
+  ],
+  (GTB Standard Time, GR): [
+    Athens
+  ],
+  (Haiti Standard Time, 001): null,
+  (Hawaiian Standard Time, 001): [
+    Hawaii
+  ],
+  (India Standard Time, 001): [
+    Chennai,
+    Kolkata,
+    Mumbai,
+    New Delhi
+  ],
+  (Iran Standard Time, 001): [
+    Tehran
+  ],
+  (Israel Standard Time, 001): [
+    Jerusalem
+  ],
+  (Jordan Standard Time, 001): null,
+  (Kaliningrad Standard Time, 001): [
+    Kaliningrad
+  ],
+  (Korea Standard Time, 001): [
+    Seoul
+  ],
+  (Libya Standard Time, 001): null,
+  (Line Islands Standard Time, 001): null,
+  (Lord Howe Standard Time, 001): null,
+  (Magadan Standard Time, 001): [
+    Magadan
+  ],
+  (Magallanes Standard Time, 001): null,
+  (Marquesas Standard Time, 001): null,
+  (Mauritius Standard Time, 001): null,
+  (Middle East Standard Time, 001): null,
+  (Montevideo Standard Time, 001): [
+    Montevideo
+  ],
+  (Morocco Standard Time, 001): [
+    Casablanca
+  ],
+  (Mountain Standard Time, 001): [
+    Mountain Time (US & Canada)
+  ],
+  (Mountain Standard Time (Mexico), 001): [
+    Chihuahua
+  ],
+  (Myanmar Standard Time, 001): [
+    Rangoon
+  ],
+  (N. Central Asia Standard Time, 001): [
+    Novosibirsk
+  ],
+  (Namibia Standard Time, 001): null,
+  (Nepal Standard Time, 001): [
+    Kathmandu
+  ],
+  (New Zealand Standard Time, 001): [
+    Auckland,
+    Wellington
+  ],
+  (Newfoundland Standard Time, 001): [
+    Newfoundland
+  ],
+  (Norfolk Standard Time, 001): null,
+  (North Asia East Standard Time, 001): [
+    Irkutsk
+  ],
+  (North Asia Standard Time, 001): [
+    Krasnoyarsk
+  ],
+  (North Korea Standard Time, 001): null,
+  (Omsk Standard Time, 001): null,
+  (Pacific SA Standard Time, 001): [
+    Santiago
+  ],
+  (Pacific Standard Time, 001): [
+    Pacific Time (US & Canada)
+  ],
+  (Pacific Standard Time (Mexico), 001): [
+    Tijuana
+  ],
+  (Pakistan Standard Time, 001): [
+    Islamabad,
+    Karachi
+  ],
+  (Paraguay Standard Time, 001): null,
+  (Qyzylorda Standard Time, 001): null,
+  (Romance Standard Time, 001): [
+    Paris
+  ],
+  (Romance Standard Time, BE): [
+    Brussels
+  ],
+  (Romance Standard Time, DK): [
+    Copenhagen
+  ],
+  (Romance Standard Time, ES): [
+    Madrid
+  ],
+  (Russia Time Zone 10, 001): [
+    Srednekolymsk
+  ],
+  (Russia Time Zone 11, 001): [
+    Kamchatka
+  ],
+  (Russia Time Zone 3, 001): [
+    Samara
+  ],
+  (Russian Standard Time, 001): [
+    Moscow,
+    St. Petersburg
+  ],
+  (SA Eastern Standard Time, 001): null,
+  (SA Pacific Standard Time, 001): [
+    Bogota
+  ],
+  (SA Pacific Standard Time, PE): [
+    Lima,
+    Quito
+  ],
+  (SA Western Standard Time, 001): [
+    La Paz
+  ],
+  (SA Western Standard Time, AG): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, AI): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, AW): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, BL): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, BQ): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, CA): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, CW): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, DM): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, GD): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, GP): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, GY): [
+    Georgetown
+  ],
+  (SA Western Standard Time, KN): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, LC): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, MF): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, MS): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, PR): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, SX): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, TT): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, VC): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, VG): [
+    Puerto Rico
+  ],
+  (SA Western Standard Time, VI): [
+    Puerto Rico
+  ],
+  (Saint Pierre Standard Time, 001): null,
+  (Sakhalin Standard Time, 001): null,
+  (Samoa Standard Time, 001): [
+    Samoa
+  ],
+  (Sao Tome Standard Time, 001): null,
+  (Saratov Standard Time, 001): null,
+  (SE Asia Standard Time, 001): [
+    Bangkok,
+    Hanoi
+  ],
+  (SE Asia Standard Time, ID): [
+    Jakarta
+  ],
+  (Singapore Standard Time, 001): [
+    Singapore
+  ],
+  (Singapore Standard Time, MY): [
+    Kuala Lumpur
+  ],
+  (South Africa Standard Time, 001): [
+    Pretoria
+  ],
+  (South Africa Standard Time, BI): [
+    Harare
+  ],
+  (South Africa Standard Time, BW): [
+    Harare
+  ],
+  (South Africa Standard Time, CD): [
+    Harare
+  ],
+  (South Africa Standard Time, MW): [
+    Harare
+  ],
+  (South Africa Standard Time, MZ): [
+    Harare
+  ],
+  (South Africa Standard Time, RW): [
+    Harare
+  ],
+  (South Africa Standard Time, ZM): [
+    Harare
+  ],
+  (South Africa Standard Time, ZW): [
+    Harare
+  ],
+  (South Sudan Standard Time, 001): null,
+  (Sri Lanka Standard Time, 001): [
+    Sri Jayawardenepura
+  ],
+  (Sudan Standard Time, 001): null,
+  (Syria Standard Time, 001): null,
+  (Taipei Standard Time, 001): [
+    Taipei
+  ],
+  (Tasmania Standard Time, 001): [
+    Hobart
+  ],
+  (Tocantins Standard Time, 001): null,
+  (Tokyo Standard Time, 001): [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  (Tomsk Standard Time, 001): null,
+  (Tonga Standard Time, 001): [
+    Nuku'alofa
+  ],
+  (Transbaikal Standard Time, 001): null,
+  (Turkey Standard Time, 001): [
+    Istanbul
+  ],
+  (Turks And Caicos Standard Time, 001): null,
+  (Ulaanbaatar Standard Time, 001): [
+    Ulaanbaatar
+  ],
+  (US Eastern Standard Time, 001): [
+    Indiana (East)
+  ],
+  (US Mountain Standard Time, 001): [
+    Arizona
+  ],
+  (UTC, 001): [
+    UTC
+  ],
+  (UTC-02, 001): null,
+  (UTC-08, 001): null,
+  (UTC-09, 001): null,
+  (UTC-11, 001): null,
+  (UTC+12, 001): null,
+  (UTC+13, 001): null,
+  (Venezuela Standard Time, 001): [
+    Caracas
+  ],
+  (Vladivostok Standard Time, 001): [
+    Vladivostok
+  ],
+  (Volgograd Standard Time, 001): [
+    Volgograd
+  ],
+  (W. Australia Standard Time, 001): [
+    Perth
+  ],
+  (W. Central Africa Standard Time, 001): null,
+  (W. Europe Standard Time, 001): [
+    Berlin
+  ],
+  (W. Europe Standard Time, AT): [
+    Vienna
+  ],
+  (W. Europe Standard Time, CH): [
+    Bern,
+    Zurich
+  ],
+  (W. Europe Standard Time, IT): [
+    Rome
+  ],
+  (W. Europe Standard Time, LI): [
+    Bern,
+    Zurich
+  ],
+  (W. Europe Standard Time, NL): [
+    Amsterdam
+  ],
+  (W. Europe Standard Time, SE): [
+    Stockholm
+  ],
+  (W. Europe Standard Time, SM): [
+    Rome
+  ],
+  (W. Europe Standard Time, VA): [
+    Rome
+  ],
+  (W. Mongolia Standard Time, 001): null,
+  (West Asia Standard Time, 001): [
+    Tashkent
+  ],
+  (West Bank Standard Time, 001): null,
+  (West Pacific Standard Time, 001): [
+    Port Moresby
+  ],
+  (West Pacific Standard Time, GU): [
+    Guam
+  ],
+  (West Pacific Standard Time, MP): [
+    Guam
+  ],
+  (Yakutsk Standard Time, 001): [
+    Yakutsk
+  ],
+  (Yukon Standard Time, 001): [
+    Arizona
+  ]
+}

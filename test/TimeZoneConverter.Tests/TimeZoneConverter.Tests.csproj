@@ -8,4 +8,10 @@
     <ProjectReference Include="..\..\src\TimeZoneConverter\TimeZoneConverter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DataVerificationTests.IANA_To_Windows.verified.txt">
+      <DependentUpon>DataVerificationTests.cs</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>
