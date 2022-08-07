@@ -136,9 +136,58 @@ public class IanaToWindowsTests
     }
     
     [Fact]
+    public void Can_Convert_Indianapolis_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Indianapolis");
+        Assert.Equal("US Eastern Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Indiana_Indianapolis_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Indiana/Indianapolis");
+        Assert.Equal("US Eastern Standard Time", result);
+    }
+    
+    [Fact]
     public void Can_Convert_Fort_Wayne_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Fort_Wayne");
         Assert.Equal("US Eastern Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_East_Indiana_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("US/East-Indiana");
+        Assert.Equal("US Eastern Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Marengo_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Indiana/Marengo");
+        Assert.Equal("US Eastern Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Vevay_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Indiana/Vevay");
+        Assert.Equal("US Eastern Standard Time", result);
+    }
+
+    [Fact]
+    public void Can_Convert_Calcutta_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("Asia/Calcutta");
+        Assert.Equal("India Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Kolkata_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("Asia/Kolkata");
+        Assert.Equal("India Standard Time", result);
     }
 }
