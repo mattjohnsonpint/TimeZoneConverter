@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace TimeZoneConverter;
@@ -78,9 +79,9 @@ public static class TZConvert
     /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
     /// <param name="windowsTimeZoneId">A Windows time zone ID.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-    public static bool TryIanaToWindows(string ianaTimeZoneName, out string windowsTimeZoneId)
+    public static bool TryIanaToWindows(string ianaTimeZoneName, [MaybeNullWhen(false)] out string windowsTimeZoneId)
     {
-        return IanaMap.TryGetValue(ianaTimeZoneName, out windowsTimeZoneId);
+        return IanaMap.TryGetValue(ianaTimeZoneName, out windowsTimeZoneId!);
     }
 
     /// <summary>
@@ -108,7 +109,7 @@ public static class TZConvert
     /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
     /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-    public static bool TryWindowsToIana(string windowsTimeZoneId, out string ianaTimeZoneName)
+    public static bool TryWindowsToIana(string windowsTimeZoneId, [MaybeNullWhen(false)] out string ianaTimeZoneName)
     {
         return TryWindowsToIana(windowsTimeZoneId, "001", out ianaTimeZoneName);
     }
@@ -123,7 +124,8 @@ public static class TZConvert
     /// </param>
     /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-    public static bool TryWindowsToIana(string windowsTimeZoneId, string territoryCode, out string ianaTimeZoneName)
+    public static bool TryWindowsToIana(string windowsTimeZoneId, string territoryCode, 
+        [MaybeNullWhen(false)] out string ianaTimeZoneName)
     {
         if (WindowsMap.TryGetValue($"{territoryCode}|{windowsTimeZoneId}", out ianaTimeZoneName))
             return true;
@@ -153,7 +155,7 @@ public static class TZConvert
     /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
     /// <param name="timeZoneInfo">A <see cref="TimeZoneInfo"/> object.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-    public static bool TryGetTimeZoneInfo(string windowsOrIanaTimeZoneId, out TimeZoneInfo timeZoneInfo)
+    public static bool TryGetTimeZoneInfo(string windowsOrIanaTimeZoneId, [MaybeNullWhen(false)] out TimeZoneInfo timeZoneInfo)
     {
         if (string.Equals(windowsOrIanaTimeZoneId, "UTC", StringComparison.OrdinalIgnoreCase))
         {
@@ -194,13 +196,17 @@ public static class TZConvert
     public static bool TryIanaToRails(string ianaTimeZoneName, out IList<string> railsTimeZoneNames)
     {
         // try directly first
-        if (InverseRailsMap.TryGetValue(ianaTimeZoneName, out railsTimeZoneNames))
+        if (InverseRailsMap.TryGetValue(ianaTimeZoneName, out railsTimeZoneNames!))
             return true;
 
         // try again with the golden zone
-        return TryIanaToWindows(ianaTimeZoneName, out var windowsTimeZoneId) &&
+        if (TryIanaToWindows(ianaTimeZoneName, out var windowsTimeZoneId) &&
                TryWindowsToIana(windowsTimeZoneId, out var ianaGoldenZone) &&
-               InverseRailsMap.TryGetValue(ianaGoldenZone, out railsTimeZoneNames);
+               InverseRailsMap.TryGetValue(ianaGoldenZone, out railsTimeZoneNames!))
+        return true;
+
+        railsTimeZoneNames = Array.Empty<string>();
+        return false;
     }
 
     /// <summary>
@@ -223,7 +229,7 @@ public static class TZConvert
     /// <param name="railsTimeZoneName">The Rails time zone name to convert.</param>
     /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-    public static bool TryRailsToIana(string railsTimeZoneName, out string ianaTimeZoneName)
+    public static bool TryRailsToIana(string railsTimeZoneName, [MaybeNullWhen(false)] out string ianaTimeZoneName)
     {
         return RailsMap.TryGetValue(railsTimeZoneName, out ianaTimeZoneName);
     }
@@ -248,13 +254,13 @@ public static class TZConvert
     /// <param name="railsTimeZoneName">The Rails time zone name to convert.</param>
     /// <param name="windowsTimeZoneId">A Windows time zone ID.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
-    public static bool TryRailsToWindows(string railsTimeZoneName, out string windowsTimeZoneId)
+    public static bool TryRailsToWindows(string railsTimeZoneName, [MaybeNullWhen(false)] out string windowsTimeZoneId)
     {
         if (TryRailsToIana(railsTimeZoneName, out var ianaTimeZoneName) &&
             TryIanaToWindows(ianaTimeZoneName, out windowsTimeZoneId))
             return true;
 
-        windowsTimeZoneId = null;
+        windowsTimeZoneId = null!;
         return false;
     }
 
@@ -332,7 +338,7 @@ public static class TZConvert
 
         foreach (var name in KnownIanaTimeZoneNames)
         {
-            TimeZoneInfo tzi = null;
+            TimeZoneInfo? tzi = null;
 
             try
             {
