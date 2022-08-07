@@ -134,4 +134,11 @@ public class IanaToWindowsTests
         var result = TZConvert.IanaToWindows("Pacific/Kanton");
         Assert.Equal("UTC+13", result);
     }
+    
+    [Fact]
+    public void Can_Convert_Fort_Wayne_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Fort_Wayne");
+        Assert.Equal("US Eastern Standard Time", result);
+    }
 }

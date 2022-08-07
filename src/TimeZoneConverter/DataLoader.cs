@@ -57,13 +57,37 @@ internal static class DataLoader
         // Expand the IANA map to include all links (both directions)
         foreach (var link in links)
         {
-            if (!ianaMap.ContainsKey(link.Key) && ianaMap.ContainsKey(link.Value))
+            var hasMapFromKey = ianaMap.TryGetValue(link.Key, out var mapFromKey);
+            var hasMapFromValue = ianaMap.TryGetValue(link.Value, out var mapFromValue);
+
+            if (hasMapFromKey && hasMapFromValue)
             {
-                ianaMap.Add(link.Key, ianaMap[link.Value]);
+                // There are already mappings in both directions
+                continue;
             }
-            else if (!ianaMap.ContainsKey(link.Value) && ianaMap.ContainsKey(link.Key))
+            
+            if (!hasMapFromKey && hasMapFromValue)
             {
-                ianaMap.Add(link.Value, ianaMap[link.Key]);
+                // Forward mapping
+                ianaMap.Add(link.Key, mapFromValue!);
+                continue;
+            }
+            
+            if (!hasMapFromValue && hasMapFromKey)
+            {
+                // Reverse mapping
+                ianaMap.Add(link.Value, mapFromKey!);
+                continue;
+            }
+
+            // This is a rare edge case, so it's worth just searching O(n)
+            foreach (var item in links)
+            {
+                if (item.Key != link.Key && item.Value == link.Value && ianaMap.TryGetValue(item.Key, out var mapFromItemKey))
+                {
+                    ianaMap.Add(link.Key, mapFromItemKey);
+                    break;
+                }
             }
         }
 
