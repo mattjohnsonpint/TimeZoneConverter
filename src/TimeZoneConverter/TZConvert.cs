@@ -322,13 +322,19 @@ namespace TimeZoneConverter
 
         private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
         {
+            // Clear the TZI cache to ensure we have as pristine data as possible
+            TimeZoneInfo.ClearCachedData();
+
             IEnumerable<TimeZoneInfo> systemTimeZones;
 #if NETSTANDARD
             systemTimeZones = IsWindows ? TimeZoneInfo.GetSystemTimeZones() : GetSystemTimeZonesLinux();
 #else
             systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 #endif
-            return systemTimeZones.ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
+            // Group to remove duplicates with casing (though this should be very rare since we cleared cache)
+            return systemTimeZones
+                .GroupBy(x => x.Id, StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
         }
 
 #if NETSTANDARD
