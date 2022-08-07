@@ -1,25 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>net6.0;netstandard2.0;net462</TargetFrameworks>
     <Description>Generates a POSIX time zone string from standard time zone identifiers.</Description>
     <Authors>Matt Johnson-Pint</Authors>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <PackageId>TimeZoneConverter.Posix</PackageId>
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo,posix</PackageTags>
     <PackageProjectUrl>https://github.com/mattjohnsonpint/TimeZoneConverter</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>3.0.1</Version>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>mj1856_oss.snk</AssemblyOriginatorKeyFile>
+    <Version>4.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="3.0.9" />
-    <PackageReference Include="TimeZoneConverter" Version="5.0.0" />
+    <ProjectReference Include="..\TimeZoneConverter\TimeZoneConverter.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="NodaTime" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
