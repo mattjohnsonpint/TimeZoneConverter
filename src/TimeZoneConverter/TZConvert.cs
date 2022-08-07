@@ -322,13 +322,19 @@ namespace TimeZoneConverter
 
         private static Dictionary<string, TimeZoneInfo> GetSystemTimeZones()
         {
+            // Clear the TZI cache to ensure we have as pristine data as possible
+            TimeZoneInfo.ClearCachedData();
+
             IEnumerable<TimeZoneInfo> systemTimeZones;
 #if NETSTANDARD
             systemTimeZones = IsWindows ? TimeZoneInfo.GetSystemTimeZones() : GetSystemTimeZonesLinux();
 #else
             systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 #endif
-            return systemTimeZones.Distinct(new TimeZoneIdEqualityComparer()).ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
+            // Group to remove duplicates with casing (though this should be very rare since we cleared cache)
+            return systemTimeZones
+                .GroupBy(x => x.Id, StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
         }
 
 #if NETSTANDARD
@@ -355,20 +361,5 @@ namespace TimeZoneConverter
             }
         }
 #endif
-        private class TimeZoneIdEqualityComparer : IEqualityComparer<TimeZoneInfo>
-        {
-            public bool Equals(TimeZoneInfo x, TimeZoneInfo y)
-            {
-                if (ReferenceEquals(x, y)) return true;
-                if (ReferenceEquals(x, null)) return false;
-                if (ReferenceEquals(y, null)) return false;
-                return x.Id.Equals(y.Id, StringComparison.OrdinalIgnoreCase);
-            }
-
-            public int GetHashCode(TimeZoneInfo obj)
-            {
-                return obj.Id.GetHashCode();
-            }
-        }
     }
 }
