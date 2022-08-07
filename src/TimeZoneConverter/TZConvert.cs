@@ -1,6 +1,4 @@
-﻿#if NETSTANDARD
 using System.Runtime.InteropServices;
-#endif
 
 namespace TimeZoneConverter;
 
@@ -14,12 +12,7 @@ public static class TZConvert
     private static readonly Dictionary<string, string> RailsMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, IList<string>> InverseRailsMap = new(StringComparer.OrdinalIgnoreCase);
 
-#if NETSTANDARD
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-#else
-    private const bool IsWindows = true;
-#endif
-
     private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
 
     static TZConvert()
