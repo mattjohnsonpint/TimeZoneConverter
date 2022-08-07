@@ -55,40 +55,39 @@ internal static class DataLoader
         }
 
         // Expand the IANA map to include all links (both directions)
-        foreach (var link in links)
+        var linksToMap = links.ToList();
+        while (linksToMap.Count > 0)
         {
-            var hasMapFromKey = ianaMap.TryGetValue(link.Key, out var mapFromKey);
-            var hasMapFromValue = ianaMap.TryGetValue(link.Value, out var mapFromValue);
-
-            if (hasMapFromKey && hasMapFromValue)
+            var retry = new List<KeyValuePair<string, string>>();
+            foreach (var link in linksToMap)
             {
-                // There are already mappings in both directions
-                continue;
-            }
-            
-            if (!hasMapFromKey && hasMapFromValue)
-            {
-                // Forward mapping
-                ianaMap.Add(link.Key, mapFromValue!);
-                continue;
-            }
-            
-            if (!hasMapFromValue && hasMapFromKey)
-            {
-                // Reverse mapping
-                ianaMap.Add(link.Value, mapFromKey!);
-                continue;
-            }
-
-            // This is a rare edge case, so it's worth just searching O(n)
-            foreach (var item in links)
-            {
-                if (item.Key != link.Key && item.Value == link.Value && ianaMap.TryGetValue(item.Key, out var mapFromItemKey))
+                var hasMapFromKey = ianaMap.TryGetValue(link.Key, out var mapFromKey);
+                var hasMapFromValue = ianaMap.TryGetValue(link.Value, out var mapFromValue);
+                
+                if (hasMapFromKey && hasMapFromValue)
                 {
-                    ianaMap.Add(link.Key, mapFromItemKey);
-                    break;
+                    // There are already mappings in both directions
+                    continue;
+                }
+
+                if (!hasMapFromKey && hasMapFromValue)
+                {
+                    // Forward mapping
+                    ianaMap.Add(link.Key, mapFromValue!);
+                }
+                else if (!hasMapFromValue && hasMapFromKey)
+                {
+                    // Reverse mapping
+                    ianaMap.Add(link.Value, mapFromKey!);
+                }
+                else
+                {
+                    // Not found yet, but we can try again
+                    retry.Add(link);
                 }
             }
+
+            linksToMap = retry;
         }
 
         foreach (var item in railsMapping)
