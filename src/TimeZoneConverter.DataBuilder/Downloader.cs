@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using SharpCompress.Readers;
 
 namespace TimeZoneConverter.DataBuilder;
