@@ -155,7 +155,7 @@ namespace TimeZoneConverter
             if (TryGetTimeZoneInfo(windowsOrIanaTimeZoneId, out TimeZoneInfo timeZoneInfo))
                 return timeZoneInfo;
 
-            throw new TimeZoneNotFoundException();
+            throw new TimeZoneNotFoundException($"\"{windowsOrIanaTimeZoneId}\" was not found.");
         }
 
         /// <summary>
