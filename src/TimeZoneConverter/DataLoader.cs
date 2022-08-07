@@ -10,13 +10,13 @@ internal static class DataLoader
         IDictionary<string, string> ianaMap,
         IDictionary<string, string> windowsMap,
         IDictionary<string, string> railsMap,
-        IDictionary<string, IList<string>> inverseRailsMap)
+        IDictionary<string, IList<string>> inverseRailsMap,
+        IDictionary<string, string> links)
     {
         var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
         var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
         var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
-
-        var links = new Dictionary<string, string>();
+        
         foreach (var link in aliases)
         {
             var parts = link.Split(',');
@@ -33,12 +33,8 @@ internal static class DataLoader
             var territory = parts[1];
             var ianaZones = parts[2].Split();
 
-            // Create the Windows map entry
-            if (!links.TryGetValue(ianaZones[0], out var value))
-                value = ianaZones[0];
-
             var key = $"{territory}|{windowsZone}";
-            windowsMap.Add(key, value);
+            windowsMap.Add(key, ianaZones[0]);
 
             // Create the IANA map entries
             foreach (var ianaZone in ianaZones)

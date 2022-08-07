@@ -15,18 +15,24 @@ public class DataVerificationTests
         return Verify(allMappings);
     }
 
-    [Fact]
-    public Task Windows_To_IANA()
+    [Theory]
+    [InlineData(LinkResolution.Default)]
+    [InlineData(LinkResolution.Canonical)]
+    [InlineData(LinkResolution.Original)]
+    public Task Windows_To_IANA(LinkResolution mode)
     {
         var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
         var allMappings = windowsZones.ToDictionary(
             windowsId => windowsId,
-            windowsId => TZConvert.TryWindowsToIana(windowsId, out var ianaId) ? ianaId : null);
-        return Verify(allMappings);
+            windowsId => TZConvert.TryWindowsToIana(windowsId, out var ianaId, mode) ? ianaId : null);
+        return Verify(allMappings).UseParameters(mode);
     }
 
-    [Fact]
-    public Task Windows_To_IANA_Regional()
+    [Theory]
+    [InlineData(LinkResolution.Default)]
+    [InlineData(LinkResolution.Canonical)]
+    [InlineData(LinkResolution.Original)]
+    public Task Windows_To_IANA_Regional(LinkResolution mode)
     {
         var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
         var regions = GetRegions();
@@ -34,7 +40,7 @@ public class DataVerificationTests
         var allMappings = windowsZones
             .SelectMany(windowsId => regions.Select(region => (WindowsId: windowsId, Region: region)))
             .Select(x => (x.WindowsId, x.Region,
-                IanaId: TZConvert.TryWindowsToIana(x.WindowsId, x.Region, out var ianaId) ? ianaId : null))
+                IanaId: TZConvert.TryWindowsToIana(x.WindowsId, x.Region, out var ianaId, mode) ? ianaId : null))
             .GroupBy(x => x.WindowsId)
             .SelectMany(x =>
             {
@@ -42,7 +48,7 @@ public class DataVerificationTests
                 return x.Where(y => y.Region == primary.Region || y.IanaId != primary.IanaId);
             })
             .ToDictionary(x => (x.WindowsId, x.Region), x => x.IanaId);
-        return Verify(allMappings);
+        return Verify(allMappings).UseParameters(mode);
     }
 
     [Fact]
