@@ -244,9 +244,10 @@ public static class TZConvert
         if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out timeZoneInfo))
             return true;
 
-        // Convert to the opposite platform and try again
+        // Convert to the opposite platform and try again.
+        // Note, we use LinkResolution.Original here for some minor perf gain.
         return (IsWindows && TryIanaToWindows(windowsOrIanaTimeZoneId, out var tzid) ||
-                TryWindowsToIana(windowsOrIanaTimeZoneId, out tzid)) &&
+                TryWindowsToIana(windowsOrIanaTimeZoneId, out tzid, LinkResolution.Original)) &&
                SystemTimeZones.TryGetValue(tzid, out timeZoneInfo);
     }
 
