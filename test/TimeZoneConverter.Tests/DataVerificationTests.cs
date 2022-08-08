@@ -47,10 +47,9 @@ public class DataVerificationTests
                 var primary = x.First(y => y.Region == "001");
                 return x.Where(y => y.Region == primary.Region || y.IanaId != primary.IanaId);
             })
-            .ToDictionary(x => (x.WindowsId, x.Region), x => x.IanaId)
-            .OrderBy(x => x.Key.WindowsId, StringComparer.Ordinal)
-            .ThenBy(x => x.Key.Region, StringComparer.Ordinal);
-        return Verify(allMappings).UseParameters(mode);
+            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.IanaId);
+        var sorted = new SortedDictionary<string, string?>(allMappings, StringComparer.Ordinal);
+        return Verify(sorted).UseParameters(mode);
     }
 
     [Fact]
@@ -82,10 +81,9 @@ public class DataVerificationTests
                     (primary.RailsIds != null && y.RailsIds?.SequenceEqual(primary.RailsIds) is not true)
                 );
             })
-            .ToDictionary(x => (x.WindowsId, x.Region), x => x.RailsIds)
-            .OrderBy(x => x.Key.WindowsId, StringComparer.Ordinal)
-            .ThenBy(x => x.Key.Region, StringComparer.Ordinal);
-        return Verify(allMappings);
+            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.RailsIds);
+        var sorted = new SortedDictionary<string, IList<string>?>(allMappings, StringComparer.Ordinal);
+        return Verify(sorted);
     }
     
     [Fact]
