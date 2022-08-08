@@ -150,38 +150,51 @@ public static class TZConvert
         LinkResolution linkResolutionMode = LinkResolution.Default)
     {
         // try first with the given region
-        var found = WindowsMap.TryGetValue($"{territoryCode}|{windowsTimeZoneId}", out ianaTimeZoneName);
+        var found = WindowsMap.TryGetValue($"{territoryCode}|{windowsTimeZoneId}", out var ianaId);
         
-        string? goldenIanaName = null;
+        string? goldenIanaId = null;
         if (territoryCode != "001" && (linkResolutionMode == LinkResolution.Default || !found))
         {
             // we need to look up the golden zone also
-            var goldenFound = WindowsMap.TryGetValue($"001|{windowsTimeZoneId}", out goldenIanaName);
+            var goldenFound = WindowsMap.TryGetValue($"001|{windowsTimeZoneId}", out goldenIanaId);
             
             if (!found)
             {
                 found = goldenFound;
-                ianaTimeZoneName = goldenIanaName;
+                ianaId = goldenIanaId;
             }
         }
 
         if (!found)
         {
+            ianaTimeZoneName = null;
             return false;
         }
         
+        ianaTimeZoneName = ianaId!;
+
         // resolve links
         switch (linkResolutionMode)
         {
             case LinkResolution.Default:
-                if (goldenIanaName == null || ianaTimeZoneName == goldenIanaName)
+                if (goldenIanaId == null || ianaId == goldenIanaId)
                 {
-                    ianaTimeZoneName = ResolveLink(ianaTimeZoneName!);
+                    ianaTimeZoneName = ResolveLink(ianaId!);
                 }
+                else
+                {
+                    var goldenResolved = ResolveLink(goldenIanaId);
+                    var specificResolved = ResolveLink(ianaId!);
+                    if (goldenResolved != specificResolved && !WindowsMap.ContainsValue(specificResolved))
+                    {
+                        ianaTimeZoneName = specificResolved;
+                    }
+                }
+                
                 return true;
             
             case LinkResolution.Canonical:
-                ianaTimeZoneName = ResolveLink(ianaTimeZoneName!);
+                ianaTimeZoneName = ResolveLink(ianaId!);
                 return true;
             
             case LinkResolution.Original:

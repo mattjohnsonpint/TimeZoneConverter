@@ -117,42 +117,42 @@ public class WindowsToIanaTests
         var result = TZConvert.WindowsToIana("Mid-Atlantic Standard Time");
         Assert.Equal("Etc/GMT+2", result);
     }
-    
+
     [Fact]
     public void Can_Convert_SA_Western_Standard_Time_To_IANA_With_Default_Mode()
     {
         var result = TZConvert.WindowsToIana("SA Western Standard Time", "AG");
         Assert.Equal("America/Antigua", result);
     }
-    
+
     [Fact]
     public void Can_Convert_SA_Western_Standard_Time_To_IANA_With_Canonical_Mode()
     {
         var result = TZConvert.WindowsToIana("SA Western Standard Time", "AG", LinkResolution.Canonical);
         Assert.Equal("America/Puerto_Rico", result);
     }
-    
+
     [Fact]
     public void Can_Convert_SA_Western_Standard_Time_To_IANA_With_Original_Mode()
     {
         var result = TZConvert.WindowsToIana("SA Western Standard Time", "AG", LinkResolution.Original);
         Assert.Equal("America/Antigua", result);
     }
-    
+
     [Fact]
     public void Can_Convert_India_Standard_Time_To_IANA_With_Default_Mode()
     {
         var result = TZConvert.WindowsToIana("India Standard Time");
         Assert.Equal("Asia/Kolkata", result);
     }
-    
+
     [Fact]
     public void Can_Convert_India_Standard_Time_To_IANA_With_Canonical_Mode()
     {
         var result = TZConvert.WindowsToIana("India Standard Time", LinkResolution.Canonical);
         Assert.Equal("Asia/Kolkata", result);
     }
-    
+
     [Fact]
     public void Can_Convert_India_Standard_Time_To_IANA_With_Original_Mode()
     {
@@ -160,4 +160,24 @@ public class WindowsToIanaTests
         Assert.Equal("Asia/Calcutta", result);
     }
 
+    [Fact]
+    public void Can_Convert_UTCPlus13_To_IANA_With_Default_Mode()
+    {
+        var result = TZConvert.WindowsToIana("UTC+13", "KI");
+        Assert.Equal("Pacific/Kanton", result);
+    }
+
+    [Fact]
+    public void Can_Convert_UTCPlus13_To_IANA_With_Canonical_Mode()
+    {
+        var result = TZConvert.WindowsToIana("UTC+13", "KI", LinkResolution.Canonical);
+        Assert.Equal("Pacific/Kanton", result);
+    }
+
+    [Fact]
+    public void Can_Convert_UTCPlus13_To_IANA_With_Original_Mode()
+    {
+        var result = TZConvert.WindowsToIana("UTC+13", "KI", LinkResolution.Original);
+        Assert.Equal("Pacific/Enderbury", result);
+    }
 }
