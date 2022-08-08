@@ -1,4 +1,10 @@
 {
+  (AUS Central Standard Time, 001): [
+    Darwin
+  ],
+  (AUS Eastern Standard Time, 001): [
+    Sydney
+  ],
   (Afghanistan Standard Time, 001): [
     Kabul
   ],
@@ -27,13 +33,7 @@
   (Atlantic Standard Time, 001): [
     Atlantic Time (Canada)
   ],
-  (AUS Central Standard Time, 001): [
-    Darwin
-  ],
   (Aus Central W. Standard Time, 001): null,
-  (AUS Eastern Standard Time, 001): [
-    Sydney
-  ],
   (Azerbaijan Standard Time, 001): [
     Baku
   ],
@@ -110,12 +110,12 @@
   (Central Pacific Standard Time, NC): [
     New Caledonia
   ],
-  (Central Standard Time, 001): [
-    Central Time (US & Canada)
-  ],
   (Central Standard Time (Mexico), 001): [
     Guadalajara,
     Mexico City
+  ],
+  (Central Standard Time, 001): [
+    Central Time (US & Canada)
   ],
   (Chatham Islands Standard Time, 001): [
     Chatham Is.
@@ -141,18 +141,15 @@
     Brasilia
   ],
   (Easter Island Standard Time, 001): null,
+  (Eastern Standard Time (Mexico), 001): null,
   (Eastern Standard Time, 001): [
     Eastern Time (US & Canada)
   ],
-  (Eastern Standard Time (Mexico), 001): null,
   (Egypt Standard Time, 001): [
     Cairo
   ],
   (Ekaterinburg Standard Time, 001): [
     Ekaterinburg
-  ],
-  (Fiji Standard Time, 001): [
-    Fiji
   ],
   (FLE Standard Time, 001): [
     Kyiv
@@ -175,8 +172,8 @@
   (FLE Standard Time, LV): [
     Riga
   ],
-  (Georgian Standard Time, 001): [
-    Tbilisi
+  (Fiji Standard Time, 001): [
+    Fiji
   ],
   (GMT Standard Time, 001): [
     Edinburgh,
@@ -188,16 +185,19 @@
   (GMT Standard Time, PT): [
     Lisbon
   ],
-  (Greenland Standard Time, 001): [
-    Greenland
-  ],
-  (Greenwich Standard Time, 001): null,
   (GTB Standard Time, 001): [
     Bucharest
   ],
   (GTB Standard Time, GR): [
     Athens
   ],
+  (Georgian Standard Time, 001): [
+    Tbilisi
+  ],
+  (Greenland Standard Time, 001): [
+    Greenland
+  ],
+  (Greenwich Standard Time, 001): null,
   (Haiti Standard Time, 001): null,
   (Hawaiian Standard Time, 001): [
     Hawaii
@@ -237,11 +237,11 @@
   (Morocco Standard Time, 001): [
     Casablanca
   ],
-  (Mountain Standard Time, 001): [
-    Mountain Time (US & Canada)
-  ],
   (Mountain Standard Time (Mexico), 001): [
     Chihuahua
+  ],
+  (Mountain Standard Time, 001): [
+    Mountain Time (US & Canada)
   ],
   (Myanmar Standard Time, 001): [
     Rangoon
@@ -272,11 +272,11 @@
   (Pacific SA Standard Time, 001): [
     Santiago
   ],
-  (Pacific Standard Time, 001): [
-    Pacific Time (US & Canada)
-  ],
   (Pacific Standard Time (Mexico), 001): [
     Tijuana
+  ],
+  (Pacific Standard Time, 001): [
+    Pacific Time (US & Canada)
   ],
   (Pakistan Standard Time, 001): [
     Islamabad,
@@ -292,6 +292,9 @@
   ],
   (Romance Standard Time, DK): [
     Copenhagen
+  ],
+  (Romance Standard Time, EA): [
+    Madrid
   ],
   (Romance Standard Time, ES): [
     Madrid
@@ -383,13 +386,6 @@
   (SA Western Standard Time, VI): [
     Puerto Rico
   ],
-  (Saint Pierre Standard Time, 001): null,
-  (Sakhalin Standard Time, 001): null,
-  (Samoa Standard Time, 001): [
-    Samoa
-  ],
-  (Sao Tome Standard Time, 001): null,
-  (Saratov Standard Time, 001): null,
   (SE Asia Standard Time, 001): [
     Bangkok,
     Hanoi
@@ -397,6 +393,13 @@
   (SE Asia Standard Time, ID): [
     Jakarta
   ],
+  (Saint Pierre Standard Time, 001): null,
+  (Sakhalin Standard Time, 001): null,
+  (Samoa Standard Time, 001): [
+    Samoa
+  ],
+  (Sao Tome Standard Time, 001): null,
+  (Saratov Standard Time, 001): null,
   (Singapore Standard Time, 001): [
     Singapore
   ],
@@ -448,15 +451,14 @@
     Istanbul
   ],
   (Turks And Caicos Standard Time, 001): null,
-  (Ulaanbaatar Standard Time, 001): [
-    Ulaanbaatar
-  ],
   (US Eastern Standard Time, 001): [
     Indiana (East)
   ],
   (US Mountain Standard Time, 001): [
     Arizona
   ],
+  (UTC+12, 001): null,
+  (UTC+13, 001): null,
   (UTC, 001): [
     UTC
   ],
@@ -464,8 +466,9 @@
   (UTC-08, 001): null,
   (UTC-09, 001): null,
   (UTC-11, 001): null,
-  (UTC+12, 001): null,
-  (UTC+13, 001): null,
+  (Ulaanbaatar Standard Time, 001): [
+    Ulaanbaatar
+  ],
   (Venezuela Standard Time, 001): [
     Caracas
   ],

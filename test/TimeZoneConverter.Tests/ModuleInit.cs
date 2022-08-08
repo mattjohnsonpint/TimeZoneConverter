@@ -7,7 +7,7 @@ namespace TimeZoneConverter.Tests
         [ModuleInitializer]
         public static void Init()
         {
-            VerifyDiffPlex.Initialize();
+            VerifyDiffPlex.Initialize(OutputType.Compact);
         }
     }
 }

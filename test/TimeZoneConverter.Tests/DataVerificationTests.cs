@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace TimeZoneConverter.Tests;
 
 [UsesVerify]
@@ -35,10 +33,9 @@ public class DataVerificationTests
     public Task Windows_To_IANA_Regional(LinkResolution mode)
     {
         var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
-        var regions = GetRegions();
 
         var allMappings = windowsZones
-            .SelectMany(windowsId => regions.Select(region => (WindowsId: windowsId, Region: region)))
+            .SelectMany(windowsId => TestData.Regions.Select(region => (WindowsId: windowsId, Region: region)))
             .Select(x => (x.WindowsId, x.Region,
                 IanaId: TZConvert.TryWindowsToIana(x.WindowsId, x.Region, out var ianaId, mode) ? ianaId : null))
             .GroupBy(x => x.WindowsId)
@@ -47,8 +44,9 @@ public class DataVerificationTests
                 var primary = x.First(y => y.Region == "001");
                 return x.Where(y => y.Region == primary.Region || y.IanaId != primary.IanaId);
             })
-            .ToDictionary(x => (x.WindowsId, x.Region), x => x.IanaId);
-        return Verify(allMappings).UseParameters(mode);
+            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.IanaId);
+        var sorted = new SortedDictionary<string, string?>(allMappings, StringComparer.Ordinal);
+        return Verify(sorted).UseParameters(mode);
     }
 
     [Fact]
@@ -65,10 +63,9 @@ public class DataVerificationTests
     public Task Windows_To_Rails_Regional()
     {
         var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
-        var regions = GetRegions();
 
         var allMappings = windowsZones
-            .SelectMany(windowsId => regions.Select(region => (WindowsId: windowsId, Region: region)))
+            .SelectMany(windowsId => TestData.Regions.Select(region => (WindowsId: windowsId, Region: region)))
             .Select(x => (x.WindowsId, x.Region,
                 RailsIds: TZConvert.TryWindowsToRails(x.WindowsId, x.Region, out var railsIds) ? railsIds : null))
             .GroupBy(x => x.WindowsId)
@@ -80,8 +77,9 @@ public class DataVerificationTests
                     (primary.RailsIds != null && y.RailsIds?.SequenceEqual(primary.RailsIds) is not true)
                 );
             })
-            .ToDictionary(x => (x.WindowsId, x.Region), x => x.RailsIds);
-        return Verify(allMappings);
+            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.RailsIds);
+        var sorted = new SortedDictionary<string, IList<string>?>(allMappings, StringComparer.Ordinal);
+        return Verify(sorted);
     }
     
     [Fact]
@@ -112,23 +110,5 @@ public class DataVerificationTests
             railsId => railsId,
             railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null);
         return Verify(allMappings);
-    }
-
-    [Fact]
-    public Task Regions()
-    {
-        var regions = GetRegions();
-        return Verify(regions);
-    }
-
-    private IReadOnlyCollection<string> GetRegions()
-    {
-        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-            .Select(x => new RegionInfo(x.Name).TwoLetterISORegionName)
-            .Where(x => x.Length == 2 || x == "001")
-            .Distinct()
-            .ToList();
-        regions.Sort();
-        return regions.AsReadOnly();
     }
 }
