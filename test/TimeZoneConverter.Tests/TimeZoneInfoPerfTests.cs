@@ -1,17 +1,26 @@
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Xunit;
 
 namespace TimeZoneConverter.Tests;
 
-public class TimeZoneInfoPerfTests
+public class TimeZoneInfoPerfTests : IClassFixture<TimeZoneInfoPerfTests.Fixture>
 {
-    [SkippableFact]
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class Fixture
+    {
+        public Fixture()
+        {
+            // This is just to ensure that we've initialized before starting our tests
+            _ = TZConvert.KnownIanaTimeZoneNames;
+        }
+    }
+
+    public TimeZoneInfoPerfTests(Fixture _)
+    {
+    }
+
+    [Fact]
     public void GetTimeZoneInfo_WithIANAZone_1Million_ReturnsInUnder1Second()
     {
-        // TODO: Improve perf and remove skip
-        Skip.If(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-        
         var sw = Stopwatch.StartNew();
 
         for (var i = 0; i < 1000000; i++)
@@ -21,12 +30,9 @@ public class TimeZoneInfoPerfTests
         Assert.True(sw.Elapsed < TimeSpan.FromSeconds(1), $"Actual Time: {sw.Elapsed}");
     }
 
-    [SkippableFact]
+    [Fact]
     public void GetTimeZoneInfo_WithWindowsZone_1Million_ReturnsInUnder1Second()
     {
-        // TODO: Improve perf and remove skip
-        Skip.If(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-        
         var sw = Stopwatch.StartNew();
 
         for (var i = 0; i < 1000000; i++)
