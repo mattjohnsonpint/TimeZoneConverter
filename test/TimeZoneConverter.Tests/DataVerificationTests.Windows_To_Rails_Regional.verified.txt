@@ -10,6 +10,9 @@
   (Arab Standard Time, 001): [
     Riyadh
   ],
+  (Arab Standard Time, KW): [
+    Kuwait
+  ],
   (Arabian Standard Time, 001): [
     Abu Dhabi,
     Muscat
@@ -81,10 +84,10 @@
     Belgrade
   ],
   (Central Europe Standard Time, SI): [
-    Belgrade
+    Ljubljana
   ],
   (Central Europe Standard Time, SK): [
-    Prague
+    Bratislava
   ],
   (Central Europe Standard Time, XK): [
     Belgrade
@@ -93,13 +96,13 @@
     Warsaw
   ],
   (Central European Standard Time, BA): [
-    Belgrade
+    Sarajevo
   ],
   (Central European Standard Time, HR): [
-    Belgrade
+    Zagreb
   ],
   (Central European Standard Time, MK): [
-    Belgrade
+    Skopje
   ],
   (Central Pacific Standard Time, 001): [
     Solomon Is.
@@ -403,16 +406,7 @@
   (South Africa Standard Time, 001): [
     Pretoria
   ],
-  (South Africa Standard Time, BI): [
-    Harare
-  ],
-  (South Africa Standard Time, BW): [
-    Harare
-  ],
   (South Africa Standard Time, CD): [
-    Harare
-  ],
-  (South Africa Standard Time, MW): [
     Harare
   ],
   (South Africa Standard Time, MZ): [
