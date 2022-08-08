@@ -18,4 +18,8 @@
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <PackageReference Include="GitHubActionsTestLogger" Version="2.0.1" />
+  </ItemGroup>
+
 </Project>
