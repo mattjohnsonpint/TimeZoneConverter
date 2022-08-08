@@ -293,6 +293,9 @@
   (Romance Standard Time, DK): [
     Copenhagen
   ],
+  (Romance Standard Time, EA): [
+    Madrid
+  ],
   (Romance Standard Time, ES): [
     Madrid
   ],
