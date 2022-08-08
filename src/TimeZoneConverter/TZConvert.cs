@@ -393,22 +393,21 @@ public static class TZConvert
         // Clear the TZI cache to ensure we have as pristine data as possible
         TimeZoneInfo.ClearCachedData();
 
-#if NETSTANDARD
-        var systemTimeZones = IsWindows ? TimeZoneInfo.GetSystemTimeZones() : GetSystemTimeZonesLinux();
-#else
-        var systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-#endif
+        // Get the system time zones
+        var systemTimeZones = IsWindows
+            ? TimeZoneInfo.GetSystemTimeZones()
+            : GetSystemTimeZonesUnix();
+
         // Group to remove duplicates with casing (though this should be very rare since we cleared cache)
         return systemTimeZones
             .GroupBy(x => x.Id, StringComparer.OrdinalIgnoreCase)
             .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
     }
 
-#if NETSTANDARD
-    private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesLinux()
+    private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesUnix()
     {
-        // Don't trust TimeZoneInfo.GetSystemTimeZones on Non-Windows
-        // Because it doesn't return any links, or any Etc zones
+        // Don't use TimeZoneInfo.GetSystemTimeZones on non-Windows platforms
+        // because it doesn't include links or Etc zones
 
         foreach (var name in KnownIanaTimeZoneNames)
         {
@@ -427,5 +426,4 @@ public static class TZConvert
                 yield return tzi;
         }
     }
-#endif
 }
