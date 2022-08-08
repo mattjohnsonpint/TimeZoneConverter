@@ -14,7 +14,7 @@ public class TimeZoneInfoPerfTests
             TZConvert.GetTimeZoneInfo("Europe/Warsaw");
 
         sw.Stop();
-        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(1));
+        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(1), $"Actual Time: {sw.Elapsed}");
     }
 
     [Fact]
@@ -26,6 +26,6 @@ public class TimeZoneInfoPerfTests
             TZConvert.GetTimeZoneInfo("Pacific Standard Time");
 
         sw.Stop();
-        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(1));
+        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(1), $"Actual Time: {sw.Elapsed}");
     }
 }
