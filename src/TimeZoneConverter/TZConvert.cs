@@ -401,37 +401,34 @@ public static class TZConvert
         // Clear the TZI cache to ensure we have as pristine data as possible
         TimeZoneInfo.ClearCachedData();
 
-        // Get the system time zones
-        var systemTimeZones = IsWindows
-            ? TimeZoneInfo.GetSystemTimeZones()
-            : GetSystemTimeZonesUnix();
-
-        // Group to remove duplicates with casing (though this should be very rare since we cleared cache)
-        return systemTimeZones
+        // Get the system time zones, grouped to remove duplicates with casing (though this should be very rare since we cleared cache)
+        var zones = TimeZoneInfo.GetSystemTimeZones()
             .GroupBy(x => x.Id, StringComparer.OrdinalIgnoreCase)
             .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
-    }
 
-    private static IEnumerable<TimeZoneInfo> GetSystemTimeZonesUnix()
-    {
-        // Don't use TimeZoneInfo.GetSystemTimeZones on non-Windows platforms
-        // because it doesn't include links or Etc zones
+        if (IsWindows)
+        {
+            return zones;
+        }
 
+        // On non-Windows systems, expand to include any known IANA time zone names that weren't returned by the
+        // GetSystemTimeZones call.  Specifically, links and Etc zones.
         foreach (var name in KnownIanaTimeZoneNames)
         {
-            TimeZoneInfo? tzi = null;
+            if (zones.ContainsKey(name))
+                continue;
 
             try
             {
-                tzi = TimeZoneInfo.FindSystemTimeZoneById(name);
+                var tzi = TimeZoneInfo.FindSystemTimeZoneById(name);
+                zones.Add(tzi.Id, tzi);
             }
             catch
             {
                 // ignored
             }
-
-            if (tzi != null)
-                yield return tzi;
         }
+
+        return zones;
     }
 }
