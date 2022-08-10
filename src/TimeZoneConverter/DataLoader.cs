@@ -169,13 +169,13 @@ internal static class DataLoader
 
     private static void AddZoneToTerritory(IDictionary<string, HashSet<string>> ianaTerritoryZones, string territory, string ianaZone)
     {
-        if(ianaTerritoryZones.TryGetValue(territory, out HashSet<string> zones))
+        if(ianaTerritoryZones.TryGetValue(territory, out var zones))
         {
             zones.Add(ianaZone);
         }
         else
         {
-            ianaTerritoryZones.Add(territory, new HashSet<string>(System.StringComparer.OrdinalIgnoreCase) { ianaZone });
+            ianaTerritoryZones.Add(territory, new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ianaZone });
         }
     }
 
