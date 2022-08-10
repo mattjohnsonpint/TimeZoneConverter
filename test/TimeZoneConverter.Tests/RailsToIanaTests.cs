@@ -1,38 +1,37 @@
-﻿using Xunit;
+using Xunit;
 using Xunit.Abstractions;
 
-namespace TimeZoneConverter.Tests
+namespace TimeZoneConverter.Tests;
+
+public class RailsToIanaTests
 {
-    public class RailsToIanaTests
+    private readonly ITestOutputHelper _output;
+
+    public RailsToIanaTests(ITestOutputHelper output)
     {
-        private readonly ITestOutputHelper _output;
+        _output = output;
+    }
 
-        public RailsToIanaTests(ITestOutputHelper output)
+    [Fact]
+    public void Can_Convert_Rails_Zones_To_Iana_Zones()
+    {
+        var errors = 0;
+        ICollection<string> railsZones = TZConvert.KnownRailsTimeZoneNames.ToList();
+
+        foreach (var railsZone in railsZones)
         {
-            _output = output;
-        }
-
-        [Fact]
-        public void Can_Convert_Rails_Zones_To_Iana_Zones()
-        {
-            var errors = 0;
-            var railsZones = TZConvert.KnownRailsTimeZoneNames;
-
-            foreach (var railsZone in railsZones)
+            if (TZConvert.TryRailsToIana(railsZone, out var ianaZone))
             {
-                if (TZConvert.TryRailsToIana(railsZone, out var ianaZone))
-                {
-                    Assert.NotNull(ianaZone);
-                    Assert.NotEqual(string.Empty, ianaZone);
-                }
-                else
-                {
-                    errors++;
-                    _output.WriteLine($"Failed to convert \"{railsZone}\"");
-                }
+                Assert.NotNull(ianaZone);
+                Assert.NotEqual(string.Empty, ianaZone);
             }
-
-            Assert.Equal(0, errors);
+            else
+            {
+                errors++;
+                _output.WriteLine($"Failed to convert \"{railsZone}\"");
+            }
         }
+
+        Assert.Equal(0, errors);
     }
 }

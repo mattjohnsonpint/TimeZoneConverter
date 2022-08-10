@@ -1,0 +1,1625 @@
+{
+  Africa/Abidjan: null,
+  Africa/Accra: null,
+  Africa/Addis_Ababa: [
+    Nairobi
+  ],
+  Africa/Algiers: [
+    West Central Africa
+  ],
+  Africa/Asmara: [
+    Nairobi
+  ],
+  Africa/Asmera: [
+    Nairobi
+  ],
+  Africa/Bamako: null,
+  Africa/Bangui: null,
+  Africa/Banjul: null,
+  Africa/Bissau: null,
+  Africa/Blantyre: [
+    Pretoria
+  ],
+  Africa/Brazzaville: null,
+  Africa/Bujumbura: [
+    Pretoria
+  ],
+  Africa/Cairo: [
+    Cairo
+  ],
+  Africa/Casablanca: [
+    Casablanca
+  ],
+  Africa/Ceuta: [
+    Madrid
+  ],
+  Africa/Conakry: null,
+  Africa/Dakar: null,
+  Africa/Dar_es_Salaam: [
+    Nairobi
+  ],
+  Africa/Djibouti: [
+    Nairobi
+  ],
+  Africa/Douala: null,
+  Africa/El_Aaiun: [
+    Casablanca
+  ],
+  Africa/Freetown: null,
+  Africa/Gaborone: [
+    Pretoria
+  ],
+  Africa/Harare: [
+    Harare
+  ],
+  Africa/Johannesburg: [
+    Pretoria
+  ],
+  Africa/Juba: null,
+  Africa/Kampala: [
+    Nairobi
+  ],
+  Africa/Khartoum: null,
+  Africa/Kigali: [
+    Harare
+  ],
+  Africa/Kinshasa: null,
+  Africa/Lagos: null,
+  Africa/Libreville: null,
+  Africa/Lome: null,
+  Africa/Luanda: null,
+  Africa/Lubumbashi: [
+    Harare
+  ],
+  Africa/Lusaka: [
+    Harare
+  ],
+  Africa/Malabo: null,
+  Africa/Maputo: [
+    Harare
+  ],
+  Africa/Maseru: [
+    Pretoria
+  ],
+  Africa/Mbabane: [
+    Pretoria
+  ],
+  Africa/Mogadishu: [
+    Nairobi
+  ],
+  Africa/Monrovia: [
+    Monrovia
+  ],
+  Africa/Nairobi: [
+    Nairobi
+  ],
+  Africa/Ndjamena: null,
+  Africa/Niamey: null,
+  Africa/Nouakchott: null,
+  Africa/Ouagadougou: null,
+  Africa/Porto-Novo: null,
+  Africa/Sao_Tome: null,
+  Africa/Timbuktu: null,
+  Africa/Tripoli: null,
+  Africa/Tunis: null,
+  Africa/Windhoek: null,
+  America/Adak: null,
+  America/Anchorage: [
+    Alaska
+  ],
+  America/Anguilla: [
+    Puerto Rico
+  ],
+  America/Antigua: [
+    Puerto Rico
+  ],
+  America/Araguaina: null,
+  America/Argentina/Buenos_Aires: [
+    Buenos Aires
+  ],
+  America/Argentina/Catamarca: [
+    Buenos Aires
+  ],
+  America/Argentina/ComodRivadavia: [
+    Buenos Aires
+  ],
+  America/Argentina/Cordoba: [
+    Buenos Aires
+  ],
+  America/Argentina/Jujuy: [
+    Buenos Aires
+  ],
+  America/Argentina/La_Rioja: [
+    Buenos Aires
+  ],
+  America/Argentina/Mendoza: [
+    Buenos Aires
+  ],
+  America/Argentina/Rio_Gallegos: [
+    Buenos Aires
+  ],
+  America/Argentina/Salta: [
+    Buenos Aires
+  ],
+  America/Argentina/San_Juan: [
+    Buenos Aires
+  ],
+  America/Argentina/San_Luis: [
+    Buenos Aires
+  ],
+  America/Argentina/Tucuman: [
+    Buenos Aires
+  ],
+  America/Argentina/Ushuaia: [
+    Buenos Aires
+  ],
+  America/Aruba: [
+    Puerto Rico
+  ],
+  America/Asuncion: null,
+  America/Atikokan: [
+    Bogota
+  ],
+  America/Atka: null,
+  America/Bahia: null,
+  America/Bahia_Banderas: [
+    Guadalajara,
+    Mexico City
+  ],
+  America/Barbados: [
+    La Paz
+  ],
+  America/Belem: null,
+  America/Belize: [
+    Central America
+  ],
+  America/Blanc-Sablon: [
+    Puerto Rico
+  ],
+  America/Boa_Vista: [
+    La Paz
+  ],
+  America/Bogota: [
+    Bogota
+  ],
+  America/Boise: [
+    Mountain Time (US & Canada)
+  ],
+  America/Buenos_Aires: [
+    Buenos Aires
+  ],
+  America/Cambridge_Bay: [
+    Mountain Time (US & Canada)
+  ],
+  America/Campo_Grande: null,
+  America/Cancun: null,
+  America/Caracas: [
+    Caracas
+  ],
+  America/Catamarca: [
+    Buenos Aires
+  ],
+  America/Cayenne: null,
+  America/Cayman: [
+    Bogota
+  ],
+  America/Chicago: [
+    Central Time (US & Canada)
+  ],
+  America/Chihuahua: [
+    Chihuahua
+  ],
+  America/Coral_Harbour: [
+    Bogota
+  ],
+  America/Cordoba: [
+    Buenos Aires
+  ],
+  America/Costa_Rica: [
+    Central America
+  ],
+  America/Creston: [
+    Arizona
+  ],
+  America/Cuiaba: null,
+  America/Curacao: [
+    Puerto Rico
+  ],
+  America/Danmarkshavn: null,
+  America/Dawson: [
+    Arizona
+  ],
+  America/Dawson_Creek: [
+    Arizona
+  ],
+  America/Denver: [
+    Mountain Time (US & Canada)
+  ],
+  America/Detroit: [
+    Eastern Time (US & Canada)
+  ],
+  America/Dominica: [
+    Puerto Rico
+  ],
+  America/Edmonton: [
+    Mountain Time (US & Canada)
+  ],
+  America/Eirunepe: [
+    Bogota
+  ],
+  America/El_Salvador: [
+    Central America
+  ],
+  America/Ensenada: [
+    Tijuana
+  ],
+  America/Fortaleza: null,
+  America/Fort_Nelson: [
+    Arizona
+  ],
+  America/Fort_Wayne: [
+    Indiana (East)
+  ],
+  America/Glace_Bay: [
+    Atlantic Time (Canada)
+  ],
+  America/Godthab: [
+    Greenland
+  ],
+  America/Goose_Bay: [
+    Atlantic Time (Canada)
+  ],
+  America/Grand_Turk: null,
+  America/Grenada: [
+    Puerto Rico
+  ],
+  America/Guadeloupe: [
+    Puerto Rico
+  ],
+  America/Guatemala: [
+    Central America
+  ],
+  America/Guayaquil: [
+    Bogota
+  ],
+  America/Guyana: [
+    Georgetown
+  ],
+  America/Halifax: [
+    Atlantic Time (Canada)
+  ],
+  America/Havana: null,
+  America/Hermosillo: [
+    Arizona
+  ],
+  America/Indiana/Indianapolis: [
+    Indiana (East)
+  ],
+  America/Indiana/Knox: [
+    Central Time (US & Canada)
+  ],
+  America/Indiana/Marengo: [
+    Indiana (East)
+  ],
+  America/Indiana/Petersburg: [
+    Eastern Time (US & Canada)
+  ],
+  America/Indiana/Tell_City: [
+    Central Time (US & Canada)
+  ],
+  America/Indiana/Vevay: [
+    Indiana (East)
+  ],
+  America/Indiana/Vincennes: [
+    Eastern Time (US & Canada)
+  ],
+  America/Indiana/Winamac: [
+    Eastern Time (US & Canada)
+  ],
+  America/Indianapolis: [
+    Indiana (East)
+  ],
+  America/Inuvik: [
+    Mountain Time (US & Canada)
+  ],
+  America/Iqaluit: [
+    Eastern Time (US & Canada)
+  ],
+  America/Jamaica: [
+    Bogota
+  ],
+  America/Jujuy: [
+    Buenos Aires
+  ],
+  America/Juneau: [
+    Alaska
+  ],
+  America/Kentucky/Louisville: [
+    Eastern Time (US & Canada)
+  ],
+  America/Kentucky/Monticello: [
+    Eastern Time (US & Canada)
+  ],
+  America/Knox_IN: [
+    Central Time (US & Canada)
+  ],
+  America/Kralendijk: [
+    Puerto Rico
+  ],
+  America/La_Paz: [
+    La Paz
+  ],
+  America/Lima: [
+    Lima,
+    Quito
+  ],
+  America/Los_Angeles: [
+    Pacific Time (US & Canada)
+  ],
+  America/Louisville: [
+    Eastern Time (US & Canada)
+  ],
+  America/Lower_Princes: [
+    Puerto Rico
+  ],
+  America/Maceio: null,
+  America/Managua: [
+    Central America
+  ],
+  America/Manaus: [
+    La Paz
+  ],
+  America/Marigot: [
+    Puerto Rico
+  ],
+  America/Martinique: [
+    La Paz
+  ],
+  America/Matamoros: [
+    Central Time (US & Canada)
+  ],
+  America/Mazatlan: [
+    Mazatlan
+  ],
+  America/Mendoza: [
+    Buenos Aires
+  ],
+  America/Menominee: [
+    Central Time (US & Canada)
+  ],
+  America/Merida: [
+    Guadalajara,
+    Mexico City
+  ],
+  America/Metlakatla: [
+    Alaska
+  ],
+  America/Mexico_City: [
+    Guadalajara,
+    Mexico City
+  ],
+  America/Miquelon: null,
+  America/Moncton: [
+    Atlantic Time (Canada)
+  ],
+  America/Monterrey: [
+    Monterrey
+  ],
+  America/Montevideo: [
+    Montevideo
+  ],
+  America/Montreal: [
+    Eastern Time (US & Canada)
+  ],
+  America/Montserrat: [
+    Puerto Rico
+  ],
+  America/Nassau: [
+    Eastern Time (US & Canada)
+  ],
+  America/New_York: [
+    Eastern Time (US & Canada)
+  ],
+  America/Nipigon: [
+    Eastern Time (US & Canada)
+  ],
+  America/Nome: [
+    Alaska
+  ],
+  America/Noronha: null,
+  America/North_Dakota/Beulah: [
+    Central Time (US & Canada)
+  ],
+  America/North_Dakota/Center: [
+    Central Time (US & Canada)
+  ],
+  America/North_Dakota/New_Salem: [
+    Central Time (US & Canada)
+  ],
+  America/Nuuk: [
+    Greenland
+  ],
+  America/Ojinaga: [
+    Mountain Time (US & Canada)
+  ],
+  America/Panama: [
+    Bogota
+  ],
+  America/Pangnirtung: [
+    Eastern Time (US & Canada)
+  ],
+  America/Paramaribo: null,
+  America/Phoenix: [
+    Arizona
+  ],
+  America/Port-au-Prince: null,
+  America/Porto_Acre: [
+    Bogota
+  ],
+  America/Porto_Velho: [
+    La Paz
+  ],
+  America/Port_of_Spain: [
+    Puerto Rico
+  ],
+  America/Puerto_Rico: [
+    Puerto Rico
+  ],
+  America/Punta_Arenas: null,
+  America/Rainy_River: [
+    Central Time (US & Canada)
+  ],
+  America/Rankin_Inlet: [
+    Central Time (US & Canada)
+  ],
+  America/Recife: null,
+  America/Regina: [
+    Saskatchewan
+  ],
+  America/Resolute: [
+    Central Time (US & Canada)
+  ],
+  America/Rio_Branco: [
+    Bogota
+  ],
+  America/Rosario: [
+    Buenos Aires
+  ],
+  America/Santarem: null,
+  America/Santa_Isabel: [
+    Tijuana
+  ],
+  America/Santiago: [
+    Santiago
+  ],
+  America/Santo_Domingo: [
+    La Paz
+  ],
+  America/Sao_Paulo: [
+    Brasilia
+  ],
+  America/Scoresbysund: [
+    Azores
+  ],
+  America/Shiprock: [
+    Mountain Time (US & Canada)
+  ],
+  America/Sitka: [
+    Alaska
+  ],
+  America/St_Barthelemy: [
+    Puerto Rico
+  ],
+  America/St_Johns: [
+    Newfoundland
+  ],
+  America/St_Kitts: [
+    Puerto Rico
+  ],
+  America/St_Lucia: [
+    Puerto Rico
+  ],
+  America/St_Thomas: [
+    Puerto Rico
+  ],
+  America/St_Vincent: [
+    Puerto Rico
+  ],
+  America/Swift_Current: [
+    Saskatchewan
+  ],
+  America/Tegucigalpa: [
+    Central America
+  ],
+  America/Thule: [
+    Atlantic Time (Canada)
+  ],
+  America/Thunder_Bay: [
+    Eastern Time (US & Canada)
+  ],
+  America/Tijuana: [
+    Tijuana
+  ],
+  America/Toronto: [
+    Eastern Time (US & Canada)
+  ],
+  America/Tortola: [
+    Puerto Rico
+  ],
+  America/Vancouver: [
+    Pacific Time (US & Canada)
+  ],
+  America/Virgin: [
+    Puerto Rico
+  ],
+  America/Whitehorse: [
+    Arizona
+  ],
+  America/Winnipeg: [
+    Central Time (US & Canada)
+  ],
+  America/Yakutat: [
+    Alaska
+  ],
+  America/Yellowknife: [
+    Mountain Time (US & Canada)
+  ],
+  Antarctica/Casey: [
+    Solomon Is.
+  ],
+  Antarctica/Davis: [
+    Bangkok,
+    Hanoi
+  ],
+  Antarctica/DumontDUrville: [
+    Port Moresby
+  ],
+  Antarctica/Macquarie: [
+    Hobart
+  ],
+  Antarctica/Mawson: [
+    Tashkent
+  ],
+  Antarctica/McMurdo: [
+    Auckland,
+    Wellington
+  ],
+  Antarctica/Palmer: null,
+  Antarctica/Rothera: null,
+  Antarctica/South_Pole: [
+    Auckland,
+    Wellington
+  ],
+  Antarctica/Syowa: [
+    Riyadh
+  ],
+  Antarctica/Troll: null,
+  Antarctica/Vostok: [
+    Almaty
+  ],
+  Arctic/Longyearbyen: [
+    Berlin
+  ],
+  Asia/Aden: [
+    Riyadh
+  ],
+  Asia/Almaty: [
+    Almaty
+  ],
+  Asia/Amman: null,
+  Asia/Anadyr: [
+    Kamchatka
+  ],
+  Asia/Aqtau: [
+    Tashkent
+  ],
+  Asia/Aqtobe: [
+    Tashkent
+  ],
+  Asia/Ashgabat: [
+    Tashkent
+  ],
+  Asia/Ashkhabad: [
+    Tashkent
+  ],
+  Asia/Atyrau: [
+    Tashkent
+  ],
+  Asia/Baghdad: [
+    Baghdad
+  ],
+  Asia/Bahrain: [
+    Riyadh
+  ],
+  Asia/Baku: [
+    Baku
+  ],
+  Asia/Bangkok: [
+    Bangkok,
+    Hanoi
+  ],
+  Asia/Barnaul: null,
+  Asia/Beirut: null,
+  Asia/Bishkek: [
+    Almaty
+  ],
+  Asia/Brunei: [
+    Singapore
+  ],
+  Asia/Calcutta: [
+    Chennai,
+    Kolkata,
+    Mumbai,
+    New Delhi
+  ],
+  Asia/Chita: null,
+  Asia/Choibalsan: [
+    Ulaanbaatar
+  ],
+  Asia/Chongqing: [
+    Chongqing
+  ],
+  Asia/Chungking: [
+    Beijing
+  ],
+  Asia/Colombo: [
+    Sri Jayawardenepura
+  ],
+  Asia/Dacca: [
+    Astana,
+    Dhaka
+  ],
+  Asia/Damascus: null,
+  Asia/Dhaka: [
+    Astana,
+    Dhaka
+  ],
+  Asia/Dili: [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  Asia/Dubai: [
+    Abu Dhabi,
+    Muscat
+  ],
+  Asia/Dushanbe: [
+    Tashkent
+  ],
+  Asia/Famagusta: [
+    Bucharest
+  ],
+  Asia/Gaza: null,
+  Asia/Harbin: [
+    Beijing
+  ],
+  Asia/Hebron: null,
+  Asia/Hong_Kong: [
+    Hong Kong
+  ],
+  Asia/Hovd: null,
+  Asia/Ho_Chi_Minh: [
+    Bangkok,
+    Hanoi
+  ],
+  Asia/Irkutsk: [
+    Irkutsk
+  ],
+  Asia/Istanbul: [
+    Istanbul
+  ],
+  Asia/Jakarta: [
+    Jakarta
+  ],
+  Asia/Jayapura: [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  Asia/Jerusalem: [
+    Jerusalem
+  ],
+  Asia/Kabul: [
+    Kabul
+  ],
+  Asia/Kamchatka: [
+    Kamchatka
+  ],
+  Asia/Karachi: [
+    Islamabad,
+    Karachi
+  ],
+  Asia/Kashgar: [
+    Urumqi
+  ],
+  Asia/Kathmandu: [
+    Kathmandu
+  ],
+  Asia/Katmandu: [
+    Kathmandu
+  ],
+  Asia/Khandyga: [
+    Yakutsk
+  ],
+  Asia/Kolkata: [
+    Chennai,
+    Kolkata,
+    Mumbai,
+    New Delhi
+  ],
+  Asia/Krasnoyarsk: [
+    Krasnoyarsk
+  ],
+  Asia/Kuala_Lumpur: [
+    Kuala Lumpur
+  ],
+  Asia/Kuching: [
+    Kuala Lumpur
+  ],
+  Asia/Kuwait: [
+    Kuwait
+  ],
+  Asia/Macao: [
+    Beijing
+  ],
+  Asia/Macau: [
+    Beijing
+  ],
+  Asia/Magadan: [
+    Magadan
+  ],
+  Asia/Makassar: [
+    Singapore
+  ],
+  Asia/Manila: [
+    Singapore
+  ],
+  Asia/Muscat: [
+    Abu Dhabi,
+    Muscat
+  ],
+  Asia/Nicosia: [
+    Bucharest
+  ],
+  Asia/Novokuznetsk: [
+    Krasnoyarsk
+  ],
+  Asia/Novosibirsk: [
+    Novosibirsk
+  ],
+  Asia/Omsk: null,
+  Asia/Oral: [
+    Tashkent
+  ],
+  Asia/Phnom_Penh: [
+    Bangkok,
+    Hanoi
+  ],
+  Asia/Pontianak: [
+    Jakarta
+  ],
+  Asia/Pyongyang: null,
+  Asia/Qatar: [
+    Riyadh
+  ],
+  Asia/Qostanay: [
+    Almaty
+  ],
+  Asia/Qyzylorda: null,
+  Asia/Rangoon: [
+    Rangoon
+  ],
+  Asia/Riyadh: [
+    Riyadh
+  ],
+  Asia/Saigon: [
+    Bangkok,
+    Hanoi
+  ],
+  Asia/Sakhalin: null,
+  Asia/Samarkand: [
+    Tashkent
+  ],
+  Asia/Seoul: [
+    Seoul
+  ],
+  Asia/Shanghai: [
+    Beijing
+  ],
+  Asia/Singapore: [
+    Singapore
+  ],
+  Asia/Srednekolymsk: [
+    Srednekolymsk
+  ],
+  Asia/Taipei: [
+    Taipei
+  ],
+  Asia/Tashkent: [
+    Tashkent
+  ],
+  Asia/Tbilisi: [
+    Tbilisi
+  ],
+  Asia/Tehran: [
+    Tehran
+  ],
+  Asia/Tel_Aviv: [
+    Jerusalem
+  ],
+  Asia/Thimbu: [
+    Astana,
+    Dhaka
+  ],
+  Asia/Thimphu: [
+    Astana,
+    Dhaka
+  ],
+  Asia/Tokyo: [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  Asia/Tomsk: null,
+  Asia/Ujung_Pandang: [
+    Singapore
+  ],
+  Asia/Ulaanbaatar: [
+    Ulaanbaatar
+  ],
+  Asia/Ulan_Bator: [
+    Ulaanbaatar
+  ],
+  Asia/Urumqi: [
+    Urumqi
+  ],
+  Asia/Ust-Nera: [
+    Vladivostok
+  ],
+  Asia/Vientiane: [
+    Bangkok,
+    Hanoi
+  ],
+  Asia/Vladivostok: [
+    Vladivostok
+  ],
+  Asia/Yakutsk: [
+    Yakutsk
+  ],
+  Asia/Yangon: [
+    Rangoon
+  ],
+  Asia/Yekaterinburg: [
+    Ekaterinburg
+  ],
+  Asia/Yerevan: [
+    Yerevan
+  ],
+  Atlantic/Azores: [
+    Azores
+  ],
+  Atlantic/Bermuda: [
+    Atlantic Time (Canada)
+  ],
+  Atlantic/Canary: [
+    Edinburgh,
+    London
+  ],
+  Atlantic/Cape_Verde: [
+    Cape Verde Is.
+  ],
+  Atlantic/Faeroe: [
+    Edinburgh,
+    London
+  ],
+  Atlantic/Faroe: [
+    Edinburgh,
+    London
+  ],
+  Atlantic/Jan_Mayen: [
+    Berlin
+  ],
+  Atlantic/Madeira: [
+    Lisbon
+  ],
+  Atlantic/Reykjavik: null,
+  Atlantic/South_Georgia: [
+    Mid-Atlantic
+  ],
+  Atlantic/Stanley: null,
+  Atlantic/St_Helena: null,
+  Australia/ACT: [
+    Sydney
+  ],
+  Australia/Adelaide: [
+    Adelaide
+  ],
+  Australia/Brisbane: [
+    Brisbane
+  ],
+  Australia/Broken_Hill: [
+    Adelaide
+  ],
+  Australia/Canberra: [
+    Sydney
+  ],
+  Australia/Currie: [
+    Hobart
+  ],
+  Australia/Darwin: [
+    Darwin
+  ],
+  Australia/Eucla: null,
+  Australia/Hobart: [
+    Hobart
+  ],
+  Australia/LHI: null,
+  Australia/Lindeman: [
+    Brisbane
+  ],
+  Australia/Lord_Howe: null,
+  Australia/Melbourne: [
+    Canberra,
+    Melbourne
+  ],
+  Australia/North: [
+    Darwin
+  ],
+  Australia/NSW: [
+    Sydney
+  ],
+  Australia/Perth: [
+    Perth
+  ],
+  Australia/Queensland: [
+    Brisbane
+  ],
+  Australia/South: [
+    Adelaide
+  ],
+  Australia/Sydney: [
+    Sydney
+  ],
+  Australia/Tasmania: [
+    Hobart
+  ],
+  Australia/Victoria: [
+    Canberra,
+    Melbourne
+  ],
+  Australia/West: [
+    Perth
+  ],
+  Australia/Yancowinna: [
+    Adelaide
+  ],
+  Brazil/Acre: [
+    Bogota
+  ],
+  Brazil/DeNoronha: null,
+  Brazil/East: [
+    Brasilia
+  ],
+  Brazil/West: [
+    La Paz
+  ],
+  Canada/Atlantic: [
+    Atlantic Time (Canada)
+  ],
+  Canada/Central: [
+    Central Time (US & Canada)
+  ],
+  Canada/Eastern: [
+    Eastern Time (US & Canada)
+  ],
+  Canada/Mountain: [
+    Mountain Time (US & Canada)
+  ],
+  Canada/Newfoundland: [
+    Newfoundland
+  ],
+  Canada/Pacific: [
+    Pacific Time (US & Canada)
+  ],
+  Canada/Saskatchewan: [
+    Saskatchewan
+  ],
+  Canada/Yukon: [
+    Arizona
+  ],
+  CET: [
+    Paris
+  ],
+  Chile/Continental: [
+    Santiago
+  ],
+  Chile/EasterIsland: null,
+  CST6CDT: [
+    Central Time (US & Canada)
+  ],
+  Cuba: null,
+  EET: [
+    Bucharest
+  ],
+  Egypt: [
+    Cairo
+  ],
+  Eire: [
+    Dublin
+  ],
+  EST: [
+    Bogota
+  ],
+  EST5EDT: [
+    Eastern Time (US & Canada)
+  ],
+  Etc/GMT: [
+    UTC
+  ],
+  Etc/GMT+0: [
+    UTC
+  ],
+  Etc/GMT+1: [
+    Cape Verde Is.
+  ],
+  Etc/GMT+10: [
+    Hawaii
+  ],
+  Etc/GMT+11: null,
+  Etc/GMT+12: [
+    International Date Line West
+  ],
+  Etc/GMT+2: null,
+  Etc/GMT+3: null,
+  Etc/GMT+4: [
+    La Paz
+  ],
+  Etc/GMT+5: [
+    Bogota
+  ],
+  Etc/GMT+6: [
+    Central America
+  ],
+  Etc/GMT+7: [
+    Arizona
+  ],
+  Etc/GMT+8: null,
+  Etc/GMT+9: null,
+  Etc/GMT-0: [
+    UTC
+  ],
+  Etc/GMT-1: null,
+  Etc/GMT-10: [
+    Port Moresby
+  ],
+  Etc/GMT-11: [
+    Solomon Is.
+  ],
+  Etc/GMT-12: null,
+  Etc/GMT-13: null,
+  Etc/GMT-14: null,
+  Etc/GMT-2: [
+    Pretoria
+  ],
+  Etc/GMT-3: [
+    Nairobi
+  ],
+  Etc/GMT-4: [
+    Abu Dhabi,
+    Muscat
+  ],
+  Etc/GMT-5: [
+    Tashkent
+  ],
+  Etc/GMT-6: [
+    Almaty
+  ],
+  Etc/GMT-7: [
+    Bangkok,
+    Hanoi
+  ],
+  Etc/GMT-8: [
+    Singapore
+  ],
+  Etc/GMT-9: [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  Etc/GMT0: [
+    UTC
+  ],
+  Etc/Greenwich: [
+    UTC
+  ],
+  Etc/UCT: [
+    UTC
+  ],
+  Etc/Universal: [
+    UTC
+  ],
+  Etc/UTC: [
+    UTC
+  ],
+  Etc/Zulu: [
+    UTC
+  ],
+  Europe/Amsterdam: [
+    Amsterdam
+  ],
+  Europe/Andorra: [
+    Berlin
+  ],
+  Europe/Astrakhan: null,
+  Europe/Athens: [
+    Athens
+  ],
+  Europe/Belfast: [
+    Edinburgh,
+    London
+  ],
+  Europe/Belgrade: [
+    Belgrade
+  ],
+  Europe/Berlin: [
+    Berlin
+  ],
+  Europe/Bratislava: [
+    Bratislava
+  ],
+  Europe/Brussels: [
+    Brussels
+  ],
+  Europe/Bucharest: [
+    Bucharest
+  ],
+  Europe/Budapest: [
+    Budapest
+  ],
+  Europe/Busingen: [
+    Bern,
+    Zurich
+  ],
+  Europe/Chisinau: null,
+  Europe/Copenhagen: [
+    Copenhagen
+  ],
+  Europe/Dublin: [
+    Dublin
+  ],
+  Europe/Gibraltar: [
+    Berlin
+  ],
+  Europe/Guernsey: [
+    Edinburgh,
+    London
+  ],
+  Europe/Helsinki: [
+    Helsinki
+  ],
+  Europe/Isle_of_Man: [
+    Edinburgh,
+    London
+  ],
+  Europe/Istanbul: [
+    Istanbul
+  ],
+  Europe/Jersey: [
+    Edinburgh,
+    London
+  ],
+  Europe/Kaliningrad: [
+    Kaliningrad
+  ],
+  Europe/Kiev: [
+    Kyiv
+  ],
+  Europe/Kirov: [
+    Moscow,
+    St. Petersburg
+  ],
+  Europe/Lisbon: [
+    Lisbon
+  ],
+  Europe/Ljubljana: [
+    Ljubljana
+  ],
+  Europe/London: [
+    Edinburgh,
+    London
+  ],
+  Europe/Luxembourg: [
+    Berlin
+  ],
+  Europe/Madrid: [
+    Madrid
+  ],
+  Europe/Malta: [
+    Berlin
+  ],
+  Europe/Mariehamn: [
+    Helsinki
+  ],
+  Europe/Minsk: [
+    Minsk
+  ],
+  Europe/Monaco: [
+    Berlin
+  ],
+  Europe/Moscow: [
+    Moscow,
+    St. Petersburg
+  ],
+  Europe/Nicosia: [
+    Bucharest
+  ],
+  Europe/Oslo: [
+    Berlin
+  ],
+  Europe/Paris: [
+    Paris
+  ],
+  Europe/Podgorica: [
+    Belgrade
+  ],
+  Europe/Prague: [
+    Prague
+  ],
+  Europe/Riga: [
+    Riga
+  ],
+  Europe/Rome: [
+    Rome
+  ],
+  Europe/Samara: [
+    Samara
+  ],
+  Europe/San_Marino: [
+    Rome
+  ],
+  Europe/Sarajevo: [
+    Sarajevo
+  ],
+  Europe/Saratov: null,
+  Europe/Simferopol: [
+    Moscow,
+    St. Petersburg
+  ],
+  Europe/Skopje: [
+    Skopje
+  ],
+  Europe/Sofia: [
+    Sofia
+  ],
+  Europe/Stockholm: [
+    Stockholm
+  ],
+  Europe/Tallinn: [
+    Tallinn
+  ],
+  Europe/Tirane: [
+    Budapest
+  ],
+  Europe/Tiraspol: null,
+  Europe/Ulyanovsk: null,
+  Europe/Uzhgorod: [
+    Kyiv
+  ],
+  Europe/Vaduz: [
+    Bern,
+    Zurich
+  ],
+  Europe/Vatican: [
+    Rome
+  ],
+  Europe/Vienna: [
+    Vienna
+  ],
+  Europe/Vilnius: [
+    Vilnius
+  ],
+  Europe/Volgograd: [
+    Volgograd
+  ],
+  Europe/Warsaw: [
+    Warsaw
+  ],
+  Europe/Zagreb: [
+    Zagreb
+  ],
+  Europe/Zaporozhye: [
+    Kyiv
+  ],
+  Europe/Zurich: [
+    Bern,
+    Zurich
+  ],
+  GB: [
+    Edinburgh,
+    London
+  ],
+  GB-Eire: [
+    Edinburgh,
+    London
+  ],
+  GMT: [
+    UTC
+  ],
+  GMT+0: [
+    UTC
+  ],
+  GMT-0: [
+    UTC
+  ],
+  GMT0: [
+    UTC
+  ],
+  Greenwich: [
+    UTC
+  ],
+  Hongkong: [
+    Hong Kong
+  ],
+  HST: [
+    Hawaii
+  ],
+  Iceland: null,
+  Indian/Antananarivo: [
+    Nairobi
+  ],
+  Indian/Chagos: [
+    Almaty
+  ],
+  Indian/Christmas: [
+    Bangkok,
+    Hanoi
+  ],
+  Indian/Cocos: [
+    Rangoon
+  ],
+  Indian/Comoro: [
+    Nairobi
+  ],
+  Indian/Kerguelen: [
+    Tashkent
+  ],
+  Indian/Mahe: null,
+  Indian/Maldives: [
+    Tashkent
+  ],
+  Indian/Mauritius: null,
+  Indian/Mayotte: [
+    Nairobi
+  ],
+  Indian/Reunion: null,
+  Iran: [
+    Tehran
+  ],
+  Israel: [
+    Jerusalem
+  ],
+  Jamaica: [
+    Bogota
+  ],
+  Japan: [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  Kwajalein: [
+    Marshall Is.
+  ],
+  Libya: null,
+  MET: [
+    Berlin
+  ],
+  Mexico/BajaNorte: [
+    Tijuana
+  ],
+  Mexico/BajaSur: [
+    Mazatlan
+  ],
+  Mexico/General: [
+    Guadalajara,
+    Mexico City
+  ],
+  MST: [
+    Arizona
+  ],
+  MST7MDT: [
+    Mountain Time (US & Canada)
+  ],
+  Navajo: [
+    Mountain Time (US & Canada)
+  ],
+  NZ: [
+    Auckland,
+    Wellington
+  ],
+  NZ-CHAT: [
+    Chatham Is.
+  ],
+  Pacific/Apia: [
+    Samoa
+  ],
+  Pacific/Auckland: [
+    Auckland,
+    Wellington
+  ],
+  Pacific/Bougainville: null,
+  Pacific/Chatham: [
+    Chatham Is.
+  ],
+  Pacific/Chuuk: [
+    Port Moresby
+  ],
+  Pacific/Easter: null,
+  Pacific/Efate: [
+    Solomon Is.
+  ],
+  Pacific/Enderbury: null,
+  Pacific/Fakaofo: [
+    Tokelau Is.
+  ],
+  Pacific/Fiji: [
+    Fiji
+  ],
+  Pacific/Funafuti: null,
+  Pacific/Galapagos: [
+    Central America
+  ],
+  Pacific/Gambier: null,
+  Pacific/Guadalcanal: [
+    Solomon Is.
+  ],
+  Pacific/Guam: [
+    Guam
+  ],
+  Pacific/Honolulu: [
+    Hawaii
+  ],
+  Pacific/Johnston: [
+    Hawaii
+  ],
+  Pacific/Kanton: null,
+  Pacific/Kiritimati: null,
+  Pacific/Kosrae: [
+    Solomon Is.
+  ],
+  Pacific/Kwajalein: [
+    Marshall Is.
+  ],
+  Pacific/Majuro: [
+    Marshall Is.
+  ],
+  Pacific/Marquesas: null,
+  Pacific/Midway: [
+    Midway Island
+  ],
+  Pacific/Nauru: null,
+  Pacific/Niue: null,
+  Pacific/Norfolk: null,
+  Pacific/Noumea: [
+    New Caledonia
+  ],
+  Pacific/Pago_Pago: [
+    American Samoa
+  ],
+  Pacific/Palau: [
+    Osaka,
+    Sapporo,
+    Tokyo
+  ],
+  Pacific/Pitcairn: null,
+  Pacific/Pohnpei: [
+    Solomon Is.
+  ],
+  Pacific/Ponape: [
+    Solomon Is.
+  ],
+  Pacific/Port_Moresby: [
+    Port Moresby
+  ],
+  Pacific/Rarotonga: [
+    Hawaii
+  ],
+  Pacific/Saipan: [
+    Guam
+  ],
+  Pacific/Samoa: [
+    American Samoa
+  ],
+  Pacific/Tahiti: [
+    Hawaii
+  ],
+  Pacific/Tarawa: null,
+  Pacific/Tongatapu: [
+    Nuku'alofa
+  ],
+  Pacific/Truk: [
+    Port Moresby
+  ],
+  Pacific/Wake: null,
+  Pacific/Wallis: null,
+  Pacific/Yap: [
+    Port Moresby
+  ],
+  Poland: [
+    Warsaw
+  ],
+  Portugal: [
+    Lisbon
+  ],
+  PRC: [
+    Beijing
+  ],
+  PST8PDT: [
+    Pacific Time (US & Canada)
+  ],
+  ROC: [
+    Taipei
+  ],
+  ROK: [
+    Seoul
+  ],
+  Singapore: [
+    Singapore
+  ],
+  Turkey: [
+    Istanbul
+  ],
+  UCT: [
+    UTC
+  ],
+  Universal: [
+    UTC
+  ],
+  US/Alaska: [
+    Alaska
+  ],
+  US/Aleutian: null,
+  US/Arizona: [
+    Arizona
+  ],
+  US/Central: [
+    Central Time (US & Canada)
+  ],
+  US/East-Indiana: [
+    Indiana (East)
+  ],
+  US/Eastern: [
+    Eastern Time (US & Canada)
+  ],
+  US/Hawaii: [
+    Hawaii
+  ],
+  US/Indiana-Starke: [
+    Central Time (US & Canada)
+  ],
+  US/Michigan: [
+    Eastern Time (US & Canada)
+  ],
+  US/Mountain: [
+    Mountain Time (US & Canada)
+  ],
+  US/Pacific: [
+    Pacific Time (US & Canada)
+  ],
+  US/Samoa: [
+    American Samoa
+  ],
+  UTC: [
+    UTC
+  ],
+  W-SU: [
+    Moscow,
+    St. Petersburg
+  ],
+  WET: [
+    Edinburgh,
+    London
+  ],
+  Zulu: [
+    UTC
+  ]
+}

@@ -1,150 +1,195 @@
-﻿using System.Collections.Generic;
-using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Reflection;
 using System.Resources;
 
-namespace TimeZoneConverter
+namespace TimeZoneConverter;
+
+internal static class DataLoader
 {
-    internal static class DataLoader
+    public static void Populate(
+        IDictionary<string, string> ianaMap,
+        IDictionary<string, HashSet<string>> ianaTerritoryZones,
+        IDictionary<string, string> windowsMap,
+        IDictionary<string, string> railsMap,
+        IDictionary<string, IList<string>> inverseRailsMap,
+        IDictionary<string, string> links)
     {
-        public static void Populate(IDictionary<string, string> ianaMap, IDictionary<string, HashSet<string>> ianaTerritoryZones, IDictionary<string, string> windowsMap, IDictionary<string, string> railsMap, IDictionary<string, IList<string>> inverseRailsMap)
+        var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
+        var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
+        var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
+        
+        foreach (var link in aliases)
         {
-            var mapping      = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
-            var aliases      = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
-            var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
-
-            var links = new Dictionary<string, string>();
-            foreach (var link in aliases)
+            var parts = link.Split(',');
+            var value = parts[0];
+            foreach (var key in parts[1].Split())
             {
-                var parts = link.Split(',');
-                var value = parts[0];
-                foreach (var key in parts[1].Split())
-                    links.Add(key, value);
+                links.Add(key, value);
             }
-            
-            var similarIanaZones = new Dictionary<string, IList<string>>();
-            foreach (var item in mapping)
-            {
-                var parts       = item.Split(',');
-                var windowsZone = parts[0];         // e.g. "Pacific Standard Time"
-                var territory   = parts[1];         // e.g. "US"
-                var ianaZones   = parts[2].Split(); // e.g. "America/Vancouver America/Dawson America/Whitehorse" -> `new String[] { "America/Vancouver", "America/Dawson", "America/Whitehorse" }`
+        }
 
-                // Create the Windows map entry
-                if (!links.TryGetValue(ianaZones[0], out var value))
+        var similarIanaZones = new Dictionary<string, IList<string>>();
+        foreach (var item in mapping)
+        {
+            var parts = item.Split(',');
+            var windowsZone = parts[0];        // e.g. "Pacific Standard Time"
+            var territory = parts[1];          // e.g. "US"
+            var ianaZones = parts[2].Split();  // e.g. "America/Vancouver America/Dawson America/Whitehorse" -> `new String[] { "America/Vancouver", "America/Dawson", "America/Whitehorse" }`
+
+            // Create the Windows map entry
+            var key = $"{territory}|{windowsZone}";
+            windowsMap.Add(key, ianaZones[0]);
+
+            // Create the IANA map entries
+            foreach (var ianaZone in ianaZones)
+            {
+                if (!ianaMap.ContainsKey(ianaZone))
                 {
-                    value = ianaZones[0];
+                    ianaMap.Add(ianaZone, windowsZone);
                 }
 
-                var key = $"{territory}|{windowsZone}";
-                windowsMap.Add(key, value);
+                if (territory != "001")
+                {
+                    AddZoneToTerritory(ianaTerritoryZones, territory, ianaZone);
+                }
+            }
 
-                // Create the IANA map entries
+            if (ianaZones.Length > 1)
+            {
                 foreach (var ianaZone in ianaZones)
                 {
-                    if (!ianaMap.ContainsKey(ianaZone))
-                    {
-                        ianaMap.Add(ianaZone, windowsZone);
-                    }
-
-                    if (territory != "001")
-                    {
-                        AddZoneToTerritory(ianaTerritoryZones, territory, ianaZone);
-                    }
+                    similarIanaZones.Add(ianaZone, ianaZones.Except(new[] {ianaZone}).ToArray());
                 }
+            }
+        }
 
-                if (ianaZones.Length > 1)
+        // Expand the IANA map to include all links (both directions)
+        var linksToMap = links.ToList();
+        while (linksToMap.Count > 0)
+        {
+            var retry = new List<KeyValuePair<string, string>>();
+            foreach (var link in linksToMap)
+            {
+                var hasMapFromKey = ianaMap.TryGetValue(link.Key, out var mapFromKey);
+                var hasMapFromValue = ianaMap.TryGetValue(link.Value, out var mapFromValue);
+                
+                if (hasMapFromKey && hasMapFromValue)
                 {
-                    foreach (var ianaZone in ianaZones)
-                        similarIanaZones.Add(ianaZone, ianaZones.Except(new[] {ianaZone}).ToArray());
+                    // There are already mappings in both directions
+                    continue;
+                }
+
+                if (!hasMapFromKey && hasMapFromValue)
+                {
+                    // Forward mapping
+                    ianaMap.Add(link.Key, mapFromValue!);
+                }
+                else if (!hasMapFromValue && hasMapFromKey)
+                {
+                    // Reverse mapping
+                    ianaMap.Add(link.Value, mapFromKey!);
+                }
+                else
+                {
+                    // Not found yet, but we can try again
+                    retry.Add(link);
                 }
             }
 
-            // Expand the IANA map to include all links
-            foreach (var link in links)
-            {
-                if (ianaMap.ContainsKey(link.Key))
-                    continue;
+            linksToMap = retry;
+        }
 
-                ianaMap.Add(link.Key, ianaMap[link.Value]);
+        foreach (var item in railsMapping)
+        {
+            var parts = item.Split(',');
+            var railsZone = parts[0];
+            var ianaZones = parts[1].Split();
+
+            for (var i = 0; i < ianaZones.Length; i++)
+            {
+                var ianaZone = ianaZones[i];
+                if (i == 0)
+                    railsMap.Add(railsZone, ianaZone);
+                else
+                    inverseRailsMap.Add(ianaZone, new[] {railsZone});
             }
+        }
 
-            foreach (var item in railsMapping)
+        foreach (var grouping in railsMap.GroupBy(x => x.Value, x => x.Key))
+        {
+            inverseRailsMap.Add(grouping.Key, grouping.ToList());
+        }
+
+        // Expand the Inverse Rails map to include similar IANA zones
+        foreach (var ianaZone in ianaMap.Keys)
+        {
+            if (inverseRailsMap.ContainsKey(ianaZone) || links.ContainsKey(ianaZone))
+                continue;
+
+            if (similarIanaZones.TryGetValue(ianaZone, out var similarZones))
             {
-                var parts = item.Split(',');
-                var railsZone = parts[0].Trim('"');
-                var ianaZone = parts[1].Trim('"');
-                railsMap.Add(railsZone, ianaZone);
-            }
-
-            foreach (var grouping in railsMap.GroupBy(x => x.Value, x => x.Key))
-            {
-                inverseRailsMap.Add(grouping.Key, grouping.ToList());
-            }
-
-            // Expand the Inverse Rails map to include similar IANA zones
-            foreach (var ianaZone in ianaMap.Keys)
-            {
-                if (inverseRailsMap.ContainsKey(ianaZone) || links.ContainsKey(ianaZone))
-                    continue;
-
-                if (similarIanaZones.TryGetValue(ianaZone, out var similarZones))
+                foreach (var otherZone in similarZones)
                 {
-                    foreach (var otherZone in similarZones)
+                    if (inverseRailsMap.TryGetValue(otherZone, out var railsZones))
                     {
-                        if (inverseRailsMap.TryGetValue(otherZone, out var railsZones))
-                        {
-                            inverseRailsMap.Add(ianaZone, railsZones);
-                            break;
-                        }
+                        inverseRailsMap.Add(ianaZone, railsZones);
+                        break;
                     }
                 }
             }
+        }
 
-            // Expand the Inverse Rails map to include links
-            foreach (var link in links)
+        // Expand the Inverse Rails map to include links (in either direction)
+        foreach (var link in links)
+        {
+            if (!inverseRailsMap.ContainsKey(link.Key))
             {
-                if (inverseRailsMap.ContainsKey(link.Key))
-                    continue;
-
                 if (inverseRailsMap.TryGetValue(link.Value, out var railsZone))
                     inverseRailsMap.Add(link.Key, railsZone);
             }
-
-            
-        }
-
-        private static void AddZoneToTerritory(IDictionary<string, HashSet<string>> ianaTerritoryZones, string territory, string ianaZone)
-        {
-            if(ianaTerritoryZones.TryGetValue(territory, out HashSet<string> zones))
+            else if (!inverseRailsMap.ContainsKey(link.Value))
             {
-                zones.Add(ianaZone);
-            }
-            else
-            {
-                ianaTerritoryZones.Add(territory, new HashSet<string>(System.StringComparer.OrdinalIgnoreCase) { ianaZone });
+                if (inverseRailsMap.TryGetValue(link.Key, out var railsZone))
+                    inverseRailsMap.Add(link.Value, railsZone);
             }
         }
 
-        private static IEnumerable<string> GetEmbeddedData(string resourceName)
+        // Expand the Inverse Rails map to use CLDR golden zones
+        foreach (var ianaZone in ianaMap.Keys)
         {
-#if NET35 || NET40
-            var assembly = typeof(DataLoader).Assembly;
-#else
-            var assembly = typeof(DataLoader).GetTypeInfo().Assembly;
-#endif
-            using (var compressedStream = assembly.GetManifestResourceStream(resourceName) ?? throw new MissingManifestResourceException())
-            using (var stream = new GZipStream(compressedStream, CompressionMode.Decompress))
-            using (var reader = new StreamReader(stream))
+            if (!inverseRailsMap.ContainsKey(ianaZone) &&
+                ianaMap.TryGetValue(ianaZone, out var windowsZone) &&
+                windowsMap.TryGetValue("001|" + windowsZone, out var goldenZone) &&
+                inverseRailsMap.TryGetValue(goldenZone, out var railsZones))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    yield return line;
-                }
+                inverseRailsMap.Add(ianaZone, railsZones);
             }
+        }
+    }
+
+    private static void AddZoneToTerritory(IDictionary<string, HashSet<string>> ianaTerritoryZones, string territory, string ianaZone)
+    {
+        if(ianaTerritoryZones.TryGetValue(territory, out HashSet<string> zones))
+        {
+            zones.Add(ianaZone);
+        }
+        else
+        {
+            ianaTerritoryZones.Add(territory, new HashSet<string>(System.StringComparer.OrdinalIgnoreCase) { ianaZone });
+        }
+    }
+
+    private static IEnumerable<string> GetEmbeddedData(string resourceName)
+    {
+        var assembly = typeof(DataLoader).GetTypeInfo().Assembly;
+        using var compressedStream = assembly.GetManifestResourceStream(resourceName) ??
+                                     throw new MissingManifestResourceException();
+        using var stream = new GZipStream(compressedStream, CompressionMode.Decompress);
+        using var reader = new StreamReader(stream);
+
+        while (reader.ReadLine() is { } line)
+        {
+            yield return line;
         }
     }
 }

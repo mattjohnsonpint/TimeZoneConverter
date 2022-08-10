@@ -1,6 +1,6 @@
 TimeZoneConverter
-Copyright (c) 2017 Matt Johnson
-https://github.com/mj1856/TimeZoneConverter
+Copyright (c) 2017 Matt Johnson-Pint
+https://github.com/mattjohnsonpint/TimeZoneConverter
 
 While we certainly hope this software is useful, none of the authors or
 contributors place any guarantees as to the accuracy of the data or the

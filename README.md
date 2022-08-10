@@ -13,13 +13,24 @@
 PM> Install-Package TimeZoneConverter
 ```
 
-This library should be compatible with .NET Standard 1.1 and greater, as well as .NET Framework 3.5 and greater.
-See the [.NET Standard Platform Support Matrix][1] for further details about .NET Standard,
-and please raise an issue if you encounter any compatibility errors.
+As of version 4.0.0, *TimeZoneConverter* works with all of the following:
+
+- .NET 5 or greater
+- .NET Core 2.0 or greater
+- .NET Framework 4.6.1 and greater
+
+Note that .NET Framework versions less than 4.6.1 are no longer supported.
+
+#### Important note on .NET 6+
+
+.NET 6 has built-in support for IANA and Windows time zones in a cross-platform manner, removing the need for the TimeZoneConverter library.
+It relies on [.NET's ICU integration](https://docs.microsoft.com/dotnet/core/extensions/globalization-icu) to perform this functionality.
+See [the .NET blog](https://devblogs.microsoft.com/dotnet/date-time-and-time-zone-enhancements-in-net-6/#time-zone-conversion-apis) for details.
+**If you are targeting only .NET 6 (or higher), and you have either platform-provided or App-local ICU enabled, you don't need to use the TimeZoneConverter library!**
 
 #### Note on OS Data Dependencies
 
-Some functions, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
+Some functions in TimeZoneConverter, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
 time zone data of the operating system.  On Windows, this data comes from the registry and is maintained via Windows Updates.
 
 On OSX and Linux, this data comes from a distribution of the [IANA time zone database](https://www.iana.org/time-zones),  usually via the `tzdata` package.  If your environment does not have the `tzdata` package installed, you will need to install it for `TZConvert.GetTimeZoneInfo` to work correctly.
@@ -32,11 +43,17 @@ For example, the Alpine Linux Docker images for .NET Core no longer ship with `t
 PM> Install-Package TimeZoneConverter.Posix
 ```
 
-This library should be compatible with .NET Standard 1.3 and greater, as well as .NET Framework 4.5 and greater.
-See the [.NET Standard Platform Support Matrix][1] for further details about .NET Standard,
-and please raise an issue if you encounter any compatibility errors.
+This is a separate helper library that is maintained in the same repository.  You only need it if you require support for POSIX time zones.
 
-Note that `TimeZoneConverter.Posix` takes a dependency on both `TimeZoneConverter` and [Noda Time][2].
+As of version 3.0.0, *TimeZoneConverter.Posix* works with all of the following:
+
+- .NET 5 or greater
+- .NET Core 2.0 or greater
+- .NET Framework 4.6.1 and greater
+
+Note that .NET Framework versions less than 4.6.1 are no longer supported.
+
+Also note that `TimeZoneConverter.Posix` takes a dependency on both `TimeZoneConverter` and [Noda Time][2].
 
 ## Notes
 
@@ -82,8 +99,6 @@ string tz = TZConvert.WindowsToIana("Eastern Standard Time", "CA");
 ```
 
 Get a `TimeZoneInfo` object from .NET Core, regardless of what OS you are running on:  
-*Helps with .NET CoreFX issue [#11897][8]*  
-***This function is only available for .NET Standard 1.3+ or full .NET Framework targets***
 
 ```csharp
 // Either of these will work on any platform:
@@ -147,15 +162,14 @@ string posix = PosixTimeZone.FromTimeZoneInfo(TimeZoneInfo.Local);
 
 ## License
 
-This library is provided free of charge, under the terms of the [MIT license][9].
+This library is provided free of charge, under the terms of the [MIT license][8].
 
 
 [1]: https://docs.microsoft.com/en-us/dotnet/articles/standard/library
 [2]: https://nodatime.org
-[3]: http://cldr.unicode.org
+[3]: https://cldr.unicode.org
 [4]: https://iana.org/time-zones
 [5]: https://aka.ms/dstblog
 [6]: https://github.com/rails/rails/blob/master/activesupport/lib/active_support/values/time_zone.rb
 [7]: https://support.microsoft.com/en-us/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton
-[8]: https://github.com/dotnet/corefx/issues/11897
-[9]: https://raw.githubusercontent.com/mj1856/TimeZoneConverter/master/LICENSE.txt
+[8]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/LICENSE.txt
