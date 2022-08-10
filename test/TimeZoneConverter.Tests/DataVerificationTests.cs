@@ -111,4 +111,15 @@ public class DataVerificationTests
             railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null);
         return Verify(allMappings);
     }
+    
+    [Theory]
+    [InlineData(LinkResolution.Default)]
+    [InlineData(LinkResolution.Canonical)]
+    [InlineData(LinkResolution.Original)]
+    public Task Iana_Territories(LinkResolution mode)
+    {
+        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory(mode);
+        var sorted = new SortedDictionary<string, IReadOnlyCollection<string>>(territories, StringComparer.Ordinal);
+        return Verify(sorted).UseParameters(mode);
+    }
 }

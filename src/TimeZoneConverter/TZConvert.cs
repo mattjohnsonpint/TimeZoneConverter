@@ -16,6 +16,7 @@ public static class TZConvert
     private static readonly Dictionary<string, string> Links = new(StringComparer.OrdinalIgnoreCase);
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
     private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
+    private static readonly Dictionary<string, IReadOnlyCollection<string>> IanaTimeZoneNamesByTerritory;
 
     static TZConvert()
     {
@@ -41,8 +42,15 @@ public static class TZConvert
         KnownIanaTimeZoneNames = knownIanaTimeZoneNames;
         KnownWindowsTimeZoneIds = knownWindowsTimeZoneIds;
         KnownRailsTimeZoneNames = knownRailsTimeZoneNames;
-        
-        IanaTimeZoneNamesByTerritory = IanaTerritoriesMap.ToDictionary(kvp => kvp.Key, kvp => (ICollection<string>)kvp.Value);
+
+        IanaTimeZoneNamesByTerritory = IanaTerritoriesMap
+            .OrderBy(x => x.Key, StringComparer.Ordinal)
+            .ToDictionary(
+                x => x.Key,
+                x => (IReadOnlyCollection<string>) x.Value
+                    .OrderBy(y => y, StringComparer.Ordinal)
+                    .ToList()
+                    .AsReadOnly());
 
         SystemTimeZones = GetSystemTimeZones();
     }
@@ -63,9 +71,36 @@ public static class TZConvert
     public static IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
 
     /// <summary>
-    /// Gets a dictionary that has an unsorted collection of IANA time zone names keyed by IANA time zone territory name.
+    /// Gets a dictionary that has an sorted collection of IANA time zone names keyed by IANA time zone territory name.
     /// </summary>
-    public static IDictionary<string, ICollection<string>> IanaTimeZoneNamesByTerritory { get; }
+    /// <param name="linkResolutionMode">The mode of resolving links for the result.</param>
+    /// <returns>The dictionary of territories and time zone names.</returns>
+    public static IDictionary<string, IReadOnlyCollection<string>> GetIanaTimeZoneNamesByTerritory(
+        LinkResolution linkResolutionMode = LinkResolution.Default)
+    {
+        switch (linkResolutionMode)
+        {
+            case LinkResolution.Default:
+                // TODO
+                //break;
+            
+            case LinkResolution.Canonical:
+                return IanaTimeZoneNamesByTerritory.ToDictionary(
+                    x => x.Key,
+                    x => (IReadOnlyCollection<string>) x.Value
+                        .Select(ResolveLink)
+                        .OrderBy(y => y, StringComparer.Ordinal)
+                        .ToList()
+                        .AsReadOnly()
+                );
+            
+            case LinkResolution.Original:
+                return IanaTimeZoneNamesByTerritory;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(linkResolutionMode), linkResolutionMode, null);
+        }
+    }
 
     /// <summary>
     /// Converts an IANA time zone name to the equivalent Windows time zone ID.
