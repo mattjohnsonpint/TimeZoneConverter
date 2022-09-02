@@ -190,4 +190,18 @@ public class IanaToWindowsTests
         var result = TZConvert.IanaToWindows("Asia/Kolkata");
         Assert.Equal("India Standard Time", result);
     }
+    
+    [Fact]
+    public void Can_Convert_Kyiv_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("Europe/Kyiv");
+        Assert.Equal("FLE Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Kiev_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("Europe/Kiev");
+        Assert.Equal("FLE Standard Time", result);
+    }
 }
