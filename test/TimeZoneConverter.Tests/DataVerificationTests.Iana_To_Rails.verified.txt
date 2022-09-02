@@ -595,7 +595,7 @@
   ],
   Antarctica/Troll: null,
   Antarctica/Vostok: [
-    Almaty
+    Urumqi
   ],
   Arctic/Longyearbyen: [
     Berlin
@@ -644,7 +644,7 @@
     Almaty
   ],
   Asia/Brunei: [
-    Singapore
+    Kuala Lumpur
   ],
   Asia/Calcutta: [
     Chennai,
@@ -1218,6 +1218,9 @@
     Moscow,
     St. Petersburg
   ],
+  Europe/Kyiv: [
+    Kyiv
+  ],
   Europe/Lisbon: [
     Lisbon
   ],
@@ -1229,7 +1232,7 @@
     London
   ],
   Europe/Luxembourg: [
-    Berlin
+    Brussels
   ],
   Europe/Madrid: [
     Madrid
@@ -1244,7 +1247,7 @@
     Minsk
   ],
   Europe/Monaco: [
-    Berlin
+    Paris
   ],
   Europe/Moscow: [
     Moscow,
@@ -1383,7 +1386,10 @@
   Indian/Kerguelen: [
     Tashkent
   ],
-  Indian/Mahe: null,
+  Indian/Mahe: [
+    Abu Dhabi,
+    Muscat
+  ],
   Indian/Maldives: [
     Tashkent
   ],
@@ -1391,7 +1397,10 @@
   Indian/Mayotte: [
     Nairobi
   ],
-  Indian/Reunion: null,
+  Indian/Reunion: [
+    Abu Dhabi,
+    Muscat
+  ],
   Iran: [
     Tehran
   ],
@@ -1532,15 +1541,21 @@
   Pacific/Tahiti: [
     Hawaii
   ],
-  Pacific/Tarawa: null,
+  Pacific/Tarawa: [
+    Marshall Is.
+  ],
   Pacific/Tongatapu: [
     Nuku'alofa
   ],
   Pacific/Truk: [
     Port Moresby
   ],
-  Pacific/Wake: null,
-  Pacific/Wallis: null,
+  Pacific/Wake: [
+    Marshall Is.
+  ],
+  Pacific/Wallis: [
+    Marshall Is.
+  ],
   Pacific/Yap: [
     Port Moresby
   ],

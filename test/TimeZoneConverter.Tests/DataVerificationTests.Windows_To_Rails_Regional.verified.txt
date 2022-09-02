@@ -403,6 +403,9 @@
   (Singapore Standard Time, 001): [
     Singapore
   ],
+  (Singapore Standard Time, BN): [
+    Kuala Lumpur
+  ],
   (Singapore Standard Time, MY): [
     Kuala Lumpur
   ],
@@ -498,6 +501,12 @@
   (W. Europe Standard Time, LI): [
     Bern,
     Zurich
+  ],
+  (W. Europe Standard Time, LU): [
+    Brussels
+  ],
+  (W. Europe Standard Time, MC): [
+    Paris
   ],
   (W. Europe Standard Time, NL): [
     Amsterdam
