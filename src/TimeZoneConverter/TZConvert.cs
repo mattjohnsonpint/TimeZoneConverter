@@ -66,12 +66,35 @@ public static class TZConvert
     /// <summary>
     /// Gets a dictionary that has an sorted collection of IANA time zone names keyed by territory code.
     /// </summary>
+    /// <param name="fullList">
+    /// When set <c>true</c>, each territory contains the full list zones applicable to that territory.
+    /// Otherwise, the list is condensed to only those typically needed for selecting a time zone.
+    /// </param>
     /// <returns>The dictionary of territories and time zone names.</returns>
-    public static IReadOnlyDictionary<string, IReadOnlyCollection<string>> GetIanaTimeZoneNamesByTerritory() =>
-        new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
+    public static IReadOnlyDictionary<string, IReadOnlyCollection<string>> GetIanaTimeZoneNamesByTerritory(bool fullList = false)
+    {
+        if (fullList)
+        {
+            return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
+                IanaTerritoryZones.ToDictionary(
+                    x => x.Key,
+                    x => (IReadOnlyCollection<string>) x.Value
+                        .OrderBy(zone => zone)
+                        .ToList().AsReadOnly()));
+        }
+        
+        // Converting to windows and back has the reduction effect we are looking for
+        return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
             IanaTerritoryZones.ToDictionary(
                 x => x.Key,
-                x => (IReadOnlyCollection<string>) x.Value.ToList().AsReadOnly()));
+                x => (IReadOnlyCollection<string>) x.Value
+                    .Select(zone => TryIanaToWindows(zone, out var winId)
+                        ? WindowsToIana(winId, x.Key)
+                        : zone)
+                    .OrderBy(zone => zone)
+                    .Distinct()
+                    .ToList().AsReadOnly()));
+    }
 
     /// <summary>
     /// Converts an IANA time zone name to the equivalent Windows time zone ID.
