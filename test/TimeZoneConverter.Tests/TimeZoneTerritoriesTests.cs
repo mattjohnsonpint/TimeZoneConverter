@@ -19,7 +19,7 @@ public class TimeZoneTerritoriesTests
     [Fact]
     public void Can_Get_Known_IANA_TimeZones_in_USA()
     {
-        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory();
+        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory(true);
         Assert.True(territories.TryGetValue("US", out var zoneIds));
         Assert.NotEmpty(zoneIds);
 
