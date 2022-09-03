@@ -8,7 +8,7 @@ env:
   DOTNET_NOLOGO: 1
 
 jobs:
-  build:
+  pack-for-release:
     runs-on: ubuntu-latest
 
     strategy:
