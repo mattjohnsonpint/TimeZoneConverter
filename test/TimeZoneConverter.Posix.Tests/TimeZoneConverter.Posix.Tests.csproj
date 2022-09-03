@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;netcoreapp3.1;net462</TargetFrameworks>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\TimeZoneConverter.Posix\TimeZoneConverter.Posix.csproj" />
   </ItemGroup>

@@ -12,10 +12,10 @@ namespace TimeZoneConverter.Posix;
 public static class PosixTimeZone
 {
     /// <summary>
-    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo"/> object, for the current year.
-    /// Note - only uses only the <see cref="TimeZoneInfo.Id"/> property from the object.
+    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo" /> object, for the current year.
+    /// Note - only uses only the <see cref="TimeZoneInfo.Id" /> property from the object.
     /// </summary>
-    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo"/> object.</param>
+    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo" /> object.</param>
     /// <returns>A POSIX time zone string.</returns>
     public static string FromTimeZoneInfo(TimeZoneInfo timeZoneInfo)
     {
@@ -25,10 +25,10 @@ public static class PosixTimeZone
     }
 
     /// <summary>
-    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo"/> object, for the given year.
-    /// Note - only uses only the <see cref="TimeZoneInfo.Id"/> property from the object.
+    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo" /> object, for the given year.
+    /// Note - only uses only the <see cref="TimeZoneInfo.Id" /> property from the object.
     /// </summary>
-    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo"/> object.</param>
+    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo" /> object.</param>
     /// <param name="year">The reference year.</param>
     /// <returns>A POSIX time zone string.</returns>
     public static string FromTimeZoneInfo(TimeZoneInfo timeZoneInfo, int year)
@@ -130,7 +130,7 @@ public static class PosixTimeZone
 
     private static string GetPosixAbbreviation(string abbreviation)
     {
-        return abbreviation.IndexOfAny(new[] { '+', '-' }) != -1 ? "<" + abbreviation + ">" : abbreviation;
+        return abbreviation.IndexOfAny(new[] {'+', '-'}) != -1 ? "<" + abbreviation + ">" : abbreviation;
     }
 
     private static string GetPosixOffsetString(Offset offset)
@@ -141,7 +141,10 @@ public static class PosixTimeZone
 
     private static string GetPosixTransitionString(ZoneInterval interval, DateTimeZone tz)
     {
-        if (!interval.HasEnd) return "J365/25";
+        if (!interval.HasEnd)
+        {
+            return "J365/25";
+        }
 
         var transition = interval.IsoLocalEnd;
         var transitionOccurrence = (transition.Day - 1) / 7 + 1;
@@ -167,11 +170,23 @@ public static class PosixTimeZone
             }
         }
 
-        var datePart = $"M{transition.Month}.{transitionOccurrence}.{(int)transition.DayOfWeek.ToDayOfWeek()}";
+        var datePart = $"M{transition.Month}.{transitionOccurrence}.{(int) transition.DayOfWeek.ToDayOfWeek()}";
 
-        if (transition.TimeOfDay == new LocalTime(2, 0)) return datePart;
-        if (transition.Minute == 0 && transition.Second == 0) return $"{datePart}/{transition.Hour}";
-        if (transition.Second == 0) return $"{datePart}/{transition.ToString("H:mm", CultureInfo.InvariantCulture)}";
+        if (transition.TimeOfDay == new LocalTime(2, 0))
+        {
+            return datePart;
+        }
+
+        if (transition.Minute == 0 && transition.Second == 0)
+        {
+            return $"{datePart}/{transition.Hour}";
+        }
+
+        if (transition.Second == 0)
+        {
+            return $"{datePart}/{transition.ToString("H:mm", CultureInfo.InvariantCulture)}";
+        }
+
         return $"{datePart}/{transition.ToString("H:mm:ss", CultureInfo.InvariantCulture)}";
     }
 }

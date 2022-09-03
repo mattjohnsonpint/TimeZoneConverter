@@ -1,4 +1,3 @@
-using Xunit;
 using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
@@ -10,35 +9,6 @@ public class IanaToRailsTests
     public IanaToRailsTests(ITestOutputHelper output)
     {
         _output = output;
-    }
-
-    [Fact]
-    public void Can_Convert_Iana_Zones_To_Rails_Zones()
-    {
-        var errors = new List<string>();
-        var ianaZones = TZConvert.KnownIanaTimeZoneNames.OrderBy(x => x);
-
-        foreach (var ianaZone in ianaZones.Except(UnmappableZones))
-        {
-            if (TZConvert.TryIanaToRails(ianaZone, out var railsZones))
-            {
-                Assert.NotNull(railsZones);
-                Assert.NotEmpty(railsZones);
-            }
-            else
-            {
-                errors.Add(ianaZone);
-            }
-        }
-
-        var errorsCount = errors.Count;
-        if (errorsCount > 0)
-        {
-            _output.WriteLine("Failed to convert:\n");
-            _output.WriteLine(string.Join(",\n", errors.Select(x => $"\"{x}\"")));
-        }
-
-        Assert.Equal(0, errorsCount);
     }
 
     private static IEnumerable<string> UnmappableZones => new[]
@@ -155,4 +125,33 @@ public class IanaToRailsTests
         "Pacific/Wallis",
         "US/Aleutian"
     };
+
+    [Fact]
+    public void Can_Convert_Iana_Zones_To_Rails_Zones()
+    {
+        var errors = new List<string>();
+        var ianaZones = TZConvert.KnownIanaTimeZoneNames.OrderBy(x => x);
+
+        foreach (var ianaZone in ianaZones.Except(UnmappableZones))
+        {
+            if (TZConvert.TryIanaToRails(ianaZone, out var railsZones))
+            {
+                Assert.NotNull(railsZones);
+                Assert.NotEmpty(railsZones);
+            }
+            else
+            {
+                errors.Add(ianaZone);
+            }
+        }
+
+        var errorsCount = errors.Count;
+        if (errorsCount > 0)
+        {
+            _output.WriteLine("Failed to convert:\n");
+            _output.WriteLine(string.Join(",\n", errors.Select(x => $"\"{x}\"")));
+        }
+
+        Assert.Equal(0, errorsCount);
+    }
 }

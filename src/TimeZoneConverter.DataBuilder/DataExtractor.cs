@@ -38,11 +38,15 @@ public static class DataExtractor
             {
                 var aliasAttribute = element.Attribute("alias");
                 if (aliasAttribute == null)
+                {
                     continue;
+                }
 
                 var zones = aliasAttribute.Value.Split();
                 if (zones.Length <= 1)
+                {
                     continue;
+                }
 
                 var target = zones[0];
                 var aliases = zones.Skip(1).ToArray();
@@ -52,16 +56,22 @@ public static class DataExtractor
                     for (var i = 0; i < aliases.Length; i++)
                     {
                         if (aliases[i] == ianaCanonicalZone)
+                        {
                             aliases[i] = target;
+                        }
                     }
 
                     target = ianaCanonicalZone;
                 }
 
                 if (data.ContainsKey(target))
+                {
                     data[target] += " " + string.Join(" ", aliases);
+                }
                 else
+                {
                     data.Add(target, string.Join(" ", aliases));
+                }
             }
         }
 
@@ -74,7 +84,9 @@ public static class DataExtractor
             }
 
             if (data[link.Value].Split().Contains(link.Key))
+            {
                 continue;
+            }
 
             data[link.Value] += " " + link.Key;
         }
@@ -147,13 +159,17 @@ public static class DataExtractor
             if (inMappingSection)
             {
                 if (line == "}")
+                {
                     break;
+                }
 
                 var parts = line.Split("=>");
                 data.Add(parts[0].Trim(' ', '"') + "," + parts[1].TrimEnd(',').Trim(' ', '"'));
             }
             else if (line == "MAPPING = {")
+            {
                 inMappingSection = true;
+            }
         }
 
         return data;

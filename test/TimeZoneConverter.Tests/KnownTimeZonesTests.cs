@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace TimeZoneConverter.Tests;
 
 public class KnownTimeZonesTests

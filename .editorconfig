@@ -2,11 +2,17 @@
 ############################### 
 # Core EditorConfig Options   # 
 ############################### 
+
 # All files 
-[*] 
-indent_style = space 
-# Code files 
-[*.{cs}] 
-indent_size = 4 
-insert_final_newline = true 
+[*]
+indent_style = space
+insert_final_newline = true
 charset = utf-8
+
+# Project files
+[*.{csproj,props,targets}]
+indent_size = 2
+
+# Code files 
+[*.{cs}]
+indent_size = 4

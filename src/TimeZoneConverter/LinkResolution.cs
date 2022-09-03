@@ -12,7 +12,7 @@ public enum LinkResolution
     /// </summary>
     /// <remarks>
     /// Ex: "India Standard Time" => "Asia/Kolkata"
-    ///     "SA Western Standard Time" (AG) => "America/Antigua"
+    /// "SA Western Standard Time" (AG) => "America/Antigua"
     /// </remarks>
     Default = 0,
 
@@ -22,7 +22,7 @@ public enum LinkResolution
     /// <remarks>
     /// This was the default behavior prior to version 6.0.
     /// Ex: "India Standard Time" => "Asia/Kolkata"
-    ///     "SA Western Standard Time" (AG) => "America/Puerto_Rico"
+    /// "SA Western Standard Time" (AG) => "America/Puerto_Rico"
     /// </remarks>
     Canonical,
 
@@ -32,7 +32,7 @@ public enum LinkResolution
     /// </summary>
     /// <remarks>
     /// Ex: "India Standard Time" => "Asia/Calcutta"
-    ///     "SA Western Standard Time" (AG) => "America/Antigua"
+    /// "SA Western Standard Time" (AG) => "America/Antigua"
     /// </remarks>
     Original
 }

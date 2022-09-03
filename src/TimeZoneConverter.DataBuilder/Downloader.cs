@@ -5,7 +5,7 @@ namespace TimeZoneConverter.DataBuilder;
 
 public static class Downloader
 {
-    private static readonly HttpClient HttpClientInstance = new HttpClient();
+    private static readonly HttpClient HttpClientInstance = new();
 
     public static async Task DownloadCldrAsync(string dir)
     {
@@ -37,7 +37,9 @@ public static class Downloader
     private static async Task DownloadAsync(string url, string dir)
     {
         if (!Directory.Exists(dir))
+        {
             Directory.CreateDirectory(dir);
+        }
 
         var filename = url.Substring(url.LastIndexOf('/') + 1);
         using var result = await HttpClientInstance.GetAsync(url);
@@ -50,21 +52,29 @@ public static class Downloader
         await using var httpStream = await HttpClientInstance.GetStreamAsync(url);
         using var reader = ReaderFactory.Open(httpStream);
         if (!Directory.Exists(dir))
+        {
             Directory.CreateDirectory(dir);
+        }
 
         while (reader.MoveToNextEntry())
         {
             var entry = reader.Entry;
             if (entry.IsDirectory)
+            {
                 continue;
+            }
 
             var targetPath = Path.Combine(dir, entry.Key.Replace('/', '\\'));
             var targetDir = Path.GetDirectoryName(targetPath);
             if (targetDir == null)
+            {
                 throw new InvalidOperationException();
+            }
 
             if (!Directory.Exists(targetDir))
+            {
                 Directory.CreateDirectory(targetDir);
+            }
 
             await using var stream = reader.OpenEntryStream();
             await using var fs = File.Create(targetPath);
