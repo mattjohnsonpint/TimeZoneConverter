@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
@@ -8,17 +9,20 @@ namespace TimeZoneConverter;
 /// </summary>
 public static class TZConvert
 {
+    private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
     private static readonly Dictionary<string, string> IanaMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, string> WindowsMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, string> RailsMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, IList<string>> InverseRailsMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, string> Links = new(StringComparer.OrdinalIgnoreCase);
-    private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
     private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
+    
+    private static readonly IDictionary<string, IList<string>> IanaTerritoryZones =
+        new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
     static TZConvert()
     {
-        DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap, Links);
+        DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap, Links, IanaTerritoryZones);
 
         var knownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
         var knownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
@@ -58,6 +62,16 @@ public static class TZConvert
     /// Gets a collection of all Rails time zone names known to this library.
     /// </summary>
     public static IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
+
+    /// <summary>
+    /// Gets a dictionary that has an sorted collection of IANA time zone names keyed by territory code.
+    /// </summary>
+    /// <returns>The dictionary of territories and time zone names.</returns>
+    public static IReadOnlyDictionary<string, IReadOnlyCollection<string>> GetIanaTimeZoneNamesByTerritory() =>
+        new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
+            IanaTerritoryZones.ToDictionary(
+                x => x.Key,
+                x => (IReadOnlyCollection<string>) x.Value.ToList().AsReadOnly()));
 
     /// <summary>
     /// Converts an IANA time zone name to the equivalent Windows time zone ID.

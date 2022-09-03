@@ -111,4 +111,11 @@ public class DataVerificationTests
             railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null);
         return Verify(allMappings);
     }
+
+    [Fact]
+    public Task Iana_Territories()
+    {
+        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory();
+        return Verify(territories);
+    }
 }

@@ -11,11 +11,13 @@ internal static class DataLoader
         IDictionary<string, string> windowsMap,
         IDictionary<string, string> railsMap,
         IDictionary<string, IList<string>> inverseRailsMap,
-        IDictionary<string, string> links)
+        IDictionary<string, string> links,
+        IDictionary<string, IList<string>> ianaTerritoryZones)
     {
         var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
         var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
         var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
+        var territories = GetEmbeddedData("TimeZoneConverter.Data.Territories.csv.gz");
 
         foreach (var link in aliases)
         {
@@ -27,14 +29,23 @@ internal static class DataLoader
             }
         }
 
+        foreach (var item in territories)
+        {
+            var parts = item.Split(',');
+            var territory = parts[0];
+            var zones = new List<string>(parts[1].Split(' '));
+            ianaTerritoryZones.Add(territory, zones);
+        }
+
         var similarIanaZones = new Dictionary<string, IList<string>>();
         foreach (var item in mapping)
         {
             var parts = item.Split(',');
-            var windowsZone = parts[0];
-            var territory = parts[1];
-            var ianaZones = parts[2].Split();
+            var windowsZone = parts[0];        // e.g. "Pacific Standard Time"
+            var territory = parts[1];          // e.g. "US"
+            var ianaZones = parts[2].Split();  // e.g. "America/Vancouver America/Dawson America/Whitehorse" -> `new String[] { "America/Vancouver", "America/Dawson", "America/Whitehorse" }`
 
+            // Create the Windows map entry
             var key = $"{territory}|{windowsZone}";
             windowsMap.Add(key, ianaZones[0]);
 

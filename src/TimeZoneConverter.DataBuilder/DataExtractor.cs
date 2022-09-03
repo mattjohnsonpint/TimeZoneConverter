@@ -121,6 +121,32 @@ public static class DataExtractor
         return data;
     }
 
+    public static IList<string> LoadTzdbTerritories(string tzdbDirectoryPath)
+    {
+        var data = new Dictionary<string, IList<string>>();
+        var lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, "zone.tab"));
+        foreach (var line in lines.Where(x => !x.StartsWith("#")))
+        {
+            var parts = line.Split('\t');
+            var territory = parts[0];
+            var zone = parts[2];
+
+            if (data.TryGetValue(territory, out var zones))
+            {
+                zones.Add(zone);
+            }
+            else
+            {
+                data.Add(territory, new List<string> {zone});
+            }
+        }
+
+        return data
+            .OrderBy(x => x.Key)
+            .Select(x => x.Key + "," + string.Join(' ', x.Value.OrderBy(z=> z)))
+            .ToList();
+    }
+
     public static IList<string> LoadRailsMapping(string railsPath)
     {
         var data = new List<string>();
