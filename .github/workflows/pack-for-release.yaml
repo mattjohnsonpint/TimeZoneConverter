@@ -1,4 +1,4 @@
-name: build
+name: pack-for-release
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ env:
   DOTNET_NOLOGO: 1
 
 jobs:
-  pack-for-release:
+  build-and-pack:
     runs-on: ubuntu-latest
 
     strategy:
