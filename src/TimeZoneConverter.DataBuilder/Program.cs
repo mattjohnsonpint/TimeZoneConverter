@@ -23,8 +23,9 @@ internal static class Program
                 Task.WaitAll(t1, t2, t3);
             }
 
-            // Extract links from TZDB
+            // Extract links and territories from TZDB
             var links = DataExtractor.LoadTzdbLinks(tzdbPath);
+            var territories = DataExtractor.LoadTzdbTerritories(tzdbPath);
 
             // Fixup UTC equivalencies.  Prefer Etc/UTC.
             links.Add("Etc/GMT", "Etc/UTC");
@@ -76,6 +77,7 @@ internal static class Program
             var dataPath = Path.Combine(projectPath, "src", "TimeZoneConverter", "Data");
             WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Mapping.csv.gz"), mapping);
             WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Aliases.csv.gz"), aliases);
+            WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Territories.csv.gz"), territories);
             WriteAllLinesToCompressedFile(Path.Combine(dataPath, "RailsMapping.csv.gz"), railsMapping);
         }
         finally

@@ -81,7 +81,7 @@ public class DataVerificationTests
         var sorted = new SortedDictionary<string, IList<string>?>(allMappings, StringComparer.Ordinal);
         return Verify(sorted);
     }
-    
+
     [Fact]
     public Task Iana_To_Rails()
     {
@@ -91,7 +91,7 @@ public class DataVerificationTests
             ianaId => TZConvert.TryIanaToRails(ianaId, out var railsIds) ? railsIds : null);
         return Verify(allMappings);
     }
-    
+
     [Fact]
     public Task Rails_To_Iana()
     {
@@ -101,7 +101,7 @@ public class DataVerificationTests
             railsId => TZConvert.TryRailsToIana(railsId, out var ianaId) ? ianaId : null);
         return Verify(allMappings);
     }
-    
+
     [Fact]
     public Task Rails_To_Windows()
     {
@@ -111,15 +111,11 @@ public class DataVerificationTests
             railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null);
         return Verify(allMappings);
     }
-    
-    [Theory]
-    [InlineData(LinkResolution.Default)]
-    [InlineData(LinkResolution.Canonical)]
-    [InlineData(LinkResolution.Original)]
-    public Task Iana_Territories(LinkResolution mode)
+
+    [Fact]
+    public Task Iana_Territories()
     {
-        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory(mode);
-        var sorted = new SortedDictionary<string, IReadOnlyCollection<string>>(territories, StringComparer.Ordinal);
-        return Verify(sorted).UseParameters(mode);
+        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory();
+        return Verify(territories);
     }
 }

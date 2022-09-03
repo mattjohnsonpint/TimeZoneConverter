@@ -8,15 +8,16 @@ internal static class DataLoader
 {
     public static void Populate(
         IDictionary<string, string> ianaMap,
-        IDictionary<string, HashSet<string>> ianaTerritoryZones,
         IDictionary<string, string> windowsMap,
         IDictionary<string, string> railsMap,
         IDictionary<string, IList<string>> inverseRailsMap,
-        IDictionary<string, string> links)
+        IDictionary<string, string> links,
+        IDictionary<string, IList<string>> ianaTerritoryZones)
     {
         var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
         var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
         var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
+        var territories = GetEmbeddedData("TimeZoneConverter.Data.Territories.csv.gz");
         
         foreach (var link in aliases)
         {
@@ -26,6 +27,14 @@ internal static class DataLoader
             {
                 links.Add(key, value);
             }
+        }
+
+        foreach (var item in territories)
+        {
+            var parts = item.Split(',');
+            var territory = parts[0];
+            var zones = new List<string>(parts[1].Split(' '));
+            ianaTerritoryZones.Add(territory, zones);
         }
 
         var similarIanaZones = new Dictionary<string, IList<string>>();
@@ -47,11 +56,6 @@ internal static class DataLoader
                 {
                     ianaMap.Add(ianaZone, windowsZone);
                 }
-
-                if (territory != "001")
-                {
-                    AddZoneToTerritory(ianaTerritoryZones, territory, ianaZone);
-                }
             }
 
             if (ianaZones.Length > 1)
@@ -72,7 +76,7 @@ internal static class DataLoader
             {
                 var hasMapFromKey = ianaMap.TryGetValue(link.Key, out var mapFromKey);
                 var hasMapFromValue = ianaMap.TryGetValue(link.Value, out var mapFromValue);
-                
+
                 if (hasMapFromKey && hasMapFromValue)
                 {
                     // There are already mappings in both directions
@@ -164,18 +168,6 @@ internal static class DataLoader
             {
                 inverseRailsMap.Add(ianaZone, railsZones);
             }
-        }
-    }
-
-    private static void AddZoneToTerritory(IDictionary<string, HashSet<string>> ianaTerritoryZones, string territory, string ianaZone)
-    {
-        if(ianaTerritoryZones.TryGetValue(territory, out var zones))
-        {
-            zones.Add(ianaZone);
-        }
-        else
-        {
-            ianaTerritoryZones.Add(territory, new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ianaZone });
         }
     }
 

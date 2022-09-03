@@ -1,7 +1,4 @@
-{
-  AC: [
-    Africa/Abidjan
-  ],
+﻿{
   AD: [
     Europe/Andorra
   ],
@@ -12,10 +9,10 @@
     Asia/Kabul
   ],
   AG: [
-    America/Puerto_Rico
+    America/Antigua
   ],
   AI: [
-    America/Puerto_Rico
+    America/Anguilla
   ],
   AL: [
     Europe/Tirane
@@ -24,18 +21,19 @@
     Asia/Yerevan
   ],
   AO: [
-    Africa/Lagos
+    Africa/Luanda
   ],
   AQ: [
     Antarctica/Casey,
     Antarctica/Davis,
+    Antarctica/DumontDUrville,
     Antarctica/Mawson,
+    Antarctica/McMurdo,
     Antarctica/Palmer,
     Antarctica/Rothera,
-    Antarctica/Vostok,
-    Asia/Riyadh,
-    Pacific/Auckland,
-    Pacific/Port_Moresby
+    Antarctica/Syowa,
+    Antarctica/Troll,
+    Antarctica/Vostok
   ],
   AR: [
     America/Argentina/Buenos_Aires,
@@ -65,7 +63,6 @@
     Australia/Darwin,
     Australia/Eucla,
     Australia/Hobart,
-    Australia/Hobart,
     Australia/Lindeman,
     Australia/Lord_Howe,
     Australia/Melbourne,
@@ -73,16 +70,16 @@
     Australia/Sydney
   ],
   AW: [
-    America/Puerto_Rico
+    America/Aruba
   ],
   AX: [
-    Europe/Helsinki
+    Europe/Mariehamn
   ],
   AZ: [
     Asia/Baku
   ],
   BA: [
-    Europe/Belgrade
+    Europe/Sarajevo
   ],
   BB: [
     America/Barbados
@@ -94,22 +91,22 @@
     Europe/Brussels
   ],
   BF: [
-    Africa/Abidjan
+    Africa/Ouagadougou
   ],
   BG: [
     Europe/Sofia
   ],
   BH: [
-    Asia/Qatar
+    Asia/Bahrain
   ],
   BI: [
-    Africa/Maputo
+    Africa/Bujumbura
   ],
   BJ: [
-    Africa/Lagos
+    Africa/Porto-Novo
   ],
   BL: [
-    America/Puerto_Rico
+    America/St_Barthelemy
   ],
   BM: [
     Atlantic/Bermuda
@@ -121,7 +118,7 @@
     America/La_Paz
   ],
   BQ: [
-    America/Puerto_Rico
+    America/Kralendijk
   ],
   BR: [
     America/Araguaina,
@@ -142,13 +139,13 @@
     America/Sao_Paulo
   ],
   BS: [
-    America/Toronto
+    America/Nassau
   ],
   BT: [
     Asia/Thimphu
   ],
   BW: [
-    Africa/Maputo
+    Africa/Gaborone
   ],
   BY: [
     Europe/Minsk
@@ -157,7 +154,10 @@
     America/Belize
   ],
   CA: [
+    America/Atikokan,
+    America/Blanc-Sablon,
     America/Cambridge_Bay,
+    America/Creston,
     America/Dawson,
     America/Dawson_Creek,
     America/Edmonton,
@@ -169,10 +169,7 @@
     America/Iqaluit,
     America/Moncton,
     America/Nipigon,
-    America/Panama,
     America/Pangnirtung,
-    America/Phoenix,
-    America/Puerto_Rico,
     America/Rainy_River,
     America/Rankin_Inlet,
     America/Regina,
@@ -180,7 +177,6 @@
     America/St_Johns,
     America/Swift_Current,
     America/Thunder_Bay,
-    America/Toronto,
     America/Toronto,
     America/Vancouver,
     America/Whitehorse,
@@ -191,14 +187,14 @@
     Indian/Cocos
   ],
   CD: [
-    Africa/Lagos,
-    Africa/Maputo
+    Africa/Kinshasa,
+    Africa/Lubumbashi
   ],
   CF: [
-    Africa/Lagos
+    Africa/Bangui
   ],
   CG: [
-    Africa/Lagos
+    Africa/Brazzaville
   ],
   CH: [
     Europe/Zurich
@@ -215,7 +211,7 @@
     Pacific/Easter
   ],
   CM: [
-    Africa/Lagos
+    Africa/Douala
   ],
   CN: [
     Asia/Shanghai,
@@ -234,7 +230,7 @@
     Atlantic/Cape_Verde
   ],
   CW: [
-    America/Puerto_Rico
+    America/Curacao
   ],
   CX: [
     Indian/Christmas
@@ -248,28 +244,22 @@
   ],
   DE: [
     Europe/Berlin,
-    Europe/Zurich
-  ],
-  DG: [
-    Indian/Chagos
+    Europe/Busingen
   ],
   DJ: [
-    Africa/Nairobi
+    Africa/Djibouti
   ],
   DK: [
     Europe/Copenhagen
   ],
   DM: [
-    America/Puerto_Rico
+    America/Dominica
   ],
   DO: [
     America/Santo_Domingo
   ],
   DZ: [
     Africa/Algiers
-  ],
-  EA: [
-    Africa/Ceuta
   ],
   EC: [
     America/Guayaquil,
@@ -285,7 +275,7 @@
     Africa/El_Aaiun
   ],
   ER: [
-    Africa/Nairobi
+    Africa/Asmara
   ],
   ES: [
     Africa/Ceuta,
@@ -293,7 +283,7 @@
     Europe/Madrid
   ],
   ET: [
-    Africa/Nairobi
+    Africa/Addis_Ababa
   ],
   FI: [
     Europe/Helsinki
@@ -316,13 +306,13 @@
     Europe/Paris
   ],
   GA: [
-    Africa/Lagos
+    Africa/Libreville
   ],
   GB: [
     Europe/London
   ],
   GD: [
-    America/Puerto_Rico
+    America/Grenada
   ],
   GE: [
     Asia/Tbilisi
@@ -331,10 +321,10 @@
     America/Cayenne
   ],
   GG: [
-    Europe/London
+    Europe/Guernsey
   ],
   GH: [
-    Africa/Abidjan
+    Africa/Accra
   ],
   GI: [
     Europe/Gibraltar
@@ -346,16 +336,16 @@
     America/Thule
   ],
   GM: [
-    Africa/Abidjan
+    Africa/Banjul
   ],
   GN: [
-    Africa/Abidjan
+    Africa/Conakry
   ],
   GP: [
-    America/Puerto_Rico
+    America/Guadeloupe
   ],
   GQ: [
-    Africa/Lagos
+    Africa/Malabo
   ],
   GR: [
     Europe/Athens
@@ -382,16 +372,13 @@
     America/Tegucigalpa
   ],
   HR: [
-    Europe/Belgrade
+    Europe/Zagreb
   ],
   HT: [
     America/Port-au-Prince
   ],
   HU: [
     Europe/Budapest
-  ],
-  IC: [
-    Atlantic/Canary
   ],
   ID: [
     Asia/Jakarta,
@@ -406,7 +393,7 @@
     Asia/Jerusalem
   ],
   IM: [
-    Europe/London
+    Europe/Isle_of_Man
   ],
   IN: [
     Asia/Kolkata
@@ -427,7 +414,7 @@
     Europe/Rome
   ],
   JE: [
-    Europe/London
+    Europe/Jersey
   ],
   JM: [
     America/Jamaica
@@ -445,7 +432,7 @@
     Asia/Bishkek
   ],
   KH: [
-    Asia/Bangkok
+    Asia/Phnom_Penh
   ],
   KI: [
     Pacific/Kanton,
@@ -453,10 +440,10 @@
     Pacific/Tarawa
   ],
   KM: [
-    Africa/Nairobi
+    Indian/Comoro
   ],
   KN: [
-    America/Puerto_Rico
+    America/St_Kitts
   ],
   KP: [
     Asia/Pyongyang
@@ -465,10 +452,10 @@
     Asia/Seoul
   ],
   KW: [
-    Asia/Riyadh
+    Asia/Kuwait
   ],
   KY: [
-    America/Panama
+    America/Cayman
   ],
   KZ: [
     Asia/Almaty,
@@ -480,16 +467,16 @@
     Asia/Qyzylorda
   ],
   LA: [
-    Asia/Bangkok
+    Asia/Vientiane
   ],
   LB: [
     Asia/Beirut
   ],
   LC: [
-    America/Puerto_Rico
+    America/St_Lucia
   ],
   LI: [
-    Europe/Zurich
+    Europe/Vaduz
   ],
   LK: [
     Asia/Colombo
@@ -498,7 +485,7 @@
     Africa/Monrovia
   ],
   LS: [
-    Africa/Johannesburg
+    Africa/Maseru
   ],
   LT: [
     Europe/Vilnius
@@ -522,23 +509,23 @@
     Europe/Chisinau
   ],
   ME: [
-    Europe/Belgrade
+    Europe/Podgorica
   ],
   MF: [
-    America/Puerto_Rico
+    America/Marigot
   ],
   MG: [
-    Africa/Nairobi
+    Indian/Antananarivo
   ],
   MH: [
     Pacific/Kwajalein,
     Pacific/Majuro
   ],
   MK: [
-    Europe/Belgrade
+    Europe/Skopje
   ],
   ML: [
-    Africa/Abidjan
+    Africa/Bamako
   ],
   MM: [
     Asia/Yangon
@@ -552,16 +539,16 @@
     Asia/Macau
   ],
   MP: [
-    Pacific/Guam
+    Pacific/Saipan
   ],
   MQ: [
     America/Martinique
   ],
   MR: [
-    Africa/Abidjan
+    Africa/Nouakchott
   ],
   MS: [
-    America/Puerto_Rico
+    America/Montserrat
   ],
   MT: [
     Europe/Malta
@@ -573,7 +560,7 @@
     Indian/Maldives
   ],
   MW: [
-    Africa/Maputo
+    Africa/Blantyre
   ],
   MX: [
     America/Bahia_Banderas,
@@ -586,7 +573,6 @@
     America/Mexico_City,
     America/Monterrey,
     America/Ojinaga,
-    America/Tijuana,
     America/Tijuana
   ],
   MY: [
@@ -603,7 +589,7 @@
     Pacific/Noumea
   ],
   NE: [
-    Africa/Lagos
+    Africa/Niamey
   ],
   NF: [
     Pacific/Norfolk
@@ -634,7 +620,7 @@
     Pacific/Chatham
   ],
   OM: [
-    Asia/Dubai
+    Asia/Muscat
   ],
   PA: [
     America/Panama
@@ -725,7 +711,7 @@
     Europe/Volgograd
   ],
   RW: [
-    Africa/Maputo
+    Africa/Kigali
   ],
   SA: [
     Asia/Riyadh
@@ -746,28 +732,28 @@
     Asia/Singapore
   ],
   SH: [
-    Africa/Abidjan
+    Atlantic/St_Helena
   ],
   SI: [
-    Europe/Belgrade
+    Europe/Ljubljana
   ],
   SJ: [
-    Europe/Oslo
+    Arctic/Longyearbyen
   ],
   SK: [
-    Europe/Prague
+    Europe/Bratislava
   ],
   SL: [
-    Africa/Abidjan
+    Africa/Freetown
   ],
   SM: [
-    Europe/Rome
+    Europe/San_Marino
   ],
   SN: [
-    Africa/Abidjan
+    Africa/Dakar
   ],
   SO: [
-    Africa/Nairobi
+    Africa/Mogadishu
   ],
   SR: [
     America/Paramaribo
@@ -782,16 +768,13 @@
     America/El_Salvador
   ],
   SX: [
-    America/Puerto_Rico
+    America/Lower_Princes
   ],
   SY: [
     Asia/Damascus
   ],
   SZ: [
-    Africa/Johannesburg
-  ],
-  TA: [
-    Africa/Abidjan
+    Africa/Mbabane
   ],
   TC: [
     America/Grand_Turk
@@ -803,7 +786,7 @@
     Indian/Kerguelen
   ],
   TG: [
-    Africa/Abidjan
+    Africa/Lome
   ],
   TH: [
     Asia/Bangkok
@@ -830,7 +813,7 @@
     Europe/Istanbul
   ],
   TT: [
-    America/Puerto_Rico
+    America/Port_of_Spain
   ],
   TV: [
     Pacific/Funafuti
@@ -839,20 +822,19 @@
     Asia/Taipei
   ],
   TZ: [
-    Africa/Nairobi
+    Africa/Dar_es_Salaam
   ],
   UA: [
-    Europe/Kiev,
+    Europe/Kyiv,
     Europe/Simferopol,
     Europe/Uzhgorod,
     Europe/Zaporozhye
   ],
   UG: [
-    Africa/Nairobi
+    Africa/Kampala
   ],
   UM: [
-    Pacific/Honolulu,
-    Pacific/Pago_Pago,
+    Pacific/Midway,
     Pacific/Wake
   ],
   US: [
@@ -894,19 +876,19 @@
     Asia/Tashkent
   ],
   VA: [
-    Europe/Rome
+    Europe/Vatican
   ],
   VC: [
-    America/Puerto_Rico
+    America/St_Vincent
   ],
   VE: [
     America/Caracas
   ],
   VG: [
-    America/Puerto_Rico
+    America/Tortola
   ],
   VI: [
-    America/Puerto_Rico
+    America/St_Thomas
   ],
   VN: [
     Asia/Ho_Chi_Minh
@@ -920,56 +902,19 @@
   WS: [
     Pacific/Apia
   ],
-  XK: [
-    Europe/Belgrade
-  ],
   YE: [
-    Asia/Riyadh
+    Asia/Aden
   ],
   YT: [
-    Africa/Nairobi
+    Indian/Mayotte
   ],
   ZA: [
     Africa/Johannesburg
   ],
   ZM: [
-    Africa/Maputo
+    Africa/Lusaka
   ],
   ZW: [
-    Africa/Maputo
-  ],
-  ZZ: [
-    CST6CDT,
-    EST5EDT,
-    Etc/GMT+1,
-    Etc/GMT+10,
-    Etc/GMT+11,
-    Etc/GMT+12,
-    Etc/GMT+2,
-    Etc/GMT+3,
-    Etc/GMT+4,
-    Etc/GMT+5,
-    Etc/GMT+6,
-    Etc/GMT+7,
-    Etc/GMT+8,
-    Etc/GMT+9,
-    Etc/GMT-1,
-    Etc/GMT-10,
-    Etc/GMT-11,
-    Etc/GMT-12,
-    Etc/GMT-13,
-    Etc/GMT-14,
-    Etc/GMT-2,
-    Etc/GMT-3,
-    Etc/GMT-4,
-    Etc/GMT-5,
-    Etc/GMT-6,
-    Etc/GMT-7,
-    Etc/GMT-8,
-    Etc/GMT-9,
-    Etc/UTC,
-    Etc/UTC,
-    MST7MDT,
-    PST8PDT
+    Africa/Harare
   ]
 }
