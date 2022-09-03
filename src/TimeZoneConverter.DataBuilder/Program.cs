@@ -31,7 +31,9 @@ internal static class Program
             foreach (var tzdbLink in links.ToList())
             {
                 if (tzdbLink.Value == "Etc/GMT")
+                {
                     links[tzdbLink.Key] = "Etc/UTC";
+                }
             }
 
             // Extract mappings and aliases from CLDR
@@ -72,7 +74,10 @@ internal static class Program
             // Write to source files in the main library
             var projectPath = Path.GetFullPath(".");
             while (!File.Exists(Path.Combine(projectPath, "TimeZoneConverter.sln")))
+            {
                 projectPath = Path.GetFullPath(Path.Combine(projectPath, ".."));
+            }
+
             var dataPath = Path.Combine(projectPath, "src", "TimeZoneConverter", "Data");
             WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Mapping.csv.gz"), mapping);
             WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Aliases.csv.gz"), aliases);
@@ -91,6 +96,8 @@ internal static class Program
         using var compressedStream = new GZipStream(stream, CompressionLevel.Optimal);
         using var writer = new StreamWriter(compressedStream);
         foreach (var line in lines)
+        {
             writer.WriteLine(line);
+        }
     }
 }

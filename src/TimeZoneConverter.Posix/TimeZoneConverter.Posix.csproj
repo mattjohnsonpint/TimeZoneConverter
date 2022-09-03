@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TimeZoneConverter\TimeZoneConverter.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="NodaTime" Version="3.1.2" />
   </ItemGroup>
