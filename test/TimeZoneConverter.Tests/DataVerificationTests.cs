@@ -112,10 +112,12 @@ public class DataVerificationTests
         return Verify(allMappings);
     }
 
-    [Fact]
-    public Task Iana_Territories()
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public Task Iana_Territories(bool fullList)
     {
-        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory();
-        return Verify(territories);
+        var territories = TZConvert.GetIanaTimeZoneNamesByTerritory(fullList);
+        return Verify(territories).UseParameters(fullList);
     }
 }
