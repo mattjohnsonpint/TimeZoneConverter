@@ -1,0 +1,41 @@
+name: build
+
+on:
+  workflow_dispatch:
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Update tzdata
+          run: sudo apt-get update && sudo apt-get install -y tzdata 
+
+        - name: Restore
+          run: dotnet restore --nologo
+
+        - name: Build
+          run: dotnet build -c Release --nologo --no-restore
+
+        - name: Test
+          run: dotnet test -c Release --nologo --no-build -l GitHubActions -l "trx;LogFilePrefix=testresults_${{ runner.os }}"
+
+        - name: Pack
+          run: dotnet pack -c Release --nologo --no-build
+
+        - name: Archive Artifacts
+          uses: actions/upload-artifact@v3
+          with:
+            name: nuget-packages
+            path: src/**/Release/*.*nupkg
+            if-no-files-found: error
