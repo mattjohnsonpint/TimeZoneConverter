@@ -83,7 +83,7 @@ For example, if one attempts to convert `Africa/Khartoum` to a Windows time zone
 
 It is possible for a zone to be *unmappable* - meaning that there is no logical equivalent from one type of time zone to another.
 
-Currently there is only one IANA zone that is unmappable to Windows, which is `Antarctica/Troll`.  In other words, there is no "correct" time zone for Windows users who may happen to be stationed in https://en.wikipedia.org/wiki/Troll_(research_station).  Therefore, if you try to convert `Antarctica/Troll` to Windows, you will get a `TimeZoneNotFoundException`.
+Currently there is only one IANA zone that is unmappable to Windows, which is `Antarctica/Troll`.  In other words, there is no "correct" time zone for Windows users who may happen to be stationed in [Troll Station, Antarctica](https://en.wikipedia.org/wiki/Troll_(research_station)).  Therefore, if you try to convert `Antarctica/Troll` to Windows, you will get a `TimeZoneNotFoundException`.
 
 There are *many* zones that are unmappable to Rails.  The complete list is in the unit test code [here](https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/test/TimeZoneConverter.Tests/IanaToRailsTests.cs).
 
