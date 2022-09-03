@@ -23,10 +23,14 @@ Note that .NET Framework versions less than 4.6.2 are no longer supported.
 
 #### Important note on .NET 6+
 
-.NET 6 has built-in support for IANA and Windows time zones in a cross-platform manner, removing the need for the TimeZoneConverter library.
+.NET 6 has built-in support for IANA and Windows time zones in a cross-platform manner, somewhat reducing the need for this library.
 It relies on [.NET's ICU integration](https://docs.microsoft.com/dotnet/core/extensions/globalization-icu) to perform this functionality.
 See [the .NET blog](https://devblogs.microsoft.com/dotnet/date-time-and-time-zone-enhancements-in-net-6/#time-zone-conversion-apis) for details.
-**If you are targeting only .NET 6 (or higher), and you have either platform-provided or App-local ICU enabled, you don't need to use the TimeZoneConverter library!**
+
+Restated, if you are targeting only .NET 6 (or higher), and you have either platform-provided or App-local ICU enabled, you *might* not need to use this library.
+However, it is indeed still supported, and many have found it continues to be useful in certain environments or on specific platforms.
+
+TimeZoneConverter has no external data dependencies at runtime.  All of the data it needs is embedded in the library itself.
 
 #### Note on OS Data Dependencies
 
