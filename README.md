@@ -79,7 +79,7 @@ Additionally, this library does not attempt to determine if the time zone IDs pr
 
 For example, if one attempts to convert `Africa/Khartoum` to a Windows time zone ID, they will get `Sudan Standard Time`.  If it is then used on a Windows computer that does not yet have [`KB4051956`][7] installed (which created this time zone), they will likely get a `TimeZoneNotFoundException`.
 
-## Unmappable Zones
+### Unmappable Zones
 
 It is possible for a zone to be *unmappable* - meaning that there is no logical equivalent from one type of time zone to another.
 
