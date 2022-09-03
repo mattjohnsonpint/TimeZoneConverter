@@ -16,13 +16,15 @@ internal static class DataLoader
         var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
         var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
         var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
-        
+
         foreach (var link in aliases)
         {
             var parts = link.Split(',');
             var value = parts[0];
             foreach (var key in parts[1].Split())
+            {
                 links.Add(key, value);
+            }
         }
 
         var similarIanaZones = new Dictionary<string, IList<string>>();
@@ -40,13 +42,17 @@ internal static class DataLoader
             foreach (var ianaZone in ianaZones)
             {
                 if (!ianaMap.ContainsKey(ianaZone))
+                {
                     ianaMap.Add(ianaZone, windowsZone);
+                }
             }
 
             if (ianaZones.Length > 1)
             {
                 foreach (var ianaZone in ianaZones)
+                {
                     similarIanaZones.Add(ianaZone, ianaZones.Except(new[] {ianaZone}).ToArray());
+                }
             }
         }
 
@@ -59,7 +65,7 @@ internal static class DataLoader
             {
                 var hasMapFromKey = ianaMap.TryGetValue(link.Key, out var mapFromKey);
                 var hasMapFromValue = ianaMap.TryGetValue(link.Value, out var mapFromValue);
-                
+
                 if (hasMapFromKey && hasMapFromValue)
                 {
                     // There are already mappings in both directions
@@ -96,9 +102,13 @@ internal static class DataLoader
             {
                 var ianaZone = ianaZones[i];
                 if (i == 0)
+                {
                     railsMap.Add(railsZone, ianaZone);
+                }
                 else
+                {
                     inverseRailsMap.Add(ianaZone, new[] {railsZone});
+                }
             }
         }
 
@@ -111,7 +121,9 @@ internal static class DataLoader
         foreach (var ianaZone in ianaMap.Keys)
         {
             if (inverseRailsMap.ContainsKey(ianaZone) || links.ContainsKey(ianaZone))
+            {
                 continue;
+            }
 
             if (similarIanaZones.TryGetValue(ianaZone, out var similarZones))
             {
@@ -132,12 +144,16 @@ internal static class DataLoader
             if (!inverseRailsMap.ContainsKey(link.Key))
             {
                 if (inverseRailsMap.TryGetValue(link.Value, out var railsZone))
+                {
                     inverseRailsMap.Add(link.Key, railsZone);
+                }
             }
             else if (!inverseRailsMap.ContainsKey(link.Value))
             {
                 if (inverseRailsMap.TryGetValue(link.Key, out var railsZone))
+                {
                     inverseRailsMap.Add(link.Value, railsZone);
+                }
             }
         }
 

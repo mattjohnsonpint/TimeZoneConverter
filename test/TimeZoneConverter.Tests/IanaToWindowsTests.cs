@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
@@ -21,7 +20,7 @@ public class IanaToWindowsTests
         var errors = 0;
         var ianaZones = TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id);
 
-        string[] unmappable = { "Antarctica/Troll" };
+        string[] unmappable = {"Antarctica/Troll"};
 
         foreach (var ianaZone in ianaZones.Except(unmappable))
         {
@@ -46,7 +45,7 @@ public class IanaToWindowsTests
         var errors = 0;
         ICollection<string> ianaZones = TZConvert.KnownIanaTimeZoneNames.ToList();
 
-        string[] unmappable = { "Antarctica/Troll" };
+        string[] unmappable = {"Antarctica/Troll"};
 
         foreach (var ianaZone in ianaZones.Except(unmappable))
         {
@@ -134,42 +133,42 @@ public class IanaToWindowsTests
         var result = TZConvert.IanaToWindows("Pacific/Kanton");
         Assert.Equal("UTC+13", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Indianapolis_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Indianapolis");
         Assert.Equal("US Eastern Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Indiana_Indianapolis_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Indiana/Indianapolis");
         Assert.Equal("US Eastern Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Fort_Wayne_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Fort_Wayne");
         Assert.Equal("US Eastern Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_East_Indiana_To_Windows()
     {
         var result = TZConvert.IanaToWindows("US/East-Indiana");
         Assert.Equal("US Eastern Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Marengo_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Indiana/Marengo");
         Assert.Equal("US Eastern Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Vevay_To_Windows()
     {
@@ -183,21 +182,21 @@ public class IanaToWindowsTests
         var result = TZConvert.IanaToWindows("Asia/Calcutta");
         Assert.Equal("India Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Kolkata_To_Windows()
     {
         var result = TZConvert.IanaToWindows("Asia/Kolkata");
         Assert.Equal("India Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Kyiv_To_Windows()
     {
         var result = TZConvert.IanaToWindows("Europe/Kyiv");
         Assert.Equal("FLE Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Kiev_To_Windows()
     {

@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace TimeZoneConverter.Posix.Tests;
 
 public class PosixTests
