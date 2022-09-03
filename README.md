@@ -13,13 +13,13 @@
 PM> Install-Package TimeZoneConverter
 ```
 
-As of version 4.0.0, *TimeZoneConverter* works with all of the following:
+As of version 6.0.0, *TimeZoneConverter* works with all of the following:
 
 - .NET 5 or greater
 - .NET Core 2.0 or greater
-- .NET Framework 4.6.1 and greater
+- .NET Framework 4.6.2 and greater
 
-Note that .NET Framework versions less than 4.6.1 are no longer supported.
+Note that .NET Framework versions less than 4.6.2 are no longer supported.
 
 #### Important note on .NET 6+
 
@@ -45,13 +45,13 @@ PM> Install-Package TimeZoneConverter.Posix
 
 This is a separate helper library that is maintained in the same repository.  You only need it if you require support for POSIX time zones.
 
-As of version 3.0.0, *TimeZoneConverter.Posix* works with all of the following:
+As of version 4.0.0, *TimeZoneConverter.Posix* works with all of the following:
 
 - .NET 5 or greater
 - .NET Core 2.0 or greater
-- .NET Framework 4.6.1 and greater
+- .NET Framework 4.6.2 and greater
 
-Note that .NET Framework versions less than 4.6.1 are no longer supported.
+Note that .NET Framework versions less than 4.6.2 are no longer supported.
 
 Also note that `TimeZoneConverter.Posix` takes a dependency on both `TimeZoneConverter` and [Noda Time][2].
 
@@ -159,6 +159,18 @@ Generate a POSIX time zone string from a `TimeZoneInfo` object.
 ```csharp
 string posix = PosixTimeZone.FromTimeZoneInfo(TimeZoneInfo.Local);
 ```
+
+## Extras
+
+There are a few additional helpers you may find useful.
+
+- These properties provide lists of the various types of time zones known to this library:
+  - `TZConvert.KnownIanaTimeZoneNames`
+  - `TZConvert.KnownWindowsTimeZoneIds`
+  - `TZConvert.KnownRailsTimeZoneNames`
+
+- If you need a list of time zones that are applicable in a given region, you can use:
+  - `TZConvert.GetIanaTimeZoneNamesByTerritory()`
 
 ## License
 
