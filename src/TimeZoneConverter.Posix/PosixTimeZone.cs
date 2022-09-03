@@ -12,10 +12,10 @@ namespace TimeZoneConverter.Posix;
 public static class PosixTimeZone
 {
     /// <summary>
-    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo"/> object, for the current year.
-    /// Note - only uses only the <see cref="TimeZoneInfo.Id"/> property from the object.
+    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo" /> object, for the current year.
+    /// Note - only uses only the <see cref="TimeZoneInfo.Id" /> property from the object.
     /// </summary>
-    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo"/> object.</param>
+    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo" /> object.</param>
     /// <returns>A POSIX time zone string.</returns>
     public static string FromTimeZoneInfo(TimeZoneInfo timeZoneInfo)
     {
@@ -25,10 +25,10 @@ public static class PosixTimeZone
     }
 
     /// <summary>
-    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo"/> object, for the given year.
-    /// Note - only uses only the <see cref="TimeZoneInfo.Id"/> property from the object.
+    /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo" /> object, for the given year.
+    /// Note - only uses only the <see cref="TimeZoneInfo.Id" /> property from the object.
     /// </summary>
-    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo"/> object.</param>
+    /// <param name="timeZoneInfo">The <see cref="TimeZoneInfo" /> object.</param>
     /// <param name="year">The reference year.</param>
     /// <returns>A POSIX time zone string.</returns>
     public static string FromTimeZoneInfo(TimeZoneInfo timeZoneInfo, int year)

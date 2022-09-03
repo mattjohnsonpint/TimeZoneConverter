@@ -5,16 +5,6 @@ namespace TimeZoneConverter.Tests;
 
 public class TimeZoneInfoPerfTests : IClassFixture<TimeZoneInfoPerfTests.Fixture>
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class Fixture
-    {
-        public Fixture()
-        {
-            // This is just to ensure that we've initialized before starting our tests
-            _ = TZConvert.KnownIanaTimeZoneNames;
-        }
-    }
-
     public TimeZoneInfoPerfTests(Fixture _)
     {
     }
@@ -49,5 +39,15 @@ public class TimeZoneInfoPerfTests : IClassFixture<TimeZoneInfoPerfTests.Fixture
 
         sw.Stop();
         Assert.True(sw.Elapsed < TimeSpan.FromSeconds(1), $"Actual Time: {sw.Elapsed}");
+    }
+
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class Fixture
+    {
+        public Fixture()
+        {
+            // This is just to ensure that we've initialized before starting our tests
+            _ = TZConvert.KnownIanaTimeZoneNames;
+        }
     }
 }

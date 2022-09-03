@@ -64,7 +64,10 @@ public static class TZConvert
     /// </summary>
     /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
     /// <returns>A Windows time zone ID.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Windows zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent Windows
+    /// zone.
+    /// </exception>
     public static string IanaToWindows(string ianaTimeZoneName)
     {
         if (TryIanaToWindows(ianaTimeZoneName, out var windowsTimeZoneId))
@@ -93,7 +96,10 @@ public static class TZConvert
     /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
     /// <param name="linkResolutionMode">The mode of resolving links for the result.</param>
     /// <returns>An IANA time zone name.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent IANA zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent IANA
+    /// zone.
+    /// </exception>
     public static string WindowsToIana(string windowsTimeZoneId, LinkResolution linkResolutionMode)
     {
         return WindowsToIana(windowsTimeZoneId, "001", linkResolutionMode);
@@ -109,7 +115,10 @@ public static class TZConvert
     /// </param>
     /// <param name="linkResolutionMode">The mode of resolving links for the result.</param>
     /// <returns>An IANA time zone name.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent IANA zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent IANA
+    /// zone.
+    /// </exception>
     public static string WindowsToIana(
         string windowsTimeZoneId,
         string territoryCode = "001",
@@ -219,11 +228,11 @@ public static class TZConvert
     }
 
     /// <summary>
-    /// Retrieves a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone identifier,
+    /// Retrieves a <see cref="TimeZoneInfo" /> object given a valid Windows or IANA time zone identifier,
     /// regardless of which platform the application is running on.
     /// </summary>
     /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
-    /// <returns>A <see cref="TimeZoneInfo"/> object.</returns>
+    /// <returns>A <see cref="TimeZoneInfo" /> object.</returns>
     public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
     {
         if (TryGetTimeZoneInfo(windowsOrIanaTimeZoneId, out var timeZoneInfo))
@@ -235,11 +244,11 @@ public static class TZConvert
     }
 
     /// <summary>
-    /// Attempts to retrieve a <see cref="TimeZoneInfo"/> object given a valid Windows or IANA time zone identifier,
+    /// Attempts to retrieve a <see cref="TimeZoneInfo" /> object given a valid Windows or IANA time zone identifier,
     /// regardless of which platform the application is running on.
     /// </summary>
     /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
-    /// <param name="timeZoneInfo">A <see cref="TimeZoneInfo"/> object.</param>
+    /// <param name="timeZoneInfo">A <see cref="TimeZoneInfo" /> object.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     public static bool TryGetTimeZoneInfo(string windowsOrIanaTimeZoneId,
         [MaybeNullWhen(false)] out TimeZoneInfo timeZoneInfo)
@@ -268,7 +277,10 @@ public static class TZConvert
     /// </summary>
     /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
     /// <returns>One or more equivalent Rails time zone names.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Rails zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent Rails
+    /// zone.
+    /// </exception>
     public static IList<string> IanaToRails(string ianaTimeZoneName)
     {
         if (TryIanaToRails(ianaTimeZoneName, out var railsTimeZoneNames))
@@ -311,7 +323,10 @@ public static class TZConvert
     /// </summary>
     /// <param name="railsTimeZoneName">The Rails time zone name to convert.</param>
     /// <returns>An IANA time zone name.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent IANA zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent IANA
+    /// zone.
+    /// </exception>
     public static string RailsToIana(string railsTimeZoneName)
     {
         if (TryRailsToIana(railsTimeZoneName, out var ianaTimeZoneName))
@@ -339,7 +354,10 @@ public static class TZConvert
     /// </summary>
     /// <param name="railsTimeZoneName">The Rails time zone name to convert.</param>
     /// <returns>A Windows time zone ID.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Windows zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent Windows
+    /// zone.
+    /// </exception>
     public static string RailsToWindows(string railsTimeZoneName)
     {
         if (TryRailsToWindows(railsTimeZoneName, out var windowsTimeZoneId))
@@ -378,7 +396,10 @@ public static class TZConvert
     /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
     /// </param>
     /// <returns>One or more equivalent Rails time zone names.</returns>
-    /// <exception cref="InvalidTimeZoneException">Thrown if the input string was not recognized or has no equivalent Rails zone.</exception>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent Rails
+    /// zone.
+    /// </exception>
     public static IList<string> WindowsToRails(string windowsTimeZoneId, string territoryCode = "001")
     {
         if (TryWindowsToRails(windowsTimeZoneId, territoryCode, out var railsTimeZoneNames))
