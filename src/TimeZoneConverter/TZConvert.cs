@@ -82,7 +82,7 @@ public static class TZConvert
                         .OrderBy(zone => zone)
                         .ToList().AsReadOnly()));
         }
-        
+
         // Converting to windows and back has the reduction effect we are looking for
         return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
             IanaTerritoryZones.ToDictionary(
@@ -131,6 +131,24 @@ public static class TZConvert
     /// Converts a Windows time zone ID to an equivalent IANA time zone name.
     /// </summary>
     /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
+    /// <param name="territoryCode">
+    /// An optional two-letter ISO Country/Region code, used to get a a specific mapping.
+    /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
+    /// </param>
+    /// <returns>An IANA time zone name.</returns>
+    /// <exception cref="InvalidTimeZoneException">
+    /// Thrown if the input string was not recognized or has no equivalent IANA
+    /// zone.
+    /// </exception>
+    public static string WindowsToIana(string windowsTimeZoneId, string territoryCode = "001")
+    {
+        return WindowsToIana(windowsTimeZoneId, territoryCode, LinkResolution.Default);
+    }
+
+    /// <summary>
+    /// Converts a Windows time zone ID to an equivalent IANA time zone name.
+    /// </summary>
+    /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
     /// <param name="linkResolutionMode">The mode of resolving links for the result.</param>
     /// <returns>An IANA time zone name.</returns>
     /// <exception cref="InvalidTimeZoneException">
@@ -156,10 +174,7 @@ public static class TZConvert
     /// Thrown if the input string was not recognized or has no equivalent IANA
     /// zone.
     /// </exception>
-    public static string WindowsToIana(
-        string windowsTimeZoneId,
-        string territoryCode = "001",
-        LinkResolution linkResolutionMode = LinkResolution.Default)
+    public static string WindowsToIana(string windowsTimeZoneId, string territoryCode, LinkResolution linkResolutionMode)
     {
         if (TryWindowsToIana(windowsTimeZoneId, territoryCode, out var ianaTimeZoneName, linkResolutionMode))
         {
@@ -168,6 +183,20 @@ public static class TZConvert
 
         throw new InvalidTimeZoneException(
             $"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID.");
+    }
+    
+    /// <summary>
+    /// Attempts to convert a Windows time zone ID to an equivalent IANA time zone name.
+    /// Uses the "golden zone" - the one that is the most prevalent.
+    /// </summary>
+    /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
+    /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
+    /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+    public static bool TryWindowsToIana(
+        string windowsTimeZoneId,
+        [MaybeNullWhen(false)] out string ianaTimeZoneName)
+    {
+        return TryWindowsToIana(windowsTimeZoneId, "001", out ianaTimeZoneName, LinkResolution.Default);
     }
 
     /// <summary>
@@ -181,9 +210,27 @@ public static class TZConvert
     public static bool TryWindowsToIana(
         string windowsTimeZoneId,
         [MaybeNullWhen(false)] out string ianaTimeZoneName,
-        LinkResolution linkResolutionMode = LinkResolution.Default)
+        LinkResolution linkResolutionMode)
     {
         return TryWindowsToIana(windowsTimeZoneId, "001", out ianaTimeZoneName, linkResolutionMode);
+    }
+
+    /// <summary>
+    /// Attempts to convert a Windows time zone ID to an equivalent IANA time zone name.
+    /// </summary>
+    /// <param name="windowsTimeZoneId">The Windows time zone ID to convert.</param>
+    /// <param name="territoryCode">
+    /// An optional two-letter ISO Country/Region code, used to get a a specific mapping.
+    /// Defaults to "001" if not specified, which means to get the "golden zone" - the one that is most prevalent.
+    /// </param>
+    /// <param name="ianaTimeZoneName">An IANA time zone name.</param>
+    /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+    public static bool TryWindowsToIana(
+        string windowsTimeZoneId,
+        string territoryCode,
+        [MaybeNullWhen(false)] out string ianaTimeZoneName)
+    {
+        return TryWindowsToIana(windowsTimeZoneId, territoryCode, out ianaTimeZoneName, LinkResolution.Default);
     }
 
     /// <summary>
@@ -201,7 +248,7 @@ public static class TZConvert
         string windowsTimeZoneId,
         string territoryCode,
         [MaybeNullWhen(false)] out string ianaTimeZoneName,
-        LinkResolution linkResolutionMode = LinkResolution.Default)
+        LinkResolution linkResolutionMode)
     {
         // try first with the given region
         var found = WindowsMap.TryGetValue($"{territoryCode}|{windowsTimeZoneId}", out var ianaId);
