@@ -183,7 +183,7 @@ internal static class DataLoader
 
     private static IEnumerable<string> GetEmbeddedData(string resourceName)
     {
-        var assembly = typeof(DataLoader).GetTypeInfo().Assembly;
+        var assembly = typeof(DataLoader).Assembly;
         using var compressedStream = assembly.GetManifestResourceStream(resourceName) ??
                                      throw new MissingManifestResourceException();
         using var stream = new GZipStream(compressedStream, CompressionMode.Decompress);
