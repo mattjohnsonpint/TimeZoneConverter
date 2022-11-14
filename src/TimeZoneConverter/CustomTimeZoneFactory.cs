@@ -31,8 +31,8 @@ internal static class CustomTimeZoneFactory
                 // Like IANA, we will approximate with only UTC and CEST (UTC+2).
                 // Handling the CET (UTC+1) period would require generating adjustment rules for each individual year.
                 TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    dateStart: DateTime.MinValue,
-                    dateEnd: DateTime.MaxValue,
+                    dateStart: DateTime.MinValue.Date,
+                    dateEnd: DateTime.MaxValue.Date,
                     daylightDelta: TimeSpan.FromHours(2), // Two hours DST gap
                     daylightTransitionStart: TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
                         timeOfDay: new DateTime(1, 1, 1, 1, 0, 0), // 01:00 local, 01:00 UTC
