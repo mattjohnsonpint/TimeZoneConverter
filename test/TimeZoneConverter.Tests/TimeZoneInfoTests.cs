@@ -55,9 +55,14 @@ public class TimeZoneInfoTests
         var tz = TZConvert.GetTimeZoneInfo("Antarctica/Troll");
         Assert.NotNull(tz);
         Assert.Equal(TimeSpan.Zero, tz.BaseUtcOffset);
-        Assert.Equal("(UTC+00:00) Troll Station, Antarctica", tz.DisplayName);
-        Assert.Equal("Greenwich Mean Time", tz.StandardName);
-        Assert.Equal("Central European Summer Time", tz.DaylightName);
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            // This is the custom info we set
+            Assert.Equal("(UTC+00:00) Troll Station, Antarctica", tz.DisplayName);
+            Assert.Equal("Greenwich Mean Time", tz.StandardName);
+            Assert.Equal("Central European Summer Time", tz.DaylightName);
+        }
 
         var dto1 = DateTimeOffset.Parse("2020-01-01T00:00:00Z", CultureInfo.InvariantCulture);
         var dto2 = DateTimeOffset.Parse("2020-07-01T00:00:00Z", CultureInfo.InvariantCulture);
