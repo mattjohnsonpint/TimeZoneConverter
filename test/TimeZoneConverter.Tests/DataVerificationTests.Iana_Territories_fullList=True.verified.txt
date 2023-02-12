@@ -168,15 +168,11 @@
     America/Inuvik,
     America/Iqaluit,
     America/Moncton,
-    America/Nipigon,
-    America/Pangnirtung,
-    America/Rainy_River,
     America/Rankin_Inlet,
     America/Regina,
     America/Resolute,
     America/St_Johns,
     America/Swift_Current,
-    America/Thunder_Bay,
     America/Toronto,
     America/Vancouver,
     America/Whitehorse,
@@ -566,6 +562,7 @@
     America/Bahia_Banderas,
     America/Cancun,
     America/Chihuahua,
+    America/Ciudad_Juarez,
     America/Hermosillo,
     America/Matamoros,
     America/Mazatlan,
@@ -826,9 +823,7 @@
   ],
   UA: [
     Europe/Kyiv,
-    Europe/Simferopol,
-    Europe/Uzhgorod,
-    Europe/Zaporozhye
+    Europe/Simferopol
   ],
   UG: [
     Africa/Kampala
