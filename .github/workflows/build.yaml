@@ -28,6 +28,12 @@ jobs:
           if: runner.os == 'Linux'
           run: sudo apt-get update && sudo apt-get install -y tzdata 
 
+        - name: Install .NET Core 3.1 SDK
+          uses: actions/setup-dotnet@v3
+          if: runner.os == 'Linux'
+          with:
+            dotnet-version: 3.1.x
+
         - name: Restore
           run: dotnet restore --nologo
 
