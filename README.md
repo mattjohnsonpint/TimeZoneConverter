@@ -1,25 +1,25 @@
 ## TimeZoneConverter  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter/)
 
-## TimeZoneConverter.Posix  [![NuGet Version](https://img.shields.io/nuget/v/TimeZoneConverter.Posix.svg?style=flat)](https://www.nuget.org/packages/TimeZoneConverter.Posix/)
-
 --------------------------------
 
-- TimeZoneConverter is a lightweight library to convert quickly between IANA, Windows, and Rails time zone names.
-- TimeZoneConverter.Posix adds support for generating POSIX time zone strings, which are useful in certain scenarios such as IoT.
+TimeZoneConverter is a lightweight library to convert quickly between IANA, Windows, and Rails time zone names.
 
-## TimeZoneConverter Installation
+*Note: A separate [`TimeZoneConverter.Posix`][1] package is also available if you need POSIX time zone support.*
 
-```powershell
-PM> Install-Package TimeZoneConverter
-```
+## Installation
 
-As of version 6.0.0, *TimeZoneConverter* works with all of the following:
+- Add the `TimeZoneConverter` NuGet package to your project.
+- Import the `TimeZoneConverter` namespace where needed.
+
+## Compatibility
+
+As of version 6.0.0, TimeZoneConverter works with all of the following:
 
 - .NET 5 or greater
 - .NET Core 2.0 or greater
 - .NET Framework 4.6.2 and greater
 
-Note that .NET Framework versions less than 4.6.2 are no longer supported.
+.NET Framework versions less than 4.6.2 are no longer supported.
 
 #### Important note on .NET 6+
 
@@ -41,32 +41,14 @@ On OSX and Linux, this data comes from a distribution of the [IANA time zone dat
 
 For example, the Alpine Linux Docker images for .NET Core no longer ship with `tzdata`.  See [dotnet/dotnet-docker#1366](https://github.com/dotnet/dotnet-docker/issues/1366) for instructions on how to add it to your Docker images.
 
-## TimeZoneConverter.Posix Installation
-
-```powershell
-PM> Install-Package TimeZoneConverter.Posix
-```
-
-This is a separate helper library that is maintained in the same repository.  You only need it if you require support for POSIX time zones.
-
-As of version 4.0.0, *TimeZoneConverter.Posix* works with all of the following:
-
-- .NET 5 or greater
-- .NET Core 2.0 or greater
-- .NET Framework 4.6.2 and greater
-
-Note that .NET Framework versions less than 4.6.2 are no longer supported.
-
-Also note that `TimeZoneConverter.Posix` takes a dependency on both `TimeZoneConverter` and [Noda Time][2].
-
 ## Notes
 
 This library uses a combination of data sources to achieve its goals:
 
-- The [Unicode CLDR][3] project
-- The [IANA time zone][4] data
-- Microsoft Windows [time zone updates][5]
-- The `MAPPING` data from `ActiveSupport::TimeZone` in [the Rails source code][6].
+- The [Unicode CLDR][2] project
+- The [IANA time zone][3] data
+- Microsoft Windows [time zone updates][4]
+- The `MAPPING` data from `ActiveSupport::TimeZone` in [the Rails source code][5].
 - The author's best-informed knowledge and opinions
 
 Usually, the latter is reserved for edge cases, and for newly-introduced zones that may
@@ -77,7 +59,7 @@ it is recommended that you always use the most current revision, and check for u
 
 Additionally, this library does not attempt to determine if the time zone IDs provided are actually present on the computer where the code is running.  It is assumed that the computer is kept current with time zone updates.
 
-For example, if one attempts to convert `Africa/Khartoum` to a Windows time zone ID, they will get `Sudan Standard Time`.  If it is then used on a Windows computer that does not yet have [`KB4051956`][7] installed (which created this time zone), they will likely get a `TimeZoneNotFoundException`.
+For example, if one attempts to convert `Africa/Khartoum` to a Windows time zone ID, they will get `Sudan Standard Time`.  If it is then used on a Windows computer that does not yet have [`KB4051956`][6] installed (which created this time zone), they will likely get a `TimeZoneNotFoundException`.
 
 ### Unmappable Zones
 
@@ -146,32 +128,6 @@ IList<string> tz = TZConvert.WindowsToRails("Central Standard Time (Mexico)");
 // Result:  { "Guadalajara", "Mexico City" }
 ```
 
-Generate a POSIX time zone string from a Windows time zone ID.
-
-*Requires `TimeZoneConverter.Posix`*
-
-```csharp
-string posix = PosixTimeZone.FromWindowsTimeZoneId("Eastern Standard Time");
-// Result: "EST5EDT,M3.2.0,M11.1.0"
-```
-
-Generate a POSIX time zone string from an IANA time zone name.
-
-*Requires `TimeZoneConverter.Posix`*
-
-```csharp
-string posix = PosixTimeZone.FromIanaTimeZoneName("Australia/Sydney");
-// Result: "AEST-10AEDT,M10.1.0,M4.1.0/3"
-```
-
-Generate a POSIX time zone string from a `TimeZoneInfo` object.
-
-*Requires `TimeZoneConverter.Posix`*
-
-```csharp
-string posix = PosixTimeZone.FromTimeZoneInfo(TimeZoneInfo.Local);
-```
-
 ## Extras
 
 There are a few additional helpers you may find useful.
@@ -186,14 +142,12 @@ There are a few additional helpers you may find useful.
 
 ## License
 
-This library is provided free of charge, under the terms of the [MIT license][8].
+This library is provided free of charge, under the terms of the [MIT license][7].
 
-
-[1]: https://docs.microsoft.com/en-us/dotnet/articles/standard/library
-[2]: https://nodatime.org
-[3]: https://cldr.unicode.org
-[4]: https://iana.org/time-zones
-[5]: https://aka.ms/dstblog
-[6]: https://github.com/rails/rails/blob/master/activesupport/lib/active_support/values/time_zone.rb
-[7]: https://support.microsoft.com/en-us/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton
-[8]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/LICENSE.txt
+[1]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/src/TimeZoneConverter
+[2]: https://cldr.unicode.org
+[3]: https://iana.org/time-zones
+[4]: https://aka.ms/dstblog
+[5]: https://github.com/rails/rails/blob/master/activesupport/lib/active_support/values/time_zone.rb
+[6]: https://support.microsoft.com/help/4051956/time-zone-and-dst-changes-in-windows-for-northern-cyprus-sudan-and-ton
+[7]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/LICENSE.txt
