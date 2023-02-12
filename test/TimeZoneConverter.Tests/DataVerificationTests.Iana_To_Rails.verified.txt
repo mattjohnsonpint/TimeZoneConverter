@@ -1,4 +1,4 @@
-{
+﻿{
   Africa/Abidjan: null,
   Africa/Accra: null,
   Africa/Addis_Ababa: [
@@ -209,6 +209,9 @@
   America/Chihuahua: [
     Chihuahua
   ],
+  America/Ciudad_Juarez: [
+    Mountain Time (US & Canada)
+  ],
   America/Coral_Harbour: [
     Bogota
   ],
@@ -253,13 +256,13 @@
   America/Ensenada: [
     Tijuana
   ],
-  America/Fortaleza: null,
   America/Fort_Nelson: [
     Arizona
   ],
   America/Fort_Wayne: [
     Indiana (East)
   ],
+  America/Fortaleza: null,
   America/Glace_Bay: [
     Atlantic Time (Canada)
   ],
@@ -440,7 +443,7 @@
     Greenland
   ],
   America/Ojinaga: [
-    Mountain Time (US & Canada)
+    Central Time (US & Canada)
   ],
   America/Panama: [
     Bogota
@@ -453,14 +456,14 @@
     Arizona
   ],
   America/Port-au-Prince: null,
+  America/Port_of_Spain: [
+    Puerto Rico
+  ],
   America/Porto_Acre: [
     Bogota
   ],
   America/Porto_Velho: [
     La Paz
-  ],
-  America/Port_of_Spain: [
-    Puerto Rico
   ],
   America/Puerto_Rico: [
     Puerto Rico
@@ -485,10 +488,10 @@
   America/Rosario: [
     Buenos Aires
   ],
-  America/Santarem: null,
   America/Santa_Isabel: [
     Tijuana
   ],
+  America/Santarem: null,
   America/Santiago: [
     Santiago
   ],
@@ -694,14 +697,14 @@
     Beijing
   ],
   Asia/Hebron: null,
-  Asia/Hong_Kong: [
-    Hong Kong
-  ],
-  Asia/Hovd: null,
   Asia/Ho_Chi_Minh: [
     Bangkok,
     Hanoi
   ],
+  Asia/Hong_Kong: [
+    Hong Kong
+  ],
+  Asia/Hovd: null,
   Asia/Irkutsk: [
     Irkutsk
   ],
@@ -926,8 +929,8 @@
   Atlantic/South_Georgia: [
     Mid-Atlantic
   ],
-  Atlantic/Stanley: null,
   Atlantic/St_Helena: null,
+  Atlantic/Stanley: null,
   Australia/ACT: [
     Sydney
   ],
@@ -941,7 +944,7 @@
     Adelaide
   ],
   Australia/Canberra: [
-    Sydney
+    Canberra
   ],
   Australia/Currie: [
     Hobart
@@ -959,14 +962,13 @@
   ],
   Australia/Lord_Howe: null,
   Australia/Melbourne: [
-    Canberra,
     Melbourne
-  ],
-  Australia/North: [
-    Darwin
   ],
   Australia/NSW: [
     Sydney
+  ],
+  Australia/North: [
+    Darwin
   ],
   Australia/Perth: [
     Perth
@@ -984,7 +986,6 @@
     Hobart
   ],
   Australia/Victoria: [
-    Canberra,
     Melbourne
   ],
   Australia/West: [
@@ -1002,6 +1003,12 @@
   ],
   Brazil/West: [
     La Paz
+  ],
+  CET: [
+    Paris
+  ],
+  CST6CDT: [
+    Central Time (US & Canada)
   ],
   Canada/Atlantic: [
     Atlantic Time (Canada)
@@ -1027,31 +1034,25 @@
   Canada/Yukon: [
     Arizona
   ],
-  CET: [
-    Paris
-  ],
   Chile/Continental: [
     Santiago
   ],
   Chile/EasterIsland: null,
-  CST6CDT: [
-    Central Time (US & Canada)
-  ],
   Cuba: null,
   EET: [
     Bucharest
-  ],
-  Egypt: [
-    Cairo
-  ],
-  Eire: [
-    Dublin
   ],
   EST: [
     Bogota
   ],
   EST5EDT: [
     Eastern Time (US & Canada)
+  ],
+  Egypt: [
+    Cairo
+  ],
+  Eire: [
+    Dublin
   ],
   Etc/GMT: [
     UTC
@@ -1135,10 +1136,10 @@
   Etc/UCT: [
     UTC
   ],
-  Etc/Universal: [
+  Etc/UTC: [
     UTC
   ],
-  Etc/UTC: [
+  Etc/Universal: [
     UTC
   ],
   Etc/Zulu: [
@@ -1360,11 +1361,11 @@
   Greenwich: [
     UTC
   ],
-  Hongkong: [
-    Hong Kong
-  ],
   HST: [
     Hawaii
+  ],
+  Hongkong: [
+    Hong Kong
   ],
   Iceland: null,
   Indian/Antananarivo: [
@@ -1422,6 +1423,12 @@
   MET: [
     Berlin
   ],
+  MST: [
+    Arizona
+  ],
+  MST7MDT: [
+    Mountain Time (US & Canada)
+  ],
   Mexico/BajaNorte: [
     Tijuana
   ],
@@ -1432,21 +1439,21 @@
     Guadalajara,
     Mexico City
   ],
-  MST: [
-    Arizona
-  ],
-  MST7MDT: [
-    Mountain Time (US & Canada)
-  ],
-  Navajo: [
-    Mountain Time (US & Canada)
-  ],
   NZ: [
     Auckland,
     Wellington
   ],
   NZ-CHAT: [
     Chatham Is.
+  ],
+  Navajo: [
+    Mountain Time (US & Canada)
+  ],
+  PRC: [
+    Beijing
+  ],
+  PST8PDT: [
+    Pacific Time (US & Canada)
   ],
   Pacific/Apia: [
     Samoa
@@ -1565,12 +1572,6 @@
   Portugal: [
     Lisbon
   ],
-  PRC: [
-    Beijing
-  ],
-  PST8PDT: [
-    Pacific Time (US & Canada)
-  ],
   ROC: [
     Taipei
   ],
@@ -1584,9 +1585,6 @@
     Istanbul
   ],
   UCT: [
-    UTC
-  ],
-  Universal: [
     UTC
   ],
   US/Alaska: [
@@ -1624,6 +1622,9 @@
     American Samoa
   ],
   UTC: [
+    UTC
+  ],
+  Universal: [
     UTC
   ],
   W-SU: [

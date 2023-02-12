@@ -180,4 +180,25 @@ public class WindowsToIanaTests
         var result = TZConvert.WindowsToIana("UTC+13", "KI", LinkResolution.Original);
         Assert.Equal("Pacific/Enderbury", result);
     }
+    
+    [Fact]
+    public void Can_Convert_MountainStandardTimeMexico_To_IANA_With_Default_Mode()
+    {
+        var result = TZConvert.WindowsToIana("Mountain Standard Time (Mexico)");
+        Assert.Equal("America/Mazatlan", result);
+    }
+
+    [Fact]
+    public void Can_Convert_MountainStandardTimeMexico_To_IANA_With_Canonical_Mode()
+    {
+        var result = TZConvert.WindowsToIana("Mountain Standard Time (Mexico)", LinkResolution.Canonical);
+        Assert.Equal("America/Mazatlan", result);
+    }
+
+    [Fact]
+    public void Can_Convert_MountainStandardTimeMexico_To_IANA_With_Original_Mode()
+    {
+        var result = TZConvert.WindowsToIana("Mountain Standard Time (Mexico)", LinkResolution.Original);
+        Assert.Equal("America/Mazatlan", result);
+    }
 }

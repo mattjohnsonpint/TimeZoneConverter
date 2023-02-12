@@ -238,7 +238,7 @@
     Casablanca
   ],
   (Mountain Standard Time (Mexico), 001): [
-    Chihuahua
+    Mazatlan
   ],
   (Mountain Standard Time, 001): [
     Mountain Time (US & Canada)

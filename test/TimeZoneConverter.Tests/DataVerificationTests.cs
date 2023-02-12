@@ -8,8 +8,9 @@ public class DataVerificationTests
     {
         var ianaZones = TZConvert.KnownIanaTimeZoneNames;
         var allMappings = ianaZones.ToDictionary(
-            ianaId => ianaId,
-            ianaId => TZConvert.TryIanaToWindows(ianaId, out var windowsId) ? windowsId : null);
+                ianaId => ianaId,
+                ianaId => TZConvert.TryIanaToWindows(ianaId, out var windowsId) ? windowsId : null)
+            .Sorted();
         return Verify(allMappings);
     }
 
@@ -21,8 +22,9 @@ public class DataVerificationTests
     {
         var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
         var allMappings = windowsZones.ToDictionary(
-            windowsId => windowsId,
-            windowsId => TZConvert.TryWindowsToIana(windowsId, out var ianaId, mode) ? ianaId : null);
+                windowsId => windowsId,
+                windowsId => TZConvert.TryWindowsToIana(windowsId, out var ianaId, mode) ? ianaId : null)
+            .Sorted();
         return Verify(allMappings).UseParameters(mode);
     }
 
@@ -44,9 +46,9 @@ public class DataVerificationTests
                 var primary = x.First(y => y.Region == "001");
                 return x.Where(y => y.Region == primary.Region || y.IanaId != primary.IanaId);
             })
-            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.IanaId);
-        var sorted = new SortedDictionary<string, string?>(allMappings, StringComparer.Ordinal);
-        return Verify(sorted).UseParameters(mode);
+            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.IanaId)
+            .Sorted();
+        return Verify(allMappings).UseParameters(mode);
     }
 
     [Fact]
@@ -54,8 +56,9 @@ public class DataVerificationTests
     {
         var windowsZones = TZConvert.KnownWindowsTimeZoneIds;
         var allMappings = windowsZones.ToDictionary(
-            windowsId => windowsId,
-            windowsId => TZConvert.TryWindowsToRails(windowsId, out var railsIds) ? railsIds : null);
+                windowsId => windowsId,
+                windowsId => TZConvert.TryWindowsToRails(windowsId, out var railsIds) ? railsIds : null)
+            .Sorted();
         return Verify(allMappings);
     }
 
@@ -77,9 +80,9 @@ public class DataVerificationTests
                     (primary.RailsIds != null && y.RailsIds?.SequenceEqual(primary.RailsIds) is not true)
                 );
             })
-            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.RailsIds);
-        var sorted = new SortedDictionary<string, IList<string>?>(allMappings, StringComparer.Ordinal);
-        return Verify(sorted);
+            .ToDictionary(x => $"({x.WindowsId}, {x.Region})", x => x.RailsIds)
+            .Sorted();
+        return Verify(allMappings);
     }
 
     [Fact]
@@ -87,8 +90,9 @@ public class DataVerificationTests
     {
         var ianaZones = TZConvert.KnownIanaTimeZoneNames;
         var allMappings = ianaZones.ToDictionary(
-            ianaId => ianaId,
-            ianaId => TZConvert.TryIanaToRails(ianaId, out var railsIds) ? railsIds : null);
+                ianaId => ianaId,
+                ianaId => TZConvert.TryIanaToRails(ianaId, out var railsIds) ? railsIds : null)
+            .Sorted();
         return Verify(allMappings);
     }
 
@@ -97,8 +101,9 @@ public class DataVerificationTests
     {
         var railsZones = TZConvert.KnownRailsTimeZoneNames;
         var allMappings = railsZones.ToDictionary(
-            railsId => railsId,
-            railsId => TZConvert.TryRailsToIana(railsId, out var ianaId) ? ianaId : null);
+                railsId => railsId,
+                railsId => TZConvert.TryRailsToIana(railsId, out var ianaId) ? ianaId : null)
+            .Sorted();
         return Verify(allMappings);
     }
 
@@ -107,8 +112,9 @@ public class DataVerificationTests
     {
         var railsZones = TZConvert.KnownRailsTimeZoneNames;
         var allMappings = railsZones.ToDictionary(
-            railsId => railsId,
-            railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null);
+                railsId => railsId,
+                railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null)
+            .Sorted();
         return Verify(allMappings);
     }
 

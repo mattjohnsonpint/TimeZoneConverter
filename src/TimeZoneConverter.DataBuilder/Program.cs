@@ -45,7 +45,20 @@ internal static class Program
             var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
             // Apply override mappings for zones not yet in the CLDR trunk we pulled in
-            // (NONE PRESENTLY)
+            mapping.Remove("Mountain Standard Time (Mexico),001,America/Chihuahua");
+            mapping.Add("Mountain Standard Time (Mexico),001,America/Mazatlan");
+            
+            mapping.Remove("Mountain Standard Time (Mexico),MX,America/Chihuahua America/Mazatlan");
+            mapping.Add("Mountain Standard Time (Mexico),MX,America/Mazatlan");
+            
+            mapping.Remove("Central Standard Time (Mexico),MX,America/Mexico_City America/Bahia_Banderas America/Merida America/Monterrey");
+            mapping.Add("Central Standard Time (Mexico),MX,America/Mexico_City America/Bahia_Banderas America/Merida America/Monterrey America/Chihuahua");
+            
+            mapping.Remove("Mountain Standard Time,MX,America/Ojinaga");
+            mapping.Add("Mountain Standard Time,MX,America/Ciudad_Juarez");
+            
+            mapping.Remove("Central Standard Time,MX,America/Matamoros");
+            mapping.Add("Central Standard Time,MX,America/Matamoros America/Ojinaga");
 
             // Add missing Rails mappings where they make sense
             railsMapping.Remove("Arizona,America/Phoenix");
