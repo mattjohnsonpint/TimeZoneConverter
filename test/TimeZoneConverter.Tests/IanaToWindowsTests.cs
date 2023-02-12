@@ -203,4 +203,32 @@ public class IanaToWindowsTests
         var result = TZConvert.IanaToWindows("Europe/Kiev");
         Assert.Equal("FLE Standard Time", result);
     }
+    
+    [Fact]
+    public void Can_Convert_Ciudad_Juarez_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Ciudad_Juarez");
+        Assert.Equal("Mountain Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Ojinaga_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Ojinaga");
+        Assert.Equal("Central Standard Time", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Chihuahua_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Chihuahua");
+        Assert.Equal("Central Standard Time (Mexico)", result);
+    }
+    
+    [Fact]
+    public void Can_Convert_Mazatlan_To_Windows()
+    {
+        var result = TZConvert.IanaToWindows("America/Mazatlan");
+        Assert.Equal("Mountain Standard Time (Mexico)", result);
+    }
 }
