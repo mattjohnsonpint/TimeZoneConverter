@@ -21,6 +21,11 @@ jobs:
         - name: Update tzdata
           run: sudo apt-get update && sudo apt-get install -y tzdata 
 
+        - name: Install .NET Core 3.1 SDK
+          uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: 3.1.x
+
         - name: Restore
           run: dotnet restore --nologo
 
