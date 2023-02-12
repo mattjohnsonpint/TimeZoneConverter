@@ -144,7 +144,7 @@ There are a few additional helpers you may find useful.
 
 This library is provided free of charge, under the terms of the [MIT license][7].
 
-[1]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/src/TimeZoneConverter
+[1]: https://github.com/mattjohnsonpint/TimeZoneConverter/blob/main/src/TimeZoneConverter.Posix
 [2]: https://cldr.unicode.org
 [3]: https://iana.org/time-zones
 [4]: https://aka.ms/dstblog
