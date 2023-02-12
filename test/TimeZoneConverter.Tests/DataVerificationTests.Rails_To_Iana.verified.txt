@@ -27,7 +27,7 @@
   Budapest: Europe/Budapest,
   Buenos Aires: America/Argentina/Buenos_Aires,
   Cairo: Africa/Cairo,
-  Canberra: Australia/Melbourne,
+  Canberra: Australia/Canberra,
   Cape Verde Is.: Atlantic/Cape_Verde,
   Caracas: America/Caracas,
   Casablanca: Africa/Casablanca,

@@ -941,7 +941,7 @@
     Adelaide
   ],
   Australia/Canberra: [
-    Sydney
+    Canberra
   ],
   Australia/Currie: [
     Hobart
@@ -959,7 +959,6 @@
   ],
   Australia/Lord_Howe: null,
   Australia/Melbourne: [
-    Canberra,
     Melbourne
   ],
   Australia/NSW: [
@@ -984,7 +983,6 @@
     Hobart
   ],
   Australia/Victoria: [
-    Canberra,
     Melbourne
   ],
   Australia/West: [
