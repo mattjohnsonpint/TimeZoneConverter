@@ -8,7 +8,7 @@ env:
   DOTNET_NOLOGO: 1
 
 jobs:
-  build-and-pack:
+  release:
     runs-on: ubuntu-latest
 
     strategy:
@@ -39,7 +39,7 @@ jobs:
           run: dotnet pack -c Release --nologo --no-build
 
         - name: Push to NuGet
-          run: dotnet nuget push -s nuget.org -k ${{secrets.NUGET_API_KEY}} **/*.nupkg
+          run: dotnet nuget push -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} **/*.nupkg
 
         - name: Archive Artifacts
           uses: actions/upload-artifact@v3
