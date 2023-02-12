@@ -1,4 +1,4 @@
-name: pack-for-release
+name: release
 
 on:
   workflow_dispatch:
