@@ -35,7 +35,7 @@
   Central Time (US & Canada): Central Standard Time,
   Chatham Is.: Chatham Islands Standard Time,
   Chennai: India Standard Time,
-  Chihuahua: Mountain Standard Time (Mexico),
+  Chihuahua: Central Standard Time (Mexico),
   Chongqing: China Standard Time,
   Copenhagen: Romance Standard Time,
   Darwin: AUS Central Standard Time,

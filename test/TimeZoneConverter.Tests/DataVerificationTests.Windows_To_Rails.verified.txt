@@ -175,7 +175,7 @@
     Mountain Time (US & Canada)
   ],
   Mountain Standard Time (Mexico): [
-    Chihuahua
+    Mazatlan
   ],
   Myanmar Standard Time: [
     Rangoon

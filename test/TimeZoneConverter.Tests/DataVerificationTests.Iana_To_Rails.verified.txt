@@ -209,6 +209,9 @@
   America/Chihuahua: [
     Chihuahua
   ],
+  America/Ciudad_Juarez: [
+    Mountain Time (US & Canada)
+  ],
   America/Coral_Harbour: [
     Bogota
   ],
@@ -440,7 +443,7 @@
     Greenland
   ],
   America/Ojinaga: [
-    Mountain Time (US & Canada)
+    Central Time (US & Canada)
   ],
   America/Panama: [
     Bogota
