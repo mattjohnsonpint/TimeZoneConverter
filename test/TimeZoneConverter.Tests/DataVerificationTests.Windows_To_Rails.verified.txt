@@ -1,4 +1,10 @@
-{
+﻿{
+  AUS Central Standard Time: [
+    Darwin
+  ],
+  AUS Eastern Standard Time: [
+    Sydney
+  ],
   Afghanistan Standard Time: [
     Kabul
   ],
@@ -24,13 +30,7 @@
   Atlantic Standard Time: [
     Atlantic Time (Canada)
   ],
-  AUS Central Standard Time: [
-    Darwin
-  ],
   Aus Central W. Standard Time: null,
-  AUS Eastern Standard Time: [
-    Sydney
-  ],
   Azerbaijan Standard Time: [
     Baku
   ],
@@ -112,26 +112,26 @@
   Ekaterinburg Standard Time: [
     Ekaterinburg
   ],
-  Fiji Standard Time: [
-    Fiji
-  ],
   FLE Standard Time: [
     Kyiv
   ],
-  Georgian Standard Time: [
-    Tbilisi
+  Fiji Standard Time: [
+    Fiji
   ],
   GMT Standard Time: [
     Edinburgh,
     London
   ],
+  GTB Standard Time: [
+    Bucharest
+  ],
+  Georgian Standard Time: [
+    Tbilisi
+  ],
   Greenland Standard Time: [
     Greenland
   ],
   Greenwich Standard Time: null,
-  GTB Standard Time: [
-    Bucharest
-  ],
   Haiti Standard Time: null,
   Hawaiian Standard Time: [
     Hawaii
@@ -241,6 +241,10 @@
   SA Western Standard Time: [
     La Paz
   ],
+  SE Asia Standard Time: [
+    Bangkok,
+    Hanoi
+  ],
   Saint Pierre Standard Time: null,
   Sakhalin Standard Time: null,
   Samoa Standard Time: [
@@ -248,10 +252,6 @@
   ],
   Sao Tome Standard Time: null,
   Saratov Standard Time: null,
-  SE Asia Standard Time: [
-    Bangkok,
-    Hanoi
-  ],
   Singapore Standard Time: [
     Singapore
   ],
@@ -285,9 +285,6 @@
     Istanbul
   ],
   Turks And Caicos Standard Time: null,
-  Ulaanbaatar Standard Time: [
-    Ulaanbaatar
-  ],
   US Eastern Standard Time: [
     Indiana (East)
   ],
@@ -303,6 +300,9 @@
   UTC-08: null,
   UTC-09: null,
   UTC-11: null,
+  Ulaanbaatar Standard Time: [
+    Ulaanbaatar
+  ],
   Venezuela Standard Time: [
     Caracas
   ],
