@@ -8,7 +8,7 @@
     <PackageTags>timezone;time;zone;time zone;iana;tzdb;olson;timezoneinfo,rails</PackageTags>
     <PackageProjectUrl>https://github.com/mattjohnsonpint/TimeZoneConverter</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>6.0.1</Version>
+    <Version>6.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
