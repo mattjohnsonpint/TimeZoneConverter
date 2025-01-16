@@ -1,8 +1,4 @@
 ﻿{
-  : [
-    Guadalajara,
-    Mexico City
-  ],
   Africa/Abidjan: null,
   Africa/Accra: null,
   Africa/Addis_Ababa: [

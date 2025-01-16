@@ -1,5 +1,4 @@
 ﻿{
-  : Central Standard Time (Mexico),
   Africa/Abidjan: Greenwich Standard Time,
   Africa/Accra: Greenwich Standard Time,
   Africa/Addis_Ababa: E. Africa Standard Time,
