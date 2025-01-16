@@ -1,6 +1,4 @@
 using System.Runtime.CompilerServices;
-
-#if !NETFRAMEWORK
 using VerifyTests.DiffPlex;
 
 namespace TimeZoneConverter.Tests
@@ -14,7 +12,6 @@ namespace TimeZoneConverter.Tests
         }
     }
 }
-#endif
 
 #if !NET5_0_OR_GREATER
 namespace System.Runtime.CompilerServices
