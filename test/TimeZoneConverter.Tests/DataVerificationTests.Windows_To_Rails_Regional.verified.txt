@@ -1,4 +1,4 @@
-{
+﻿{
   (AUS Central Standard Time, 001): [
     Darwin
   ],
@@ -42,7 +42,6 @@
   ],
   (Bahia Standard Time, 001): null,
   (Bangladesh Standard Time, 001): [
-    Astana,
     Dhaka
   ],
   (Belarus Standard Time, 001): [
@@ -64,12 +63,7 @@
   (Central America Standard Time, 001): [
     Central America
   ],
-  (Central Asia Standard Time, 001): [
-    Almaty
-  ],
-  (Central Asia Standard Time, CN): [
-    Urumqi
-  ],
+  (Central Asia Standard Time, 001): null,
   (Central Brazilian Standard Time, 001): null,
   (Central Europe Standard Time, 001): [
     Budapest
@@ -523,6 +517,10 @@
   (W. Mongolia Standard Time, 001): null,
   (West Asia Standard Time, 001): [
     Tashkent
+  ],
+  (West Asia Standard Time, KZ): [
+    Almaty,
+    Astana
   ],
   (West Bank Standard Time, 001): null,
   (West Pacific Standard Time, 001): [

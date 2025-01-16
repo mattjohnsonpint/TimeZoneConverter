@@ -1,4 +1,4 @@
-{
+﻿{
   (AUS Central Standard Time, 001): Australia/Darwin,
   (AUS Eastern Standard Time, 001): Australia/Sydney,
   (Afghanistan Standard Time, 001): Asia/Kabul,
@@ -35,11 +35,10 @@
   (Central America Standard Time, HN): America/Tegucigalpa,
   (Central America Standard Time, NI): America/Managua,
   (Central America Standard Time, SV): America/El_Salvador,
-  (Central Asia Standard Time, 001): Asia/Almaty,
+  (Central Asia Standard Time, 001): Asia/Bishkek,
   (Central Asia Standard Time, CN): Asia/Urumqi,
   (Central Asia Standard Time, DG): Indian/Chagos,
   (Central Asia Standard Time, IO): Indian/Chagos,
-  (Central Asia Standard Time, KG): Asia/Bishkek,
   (Central Brazilian Standard Time, 001): America/Cuiaba,
   (Central Europe Standard Time, 001): Europe/Budapest,
   (Central Europe Standard Time, AL): Europe/Tirane,

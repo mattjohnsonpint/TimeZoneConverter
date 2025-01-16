@@ -176,8 +176,7 @@
     America/Toronto,
     America/Vancouver,
     America/Whitehorse,
-    America/Winnipeg,
-    America/Yellowknife
+    America/Winnipeg
   ],
   CC: [
     Indian/Cocos
@@ -527,7 +526,6 @@
     Asia/Yangon
   ],
   MN: [
-    Asia/Choibalsan,
     Asia/Hovd,
     Asia/Ulaanbaatar
   ],

@@ -1,4 +1,8 @@
 ﻿{
+  : [
+    Guadalajara,
+    Mexico City
+  ],
   Africa/Abidjan: null,
   Africa/Accra: null,
   Africa/Addis_Ababa: [
@@ -597,9 +601,7 @@
     Riyadh
   ],
   Antarctica/Troll: null,
-  Antarctica/Vostok: [
-    Urumqi
-  ],
+  Antarctica/Vostok: null,
   Arctic/Longyearbyen: [
     Berlin
   ],
@@ -607,17 +609,20 @@
     Riyadh
   ],
   Asia/Almaty: [
-    Almaty
+    Almaty,
+    Astana
   ],
   Asia/Amman: null,
   Asia/Anadyr: [
     Kamchatka
   ],
   Asia/Aqtau: [
-    Tashkent
+    Almaty,
+    Astana
   ],
   Asia/Aqtobe: [
-    Tashkent
+    Almaty,
+    Astana
   ],
   Asia/Ashgabat: [
     Tashkent
@@ -626,7 +631,8 @@
     Tashkent
   ],
   Asia/Atyrau: [
-    Tashkent
+    Almaty,
+    Astana
   ],
   Asia/Baghdad: [
     Baghdad
@@ -643,9 +649,7 @@
   ],
   Asia/Barnaul: null,
   Asia/Beirut: null,
-  Asia/Bishkek: [
-    Almaty
-  ],
+  Asia/Bishkek: null,
   Asia/Brunei: [
     Kuala Lumpur
   ],
@@ -669,12 +673,10 @@
     Sri Jayawardenepura
   ],
   Asia/Dacca: [
-    Astana,
     Dhaka
   ],
   Asia/Damascus: null,
   Asia/Dhaka: [
-    Astana,
     Dhaka
   ],
   Asia/Dili: [
@@ -792,7 +794,8 @@
   ],
   Asia/Omsk: null,
   Asia/Oral: [
-    Tashkent
+    Almaty,
+    Astana
   ],
   Asia/Phnom_Penh: [
     Bangkok,
@@ -806,7 +809,8 @@
     Riyadh
   ],
   Asia/Qostanay: [
-    Almaty
+    Almaty,
+    Astana
   ],
   Asia/Qyzylorda: null,
   Asia/Rangoon: [
@@ -851,11 +855,9 @@
     Jerusalem
   ],
   Asia/Thimbu: [
-    Astana,
     Dhaka
   ],
   Asia/Thimphu: [
-    Astana,
     Dhaka
   ],
   Asia/Tokyo: [
@@ -1005,7 +1007,7 @@
     La Paz
   ],
   CET: [
-    Paris
+    Brussels
   ],
   CST6CDT: [
     Central Time (US & Canada)
@@ -1040,7 +1042,7 @@
   Chile/EasterIsland: null,
   Cuba: null,
   EET: [
-    Bucharest
+    Athens
   ],
   EST: [
     Bogota
@@ -1112,9 +1114,7 @@
   Etc/GMT-5: [
     Tashkent
   ],
-  Etc/GMT-6: [
-    Almaty
-  ],
+  Etc/GMT-6: null,
   Etc/GMT-7: [
     Bangkok,
     Hanoi
@@ -1371,9 +1371,7 @@
   Indian/Antananarivo: [
     Nairobi
   ],
-  Indian/Chagos: [
-    Almaty
-  ],
+  Indian/Chagos: null,
   Indian/Christmas: [
     Bangkok,
     Hanoi
@@ -1421,7 +1419,7 @@
   ],
   Libya: null,
   MET: [
-    Berlin
+    Brussels
   ],
   MST: [
     Arizona
@@ -1632,8 +1630,7 @@
     St. Petersburg
   ],
   WET: [
-    Edinburgh,
-    London
+    Lisbon
   ],
   Zulu: [
     UTC

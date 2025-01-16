@@ -412,7 +412,6 @@
     America/Cayman
   ],
   KZ: [
-    Asia/Almaty,
     Asia/Oral,
     Asia/Qyzylorda
   ],
