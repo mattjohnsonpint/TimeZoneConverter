@@ -1,7 +1,8 @@
 using System.Runtime.CompilerServices;
-using VerifyTests.DiffPlex;
 
 #if !NETFRAMEWORK
+using VerifyTests.DiffPlex;
+
 namespace TimeZoneConverter.Tests
 {
     public static class ModuleInit
