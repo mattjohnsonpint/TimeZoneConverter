@@ -16,15 +16,19 @@ jobs:
 
     steps:
         - name: Checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
 
         - name: Update tzdata
           run: sudo apt-get update && sudo apt-get install -y tzdata 
 
-        - name: Install .NET Core 3.1 SDK
-          uses: actions/setup-dotnet@v3
+        - name: Install .NET SDKs
+          uses: actions/setup-dotnet@v4
           with:
-            dotnet-version: 3.1.x
+            dotnet-version: |
+              3.1.x
+              6.0.x
+              8.0.x
+              9.0.x
 
         - name: Restore
           run: dotnet restore --nologo

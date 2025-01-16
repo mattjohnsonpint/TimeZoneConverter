@@ -6,7 +6,7 @@
   American Samoa: Pacific/Pago_Pago,
   Amsterdam: Europe/Amsterdam,
   Arizona: America/Phoenix,
-  Astana: Asia/Dhaka,
+  Astana: Asia/Almaty,
   Athens: Europe/Athens,
   Atlantic Time (Canada): America/Halifax,
   Auckland: Pacific/Auckland,

@@ -39,7 +39,6 @@
   ],
   Bahia Standard Time: null,
   Bangladesh Standard Time: [
-    Astana,
     Dhaka
   ],
   Belarus Standard Time: [
@@ -61,9 +60,7 @@
   Central America Standard Time: [
     Central America
   ],
-  Central Asia Standard Time: [
-    Almaty
-  ],
+  Central Asia Standard Time: null,
   Central Brazilian Standard Time: null,
   Central Europe Standard Time: [
     Budapest

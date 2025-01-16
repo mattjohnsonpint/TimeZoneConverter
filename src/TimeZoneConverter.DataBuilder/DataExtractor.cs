@@ -17,7 +17,7 @@ public static class DataExtractor
         {
             var windowsZone = element.Attribute("other")?.Value;
             var territory = element.Attribute("territory")?.Value;
-            var ianaZones = (element.Attribute("type")?.Value.Split() ?? Array.Empty<string>()).ToList();
+            var ianaZones = (element.Attribute("type")?.Value.Trim().Split() ?? Array.Empty<string>()).ToList();
 
             list.Add($"{windowsZone},{territory},{string.Join(" ", ianaZones)}");
         }
@@ -42,7 +42,7 @@ public static class DataExtractor
                     continue;
                 }
 
-                var zones = aliasAttribute.Value.Split();
+                var zones = aliasAttribute.Value.Trim().Split();
                 if (zones.Length <= 1)
                 {
                     continue;
@@ -83,7 +83,7 @@ public static class DataExtractor
                 continue;
             }
 
-            if (data[link.Value].Split().Contains(link.Key))
+            if (data[link.Value].Trim().Split().Contains(link.Key))
             {
                 continue;
             }
@@ -111,7 +111,7 @@ public static class DataExtractor
             var lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, file));
             foreach (var line in lines.Where(x => x.StartsWith("Link")))
             {
-                var parts = line.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
+                var parts = line.Trim().Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
                 var target = parts[1];
                 var link = parts[2];
                 data.Add(link, target);
@@ -127,7 +127,7 @@ public static class DataExtractor
         var lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, "zone.tab"));
         foreach (var line in lines.Where(x => !x.StartsWith("#")))
         {
-            var parts = line.Split('\t');
+            var parts = line.Trim().Split('\t');
             var territory = parts[0];
             var zone = parts[2];
 
@@ -163,7 +163,7 @@ public static class DataExtractor
                     break;
                 }
 
-                var parts = line.Split("=>");
+                var parts = line.Trim().Split("=>");
                 data.Add(parts[0].Trim(' ', '"') + "," + parts[1].TrimEnd(',').Trim(' ', '"'));
             }
             else if (line == "MAPPING = {")

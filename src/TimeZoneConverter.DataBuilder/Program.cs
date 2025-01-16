@@ -45,20 +45,10 @@ internal static class Program
             var railsMapping = DataExtractor.LoadRailsMapping(railsPath);
 
             // Apply override mappings for zones not yet in the CLDR trunk we pulled in
-            mapping.Remove("Mountain Standard Time (Mexico),001,America/Chihuahua");
-            mapping.Add("Mountain Standard Time (Mexico),001,America/Mazatlan");
-            
-            mapping.Remove("Mountain Standard Time (Mexico),MX,America/Chihuahua America/Mazatlan");
-            mapping.Add("Mountain Standard Time (Mexico),MX,America/Mazatlan");
-            
-            mapping.Remove("Central Standard Time (Mexico),MX,America/Mexico_City America/Bahia_Banderas America/Merida America/Monterrey");
-            mapping.Add("Central Standard Time (Mexico),MX,America/Mexico_City America/Bahia_Banderas America/Merida America/Monterrey America/Chihuahua");
-            
-            mapping.Remove("Mountain Standard Time,MX,America/Ojinaga");
-            mapping.Add("Mountain Standard Time,MX,America/Ciudad_Juarez");
-            
-            mapping.Remove("Central Standard Time,MX,America/Matamoros");
-            mapping.Add("Central Standard Time,MX,America/Matamoros America/Ojinaga");
+            // (None presently)
+
+            // Remove the alias for "Etc/Unknown Factory" as it's not a valid zone.
+            aliases.Remove("Etc/Unknown,Factory");
 
             // Add missing Rails mappings where they make sense
             railsMapping.Remove("Arizona,America/Phoenix");
@@ -71,12 +61,6 @@ internal static class Program
             mapping.Add("Greenwich Standard Time,TA,Atlantic/St_Helena");
             mapping.Add("Central Europe Standard Time,XK,Europe/Belgrade");
             mapping.Add("Central Asia Standard Time,DG,Indian/Chagos");
-
-            // Add a few aliases for IANA abbreviated zones not tracked by CLDR
-            aliases.Add("Europe/Paris,CET");
-            aliases.Add("Europe/Bucharest,EET");
-            aliases.Add("Europe/Berlin,MET");
-            aliases.Add("Atlantic/Canary,WET");
 
             mapping.Sort(StringComparer.Ordinal);
             aliases.Sort(StringComparer.Ordinal);

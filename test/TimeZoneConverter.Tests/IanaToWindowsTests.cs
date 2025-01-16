@@ -68,7 +68,7 @@ public class IanaToWindowsTests
     public void Can_Convert_Asia_Qostanay_To_Windows()
     {
         var result = TZConvert.IanaToWindows("Asia/Qostanay");
-        Assert.Equal("Central Asia Standard Time", result);
+        Assert.Equal("West Asia Standard Time", result);
     }
 
     [Fact]

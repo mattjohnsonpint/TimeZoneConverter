@@ -1,6 +1,5 @@
 namespace TimeZoneConverter.Tests;
 
-[UsesVerify]
 public class DataVerificationTests
 {
     [Fact]
