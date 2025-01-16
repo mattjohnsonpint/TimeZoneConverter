@@ -13,7 +13,7 @@ TimeZoneConverter is a lightweight library to convert quickly between IANA, Wind
 
 ## Compatibility
 
-As of version 9.0.0, TimeZoneConverter works with all of the following:
+As of version 7.0.0, TimeZoneConverter works with all of the following:
 
 - .NET 6, .NET 8, .NET 9
 - .NET Core 2.0 or greater
