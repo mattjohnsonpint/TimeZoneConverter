@@ -47,6 +47,9 @@ internal static class Program
             // Apply override mappings for zones not yet in the CLDR trunk we pulled in
             // (None presently)
 
+            // Remove the alias for "Etc/Unknown Factory" as it's not a valid zone.
+            aliases.Remove("Etc/Unknown,Factory");
+
             // Add missing Rails mappings where they make sense
             railsMapping.Remove("Arizona,America/Phoenix");
             railsMapping.Add("Arizona,America/Phoenix America/Whitehorse");
