@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeZoneConverter.Posix", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeZoneConverter.Posix.Tests", "test\TimeZoneConverter.Posix.Tests\TimeZoneConverter.Posix.Tests.csproj", "{3EF2A004-2823-4C13-AB04-8A7B415B49C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeZoneConverter.Benchmarks", "test\TimeZoneConverter.Benchmarks\TimeZoneConverter.Benchmarks.csproj", "{66C9F893-5C13-4B14-B870-594459EB739F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF2A004-2823-4C13-AB04-8A7B415B49C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66C9F893-5C13-4B14-B870-594459EB739F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C9F893-5C13-4B14-B870-594459EB739F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C9F893-5C13-4B14-B870-594459EB739F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C9F893-5C13-4B14-B870-594459EB739F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{902AFB31-8432-4C34-89AB-2CFF4DD27B93} = {62E4880C-D978-413C-AB12-E74B2E47426E}
 		{6E9924D5-04AA-4063-AD77-02C68112D612} = {9C922A24-67F8-4E45-B079-130DDAC3B5A7}
 		{3EF2A004-2823-4C13-AB04-8A7B415B49C7} = {62E4880C-D978-413C-AB12-E74B2E47426E}
+		{66C9F893-5C13-4B14-B870-594459EB739F} = {62E4880C-D978-413C-AB12-E74B2E47426E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {404E04B4-C30C-452D-8705-DDF6C17AE7D0}
