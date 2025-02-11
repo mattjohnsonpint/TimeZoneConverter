@@ -31,7 +31,7 @@ public static class Downloader
 
     public static string GetTempDir()
     {
-        return Path.GetTempPath() + Path.GetRandomFileName().Substring(0, 8);
+        return string.Concat(Path.GetTempPath(), Path.GetRandomFileName().AsSpan(0, 8));
     }
 
     private static async Task DownloadAsync(string url, string dir)

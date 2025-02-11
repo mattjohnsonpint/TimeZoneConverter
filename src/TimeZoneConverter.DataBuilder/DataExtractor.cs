@@ -77,13 +77,14 @@ public static class DataExtractor
 
         foreach (var link in tzdbLinks)
         {
-            if (!data.ContainsKey(link.Value))
+            if (!data.TryGetValue(link.Value, out string? value))
             {
-                data.Add(link.Value, link.Key);
+                value = link.Key;
+                data.Add(link.Value, value);
                 continue;
             }
 
-            if (data[link.Value].Trim().Split().Contains(link.Key))
+            if (value.Trim().Split().Contains(link.Key))
             {
                 continue;
             }
@@ -109,7 +110,7 @@ public static class DataExtractor
         foreach (var file in dataFiles)
         {
             var lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, file));
-            foreach (var line in lines.Where(x => x.StartsWith("Link")))
+            foreach (var line in lines.Where(x => x.StartsWith("Link", StringComparison.Ordinal)))
             {
                 var parts = line.Trim().Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
                 var target = parts[1];
@@ -125,7 +126,7 @@ public static class DataExtractor
     {
         var data = new Dictionary<string, IList<string>>();
         var lines = File.ReadLines(Path.Combine(tzdbDirectoryPath, "zone.tab"));
-        foreach (var line in lines.Where(x => !x.StartsWith("#")))
+        foreach (var line in lines.Where(x => !x.StartsWith('#')))
         {
             var parts = line.Trim().Split('\t');
             var territory = parts[0];
