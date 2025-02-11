@@ -11,6 +11,8 @@ namespace TimeZoneConverter.Posix;
 /// </summary>
 public static class PosixTimeZone
 {
+    private static readonly char[] PosixAbbreviationSplitChars = {'+', '-'};
+
     /// <summary>
     /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo" /> object, for the current year.
     /// Note - only uses only the <see cref="TimeZoneInfo.Id" /> property from the object.
@@ -130,7 +132,7 @@ public static class PosixTimeZone
 
     private static string GetPosixAbbreviation(string abbreviation)
     {
-        return abbreviation.IndexOfAny(new[] {'+', '-'}) != -1 ? "<" + abbreviation + ">" : abbreviation;
+        return abbreviation.IndexOfAny(PosixAbbreviationSplitChars) != -1 ? "<" + abbreviation + ">" : abbreviation;
     }
 
     private static string GetPosixOffsetString(Offset offset)
