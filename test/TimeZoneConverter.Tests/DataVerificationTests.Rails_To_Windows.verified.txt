@@ -7,6 +7,7 @@
   Amsterdam: W. Europe Standard Time,
   Arizona: US Mountain Standard Time,
   Astana: West Asia Standard Time,
+  Asuncion: Paraguay Standard Time,
   Athens: GTB Standard Time,
   Atlantic Time (Canada): Atlantic Standard Time,
   Auckland: New Zealand Standard Time,

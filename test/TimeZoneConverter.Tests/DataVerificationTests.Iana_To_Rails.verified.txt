@@ -156,7 +156,9 @@
   America/Aruba: [
     Puerto Rico
   ],
-  America/Asuncion: null,
+  America/Asuncion: [
+    Asuncion
+  ],
   America/Atikokan: [
     Bogota
   ],
@@ -221,6 +223,7 @@
   America/Costa_Rica: [
     Central America
   ],
+  America/Coyhaique: null,
   America/Creston: [
     Arizona
   ],

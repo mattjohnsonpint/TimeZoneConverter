@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using VerifyTests.DiffPlex;
 
 namespace TimeZoneConverter.Tests
 {
@@ -8,12 +7,12 @@ namespace TimeZoneConverter.Tests
         [ModuleInitializer]
         public static void Init()
         {
-            VerifyDiffPlex.Initialize(OutputType.Compact);
+            VerifierSettings.AutoVerify(includeBuildServer: false);
         }
     }
 }
 
-#if !NET5_0_OR_GREATER
+#if NETFRAMEWORK
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]

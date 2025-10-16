@@ -98,6 +98,7 @@
   America/Coral_Harbour: SA Pacific Standard Time,
   America/Cordoba: Argentina Standard Time,
   America/Costa_Rica: Central America Standard Time,
+  America/Coyhaique: Magallanes Standard Time,
   America/Creston: US Mountain Standard Time,
   America/Cuiaba: Central Brazilian Standard Time,
   America/Curacao: SA Western Standard Time,
