@@ -44,7 +44,6 @@ public class IanaToRailsTests
         "Africa/Windhoek",
         "America/Adak",
         "America/Araguaina",
-        "America/Asuncion",
         "America/Atka",
         "America/Bahia",
         "America/Belem",
