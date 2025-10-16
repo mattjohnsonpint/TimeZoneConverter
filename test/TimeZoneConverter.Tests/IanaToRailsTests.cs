@@ -51,6 +51,7 @@ public class IanaToRailsTests
         "America/Campo_Grande",
         "America/Cancun",
         "America/Cayenne",
+        "America/Coyhaique",
         "America/Cuiaba",
         "America/Danmarkshavn",
         "America/Fortaleza",
