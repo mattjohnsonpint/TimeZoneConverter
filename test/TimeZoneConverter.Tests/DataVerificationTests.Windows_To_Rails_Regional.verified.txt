@@ -149,7 +149,7 @@
     America/Havana
   ],
   (Dateline Standard Time, 001): [
-    International Date Line West
+    -12:00
   ],
   (E. Africa Standard Time, 001): [
     Nairobi
@@ -600,7 +600,7 @@
     Arizona
   ],
   (UTC+12, 001): [
-    Etc/GMT-12
+    +12:00
   ],
   (UTC+12, KI): [
     Marshall Is.
@@ -621,7 +621,7 @@
     Marshall Is.
   ],
   (UTC+13, 001): [
-    Etc/GMT-13
+    +13:00
   ],
   (UTC+13, KI): [
     Pacific/Kanton
@@ -651,7 +651,7 @@
     Pacific/Gambier
   ],
   (UTC-11, 001): [
-    Etc/GMT+11
+    -11:00
   ],
   (UTC-11, AS): [
     American Samoa

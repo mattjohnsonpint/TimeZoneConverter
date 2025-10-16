@@ -1221,13 +1221,13 @@
     Cape Verde Is.
   ],
   Etc/GMT+10: [
-    Hawaii
+    -10:00
   ],
   Etc/GMT+11: [
-    Etc/GMT+11
+    -11:00
   ],
   Etc/GMT+12: [
-    International Date Line West
+    -12:00
   ],
   Etc/GMT+2: [
     Etc/GMT+2
@@ -1260,19 +1260,19 @@
     Etc/GMT-1
   ],
   Etc/GMT-10: [
-    Port Moresby
+    +10:00
   ],
   Etc/GMT-11: [
-    Solomon Is.
+    +11:00
   ],
   Etc/GMT-12: [
-    Etc/GMT-12
+    +12:00
   ],
   Etc/GMT-13: [
-    Etc/GMT-13
+    +13:00
   ],
   Etc/GMT-14: [
-    Etc/GMT-14
+    +14:00
   ],
   Etc/GMT-2: [
     Pretoria

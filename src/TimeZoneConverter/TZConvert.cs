@@ -395,6 +395,23 @@ public static class TZConvert
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     public static bool TryIanaToRails(string ianaTimeZoneName, out IList<string> railsTimeZoneNames)
     {
+
+        // in the case of an Etc/GMT+/-n zone, use the Rails fixed-offset zone.  For example, `Etc/GMT-6` -> `+06:00` or `Etc/GMT+3` -> `-03:00`
+        if (ianaTimeZoneName.StartsWith("Etc/GMT", StringComparison.OrdinalIgnoreCase))
+        {
+            var offsetPart = ianaTimeZoneName[7..];
+            if (offsetPart.Length > 2)
+            {
+                var sign = offsetPart[0];
+                if ((sign == '+' || sign == '-') && int.TryParse(offsetPart[1..], out var hours) && hours is >= 0 and <= 14)
+                {
+                    var offsetString = $"{(sign == '+' ? '-' : '+')}{hours:00}:00"; // note the inverted sign
+                    railsTimeZoneNames = new List<string> { offsetString };
+                    return true;
+                }
+            }
+        }
+
         // try directly first
         if (InverseRailsMap.TryGetValue(ianaTimeZoneName, out railsTimeZoneNames!))
         {

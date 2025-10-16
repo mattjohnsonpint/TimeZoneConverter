@@ -104,7 +104,7 @@
     America/Havana
   ],
   Dateline Standard Time: [
-    International Date Line West
+    -12:00
   ],
   E. Africa Standard Time: [
     Nairobi
@@ -372,10 +372,10 @@
     UTC
   ],
   UTC+12: [
-    Etc/GMT-12
+    +12:00
   ],
   UTC+13: [
-    Etc/GMT-13
+    +13:00
   ],
   UTC-02: [
     Etc/GMT+2
@@ -387,7 +387,7 @@
     Etc/GMT+9
   ],
   UTC-11: [
-    Etc/GMT+11
+    -11:00
   ],
   Ulaanbaatar Standard Time: [
     Ulaanbaatar
