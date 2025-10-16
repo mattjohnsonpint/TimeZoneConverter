@@ -409,6 +409,14 @@ public static class TZConvert
             return true;
         }
 
+        // If it's a valid IANA zone, then just return it since Rails will accept it as-is.
+        if (KnownIanaTimeZoneNames.Contains(ianaTimeZoneName))
+        {
+            railsTimeZoneNames = new List<string> { ianaTimeZoneName };
+            return true;
+        }
+
+        // not found
         railsTimeZoneNames = Array.Empty<string>();
         return false;
     }
