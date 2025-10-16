@@ -276,7 +276,9 @@
     Islamabad,
     Karachi
   ],
-  (Paraguay Standard Time, 001): null,
+  (Paraguay Standard Time, 001): [
+    Asuncion
+  ],
   (Qyzylorda Standard Time, 001): null,
   (Romance Standard Time, 001): [
     Paris

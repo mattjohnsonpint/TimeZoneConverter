@@ -213,7 +213,9 @@
     Islamabad,
     Karachi
   ],
-  Paraguay Standard Time: null,
+  Paraguay Standard Time: [
+    Asuncion
+  ],
   Qyzylorda Standard Time: null,
   Romance Standard Time: [
     Paris
