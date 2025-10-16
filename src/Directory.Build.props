@@ -17,4 +17,8 @@
     <AnalysisLevel>latest-Recommended</AnalysisLevel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Polyfill" Version="8.9.0" PrivateAssets="All" />
+  </ItemGroup>
+
 </Project>
