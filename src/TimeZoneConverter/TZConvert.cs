@@ -16,7 +16,7 @@ public static class TZConvert
     private static readonly Dictionary<string, IList<string>> InverseRailsMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, string> Links = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
-    
+
     private static readonly IDictionary<string, IList<string>> IanaTerritoryZones =
         new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
@@ -78,7 +78,7 @@ public static class TZConvert
             return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
                 IanaTerritoryZones.ToDictionary(
                     x => x.Key,
-                    x => (IReadOnlyCollection<string>) x.Value
+                    x => (IReadOnlyCollection<string>)x.Value
                         .OrderBy(zone => zone)
                         .ToList().AsReadOnly()));
         }
@@ -87,7 +87,7 @@ public static class TZConvert
         return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
             IanaTerritoryZones.ToDictionary(
                 x => x.Key,
-                x => (IReadOnlyCollection<string>) x.Value
+                x => (IReadOnlyCollection<string>)x.Value
                     .Select(zone => TryIanaToWindows(zone, out var winId)
                         ? WindowsToIana(winId, x.Key)
                         : zone)
@@ -184,7 +184,7 @@ public static class TZConvert
         throw new InvalidTimeZoneException(
             $"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID.");
     }
-    
+
     /// <summary>
     /// Attempts to convert a Windows time zone ID to an equivalent IANA time zone name.
     /// Uses the "golden zone" - the one that is the most prevalent.
