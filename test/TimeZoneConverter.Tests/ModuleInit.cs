@@ -7,7 +7,7 @@ namespace TimeZoneConverter.Tests
         [ModuleInitializer]
         public static void Init()
         {
-            VerifierSettings.AutoVerify();
+            VerifierSettings.AutoVerify(includeBuildServer: false);
         }
     }
 }
