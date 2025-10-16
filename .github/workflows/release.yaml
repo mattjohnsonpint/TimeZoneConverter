@@ -11,18 +11,19 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-
     steps:
         - name: Checkout
-          uses: actions/checkout@v4
+          uses: actions/checkout@v5
 
         - name: Update tzdata
-          run: sudo apt-get update && sudo apt-get install -y tzdata 
+          run: sudo apt-get update && sudo apt-get install -y tzdata
+
+        - name: Set dotnet install dir on Windows
+          if: runner.os == 'Windows'
+          run: echo "DOTNET_INSTALL_DIR=D:\dotnet" >> $GITHUB_ENV
 
         - name: Install .NET SDKs
-          uses: actions/setup-dotnet@v4
+          uses: actions/setup-dotnet@v5
           with:
             dotnet-version: |
               3.1.x
