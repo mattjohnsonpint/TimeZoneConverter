@@ -50,10 +50,6 @@ internal static class Program
             // Remove the alias for "Etc/Unknown Factory" as it's not a valid zone.
             aliases.Remove("Etc/Unknown,Factory");
 
-            // Add missing Rails mappings where they make sense
-            railsMapping.Remove("Arizona,America/Phoenix");
-            railsMapping.Add("Arizona,America/Phoenix America/Whitehorse");
-
             // Add mappings for ISO country codes that aren't used in CLDR
             mapping.Add("Romance Standard Time,EA,Africa/Ceuta");
             mapping.Add("GMT Standard Time,IC,Atlantic/Canary");

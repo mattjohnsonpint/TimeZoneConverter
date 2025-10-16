@@ -232,9 +232,7 @@
     Puerto Rico
   ],
   America/Danmarkshavn: null,
-  America/Dawson: [
-    Arizona
-  ],
+  America/Dawson: null,
   America/Dawson_Creek: [
     Arizona
   ],
@@ -558,9 +556,7 @@
   America/Virgin: [
     Puerto Rico
   ],
-  America/Whitehorse: [
-    Arizona
-  ],
+  America/Whitehorse: null,
   America/Winnipeg: [
     Central Time (US & Canada)
   ],
@@ -1032,9 +1028,7 @@
   Canada/Saskatchewan: [
     Saskatchewan
   ],
-  Canada/Yukon: [
-    Arizona
-  ],
+  Canada/Yukon: null,
   Chile/Continental: [
     Santiago
   ],

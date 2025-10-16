@@ -537,7 +537,5 @@
   (Yakutsk Standard Time, 001): [
     Yakutsk
   ],
-  (Yukon Standard Time, 001): [
-    Arizona
-  ]
+  (Yukon Standard Time, 001): null
 }

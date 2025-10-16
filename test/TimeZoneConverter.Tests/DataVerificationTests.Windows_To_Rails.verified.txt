@@ -329,7 +329,5 @@
   Yakutsk Standard Time: [
     Yakutsk
   ],
-  Yukon Standard Time: [
-    Arizona
-  ]
+  Yukon Standard Time: null
 }
