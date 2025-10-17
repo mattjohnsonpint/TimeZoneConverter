@@ -9,50 +9,64 @@ public class MiscTests()
     [Fact]
     public void No_Exception_From_TryGetTimeZoneInfo()
     {
-        var result = TZConvert.TryGetTimeZoneInfo(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryGetTimeZoneInfo(null, out var _));
+        Assert.False(TZConvert.TryGetTimeZoneInfo("", out var _));
+        Assert.False(TZConvert.TryGetTimeZoneInfo(" ", out var _));
+        Assert.False(TZConvert.TryGetTimeZoneInfo("blah", out var _));
     }
 
     [Fact]
     public void No_Exception_From_TryIanaToRails()
     {
-        var result = TZConvert.TryIanaToRails(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryIanaToRails(null, out var _));
+        Assert.False(TZConvert.TryIanaToRails("", out var _));
+        Assert.False(TZConvert.TryIanaToRails(" ", out var _));
+        Assert.False(TZConvert.TryIanaToRails("blah", out var _));
     }
 
     [Fact]
     public void No_Exception_From_TryIanaToWindows()
     {
-        var result = TZConvert.TryIanaToWindows(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryIanaToWindows(null, out var _));
+        Assert.False(TZConvert.TryIanaToWindows("", out var _));
+        Assert.False(TZConvert.TryIanaToWindows(" ", out var _));
+        Assert.False(TZConvert.TryIanaToWindows("blah", out var _));
     }
 
     [Fact]
     public void No_Exception_From_TryRailsToIana()
     {
-        var result = TZConvert.TryRailsToIana(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryRailsToIana(null, out var _));
+        Assert.False(TZConvert.TryRailsToIana("", out var _));
+        Assert.False(TZConvert.TryRailsToIana(" ", out var _));
+        Assert.False(TZConvert.TryRailsToIana("blah", out var _));
     }
 
     [Fact]
     public void No_Exception_From_TryRailsToWindows()
     {
-        var result = TZConvert.TryRailsToWindows(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryRailsToWindows(null, out var _));
+        Assert.False(TZConvert.TryRailsToWindows("", out var _));
+        Assert.False(TZConvert.TryRailsToWindows(" ", out var _));
+        Assert.False(TZConvert.TryRailsToWindows("blah", out var _));
     }
 
     [Fact]
     public void No_Exception_From_TryWindowsToIana()
     {
-        var result = TZConvert.TryWindowsToIana(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryWindowsToIana(null, out var _));
+        Assert.False(TZConvert.TryWindowsToIana("", out var _));
+        Assert.False(TZConvert.TryWindowsToIana(" ", out var _));
+        Assert.False(TZConvert.TryWindowsToIana("blah", out var _));
     }
 
     [Fact]
     public void No_Exception_From_TryWindowsToRails()
     {
-        var result = TZConvert.TryWindowsToRails(null, out var _);
-        Assert.False(result);
+        Assert.False(TZConvert.TryWindowsToRails(null, out var _));
+        Assert.False(TZConvert.TryWindowsToRails("", out var _));
+        Assert.False(TZConvert.TryWindowsToRails(" ", out var _));
+        Assert.False(TZConvert.TryWindowsToRails("blah", out var _));
     }
 
 #pragma warning restore CS8625
