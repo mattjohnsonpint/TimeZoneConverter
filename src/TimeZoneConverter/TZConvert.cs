@@ -406,7 +406,7 @@ public static class TZConvert
                 if ((sign == '+' || sign == '-') && int.TryParse(offsetPart[1..], out var hours) && hours is >= 0 and <= 14)
                 {
                     var offsetString = $"{(sign == '+' ? '-' : '+')}{hours:00}:00"; // note the inverted sign
-                    railsTimeZoneNames = new List<string> { offsetString };
+                    railsTimeZoneNames = [offsetString];
                     return true;
                 }
             }
@@ -429,7 +429,7 @@ public static class TZConvert
         // If it's a valid IANA zone, then just return it since Rails will accept it as-is.
         if (KnownIanaTimeZoneNames.Contains(ianaTimeZoneName))
         {
-            railsTimeZoneNames = new List<string> { ianaTimeZoneName };
+            railsTimeZoneNames = [ianaTimeZoneName];
             return true;
         }
 
