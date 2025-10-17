@@ -78,4 +78,18 @@ public class TimeZoneInfoTests
         Assert.Equal(expected2.DateTime, converted2.DateTime);
         Assert.Equal(expected2.Offset, converted2.Offset);
     }
+
+    [Fact]
+    public void CanGetIndiaStandardTime()
+    {
+        var tz = TZConvert.GetTimeZoneInfo("India Standard Time");
+        Assert.NotNull(tz);
+    }
+
+    [Fact]
+    public void CanGetArgentinaStandardTime()
+    {
+        var tz = TZConvert.GetTimeZoneInfo("Argentina Standard Time");
+        Assert.NotNull(tz);
+    }
 }
