@@ -85,4 +85,11 @@ public class TimeZoneInfoTests
         var tz = TZConvert.GetTimeZoneInfo("India Standard Time");
         Assert.NotNull(tz);
     }
+
+    [Fact]
+    public void CanGetArgentinaStandardTime()
+    {
+        var tz = TZConvert.GetTimeZoneInfo("Argentina Standard Time");
+        Assert.NotNull(tz);
+    }
 }
