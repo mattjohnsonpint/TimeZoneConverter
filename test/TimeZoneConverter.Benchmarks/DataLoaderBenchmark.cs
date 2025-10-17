@@ -5,12 +5,12 @@ namespace TimeZoneConverter.Benchmarks;
 [MemoryDiagnoser]
 public class DataLoaderBenchmark
 {
-    private static readonly Dictionary<string, string> IanaMap = new();
-    private static readonly Dictionary<string, string> WindowsMap = new();
-    private static readonly Dictionary<string, string> RailsMap = new();
-    private static readonly Dictionary<string, IList<string>> InverseRailsMap = new();
-    private static readonly Dictionary<string, string> Links = new();
-    private static readonly Dictionary<string, IList<string>> IanaTerritoryZones = new();
+    private static readonly Dictionary<string, string> IanaMap = [];
+    private static readonly Dictionary<string, string> WindowsMap = [];
+    private static readonly Dictionary<string, string> RailsMap = [];
+    private static readonly Dictionary<string, IList<string>> InverseRailsMap = [];
+    private static readonly Dictionary<string, string> Links = [];
+    private static readonly Dictionary<string, IList<string>> IanaTerritoryZones = [];
 
     [IterationSetup]
     public void IterationSetup()

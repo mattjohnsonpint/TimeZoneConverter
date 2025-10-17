@@ -26,8 +26,8 @@ internal static class CustomTimeZoneFactory
             displayName: "(UTC+00:00) Troll Station, Antarctica",
             standardDisplayName: "Greenwich Mean Time",
             daylightDisplayName: "Central European Summer Time",
-            adjustmentRules: new[]
-            {
+            adjustmentRules:
+            [
                 // Like IANA, we will approximate with only UTC and CEST (UTC+2).
                 // Handling the CET (UTC+1) period would require generating adjustment rules for each individual year.
                 TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
@@ -45,6 +45,6 @@ internal static class CustomTimeZoneFactory
                         week: 5, // the last week of the month
                         DayOfWeek.Sunday)
                 )
-            }
+            ]
         );
 }

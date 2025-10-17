@@ -1,5 +1,4 @@
 using System.IO.Compression;
-using System.Reflection;
 using System.Resources;
 
 namespace TimeZoneConverter;
@@ -62,7 +61,7 @@ internal static class DataLoader
             {
                 foreach (var ianaZone in ianaZones)
                 {
-                    similarIanaZones.Add(ianaZone, ianaZones.Except(new[] {ianaZone}).ToArray());
+                    similarIanaZones.Add(ianaZone, [.. ianaZones.Except([ianaZone])]);
                 }
             }
         }
@@ -118,14 +117,14 @@ internal static class DataLoader
                 }
                 else
                 {
-                    inverseRailsMap.Add(ianaZone, new[] {railsZone});
+                    inverseRailsMap.Add(ianaZone, [railsZone]);
                 }
             }
         }
 
         foreach (var grouping in railsMap.GroupBy(x => x.Value, x => x.Key))
         {
-            inverseRailsMap.Add(grouping.Key, grouping.ToList());
+            inverseRailsMap.Add(grouping.Key, [.. grouping]);
         }
 
         // Expand the Inverse Rails map to include similar IANA zones

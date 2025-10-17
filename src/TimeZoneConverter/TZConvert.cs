@@ -79,7 +79,7 @@ public static class TZConvert
                 IanaTerritoryZones.ToDictionary(
                     x => x.Key,
                     x => (IReadOnlyCollection<string>)x.Value
-                        .OrderBy(zone => zone)
+                        .Order()
                         .ToList().AsReadOnly()));
         }
 
@@ -91,7 +91,7 @@ public static class TZConvert
                     .Select(zone => TryIanaToWindows(zone, out var winId)
                         ? WindowsToIana(winId, x.Key)
                         : zone)
-                    .OrderBy(zone => zone)
+                    .Order()
                     .Distinct()
                     .ToList().AsReadOnly()));
     }

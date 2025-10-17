@@ -3,15 +3,8 @@ using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
 
-public class IanaToWindowsTests
+public class IanaToWindowsTests(ITestOutputHelper output)
 {
-    private readonly ITestOutputHelper _output;
-
-    public IanaToWindowsTests(ITestOutputHelper output)
-    {
-        _output = output;
-    }
-
     [SkippableFact]
     public void Can_Convert_IANA_System_Zones_To_Windows()
     {
@@ -20,7 +13,7 @@ public class IanaToWindowsTests
         var errors = 0;
         var ianaZones = TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id);
 
-        string[] unmappable = {"Antarctica/Troll"};
+        string[] unmappable = ["Antarctica/Troll"];
 
         foreach (var ianaZone in ianaZones.Except(unmappable))
         {
@@ -32,7 +25,7 @@ public class IanaToWindowsTests
             else
             {
                 errors++;
-                _output.WriteLine($"Failed to convert \"{ianaZone}\"");
+                output.WriteLine($"Failed to convert \"{ianaZone}\"");
             }
         }
 
@@ -43,9 +36,9 @@ public class IanaToWindowsTests
     public void Can_Convert_Iana_Zones_To_Windows_Zones()
     {
         var errors = 0;
-        ICollection<string> ianaZones = TZConvert.KnownIanaTimeZoneNames.ToList();
+        ICollection<string> ianaZones = [.. TZConvert.KnownIanaTimeZoneNames];
 
-        string[] unmappable = {"Antarctica/Troll"};
+        string[] unmappable = ["Antarctica/Troll"];
 
         foreach (var ianaZone in ianaZones.Except(unmappable))
         {
@@ -57,7 +50,7 @@ public class IanaToWindowsTests
             else
             {
                 errors++;
-                _output.WriteLine($"Failed to convert \"{ianaZone}\"");
+                output.WriteLine($"Failed to convert \"{ianaZone}\"");
             }
         }
 
@@ -203,28 +196,28 @@ public class IanaToWindowsTests
         var result = TZConvert.IanaToWindows("Europe/Kiev");
         Assert.Equal("FLE Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Ciudad_Juarez_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Ciudad_Juarez");
         Assert.Equal("Mountain Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Ojinaga_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Ojinaga");
         Assert.Equal("Central Standard Time", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Chihuahua_To_Windows()
     {
         var result = TZConvert.IanaToWindows("America/Chihuahua");
         Assert.Equal("Central Standard Time (Mexico)", result);
     }
-    
+
     [Fact]
     public void Can_Convert_Mazatlan_To_Windows()
     {

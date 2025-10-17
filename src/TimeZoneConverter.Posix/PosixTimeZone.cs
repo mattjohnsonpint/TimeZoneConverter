@@ -11,7 +11,7 @@ namespace TimeZoneConverter.Posix;
 /// </summary>
 public static class PosixTimeZone
 {
-    private static readonly char[] PosixAbbreviationSplitChars = {'+', '-'};
+    private static readonly char[] PosixAbbreviationSplitChars = ['+', '-'];
 
     /// <summary>
     /// Generates a POSIX time zone string from a <see cref="TimeZoneInfo" /> object, for the current year.
@@ -172,7 +172,7 @@ public static class PosixTimeZone
             }
         }
 
-        var datePart = $"M{transition.Month}.{transitionOccurrence}.{(int) transition.DayOfWeek.ToDayOfWeek()}";
+        var datePart = $"M{transition.Month}.{transitionOccurrence}.{(int)transition.DayOfWeek.ToDayOfWeek()}";
 
         if (transition.TimeOfDay == new LocalTime(2, 0))
         {

@@ -3,24 +3,15 @@ using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
 
-public class WindowsToIanaTests
+public class WindowsToIanaTests(ITestOutputHelper output)
 {
-    private readonly ITestOutputHelper _output;
-
-    public WindowsToIanaTests(ITestOutputHelper output)
-    {
-        _output = output;
-    }
-
     [SkippableFact]
     public void Can_Convert_Windows_System_Zones_To_Iana()
     {
         Skip.IfNot(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "OS is not Windows.");
 
         var errors = 0;
-        var windowsZones = TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id);
-
-        foreach (var windowsZone in windowsZones)
+        foreach (var windowsZone in TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id))
         {
             if (TZConvert.TryWindowsToIana(windowsZone, out var ianaZone))
             {
@@ -30,7 +21,7 @@ public class WindowsToIanaTests
             else
             {
                 errors++;
-                _output.WriteLine($"Failed to convert \"{windowsZone}\"");
+                output.WriteLine($"Failed to convert \"{windowsZone}\"");
             }
         }
 
@@ -41,9 +32,7 @@ public class WindowsToIanaTests
     public void Can_Convert_Windows_Zones_To_Iana_Golden_Zones()
     {
         var errors = 0;
-        ICollection<string> windowsZones = TZConvert.KnownWindowsTimeZoneIds.ToList();
-
-        foreach (var windowsZone in windowsZones)
+        foreach (var windowsZone in (ICollection<string>)[.. TZConvert.KnownWindowsTimeZoneIds])
         {
             if (TZConvert.TryWindowsToIana(windowsZone, out var ianaZone))
             {
@@ -53,7 +42,7 @@ public class WindowsToIanaTests
             else
             {
                 errors++;
-                _output.WriteLine($"Failed to convert \"{windowsZone}\"");
+                output.WriteLine($"Failed to convert \"{windowsZone}\"");
             }
         }
 
@@ -81,9 +70,7 @@ public class WindowsToIanaTests
 
         var utcAliases = "Etc/UTC Etc/UCT Etc/Universal Etc/Zulu UCT UTC Universal Zulu".Split();
         var gmtAliases = "Etc/GMT Etc/GMT+0 Etc/GMT-0 Etc/GMT0 Etc/Greenwich GMT GMT+0 GMT-0 GMT0 Greenwich".Split();
-        var aliases = utcAliases.Concat(gmtAliases);
-
-        foreach (var alias in aliases)
+        foreach (var alias in utcAliases.Concat(gmtAliases))
         {
             var result2 = TZConvert.IanaToWindows(alias);
             Assert.Equal(alias + ":UTC", alias + ":" + result2);
@@ -180,7 +167,7 @@ public class WindowsToIanaTests
         var result = TZConvert.WindowsToIana("UTC+13", "KI", LinkResolution.Original);
         Assert.Equal("Pacific/Enderbury", result);
     }
-    
+
     [Fact]
     public void Can_Convert_MountainStandardTimeMexico_To_IANA_With_Default_Mode()
     {

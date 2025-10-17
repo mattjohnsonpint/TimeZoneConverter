@@ -2,22 +2,13 @@ using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
 
-public class RailsToIanaTests
+public class RailsToIanaTests(ITestOutputHelper output)
 {
-    private readonly ITestOutputHelper _output;
-
-    public RailsToIanaTests(ITestOutputHelper output)
-    {
-        _output = output;
-    }
-
     [Fact]
     public void Can_Convert_Rails_Zones_To_Iana_Zones()
     {
         var errors = 0;
-        ICollection<string> railsZones = TZConvert.KnownRailsTimeZoneNames.ToList();
-
-        foreach (var railsZone in railsZones)
+        foreach (var railsZone in (ICollection<string>)[.. TZConvert.KnownRailsTimeZoneNames])
         {
             if (TZConvert.TryRailsToIana(railsZone, out var ianaZone))
             {
@@ -27,7 +18,7 @@ public class RailsToIanaTests
             else
             {
                 errors++;
-                _output.WriteLine($"Failed to convert \"{railsZone}\"");
+                output.WriteLine($"Failed to convert \"{railsZone}\"");
             }
         }
 
