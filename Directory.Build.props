@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Roslynator.Analyzers" Version="4.12.10" PrivateAssets="All" />
+    <PackageReference Include="Roslynator.Analyzers" Version="4.14.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
