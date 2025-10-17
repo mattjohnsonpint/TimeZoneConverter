@@ -556,6 +556,13 @@ public static class TZConvert
     public static bool TryWindowsToRails(string windowsTimeZoneId, string territoryCode,
         out IList<string> railsTimeZoneNames)
     {
+        // edge case "Dateline Standard Time" -> "International Date Line West"
+        if (string.Equals(windowsTimeZoneId, "Dateline Standard Time", StringComparison.OrdinalIgnoreCase))
+        {
+            railsTimeZoneNames = ["International Date Line West"];
+            return true;
+        }
+
         if (TryWindowsToIana(windowsTimeZoneId, territoryCode, out var ianaTimeZoneName) &&
             TryIanaToRails(ianaTimeZoneName, out railsTimeZoneNames))
         {

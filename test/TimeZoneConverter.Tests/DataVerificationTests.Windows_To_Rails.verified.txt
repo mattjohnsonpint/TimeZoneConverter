@@ -104,7 +104,7 @@
     America/Havana
   ],
   Dateline Standard Time: [
-    -12:00
+    International Date Line West
   ],
   E. Africa Standard Time: [
     Nairobi

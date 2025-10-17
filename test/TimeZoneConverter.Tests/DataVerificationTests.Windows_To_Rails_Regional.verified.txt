@@ -149,7 +149,7 @@
     America/Havana
   ],
   (Dateline Standard Time, 001): [
-    -12:00
+    International Date Line West
   ],
   (E. Africa Standard Time, 001): [
     Nairobi
