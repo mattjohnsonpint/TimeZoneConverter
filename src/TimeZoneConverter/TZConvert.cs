@@ -124,6 +124,12 @@ public static class TZConvert
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     public static bool TryIanaToWindows(string ianaTimeZoneName, [MaybeNullWhen(false)] out string windowsTimeZoneId)
     {
+        if (string.IsNullOrWhiteSpace(ianaTimeZoneName))
+        {
+            windowsTimeZoneId = null;
+            return false;
+        }
+
         return IanaMap.TryGetValue(ianaTimeZoneName, out windowsTimeZoneId!);
     }
 
@@ -337,6 +343,12 @@ public static class TZConvert
     public static bool TryGetTimeZoneInfo(string windowsOrIanaTimeZoneId,
         [MaybeNullWhen(false)] out TimeZoneInfo timeZoneInfo)
     {
+        if (string.IsNullOrWhiteSpace(windowsOrIanaTimeZoneId))
+        {
+            timeZoneInfo = null;
+            return false;
+        }
+
         if (string.Equals(windowsOrIanaTimeZoneId, "UTC", StringComparison.OrdinalIgnoreCase))
         {
             timeZoneInfo = TimeZoneInfo.Utc;
@@ -395,6 +407,11 @@ public static class TZConvert
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     public static bool TryIanaToRails(string ianaTimeZoneName, out IList<string> railsTimeZoneNames)
     {
+        if (string.IsNullOrWhiteSpace(ianaTimeZoneName))
+        {
+            railsTimeZoneNames = Array.Empty<string>();
+            return false;
+        }
 
         // in the case of an Etc/GMT+/-n zone, use the Rails fixed-offset zone.  For example, `Etc/GMT-6` -> `+06:00` or `Etc/GMT+3` -> `-03:00`
         if (ianaTimeZoneName.StartsWith("Etc/GMT", StringComparison.OrdinalIgnoreCase))
@@ -466,6 +483,12 @@ public static class TZConvert
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     public static bool TryRailsToIana(string railsTimeZoneName, [MaybeNullWhen(false)] out string ianaTimeZoneName)
     {
+        if (string.IsNullOrWhiteSpace(railsTimeZoneName))
+        {
+            ianaTimeZoneName = null;
+            return false;
+        }
+
         return RailsMap.TryGetValue(railsTimeZoneName, out ianaTimeZoneName);
     }
 
