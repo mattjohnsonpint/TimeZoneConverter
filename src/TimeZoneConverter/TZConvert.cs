@@ -361,13 +361,44 @@ public static class TZConvert
             return true;
         }
 
-        // Convert to the opposite platform and try again.
-        // Note, we use LinkResolution.Original here for some minor perf gain.
-        if (((IsWindows && TryIanaToWindows(windowsOrIanaTimeZoneId, out var tzid)) ||
-             TryWindowsToIana(windowsOrIanaTimeZoneId, out tzid, LinkResolution.Original)) &&
-            SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+        if (IsWindows)
         {
-            return true;
+            // Convert to IANA and try again.
+            if (TryIanaToWindows(windowsOrIanaTimeZoneId, out var tzid) &&
+                SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            // If it's IANA, try resolving links first.
+            if (KnownIanaTimeZoneNames.Contains(windowsOrIanaTimeZoneId))
+            {
+                var canonicalId = ResolveLink(windowsOrIanaTimeZoneId);
+                if (SystemTimeZones.TryGetValue(canonicalId, out timeZoneInfo))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                // Convert from Windows and try again.
+                // Note, we use LinkResolution.Original here for some minor perf gain.
+                if (TryWindowsToIana(windowsOrIanaTimeZoneId, out var tzid, LinkResolution.Original))
+                {
+                    if (SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
+                    {
+                        return true;
+                    }
+
+                    // Try again with link resolution.
+                    if (SystemTimeZones.TryGetValue(ResolveLink(tzid), out timeZoneInfo))
+                    {
+                        return true;
+                    }
+                }
+            }
         }
 
         // See if we know how to create an equivalent custom time zone.
