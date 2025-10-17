@@ -59,7 +59,7 @@ public static class Downloader
         while (reader.MoveToNextEntry())
         {
             var entry = reader.Entry;
-            if (entry.IsDirectory)
+            if (entry.IsDirectory || entry.Key == null)
             {
                 continue;
             }
