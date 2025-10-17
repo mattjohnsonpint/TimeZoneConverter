@@ -31,7 +31,12 @@ jobs:
           run: dotnet pack -c Release --nologo --no-build
 
         - name: Push to NuGet
-          run: dotnet nuget push -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} src/**/*.nupkg
+          continue-on-error: true
+          run: dotnet nuget push -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} src/TimeZoneConverter/**/*.nupkg
+
+        - name: Push to NuGet
+          continue-on-error: true
+          run: dotnet nuget push -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} src/TimeZoneConverter.Posix/**/*.nupkg
 
         - name: Archive Artifacts
           uses: actions/upload-artifact@v4
