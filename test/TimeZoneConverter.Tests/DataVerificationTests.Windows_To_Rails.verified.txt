@@ -11,8 +11,12 @@
   Alaskan Standard Time: [
     Alaska
   ],
-  Aleutian Standard Time: null,
-  Altai Standard Time: null,
+  Aleutian Standard Time: [
+    America/Adak
+  ],
+  Altai Standard Time: [
+    Asia/Barnaul
+  ],
   Arab Standard Time: [
     Riyadh
   ],
@@ -26,25 +30,33 @@
   Argentina Standard Time: [
     Buenos Aires
   ],
-  Astrakhan Standard Time: null,
+  Astrakhan Standard Time: [
+    Europe/Astrakhan
+  ],
   Atlantic Standard Time: [
     Atlantic Time (Canada)
   ],
-  Aus Central W. Standard Time: null,
+  Aus Central W. Standard Time: [
+    Australia/Eucla
+  ],
   Azerbaijan Standard Time: [
     Baku
   ],
   Azores Standard Time: [
     Azores
   ],
-  Bahia Standard Time: null,
+  Bahia Standard Time: [
+    America/Bahia
+  ],
   Bangladesh Standard Time: [
     Dhaka
   ],
   Belarus Standard Time: [
     Minsk
   ],
-  Bougainville Standard Time: null,
+  Bougainville Standard Time: [
+    Pacific/Bougainville
+  ],
   Canada Central Standard Time: [
     Saskatchewan
   ],
@@ -60,8 +72,12 @@
   Central America Standard Time: [
     Central America
   ],
-  Central Asia Standard Time: null,
-  Central Brazilian Standard Time: null,
+  Central Asia Standard Time: [
+    Asia/Bishkek
+  ],
+  Central Brazilian Standard Time: [
+    America/Cuiaba
+  ],
   Central Europe Standard Time: [
     Budapest
   ],
@@ -84,7 +100,9 @@
   China Standard Time: [
     Beijing
   ],
-  Cuba Standard Time: null,
+  Cuba Standard Time: [
+    America/Havana
+  ],
   Dateline Standard Time: [
     International Date Line West
   ],
@@ -94,15 +112,21 @@
   E. Australia Standard Time: [
     Brisbane
   ],
-  E. Europe Standard Time: null,
+  E. Europe Standard Time: [
+    Europe/Chisinau
+  ],
   E. South America Standard Time: [
     Brasilia
   ],
-  Easter Island Standard Time: null,
+  Easter Island Standard Time: [
+    Pacific/Easter
+  ],
   Eastern Standard Time: [
     Eastern Time (US & Canada)
   ],
-  Eastern Standard Time (Mexico): null,
+  Eastern Standard Time (Mexico): [
+    America/Cancun
+  ],
   Egypt Standard Time: [
     Cairo
   ],
@@ -128,8 +152,12 @@
   Greenland Standard Time: [
     Greenland
   ],
-  Greenwich Standard Time: null,
-  Haiti Standard Time: null,
+  Greenwich Standard Time: [
+    Africa/Abidjan
+  ],
+  Haiti Standard Time: [
+    America/Port-au-Prince
+  ],
   Hawaiian Standard Time: [
     Hawaii
   ],
@@ -145,23 +173,39 @@
   Israel Standard Time: [
     Jerusalem
   ],
-  Jordan Standard Time: null,
+  Jordan Standard Time: [
+    Asia/Amman
+  ],
   Kaliningrad Standard Time: [
     Kaliningrad
   ],
   Korea Standard Time: [
     Seoul
   ],
-  Libya Standard Time: null,
-  Line Islands Standard Time: null,
-  Lord Howe Standard Time: null,
+  Libya Standard Time: [
+    Africa/Tripoli
+  ],
+  Line Islands Standard Time: [
+    Pacific/Kiritimati
+  ],
+  Lord Howe Standard Time: [
+    Australia/Lord_Howe
+  ],
   Magadan Standard Time: [
     Magadan
   ],
-  Magallanes Standard Time: null,
-  Marquesas Standard Time: null,
-  Mauritius Standard Time: null,
-  Middle East Standard Time: null,
+  Magallanes Standard Time: [
+    America/Punta_Arenas
+  ],
+  Marquesas Standard Time: [
+    Pacific/Marquesas
+  ],
+  Mauritius Standard Time: [
+    Indian/Mauritius
+  ],
+  Middle East Standard Time: [
+    Asia/Beirut
+  ],
   Montevideo Standard Time: [
     Montevideo
   ],
@@ -180,7 +224,9 @@
   N. Central Asia Standard Time: [
     Novosibirsk
   ],
-  Namibia Standard Time: null,
+  Namibia Standard Time: [
+    Africa/Windhoek
+  ],
   Nepal Standard Time: [
     Kathmandu
   ],
@@ -191,15 +237,21 @@
   Newfoundland Standard Time: [
     Newfoundland
   ],
-  Norfolk Standard Time: null,
+  Norfolk Standard Time: [
+    Pacific/Norfolk
+  ],
   North Asia East Standard Time: [
     Irkutsk
   ],
   North Asia Standard Time: [
     Krasnoyarsk
   ],
-  North Korea Standard Time: null,
-  Omsk Standard Time: null,
+  North Korea Standard Time: [
+    Asia/Pyongyang
+  ],
+  Omsk Standard Time: [
+    Asia/Omsk
+  ],
   Pacific SA Standard Time: [
     Santiago
   ],
@@ -216,7 +268,9 @@
   Paraguay Standard Time: [
     Asuncion
   ],
-  Qyzylorda Standard Time: null,
+  Qyzylorda Standard Time: [
+    Asia/Qyzylorda
+  ],
   Romance Standard Time: [
     Paris
   ],
@@ -233,7 +287,9 @@
     Moscow,
     St. Petersburg
   ],
-  SA Eastern Standard Time: null,
+  SA Eastern Standard Time: [
+    America/Cayenne
+  ],
   SA Pacific Standard Time: [
     Bogota
   ],
@@ -244,46 +300,68 @@
     Bangkok,
     Hanoi
   ],
-  Saint Pierre Standard Time: null,
-  Sakhalin Standard Time: null,
+  Saint Pierre Standard Time: [
+    America/Miquelon
+  ],
+  Sakhalin Standard Time: [
+    Asia/Sakhalin
+  ],
   Samoa Standard Time: [
     Samoa
   ],
-  Sao Tome Standard Time: null,
-  Saratov Standard Time: null,
+  Sao Tome Standard Time: [
+    Africa/Sao_Tome
+  ],
+  Saratov Standard Time: [
+    Europe/Saratov
+  ],
   Singapore Standard Time: [
     Singapore
   ],
   South Africa Standard Time: [
     Pretoria
   ],
-  South Sudan Standard Time: null,
+  South Sudan Standard Time: [
+    Africa/Juba
+  ],
   Sri Lanka Standard Time: [
     Sri Jayawardenepura
   ],
-  Sudan Standard Time: null,
-  Syria Standard Time: null,
+  Sudan Standard Time: [
+    Africa/Khartoum
+  ],
+  Syria Standard Time: [
+    Asia/Damascus
+  ],
   Taipei Standard Time: [
     Taipei
   ],
   Tasmania Standard Time: [
     Hobart
   ],
-  Tocantins Standard Time: null,
+  Tocantins Standard Time: [
+    America/Araguaina
+  ],
   Tokyo Standard Time: [
     Osaka,
     Sapporo,
     Tokyo
   ],
-  Tomsk Standard Time: null,
+  Tomsk Standard Time: [
+    Asia/Tomsk
+  ],
   Tonga Standard Time: [
     Nuku'alofa
   ],
-  Transbaikal Standard Time: null,
+  Transbaikal Standard Time: [
+    Asia/Chita
+  ],
   Turkey Standard Time: [
     Istanbul
   ],
-  Turks And Caicos Standard Time: null,
+  Turks And Caicos Standard Time: [
+    America/Grand_Turk
+  ],
   US Eastern Standard Time: [
     Indiana (East)
   ],
@@ -293,12 +371,24 @@
   UTC: [
     UTC
   ],
-  UTC+12: null,
-  UTC+13: null,
-  UTC-02: null,
-  UTC-08: null,
-  UTC-09: null,
-  UTC-11: null,
+  UTC+12: [
+    +12:00
+  ],
+  UTC+13: [
+    +13:00
+  ],
+  UTC-02: [
+    Etc/GMT+2
+  ],
+  UTC-08: [
+    Etc/GMT+8
+  ],
+  UTC-09: [
+    Etc/GMT+9
+  ],
+  UTC-11: [
+    -11:00
+  ],
   Ulaanbaatar Standard Time: [
     Ulaanbaatar
   ],
@@ -314,15 +404,21 @@
   W. Australia Standard Time: [
     Perth
   ],
-  W. Central Africa Standard Time: null,
+  W. Central Africa Standard Time: [
+    Africa/Lagos
+  ],
   W. Europe Standard Time: [
     Berlin
   ],
-  W. Mongolia Standard Time: null,
+  W. Mongolia Standard Time: [
+    Asia/Hovd
+  ],
   West Asia Standard Time: [
     Tashkent
   ],
-  West Bank Standard Time: null,
+  West Bank Standard Time: [
+    Asia/Hebron
+  ],
   West Pacific Standard Time: [
     Port Moresby
   ],
@@ -330,6 +426,6 @@
     Yakutsk
   ],
   Yukon Standard Time: [
-    Arizona
+    America/Whitehorse
   ]
 }

@@ -16,7 +16,7 @@ public static class TZConvert
     private static readonly Dictionary<string, IList<string>> InverseRailsMap = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, string> Links = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
-    
+
     private static readonly IDictionary<string, IList<string>> IanaTerritoryZones =
         new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
 
@@ -78,7 +78,7 @@ public static class TZConvert
             return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
                 IanaTerritoryZones.ToDictionary(
                     x => x.Key,
-                    x => (IReadOnlyCollection<string>) x.Value
+                    x => (IReadOnlyCollection<string>)x.Value
                         .OrderBy(zone => zone)
                         .ToList().AsReadOnly()));
         }
@@ -87,7 +87,7 @@ public static class TZConvert
         return new ReadOnlyDictionary<string, IReadOnlyCollection<string>>(
             IanaTerritoryZones.ToDictionary(
                 x => x.Key,
-                x => (IReadOnlyCollection<string>) x.Value
+                x => (IReadOnlyCollection<string>)x.Value
                     .Select(zone => TryIanaToWindows(zone, out var winId)
                         ? WindowsToIana(winId, x.Key)
                         : zone)
@@ -184,7 +184,7 @@ public static class TZConvert
         throw new InvalidTimeZoneException(
             $"\"{windowsTimeZoneId}\" was not recognized as a valid Windows time zone ID.");
     }
-    
+
     /// <summary>
     /// Attempts to convert a Windows time zone ID to an equivalent IANA time zone name.
     /// Uses the "golden zone" - the one that is the most prevalent.
@@ -395,6 +395,23 @@ public static class TZConvert
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     public static bool TryIanaToRails(string ianaTimeZoneName, out IList<string> railsTimeZoneNames)
     {
+
+        // in the case of an Etc/GMT+/-n zone, use the Rails fixed-offset zone.  For example, `Etc/GMT-6` -> `+06:00` or `Etc/GMT+3` -> `-03:00`
+        if (ianaTimeZoneName.StartsWith("Etc/GMT", StringComparison.OrdinalIgnoreCase))
+        {
+            var offsetPart = ianaTimeZoneName[7..];
+            if (offsetPart.Length > 2)
+            {
+                var sign = offsetPart[0];
+                if ((sign == '+' || sign == '-') && int.TryParse(offsetPart[1..], out var hours) && hours is >= 0 and <= 14)
+                {
+                    var offsetString = $"{(sign == '+' ? '-' : '+')}{hours:00}:00"; // note the inverted sign
+                    railsTimeZoneNames = [offsetString];
+                    return true;
+                }
+            }
+        }
+
         // try directly first
         if (InverseRailsMap.TryGetValue(ianaTimeZoneName, out railsTimeZoneNames!))
         {
@@ -409,6 +426,14 @@ public static class TZConvert
             return true;
         }
 
+        // If it's a valid IANA zone, then just return it since Rails will accept it as-is.
+        if (KnownIanaTimeZoneNames.Contains(ianaTimeZoneName))
+        {
+            railsTimeZoneNames = [ianaTimeZoneName];
+            return true;
+        }
+
+        // not found
         railsTimeZoneNames = Array.Empty<string>();
         return false;
     }
@@ -531,6 +556,13 @@ public static class TZConvert
     public static bool TryWindowsToRails(string windowsTimeZoneId, string territoryCode,
         out IList<string> railsTimeZoneNames)
     {
+        // edge case "Dateline Standard Time" -> "International Date Line West"
+        if (string.Equals(windowsTimeZoneId, "Dateline Standard Time", StringComparison.OrdinalIgnoreCase))
+        {
+            railsTimeZoneNames = ["International Date Line West"];
+            return true;
+        }
+
         if (TryWindowsToIana(windowsTimeZoneId, territoryCode, out var ianaTimeZoneName) &&
             TryIanaToRails(ianaTimeZoneName, out railsTimeZoneNames))
         {
