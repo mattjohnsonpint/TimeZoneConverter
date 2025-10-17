@@ -26,7 +26,12 @@ jobs:
 
         - name: Update tzdata on Linux
           if: runner.os == 'Linux'
-          run: sudo apt-get update && sudo apt-get install -y tzdata
+          run: | 
+            sudo apt-get update
+            sudo apt-get install -y tzdata
+            sudo dpkg --remove --force-depends tzdata-legacy
+          env:
+            DEBIAN_FRONTEND: noninteractive
 
         - name: Restore
           run: dotnet restore --nologo
