@@ -41,7 +41,7 @@ public static class Downloader
             Directory.CreateDirectory(dir);
         }
 
-        var filename = url.Substring(url.LastIndexOf('/') + 1);
+        var filename = url[(url.LastIndexOf('/') + 1)..];
         using var result = await HttpClientInstance.GetAsync(url);
         await using var fs = File.Create(Path.Combine(dir, filename));
         await result.Content.CopyToAsync(fs);
@@ -65,12 +65,7 @@ public static class Downloader
             }
 
             var targetPath = Path.Combine(dir, entry.Key.Replace('/', '\\'));
-            var targetDir = Path.GetDirectoryName(targetPath);
-            if (targetDir == null)
-            {
-                throw new InvalidOperationException();
-            }
-
+            var targetDir = Path.GetDirectoryName(targetPath) ?? throw new InvalidOperationException();
             if (!Directory.Exists(targetDir))
             {
                 Directory.CreateDirectory(targetDir);

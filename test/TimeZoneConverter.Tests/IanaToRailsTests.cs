@@ -2,17 +2,10 @@ using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
 
-public class IanaToRailsTests
+public class IanaToRailsTests(ITestOutputHelper output)
 {
-    private readonly ITestOutputHelper _output;
-
-    public IanaToRailsTests(ITestOutputHelper output)
-    {
-        _output = output;
-    }
-
-    private static IEnumerable<string> UnmappableZones => new[]
-    {
+    private static IEnumerable<string> UnmappableZones =>
+    [
         "Africa/Abidjan",
         "Africa/Accra",
         "Africa/Bamako",
@@ -126,13 +119,13 @@ public class IanaToRailsTests
         "Pacific/Norfolk",
         "Pacific/Pitcairn",
         "US/Aleutian"
-    };
+    ];
 
     [Fact]
     public void Can_Convert_Iana_Zones_To_Rails_Zones()
     {
         var errors = new List<string>();
-        var ianaZones = TZConvert.KnownIanaTimeZoneNames.OrderBy(x => x);
+        var ianaZones = TZConvert.KnownIanaTimeZoneNames.Order();
 
         foreach (var ianaZone in ianaZones.Except(UnmappableZones))
         {
@@ -150,8 +143,8 @@ public class IanaToRailsTests
         var errorsCount = errors.Count;
         if (errorsCount > 0)
         {
-            _output.WriteLine("Failed to convert:\n");
-            _output.WriteLine(string.Join(",\n", errors.Select(x => $"\"{x}\"")));
+            output.WriteLine("Failed to convert:\n");
+            output.WriteLine(string.Join(",\n", errors.Select(x => $"\"{x}\"")));
         }
 
         Assert.Equal(0, errorsCount);

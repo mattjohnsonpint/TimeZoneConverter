@@ -11,13 +11,11 @@ public static class DataExtractor
         using var stream = File.OpenRead(Path.Combine(cldrDirectoryPath, "windowsZones.xml"));
         var doc = XDocument.Load(stream);
 
-        var mapZoneElements = doc.XPathSelectElements("/supplementalData/windowsZones/mapTimezones/mapZone");
-
-        foreach (var element in mapZoneElements)
+        foreach (var element in doc.XPathSelectElements("/supplementalData/windowsZones/mapTimezones/mapZone"))
         {
             var windowsZone = element.Attribute("other")?.Value;
             var territory = element.Attribute("territory")?.Value;
-            var ianaZones = (element.Attribute("type")?.Value.Trim().Split() ?? Array.Empty<string>()).ToList();
+            var ianaZones = (element.Attribute("type")?.Value.Trim().Split() ?? []).ToList();
 
             list.Add($"{windowsZone},{territory},{string.Join(" ", ianaZones)}");
         }
@@ -32,9 +30,7 @@ public static class DataExtractor
         {
             var doc = XDocument.Load(stream);
 
-            var typeElements = doc.XPathSelectElements("/ldmlBCP47/keyword/key/type");
-
-            foreach (var element in typeElements)
+            foreach (var element in doc.XPathSelectElements("/ldmlBCP47/keyword/key/type"))
             {
                 var aliasAttribute = element.Attribute("alias");
                 if (aliasAttribute == null)
@@ -92,19 +88,18 @@ public static class DataExtractor
             data[link.Value] += " " + link.Key;
         }
 
-        return data
+        return [.. data
             .OrderBy(x => x.Key)
-            .Select(x => $"{x.Key},{x.Value}")
-            .ToList();
+            .Select(x => $"{x.Key},{x.Value}")];
     }
 
     public static IDictionary<string, string> LoadTzdbLinks(string tzdbDirectoryPath)
     {
         string[] dataFiles =
-        {
+        [
             "africa", "antarctica", "asia", "australasia", "backward",
             "etcetera", "europe", "northamerica", "southamerica"
-        };
+        ];
 
         var data = new Dictionary<string, string>();
         foreach (var file in dataFiles)
@@ -138,14 +133,13 @@ public static class DataExtractor
             }
             else
             {
-                data.Add(territory, new List<string> {zone});
+                data.Add(territory, [zone]);
             }
         }
 
-        return data
+        return [.. data
             .OrderBy(x => x.Key)
-            .Select(x => x.Key + "," + string.Join(' ', x.Value.OrderBy(z=> z)))
-            .ToList();
+            .Select(x => x.Key + "," + string.Join(' ', x.Value.Order()))];
     }
 
     public static IList<string> LoadRailsMapping(string railsPath)

@@ -1,5 +1,8 @@
 using System.Diagnostics;
+
+#if NETFRAMEWORK
 using System.Runtime.InteropServices;
+#endif
 
 namespace TimeZoneConverter.Tests;
 
