@@ -411,6 +411,32 @@ public static class TZConvert
     }
 
     /// <summary>
+    /// Attempts to resolve the IANA canonical name given an IANA time zone name.
+    /// </summary>
+    /// <param name="ianaTimeZoneName">The IANA time zone name to resolve.</param>
+    /// <param name="ianaCanonicalName">The resolved IANA canonical time zone name.</param>
+    /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+    /// <remarks>
+    /// The resolving will succeed whether the input name is an alias or a canonical name.
+    /// </remarks>
+    public static bool TryGetIanaCanonicalName(
+        string ianaTimeZoneName,
+        [MaybeNullWhen(false)] out string ianaCanonicalName)
+    {
+        if (ianaTimeZoneName == null || !KnownIanaTimeZoneNames.Contains(ianaTimeZoneName))
+        {
+            ianaCanonicalName = null;
+            return false;
+        }
+
+        ianaCanonicalName = Links.TryGetValue(ianaTimeZoneName, out ianaCanonicalName)
+            ? ianaCanonicalName
+            : ianaTimeZoneName;
+
+        return true;
+    }
+
+    /// <summary>
     /// Converts an IANA time zone name to one or more equivalent Rails time zone names.
     /// </summary>
     /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
