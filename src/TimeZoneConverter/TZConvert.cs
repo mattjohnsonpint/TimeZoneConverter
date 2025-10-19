@@ -41,9 +41,12 @@ public static class TZConvert
         knownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
         knownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
 
+        var knownIanaCanonicalNames = knownIanaTimeZoneNames.Except(Links.Keys).ToHashSet();
+
         KnownIanaTimeZoneNames = knownIanaTimeZoneNames;
         KnownWindowsTimeZoneIds = knownWindowsTimeZoneIds;
         KnownRailsTimeZoneNames = knownRailsTimeZoneNames;
+        KnownIanaCanonicalNames = knownIanaCanonicalNames;
 
         SystemTimeZones = GetSystemTimeZones();
     }
@@ -62,6 +65,11 @@ public static class TZConvert
     /// Gets a collection of all Rails time zone names known to this library.
     /// </summary>
     public static IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
+
+    /// <summary>
+    /// Gets a collection of all IANA canonical time zone names known to this library.
+    /// </summary>
+    public static IReadOnlyCollection<string> KnownIanaCanonicalNames { get; }
 
     /// <summary>
     /// Gets a dictionary that has an sorted collection of IANA time zone names keyed by territory code.

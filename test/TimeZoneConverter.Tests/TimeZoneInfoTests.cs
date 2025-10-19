@@ -135,4 +135,23 @@ public class TimeZoneInfoTests
             Assert.True(result, $"{nameof(TZConvert.TryGetIanaCanonicalName)} should succeed for \"{name}\".");
         }
     }
+
+    [Theory]
+    [InlineData("Australia/Brisbane")]
+    [InlineData("Antarctica/Troll")]
+    [InlineData("America/Adak")]
+    public void CanFindCanonicalTimeZoneInCanonicalNames(string name)
+    {
+        var result = TZConvert.KnownIanaCanonicalNames.Contains(name);
+
+        Assert.True(result, $"{nameof(TZConvert.KnownIanaCanonicalNames)} should contain \"{name}\".");
+    }
+
+    [Fact]
+    public void CannotFindAliasInCanonicalNames()
+    {
+        var result = TZConvert.KnownIanaCanonicalNames.Contains("Australia/Queensland");
+
+        Assert.False(result, $"{nameof(TZConvert.KnownIanaCanonicalNames)} should not contain \"Australia/Queensland\".");
+    }
 }
