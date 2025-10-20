@@ -41,9 +41,12 @@ public static class TZConvert
         knownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
         knownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
 
+        var knownIanaCanonicalNames = knownIanaTimeZoneNames.Except(Links.Keys).ToHashSet();
+
         KnownIanaTimeZoneNames = knownIanaTimeZoneNames;
         KnownWindowsTimeZoneIds = knownWindowsTimeZoneIds;
         KnownRailsTimeZoneNames = knownRailsTimeZoneNames;
+        KnownIanaCanonicalNames = knownIanaCanonicalNames;
 
         SystemTimeZones = GetSystemTimeZones();
     }
@@ -62,6 +65,11 @@ public static class TZConvert
     /// Gets a collection of all Rails time zone names known to this library.
     /// </summary>
     public static IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
+
+    /// <summary>
+    /// Gets a collection of all IANA canonical time zone names known to this library.
+    /// </summary>
+    public static IReadOnlyCollection<string> KnownIanaCanonicalNames { get; }
 
     /// <summary>
     /// Gets a dictionary that has an sorted collection of IANA time zone names keyed by territory code.
@@ -408,6 +416,32 @@ public static class TZConvert
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Attempts to resolve the IANA canonical name given an IANA time zone name.
+    /// </summary>
+    /// <param name="ianaTimeZoneName">The IANA time zone name to resolve.</param>
+    /// <param name="ianaCanonicalName">The resolved IANA canonical time zone name.</param>
+    /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+    /// <remarks>
+    /// The resolving will succeed whether the input name is an alias or a canonical name.
+    /// </remarks>
+    public static bool TryGetIanaCanonicalName(
+        string ianaTimeZoneName,
+        [MaybeNullWhen(false)] out string ianaCanonicalName)
+    {
+        if (ianaTimeZoneName == null || !KnownIanaTimeZoneNames.Contains(ianaTimeZoneName))
+        {
+            ianaCanonicalName = null;
+            return false;
+        }
+
+        ianaCanonicalName = Links.TryGetValue(ianaTimeZoneName, out ianaCanonicalName)
+            ? ianaCanonicalName
+            : ianaTimeZoneName;
+
+        return true;
     }
 
     /// <summary>

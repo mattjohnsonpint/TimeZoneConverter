@@ -92,4 +92,66 @@ public class TimeZoneInfoTests
         var tz = TZConvert.GetTimeZoneInfo("Argentina Standard Time");
         Assert.NotNull(tz);
     }
+
+    [Fact]
+    public void CanGetIanaCanonicalNameForAlias()
+    {
+        var result = TZConvert.TryGetIanaCanonicalName("Europe/Jersey", out var canonicalIanaName);
+
+        Assert.True(result, $"{nameof(TZConvert.TryGetIanaCanonicalName)} should succeed for alias.");
+        Assert.Equal("Europe/London", canonicalIanaName);
+    }
+
+    [Fact]
+    public void CanGetIanaCanonicalNameForCanonicalName()
+    {
+        var result = TZConvert.TryGetIanaCanonicalName("Africa/Maputo", out var canonicalIanaName);
+
+        Assert.True(result, $"{nameof(TZConvert.TryGetIanaCanonicalName)} should succeed for canonical time zone name.");
+        Assert.Equal("Africa/Maputo", canonicalIanaName);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("  ")]
+    [InlineData("NOT-A-TIME-ZONE")]
+    public void CannotGetIanaCanonicalNameForUnknownOrInvalidName(string? name)
+    {
+        var result = TZConvert.TryGetIanaCanonicalName(name, out _);
+
+        Assert.False(result, $"{nameof(TZConvert.TryGetIanaCanonicalName)} should fail for invalid or unknown time zone name.");
+    }
+
+    [Fact]
+    public void CanGetIanaCanonicalNameForAllKnownIanaTimeZones()
+    {
+        var names = TZConvert.KnownIanaTimeZoneNames.ToList();
+
+        foreach (var name in names)
+        {
+            var result = TZConvert.TryGetIanaCanonicalName(name, out _);
+
+            Assert.True(result, $"{nameof(TZConvert.TryGetIanaCanonicalName)} should succeed for \"{name}\".");
+        }
+    }
+
+    [Theory]
+    [InlineData("Australia/Brisbane")]
+    [InlineData("Antarctica/Troll")]
+    [InlineData("America/Adak")]
+    public void CanFindCanonicalTimeZoneInCanonicalNames(string name)
+    {
+        var result = TZConvert.KnownIanaCanonicalNames.Contains(name);
+
+        Assert.True(result, $"{nameof(TZConvert.KnownIanaCanonicalNames)} should contain \"{name}\".");
+    }
+
+    [Fact]
+    public void CannotFindAliasInCanonicalNames()
+    {
+        var result = TZConvert.KnownIanaCanonicalNames.Contains("Australia/Queensland");
+
+        Assert.False(result, $"{nameof(TZConvert.KnownIanaCanonicalNames)} should not contain \"Australia/Queensland\".");
+    }
 }
