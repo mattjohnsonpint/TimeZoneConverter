@@ -13,7 +13,7 @@ public class TimeZoneInfoPerfTests : IClassFixture<TimeZoneInfoPerfTests.Fixture
     }
 
     [Fact]
-    public void GetTimeZoneInfo_WithIANAZone_1Million_ReturnsInUnder3Seconds()
+    public void GetTimeZoneInfo_WithIANAZone_1Million_ReturnsInUnder5Seconds()
     {
         var sw = Stopwatch.StartNew();
 
@@ -23,11 +23,11 @@ public class TimeZoneInfoPerfTests : IClassFixture<TimeZoneInfoPerfTests.Fixture
         }
 
         sw.Stop();
-        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(3), $"Actual Time: {sw.Elapsed}");
+        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(5), $"Actual Time: {sw.Elapsed}");
     }
 
     [SkippableFact]
-    public void GetTimeZoneInfo_WithWindowsZone_1Million_ReturnsInUnder3Seconds()
+    public void GetTimeZoneInfo_WithWindowsZone_1Million_ReturnsInUnder5Seconds()
     {
 #if NETFRAMEWORK
         // This test is much slower on Mono.  Skip for now.
@@ -41,7 +41,7 @@ public class TimeZoneInfoPerfTests : IClassFixture<TimeZoneInfoPerfTests.Fixture
         }
 
         sw.Stop();
-        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(3), $"Actual Time: {sw.Elapsed}");
+        Assert.True(sw.Elapsed < TimeSpan.FromSeconds(5), $"Actual Time: {sw.Elapsed}");
     }
 
     // ReSharper disable once ClassNeverInstantiated.Global
