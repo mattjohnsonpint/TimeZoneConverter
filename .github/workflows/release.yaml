@@ -37,7 +37,7 @@ jobs:
           run: dotnet nuget push --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} src/TimeZoneConverter.Posix/**/*.nupkg
 
         - name: Archive Artifacts
-          uses: actions/upload-artifact@v4
+          uses: actions/upload-artifact@v5
           with:
             name: nuget-packages
             path: src/**/Release/*.*nupkg
