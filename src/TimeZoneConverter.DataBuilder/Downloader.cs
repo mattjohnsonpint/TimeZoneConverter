@@ -50,7 +50,7 @@ public static class Downloader
     private static async Task DownloadAndExtractAsync(string url, string dir)
     {
         await using var httpStream = await HttpClientInstance.GetStreamAsync(url);
-        using var reader = ReaderFactory.Open(httpStream);
+        using var reader = ReaderFactory.OpenReader(httpStream);
         if (!Directory.Exists(dir))
         {
             Directory.CreateDirectory(dir);
