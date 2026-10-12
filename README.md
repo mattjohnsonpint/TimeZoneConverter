@@ -13,15 +13,15 @@ TimeZoneConverter is a lightweight library to convert quickly between IANA, Wind
 
 ## Compatibility
 
-As of version 7.0.0, TimeZoneConverter works with all of the following:
+As of version 8.0.0, TimeZoneConverter works with all of the following:
 
-- .NET 6, .NET 8, .NET 9
+- .NET 5 and newer, with dedicate targets for .NET 8, .NET 9, and .NET 10
 - .NET Core 2.0 or greater
 - .NET Framework 4.6.2 and greater
 
 .NET Framework versions less than 4.6.2 are no longer supported.
 
-#### Important note on .NET 6+
+### Important note on .NET 6+
 
 .NET 6 has built-in support for IANA and Windows time zones in a cross-platform manner, somewhat reducing the need for this library.
 It relies on [.NET's ICU integration](https://docs.microsoft.com/dotnet/core/extensions/globalization-icu) to perform this functionality.
@@ -32,7 +32,7 @@ However, it is indeed still supported, and many have found it continues to be us
 
 TimeZoneConverter has no external data dependencies at runtime.  All of the data it needs is embedded in the library itself.
 
-#### Note on OS Data Dependencies
+### Note on OS Data Dependencies
 
 Some functions in TimeZoneConverter, such as `TZConvert.GetTimeZoneInfo` rely on the underlying `TimeZoneInfo` object having access to
 time zone data of the operating system.  On Windows, this data comes from the registry and is maintained via Windows Updates.
@@ -41,7 +41,7 @@ On OSX and Linux, this data comes from a distribution of the [IANA time zone dat
 
 For example, the Alpine Linux Docker images for .NET Core no longer ship with `tzdata`.  See [dotnet/dotnet-docker#1366](https://github.com/dotnet/dotnet-docker/issues/1366) for instructions on how to add it to your Docker images.
 
-## Notes
+## Implementation Details
 
 This library uses a combination of data sources to achieve its goals:
 

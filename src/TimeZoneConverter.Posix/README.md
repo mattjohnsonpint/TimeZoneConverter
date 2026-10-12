@@ -15,9 +15,9 @@ Note that `TimeZoneConverter.Posix` is dependendent on both [`TimeZoneConverter`
 
 ## Compatibility
 
-As of version 5.0.0, TimeZoneConverter.Posix works with all of the following:
+As of version 6.0.0, TimeZoneConverter.Posix works with all of the following:
 
-- .NET 6 or greater
+- .NET 5 and newer, with dedicate targets for .NET 8, .NET 9, and .NET 10
 - .NET Core 2.0 or greater
 - .NET Framework 4.6.2 and greater
 
