@@ -59,7 +59,7 @@ jobs:
           run: dotnet build -c Release --nologo --no-restore
 
         - name: Test
-          run: dotnet test -c Release --nologo --no-build -l GitHubActions -l "trx;LogFilePrefix=testresults_${{ runner.os }}"
+          run: dotnet test -c Release --no-build --report-xunit-trx
 
         - name: Archive benchmark results
           if: always()

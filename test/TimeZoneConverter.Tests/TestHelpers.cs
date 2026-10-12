@@ -25,7 +25,7 @@ public static class TestHelpers
 
         if (guidanceUrl != null)
         {
-            Skip.If(!TimeZoneInfo.GetSystemTimeZones().Any(x => x.Id == windowsId),
+            Assert.SkipUnless(TimeZoneInfo.GetSystemTimeZones().Any(x => x.Id == windowsId),
                 $"Windows time zone \"{windowsId}\" is not installed yet. See {guidanceUrl}");
         }
     }
