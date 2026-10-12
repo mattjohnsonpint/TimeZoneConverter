@@ -11,6 +11,9 @@
   Alaskan Standard Time: [
     Alaska
   ],
+  Alberta Standard Time: [
+    Alberta
+  ],
   Aleutian Standard Time: [
     America/Adak
   ],
@@ -56,6 +59,9 @@
   ],
   Bougainville Standard Time: [
     Pacific/Bougainville
+  ],
+  British Columbia Standard Time: [
+    Pacific Time (Canada)
   ],
   Canada Central Standard Time: [
     Saskatchewan
@@ -196,6 +202,9 @@
   ],
   Magallanes Standard Time: [
     America/Punta_Arenas
+  ],
+  Manitoba Standard Time: [
+    Manitoba
   ],
   Marquesas Standard Time: [
     Pacific/Marquesas

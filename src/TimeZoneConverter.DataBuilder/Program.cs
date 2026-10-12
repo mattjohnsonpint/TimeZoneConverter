@@ -47,6 +47,12 @@ internal static class Program
             // Apply override mappings for zones not yet in the CLDR trunk we pulled in
             // (None presently)
 
+            // Preserve mappings for legacy POSIX zones that became independent zones in TZDB 2026d.
+            mapping.Add("Pacific Standard Time,ZZ,PST8PDT");
+            mapping.Add("Mountain Standard Time,ZZ,MST7MDT");
+            mapping.Add("Central Standard Time,ZZ,CST6CDT");
+            mapping.Add("Eastern Standard Time,ZZ,EST5EDT");
+
             // Remove the alias for "Etc/Unknown Factory" as it's not a valid zone.
             aliases.Remove("Etc/Unknown,Factory");
 

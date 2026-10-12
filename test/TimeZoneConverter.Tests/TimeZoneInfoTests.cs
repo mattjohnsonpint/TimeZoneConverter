@@ -22,31 +22,38 @@ public class TimeZoneInfoTests
         Assert.Equal(tz2.Id, tz1.Id);
     }
 
-    [Fact]
-    public void CanGetAllKnownWindowsTimeZones()
+    public static IEnumerable<object[]> KnownWindowsTimeZones =>
+        TZConvert.KnownWindowsTimeZoneIds.Select(id => new object[] { id });
+
+    public static IEnumerable<object[]> KnownIanaTimeZones =>
+        TZConvert.KnownIanaTimeZoneNames
+            // Don't attempt unmappable zones on Windows (Troll has its own test below).
+            .Where(name => name != "Antarctica/Troll" || !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            .Select(name => new object[] { name });
+
+    [SkippableTheory]
+    [MemberData(nameof(KnownWindowsTimeZones))]
+    public void CanGetAllKnownWindowsTimeZones(string id)
     {
-        foreach (var id in TZConvert.KnownWindowsTimeZoneIds)
-        {
-            var result = TZConvert.TryGetTimeZoneInfo(id, out _);
-            Assert.True(result, $"Windows time zone \"{id}\" or an equivalent was not found.");
-        }
+        TestHelpers.SkipIfPendingWindowsTimeZoneUpdate(id);
+
+        var result = TZConvert.TryGetTimeZoneInfo(id, out _);
+        Assert.True(result, $"Windows time zone \"{id}\" or an equivalent was not found.");
     }
 
-    [Fact]
-    public void CanGetAllKnownIANATimeZones()
+    [SkippableTheory]
+    [MemberData(nameof(KnownIanaTimeZones))]
+    public void CanGetAllKnownIANATimeZones(string name)
     {
-        var names = TZConvert.KnownIanaTimeZoneNames.ToList();
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
+            TZConvert.TryIanaToWindows(name, out var windowsId))
         {
-            // Don't attempt unmappable zones
-            names.Remove("Antarctica/Troll");
+            // Use the mapping so aliases and other zones sharing these IDs are covered too.
+            TestHelpers.SkipIfPendingWindowsTimeZoneUpdate(windowsId);
         }
 
-        foreach (var name in names)
-        {
-            var result = TZConvert.TryGetTimeZoneInfo(name, out _);
-            Assert.True(result, $"IANA time zone \"{name}\" or an equivalent was not found.");
-        }
+        var result = TZConvert.TryGetTimeZoneInfo(name, out _);
+        Assert.True(result, $"IANA time zone \"{name}\" or an equivalent was not found.");
     }
 
     [Fact]

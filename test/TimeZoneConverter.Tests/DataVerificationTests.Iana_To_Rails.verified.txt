@@ -328,7 +328,7 @@
     Puerto Rico
   ],
   America/Edmonton: [
-    Mountain Time (US & Canada)
+    Alberta
   ],
   America/Eirunepe: [
     Bogota
@@ -412,7 +412,7 @@
     Indiana (East)
   ],
   America/Inuvik: [
-    Mountain Time (US & Canada)
+    Alberta
   ],
   America/Iqaluit: [
     Eastern Time (US & Canada)
@@ -571,7 +571,7 @@
     America/Punta_Arenas
   ],
   America/Rainy_River: [
-    Central Time (US & Canada)
+    Manitoba
   ],
   America/Rankin_Inlet: [
     Central Time (US & Canada)
@@ -655,7 +655,7 @@
     Puerto Rico
   ],
   America/Vancouver: [
-    Pacific Time (US & Canada)
+    Pacific Time (Canada)
   ],
   America/Virgin: [
     Puerto Rico
@@ -664,13 +664,13 @@
     America/Whitehorse
   ],
   America/Winnipeg: [
-    Central Time (US & Canada)
+    Manitoba
   ],
   America/Yakutat: [
     Alaska
   ],
   America/Yellowknife: [
-    Mountain Time (US & Canada)
+    Alberta
   ],
   Antarctica/Casey: [
     Solomon Is.
@@ -1167,19 +1167,19 @@
     Atlantic Time (Canada)
   ],
   Canada/Central: [
-    Central Time (US & Canada)
+    Manitoba
   ],
   Canada/Eastern: [
     Eastern Time (US & Canada)
   ],
   Canada/Mountain: [
-    Mountain Time (US & Canada)
+    Alberta
   ],
   Canada/Newfoundland: [
     Newfoundland
   ],
   Canada/Pacific: [
-    Pacific Time (US & Canada)
+    Pacific Time (Canada)
   ],
   Canada/Saskatchewan: [
     Saskatchewan

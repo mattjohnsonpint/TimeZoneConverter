@@ -131,10 +131,12 @@
   ],
   CA: [
     America/Blanc-Sablon,
+    America/Cambridge_Bay,
     America/Coral_Harbour,
     America/Creston,
     America/Edmonton,
     America/Halifax,
+    America/Rankin_Inlet,
     America/Regina,
     America/St_Johns,
     America/Toronto,
