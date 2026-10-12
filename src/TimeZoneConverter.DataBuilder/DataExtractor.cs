@@ -161,7 +161,7 @@ public static class DataExtractor
                 var parts = line.Trim().Split("=>");
                 data.Add(parts[0].Trim(' ', '"') + "," + parts[1].TrimEnd(',').Trim(' ', '"'));
             }
-            else if (line == "MAPPING = {")
+            else if (line.StartsWith("MAPPING = {", StringComparison.Ordinal))
             {
                 inMappingSection = true;
             }
