@@ -57,9 +57,21 @@ or may not have been published to official sources yet.
 **Important:** Since this data can change whenever new time zones are introduced from any of these sources,
 it is recommended that you always use the most current revision, and check for updates regularly.
 
-Additionally, this library does not attempt to determine if the time zone IDs provided are actually present on the computer where the code is running.  It is assumed that the computer is kept current with time zone updates.
+Generally, this library does not attempt to determine if the time zone IDs provided are actually present on the computer where the code is running.  It is assumed that the computer is kept current with time zone updates.
 
 For example, if one attempts to convert `Africa/Khartoum` to a Windows time zone ID, they will get `Sudan Standard Time`.  If it is then used on a Windows computer that does not yet have [`KB4051956`][6] installed (which created this time zone), they will likely get a `TimeZoneNotFoundException`.
+
+An exception is made for the 2026 Canadian time zone changes because of the very short timeframe between the new Windows time zones becoming available and the changes taking effect. This allows users to upgrade the library in advance while retaining the previous mappings until the Windows updates are installed. When running on Windows, IANA-to-Windows and Rails-to-Windows conversions automatically use the previous mapping if the new Windows ID is not installed:
+
+| New Windows ID | Fallback ID |
+| --- | --- |
+| `British Columbia Standard Time` | `Pacific Standard Time` |
+| `Alberta Standard Time` | `Mountain Standard Time` |
+| `Manitoba Standard Time` | `Central Standard Time` |
+
+Availability is cached when the library initializes. Restart applications after installing Windows time zone updates to use the new IDs. Non-Windows systems always return the current mappings. The embedded mappings, known-zone lists, and territory lists remain current regardless of installed updates.
+
+These fallbacks preserve the previous library behavior, but their seasonal rules are **incorrect after the November 1, 2026 permanent-DST transition**. Install the Windows updates for correct offsets; the fallback is not a replacement for those updates.
 
 ### Unmappable Zones
 

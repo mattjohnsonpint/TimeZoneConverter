@@ -8,7 +8,8 @@ public class DataVerificationTests
         var ianaZones = TZConvert.KnownIanaTimeZoneNames;
         var allMappings = ianaZones.ToDictionary(
                 ianaId => ianaId,
-                ianaId => TZConvert.TryIanaToWindows(ianaId, out var windowsId) ? windowsId : null)
+                // Verify embedded mappings independently of installed Windows updates.
+                ianaId => TZConvert.TryIanaToWindowsMapping(ianaId, out var windowsId) ? windowsId : null)
             .Sorted();
         return Verify(allMappings);
     }
@@ -112,7 +113,8 @@ public class DataVerificationTests
         var railsZones = TZConvert.KnownRailsTimeZoneNames;
         var allMappings = railsZones.ToDictionary(
                 railsId => railsId,
-                railsId => TZConvert.TryRailsToWindows(railsId, out var windowsId) ? windowsId : null)
+                railsId => TZConvert.TryRailsToIana(railsId, out var ianaId) &&
+                           TZConvert.TryIanaToWindowsMapping(ianaId, out var windowsId) ? windowsId : null)
             .Sorted();
         return Verify(allMappings);
     }

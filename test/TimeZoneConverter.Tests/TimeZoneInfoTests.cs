@@ -45,13 +45,6 @@ public class TimeZoneInfoTests
     [MemberData(nameof(KnownIanaTimeZones))]
     public void CanGetAllKnownIANATimeZones(string name)
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
-            TZConvert.TryIanaToWindows(name, out var windowsId))
-        {
-            // Use the mapping so aliases and other zones sharing these IDs are covered too.
-            TestHelpers.SkipIfPendingWindowsTimeZoneUpdate(windowsId);
-        }
-
         var result = TZConvert.TryGetTimeZoneInfo(name, out _);
         Assert.True(result, $"IANA time zone \"{name}\" or an equivalent was not found.");
     }
