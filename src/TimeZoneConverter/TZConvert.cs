@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 
 namespace TimeZoneConverter;
 
@@ -9,7 +8,6 @@ namespace TimeZoneConverter;
 /// </summary>
 public static class TZConvert
 {
-    private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
     private static readonly object MappingInitializationLock = new();
     private static bool _mappingInitializationStarted;
     private static MappingData? _configuredMappings;
@@ -200,7 +198,7 @@ public static class TZConvert
             return false;
         }
 
-        if (IsWindows && GetPreviousWindowsTimeZoneId(windowsTimeZoneId) != null)
+        if (OperatingSystem.IsWindows() && GetPreviousWindowsTimeZoneId(windowsTimeZoneId) != null)
         {
             windowsTimeZoneId = ResolveWindowsTimeZoneId(windowsTimeZoneId, true, SystemTimeZones.Keys);
         }
@@ -470,7 +468,7 @@ public static class TZConvert
             return true;
         }
 
-        if (IsWindows)
+        if (OperatingSystem.IsWindows())
         {
             // Convert to IANA and try again.
             if (TryIanaToWindows(windowsOrIanaTimeZoneId, out var tzid) &&
@@ -772,7 +770,7 @@ public static class TZConvert
             .GroupBy(x => x.Id, StringComparer.OrdinalIgnoreCase)
             .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
 
-        if (IsWindows)
+        if (OperatingSystem.IsWindows())
         {
             return zones;
         }

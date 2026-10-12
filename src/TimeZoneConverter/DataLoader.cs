@@ -31,7 +31,7 @@ internal static class DataLoader
         {
             var parts = item.Split(',');
             var territory = parts[0];
-            var zones = new List<string>(parts[1].Split(' '));
+            var zones = parts[1].Split(' ');
             ianaTerritoryZones.Add(territory, zones);
         }
 
