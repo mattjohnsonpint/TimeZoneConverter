@@ -31,7 +31,7 @@ public class TimeZoneInfoTests
             .Where(name => name != "Antarctica/Troll" || !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             .Select(name => new object[] { name });
 
-    [SkippableTheory]
+    [Theory]
     [MemberData(nameof(KnownWindowsTimeZones))]
     public void CanGetAllKnownWindowsTimeZones(string id)
     {
@@ -41,7 +41,7 @@ public class TimeZoneInfoTests
         Assert.True(result, $"Windows time zone \"{id}\" or an equivalent was not found.");
     }
 
-    [SkippableTheory]
+    [Theory]
     [MemberData(nameof(KnownIanaTimeZones))]
     public void CanGetAllKnownIANATimeZones(string name)
     {

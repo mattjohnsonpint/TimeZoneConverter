@@ -4,7 +4,6 @@ using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using Perfolizer.Horology;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Benchmarks;
 

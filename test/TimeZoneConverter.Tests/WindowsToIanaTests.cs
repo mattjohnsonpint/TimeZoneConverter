@@ -1,14 +1,13 @@
 using System.Runtime.InteropServices;
-using Xunit.Abstractions;
 
 namespace TimeZoneConverter.Tests;
 
 public class WindowsToIanaTests(ITestOutputHelper output)
 {
-    [SkippableFact]
+    [Fact]
     public void Can_Convert_Windows_System_Zones_To_Iana()
     {
-        Skip.IfNot(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "OS is not Windows.");
+        Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "OS is not Windows.");
 
         var errors = 0;
         foreach (var windowsZone in TimeZoneInfo.GetSystemTimeZones().Select(x => x.Id))
