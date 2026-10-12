@@ -9,6 +9,7 @@ on:
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   DOTNET_NOLOGO: 1
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
 jobs:
   build:
@@ -27,6 +28,17 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v7
 
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v6
+          with:
+            # Install all runtimes needed by the multi-targeted tests.
+            dotnet-version: |
+              8.0.x
+              9.0.x
+              10.0.x
+            cache: true
+            cache-dependency-path: '**/packages.lock.json'
+
         - name: Update tzdata on Linux
           if: runner.os == 'Linux'
           run: | 
@@ -41,7 +53,7 @@ jobs:
           run: cat /usr/share/zoneinfo/+VERSION 
 
         - name: Restore
-          run: dotnet restore --nologo
+          run: dotnet restore --nologo --locked-mode
 
         - name: Build
           run: dotnet build -c Release --nologo --no-restore

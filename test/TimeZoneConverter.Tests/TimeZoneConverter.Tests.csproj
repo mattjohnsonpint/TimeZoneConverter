@@ -3,8 +3,9 @@
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\.assets\mattjohnsonpint.snk</AssemblyOriginatorKeyFile>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TargetFrameworks);net48</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0;net48</TargetFrameworks>
+    <!-- Restore/build every framework for portable lockfiles; net48 tests require Windows. -->
+    <IsTestProject Condition="'$(TargetFramework)' == 'net48' and !$([MSBuild]::IsOSPlatform('Windows'))">false</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
