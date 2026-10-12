@@ -10,66 +10,49 @@ namespace TimeZoneConverter;
 public static class TZConvert
 {
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-    private static readonly Dictionary<string, string> IanaMap = new(StringComparer.OrdinalIgnoreCase);
-    private static readonly Dictionary<string, string> WindowsMap = new(StringComparer.OrdinalIgnoreCase);
-    private static readonly Dictionary<string, string> RailsMap = new(StringComparer.OrdinalIgnoreCase);
-    private static readonly Dictionary<string, IList<string>> InverseRailsMap = new(StringComparer.OrdinalIgnoreCase);
-    private static readonly Dictionary<string, string> Links = new(StringComparer.OrdinalIgnoreCase);
-    private static readonly Dictionary<string, TimeZoneInfo> SystemTimeZones;
+    private static readonly Lazy<MappingData> Mappings = new(() => new MappingData());
+    private static readonly Lazy<Dictionary<string, TimeZoneInfo>> SystemTimeZoneCache = new(GetSystemTimeZones);
 
-    private static readonly IDictionary<string, IList<string>> IanaTerritoryZones =
-        new Dictionary<string, IList<string>>(StringComparer.OrdinalIgnoreCase);
+    private static Dictionary<string, string> IanaMap => Mappings.Value.IanaMap;
+    private static Dictionary<string, string> WindowsMap => Mappings.Value.WindowsMap;
+    private static Dictionary<string, string> RailsMap => Mappings.Value.RailsMap;
+    private static Dictionary<string, IList<string>> InverseRailsMap => Mappings.Value.InverseRailsMap;
+    private static Dictionary<string, string> Links => Mappings.Value.Links;
+    private static IDictionary<string, IList<string>> IanaTerritoryZones => Mappings.Value.IanaTerritoryZones;
+    private static Dictionary<string, TimeZoneInfo> SystemTimeZones => SystemTimeZoneCache.Value;
 
-    static TZConvert()
+    /// <summary>
+    /// Loads the mapping data and system time zones before their first use.
+    /// </summary>
+    /// <remarks>
+    /// Initialization is synchronous, thread-safe, and performed only once. Call this method during
+    /// application startup to avoid first-use latency. Concurrent callers wait for initialization to finish.
+    /// </remarks>
+    public static void Initialize()
     {
-        DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap, Links, IanaTerritoryZones);
-
-        var knownIanaTimeZoneNames = new HashSet<string>(IanaMap.Select(x => x.Key));
-        var knownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());
-        var knownRailsTimeZoneNames = new HashSet<string>(RailsMap.Select(x => x.Key));
-
-        // Special case - not in any map.
-        knownIanaTimeZoneNames.Add("Antarctica/Troll");
-
-        // Remove zones from KnownIanaTimeZoneNames that have been removed from IANA data.
-        // (They should still map to Windows zones correctly.)
-        knownIanaTimeZoneNames.Remove("Canada/East-Saskatchewan"); // Removed in 2017c
-        knownIanaTimeZoneNames.Remove("US/Pacific-New"); // Removed in 2018a
-
-        // Remove zones from KnownWindowsTimeZoneIds that are marked obsolete in the Windows Registry.
-        // (They should still map to IANA zones correctly.)
-        knownWindowsTimeZoneIds.Remove("Kamchatka Standard Time");
-        knownWindowsTimeZoneIds.Remove("Mid-Atlantic Standard Time");
-
-        var knownIanaCanonicalNames = knownIanaTimeZoneNames.Except(Links.Keys).ToHashSet();
-
-        KnownIanaTimeZoneNames = knownIanaTimeZoneNames;
-        KnownWindowsTimeZoneIds = knownWindowsTimeZoneIds;
-        KnownRailsTimeZoneNames = knownRailsTimeZoneNames;
-        KnownIanaCanonicalNames = knownIanaCanonicalNames;
-
-        SystemTimeZones = GetSystemTimeZones();
+        _ = Mappings.Value;
+        _ = SystemTimeZoneCache.Value;
     }
 
     /// <summary>
     /// Gets a collection of all IANA time zone names known to this library.
     /// </summary>
-    public static IReadOnlyCollection<string> KnownIanaTimeZoneNames { get; }
+    public static IReadOnlyCollection<string> KnownIanaTimeZoneNames => Mappings.Value.KnownIanaTimeZoneNames;
 
     /// <summary>
     /// Gets a collection of all Windows time zone IDs known to this library.
     /// </summary>
-    public static IReadOnlyCollection<string> KnownWindowsTimeZoneIds { get; }
+    public static IReadOnlyCollection<string> KnownWindowsTimeZoneIds => Mappings.Value.KnownWindowsTimeZoneIds;
 
     /// <summary>
     /// Gets a collection of all Rails time zone names known to this library.
     /// </summary>
-    public static IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
+    public static IReadOnlyCollection<string> KnownRailsTimeZoneNames => Mappings.Value.KnownRailsTimeZoneNames;
 
     /// <summary>
     /// Gets a collection of all IANA canonical time zone names known to this library.
     /// </summary>
-    public static IReadOnlyCollection<string> KnownIanaCanonicalNames { get; }
+    public static IReadOnlyCollection<string> KnownIanaCanonicalNames => Mappings.Value.KnownIanaCanonicalNames;
 
     /// <summary>
     /// Gets a dictionary that has an sorted collection of IANA time zone names keyed by territory code.
@@ -111,7 +94,7 @@ public static class TZConvert
     /// <returns>A Windows time zone ID.</returns>
     /// <remarks>
     /// On Windows, the three new 2026 Canadian IDs fall back to their previous mappings until installed.
-    /// Availability is cached when the library initializes. These fallbacks retain the old seasonal rules.
+    /// Availability is cached when system time zones are first loaded. These fallbacks retain the old seasonal rules.
     /// </remarks>
     /// <exception cref="InvalidTimeZoneException">
     /// Thrown if the input string was not recognized or has no equivalent Windows
@@ -136,7 +119,7 @@ public static class TZConvert
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
     /// <remarks>
     /// On Windows, the three new 2026 Canadian IDs fall back to their previous mappings until installed.
-    /// Availability is cached when the library initializes. These fallbacks retain the old seasonal rules.
+    /// Availability is cached when system time zones are first loaded. These fallbacks retain the old seasonal rules.
     /// </remarks>
     public static bool TryIanaToWindows(string ianaTimeZoneName, [MaybeNullWhen(false)] out string windowsTimeZoneId)
     {
@@ -145,7 +128,10 @@ public static class TZConvert
             return false;
         }
 
-        windowsTimeZoneId = ResolveWindowsTimeZoneId(windowsTimeZoneId, IsWindows, SystemTimeZones.Keys);
+        if (IsWindows && GetPreviousWindowsTimeZoneId(windowsTimeZoneId) != null)
+        {
+            windowsTimeZoneId = ResolveWindowsTimeZoneId(windowsTimeZoneId, true, SystemTimeZones.Keys);
+        }
         return true;
     }
 
@@ -159,16 +145,18 @@ public static class TZConvert
 
         // Preserve the previous mappings until the corresponding Windows updates are installed.
         // These seasonal zones are not equivalent after the November 2026 permanent-DST changes.
-        var previousId = windowsId switch
-        {
-            "British Columbia Standard Time" => "Pacific Standard Time",
-            "Alberta Standard Time" => "Mountain Standard Time",
-            "Manitoba Standard Time" => "Central Standard Time",
-            _ => null
-        };
+        var previousId = GetPreviousWindowsTimeZoneId(windowsId);
 
         return previousId != null && !installedIds.Contains(windowsId) ? previousId : windowsId;
     }
+
+    private static string? GetPreviousWindowsTimeZoneId(string windowsId) => windowsId switch
+    {
+        "British Columbia Standard Time" => "Pacific Standard Time",
+        "Alberta Standard Time" => "Mountain Standard Time",
+        "Manitoba Standard Time" => "Central Standard Time",
+        _ => null
+    };
 
     internal static bool TryIanaToWindowsMapping(string ianaTimeZoneName,
         [MaybeNullWhen(false)] out string windowsTimeZoneId)
