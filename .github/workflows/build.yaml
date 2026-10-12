@@ -28,14 +28,46 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v7
 
+        - name: Resolve .NET SDK version on macOS
+          if: runner.os == 'macOS'
+          id: sdk-version
+          run: |
+            version=$(curl --fail --silent --show-error --location --retry 3 https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0/latest.version)
+            echo "version=$version" >> "$GITHUB_OUTPUT"
+
+        - name: Cache .NET SDK archive on macOS
+          if: runner.os == 'macOS'
+          id: sdk-archive
+          uses: actions/cache@v5
+          with:
+            path: ${{ runner.temp }}/dotnet-sdk-downloads
+            key: dotnet-sdk-archive-${{ runner.os }}-${{ runner.arch }}-${{ steps.sdk-version.outputs.version }}
+
+        - name: Download .NET SDK archive on macOS
+          if: runner.os == 'macOS' && steps.sdk-archive.outputs.cache-hit != 'true'
+          env:
+            SDK_VERSION: ${{ steps.sdk-version.outputs.version }}
+            SDK_DOWNLOAD_DIR: ${{ runner.temp }}/dotnet-sdk-downloads
+          run: |
+            mkdir -p "$SDK_DOWNLOAD_DIR"
+            curl --fail --show-error --location --retry 3 "https://builds.dotnet.microsoft.com/dotnet/Sdk/$SDK_VERSION/dotnet-sdk-$SDK_VERSION-osx-x64.tar.gz" --output "$SDK_DOWNLOAD_DIR/sdk.tar.gz"
+
+        - name: Install cached .NET SDK on macOS
+          if: runner.os == 'macOS'
+          env:
+            SDK_DOWNLOAD_DIR: ${{ runner.temp }}/dotnet-sdk-downloads
+          run: |
+            mkdir -p "$HOME/.dotnet"
+            tar -xzf "$SDK_DOWNLOAD_DIR/sdk.tar.gz" -C "$HOME/.dotnet"
+
         - name: Setup .NET
           uses: actions/setup-dotnet@v6
           with:
-            # Install all runtimes needed by the multi-targeted tests.
+            # Only Linux runs the .NET 8 and 9 tests.
             dotnet-version: |
-              8.0.x
-              9.0.x
               10.0.x
+              ${{ runner.os == 'Linux' && '8.0.x' || '' }}
+              ${{ runner.os == 'Linux' && '9.0.x' || '' }}
             cache: true
             cache-dependency-path: '**/packages.lock.json'
 
@@ -58,8 +90,21 @@ jobs:
         - name: Build
           run: dotnet build -c Release --nologo --no-restore
 
-        - name: Test
-          run: dotnet test -c Release --no-build --report-xunit-trx
+        - name: Test .NET 10
+          run: dotnet test --test-modules "test/**/bin/Release/net10.0/*.Tests.dll" --report-xunit-trx
+
+        - name: Test .NET 8 and 9 on Linux
+          if: runner.os == 'Linux'
+          run: |
+            dotnet test --test-modules "test/**/bin/Release/net8.0/*.Tests.dll" --report-xunit-trx
+            dotnet test --test-modules "test/**/bin/Release/net9.0/*.Tests.dll" --report-xunit-trx
+
+        - name: Test .NET Framework on Windows
+          if: runner.os == 'Windows'
+          run: dotnet test --test-modules "test/**/bin/Release/net48/win-x64/*.Tests.exe" --report-xunit-trx
+
+        - name: Benchmark .NET 10
+          run: dotnet test --project test/TimeZoneConverter.Benchmarks -c Release -f net10.0 --no-build --report-xunit-trx
 
         - name: Archive benchmark results
           if: always()
