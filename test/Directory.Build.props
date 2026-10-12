@@ -3,15 +3,15 @@
   <Import Project="..\Directory.Build.props" />
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.runner.visualstudio">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="Xunit.SkippableFact" Version="1.5.85" />
-    <PackageReference Include="Verify.Xunit" Version="31.12.5" />
-    <PackageReference Include="GitHubActionsTestLogger" Version="3.0.5" PrivateAssets="All" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="Xunit.SkippableFact" />
+    <PackageReference Include="Verify.Xunit" />
+    <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

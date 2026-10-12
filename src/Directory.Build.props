@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Polyfill" Version="11.4.3" PrivateAssets="All" />
+    <PackageReference Include="Polyfill" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
