@@ -27,6 +27,14 @@ jobs:
         - name: Test
           run: dotnet test -c Release --nologo --no-build -l GitHubActions -l "trx;LogFilePrefix=testresults_${{ runner.os }}"
 
+        - name: Archive benchmark results
+          if: always()
+          uses: actions/upload-artifact@v7
+          with:
+            name: benchmarks-${{ runner.os }}
+            path: '**/BenchmarkDotNet.Artifacts/**'
+            if-no-files-found: ignore
+
         - name: Pack
           run: dotnet pack -c Release --nologo --no-build
 
