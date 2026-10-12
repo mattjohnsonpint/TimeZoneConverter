@@ -69,7 +69,7 @@ An exception is made for the 2026 Canadian time zone changes because of the very
 | `Alberta Standard Time` | `Mountain Standard Time` |
 | `Manitoba Standard Time` | `Central Standard Time` |
 
-Availability is cached when the library initializes. Restart applications after installing Windows time zone updates to use the new IDs. Non-Windows systems always return the current mappings. The embedded mappings, known-zone lists, and territory lists remain current regardless of installed updates.
+Availability is cached when system time zones are first loaded. Restart applications after installing Windows time zone updates to use the new IDs. Non-Windows systems always return the current mappings. The embedded mappings, known-zone lists, and territory lists remain current regardless of installed updates.
 
 These fallbacks preserve the previous library behavior, but their seasonal rules are **incorrect after the November 1, 2026 permanent-DST transition**. Install the Windows updates for correct offsets; the fallback is not a replacement for those updates.
 
@@ -139,6 +139,20 @@ Convert a Windows time zone ID to one or more Rails time zone names.
 IList<string> tz = TZConvert.WindowsToRails("Central Standard Time (Mexico)");
 // Result:  { "Guadalajara", "Mexico City" }
 ```
+
+### Initialization
+
+Mapping data and system time zones are loaded lazily and independently. Known-zone lists and most
+identifier conversions load only the mapping data.
+
+To move both initialization costs to application startup, call:
+
+```csharp
+TZConvert.Initialize();
+```
+
+This method is synchronous, thread-safe, and safe to call repeatedly. Concurrent callers that need the
+same data wait for it to finish loading.
 
 ## Extras
 
