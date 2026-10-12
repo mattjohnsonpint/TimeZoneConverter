@@ -125,7 +125,7 @@ public class IanaToRailsTests(ITestOutputHelper output)
     public void Can_Convert_Iana_Zones_To_Rails_Zones()
     {
         var errors = new List<string>();
-        var ianaZones = TZConvert.KnownIanaTimeZoneNames.Order();
+        var ianaZones = TZConvert.KnownIanaTimeZoneNames.OrderBy(x => x);
 
         foreach (var ianaZone in ianaZones.Except(UnmappableZones))
         {

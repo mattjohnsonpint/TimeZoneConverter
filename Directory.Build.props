@@ -14,8 +14,4 @@
     <PackageReference Include="Roslynator.Analyzers" Version="5.0.1" PrivateAssets="All" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="..\..\Extensions.cs" Link="Extensions.cs" />
-  </ItemGroup>
-
 </Project>
