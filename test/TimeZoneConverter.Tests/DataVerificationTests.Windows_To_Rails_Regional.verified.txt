@@ -11,6 +11,9 @@
   (Alaskan Standard Time, 001): [
     Alaska
   ],
+  (Alberta Standard Time, 001): [
+    Alberta
+  ],
   (Aleutian Standard Time, 001): [
     America/Adak
   ],
@@ -59,6 +62,9 @@
   ],
   (Bougainville Standard Time, 001): [
     Pacific/Bougainville
+  ],
+  (British Columbia Standard Time, 001): [
+    Pacific Time (Canada)
   ],
   (Canada Central Standard Time, 001): [
     Saskatchewan
@@ -307,6 +313,9 @@
   ],
   (Magallanes Standard Time, 001): [
     America/Punta_Arenas
+  ],
+  (Manitoba Standard Time, 001): [
+    Manitoba
   ],
   (Marquesas Standard Time, 001): [
     Pacific/Marquesas
