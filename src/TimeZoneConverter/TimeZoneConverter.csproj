@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net462;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462;net8.0;net9.0;net10.0</TargetFrameworks>
     <Description>Lightweight library to convert quickly between IANA, Windows, and Rails time zone names.</Description>
     <Authors>Matt Johnson-Pint</Authors>
     <PackageId>TimeZoneConverter</PackageId>
@@ -19,7 +19,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
-    <PackageReference Include="System.ValueTuple" Version="4.6.1" />
+    <PackageReference Include="System.ValueTuple" Version="4.6.2" />
   </ItemGroup>
 
   <ItemGroup>
