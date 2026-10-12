@@ -7,6 +7,12 @@
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
   </PropertyGroup>
 
+  <!-- Avoid Windows-only RID inference so lockfiles are portable across build hosts. -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="Verify.XunitV3" />
