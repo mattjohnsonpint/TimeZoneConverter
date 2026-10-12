@@ -1,6 +1,3 @@
-using System.IO.Compression;
-using System.Resources;
-
 namespace TimeZoneConverter;
 
 internal static class DataLoader
@@ -11,12 +8,14 @@ internal static class DataLoader
         IDictionary<string, string> railsMap,
         IDictionary<string, IList<string>> inverseRailsMap,
         IDictionary<string, string> links,
-        IDictionary<string, IList<string>> ianaTerritoryZones)
+        IDictionary<string, IList<string>> ianaTerritoryZones,
+        Dictionary<string, string[]>? data = null)
     {
-        var mapping = GetEmbeddedData("TimeZoneConverter.Data.Mapping.csv.gz");
-        var aliases = GetEmbeddedData("TimeZoneConverter.Data.Aliases.csv.gz");
-        var railsMapping = GetEmbeddedData("TimeZoneConverter.Data.RailsMapping.csv.gz");
-        var territories = GetEmbeddedData("TimeZoneConverter.Data.Territories.csv.gz");
+        data ??= DataBundle.ReadEmbedded();
+        var mapping = data["Mapping.csv"];
+        var aliases = data["Aliases.csv"];
+        var railsMapping = data["RailsMapping.csv"];
+        var territories = data["Territories.csv"];
 
         foreach (var link in aliases)
         {
@@ -99,6 +98,10 @@ internal static class DataLoader
                 }
             }
 
+            if (retry.Count == linksToMap.Count)
+            {
+                throw new InvalidDataException("Aliases.csv contains aliases that cannot be mapped.");
+            }
             linksToMap = retry;
         }
 
@@ -180,17 +183,4 @@ internal static class DataLoader
         }
     }
 
-    private static IEnumerable<string> GetEmbeddedData(string resourceName)
-    {
-        var assembly = typeof(DataLoader).Assembly;
-        using var compressedStream = assembly.GetManifestResourceStream(resourceName) ??
-                                     throw new MissingManifestResourceException();
-        using var stream = new GZipStream(compressedStream, CompressionMode.Decompress);
-        using var reader = new StreamReader(stream);
-
-        while (reader.ReadLine() is { } line)
-        {
-            yield return line;
-        }
-    }
 }

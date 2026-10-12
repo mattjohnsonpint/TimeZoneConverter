@@ -14,9 +14,9 @@ internal sealed class MappingData
     internal IReadOnlyCollection<string> KnownRailsTimeZoneNames { get; }
     internal IReadOnlyCollection<string> KnownIanaCanonicalNames { get; }
 
-    internal MappingData()
+    internal MappingData(Dictionary<string, string[]>? data = null)
     {
-        DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap, Links, IanaTerritoryZones);
+        DataLoader.Populate(IanaMap, WindowsMap, RailsMap, InverseRailsMap, Links, IanaTerritoryZones, data);
 
         var knownIanaTimeZoneNames = new HashSet<string>(IanaMap.Keys);
         var knownWindowsTimeZoneIds = new HashSet<string>(WindowsMap.Keys.Select(x => x.Split('|')[1]).Distinct());

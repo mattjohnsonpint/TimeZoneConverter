@@ -79,10 +79,13 @@ internal static class Program
             }
 
             var dataPath = Path.Combine(projectPath, "src", "TimeZoneConverter", "Data");
-            WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Mapping.csv.gz"), mapping);
-            WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Aliases.csv.gz"), aliases);
-            WriteAllLinesToCompressedFile(Path.Combine(dataPath, "Territories.csv.gz"), territories);
-            WriteAllLinesToCompressedFile(Path.Combine(dataPath, "RailsMapping.csv.gz"), railsMapping);
+            using var stream = File.Create(Path.Combine(dataPath, "TimeZoneData.zip"));
+            using var archive = new ZipArchive(stream, ZipArchiveMode.Create);
+            WriteEntry(archive, "manifest.txt", ["TimeZoneConverter/1"]);
+            WriteEntry(archive, "Mapping.csv", mapping);
+            WriteEntry(archive, "Aliases.csv", aliases);
+            WriteEntry(archive, "Territories.csv", territories);
+            WriteEntry(archive, "RailsMapping.csv", railsMapping);
         }
         finally
         {
@@ -91,11 +94,11 @@ internal static class Program
         }
     }
 
-    private static void WriteAllLinesToCompressedFile(string path, IEnumerable<string> lines)
+    private static void WriteEntry(ZipArchive archive, string name, IEnumerable<string> lines)
     {
-        using var stream = File.Create(path);
-        using var compressedStream = new GZipStream(stream, CompressionLevel.Optimal);
-        using var writer = new StreamWriter(compressedStream);
+        var entry = archive.CreateEntry(name, CompressionLevel.Optimal);
+        entry.LastWriteTime = new DateTimeOffset(1980, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        using var writer = new StreamWriter(entry.Open());
         foreach (var line in lines)
         {
             writer.WriteLine(line);

@@ -14,18 +14,21 @@ public class EmbeddedDataBenchmark
     public void Setup()
     {
         var assembly = typeof(TZConvert).Assembly;
-        foreach (var name in assembly.GetManifestResourceNames().Where(x => x.EndsWith(".csv.gz", StringComparison.Ordinal)))
+        using var resource = assembly.GetManifestResourceStream(DataBundle.ResourceName)!;
+        using var archive = new ZipArchive(resource, ZipArchiveMode.Read);
+        foreach (var entry in archive.Entries.Where(x => x.FullName.EndsWith(".csv", StringComparison.Ordinal)))
         {
-            using var resource = assembly.GetManifestResourceStream(name)!;
-            using var compressed = new MemoryStream();
-            resource.CopyTo(compressed);
-            _compressed.Add(compressed.ToArray());
-
-            compressed.Position = 0;
-            using var gzip = new GZipStream(compressed, CompressionMode.Decompress);
+            using var input = entry.Open();
             using var uncompressed = new MemoryStream();
-            gzip.CopyTo(uncompressed);
+            input.CopyTo(uncompressed);
             _uncompressed.Add(uncompressed.ToArray());
+            using var compressed = new MemoryStream();
+            using (var gzip = new GZipStream(compressed, CompressionLevel.Optimal, leaveOpen: true))
+            {
+                uncompressed.Position = 0;
+                uncompressed.CopyTo(gzip);
+            }
+            _compressed.Add(compressed.ToArray());
         }
     }
 

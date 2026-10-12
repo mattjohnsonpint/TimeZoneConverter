@@ -154,6 +154,47 @@ TZConvert.Initialize();
 This method is synchronous, thread-safe, and safe to call repeatedly. Concurrent callers that need the
 same data wait for it to finish loading.
 
+#### External mapping data
+
+You can distribute mapping updates independently of the library as a single `TimeZoneData.zip` bundle.
+The data builder produces this file in `src/TimeZoneConverter/Data`; the library embeds the same bundle
+for its default behavior. Applications control where external bundles come from:
+
+```csharp
+using var stream = File.OpenRead("TimeZoneData.zip");
+TZConvert.Initialize(stream);
+```
+
+For streams that perform asynchronous I/O:
+
+```csharp
+using var stream = await httpClient.GetStreamAsync(dataUrl);
+await TZConvert.InitializeAsync(stream, cancellationToken);
+```
+
+Both overloads read from the current position, support non-seekable streams, leave the stream open,
+and do not retain it. Async initialization buffers the stream asynchronously; parsing and system
+time zone initialization are synchronous. Bundles are limited to 4 MiB, with each CSV limited to 4 MiB
+after decompression.
+
+Supply custom data **before mappings are first used**, and await initialization before accepting requests.
+Custom initialization throws `InvalidOperationException` if mapping initialization has already started,
+including if another caller selects embedded data while the bundle is being retrieved. Failed retrieval,
+cancellation before committing the mappings, or invalid data leaves custom initialization uncommitted.
+Parameterless `Initialize()` remains safe to repeat; custom initialization cannot replace loaded mappings.
+
+Bundle format version 1 is a ZIP containing these entries at its root:
+
+- `manifest.txt`: UTF-8 text `TimeZoneConverter/1` (an optional trailing newline is allowed).
+- `Mapping.csv`: Windows ID, territory code, space-separated IANA IDs.
+- `Aliases.csv`: canonical IANA ID, space-separated aliases.
+- `RailsMapping.csv`: Rails name, space-separated IANA IDs.
+- `Territories.csv`: territory code, space-separated IANA IDs.
+
+CSVs are UTF-8 without headers or quoting. All four datasets are required and must come from a compatible
+release. Incomplete, malformed, or unsupported bundles fail rather than mix external and embedded data.
+External bundles update identifier mappings, **not** the operating-system time zone rules used by `TimeZoneInfo`.
+
 ## Extras
 
 There are a few additional helpers you may find useful.
