@@ -125,7 +125,8 @@ public class TimeZoneInfoTests
     [InlineData("NOT-A-TIME-ZONE")]
     public void CannotGetIanaCanonicalNameForUnknownOrInvalidName(string? name)
     {
-        var result = TZConvert.TryGetIanaCanonicalName(name, out _);
+        // Deliberately pass null to verify invalid input handling.
+        var result = TZConvert.TryGetIanaCanonicalName(name!, out _);
 
         Assert.False(result, $"{nameof(TZConvert.TryGetIanaCanonicalName)} should fail for invalid or unknown time zone name.");
     }
