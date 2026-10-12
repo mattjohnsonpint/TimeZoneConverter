@@ -10,7 +10,10 @@ namespace TimeZoneConverter;
 public static class TZConvert
 {
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-    private static readonly Lazy<MappingData> Mappings = new(() => new MappingData());
+    private static readonly object MappingInitializationLock = new();
+    private static bool _mappingInitializationStarted;
+    private static MappingData? _configuredMappings;
+    private static readonly Lazy<MappingData> Mappings = new(LoadMappings);
     private static readonly Lazy<Dictionary<string, TimeZoneInfo>> SystemTimeZoneCache = new(GetSystemTimeZones);
 
     private static Dictionary<string, string> IanaMap => Mappings.Value.IanaMap;
@@ -32,6 +35,75 @@ public static class TZConvert
     {
         _ = Mappings.Value;
         _ = SystemTimeZoneCache.Value;
+    }
+
+    /// <summary>Initializes using a complete version 1 time zone data ZIP bundle.</summary>
+    /// <remarks>
+    /// Reads from the current position, leaves the stream open, and does not require seeking.
+    /// Call before mappings are first used. The bundle may not exceed 4 MiB.
+    /// </remarks>
+    /// <exception cref="InvalidOperationException">Mapping initialization has already started.</exception>
+    public static void Initialize(Stream data)
+    {
+        EnsureMappingsNotStarted();
+        using var buffer = DataBundle.Buffer(data);
+        InitializeBundle(buffer, CancellationToken.None);
+    }
+
+    /// <summary>Asynchronously reads a complete version 1 time zone data ZIP bundle, then initializes.</summary>
+    /// <remarks>
+    /// Reads from the current position and leaves the stream open. Await this method before using mappings.
+    /// Retrieval and validation failures do not configure mappings. Concurrent first use may select embedded data,
+    /// in which case this method throws. Parsing and system time zone initialization are synchronous.
+    /// </remarks>
+    /// <exception cref="InvalidOperationException">Mapping initialization has already started.</exception>
+    public static async Task InitializeAsync(Stream data, CancellationToken cancellationToken = default)
+    {
+        EnsureMappingsNotStarted();
+        using var buffer = await DataBundle.BufferAsync(data, cancellationToken).ConfigureAwait(false);
+        cancellationToken.ThrowIfCancellationRequested();
+        InitializeBundle(buffer, cancellationToken);
+    }
+
+    private static void EnsureMappingsNotStarted()
+    {
+        lock (MappingInitializationLock)
+        {
+            if (_mappingInitializationStarted)
+                throw new InvalidOperationException("Time zone mapping initialization has already started.");
+        }
+    }
+
+    private static void InitializeBundle(Stream data, CancellationToken cancellationToken)
+    {
+        MappingData mappings;
+        try
+        {
+            mappings = new MappingData(DataBundle.Read(data));
+        }
+        catch (ArgumentException exception)
+        {
+            throw new InvalidDataException("The data bundle contains duplicate or inconsistent mappings.", exception);
+        }
+        lock (MappingInitializationLock)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (_mappingInitializationStarted)
+                throw new InvalidOperationException("Time zone mapping initialization has already started.");
+            _configuredMappings = mappings;
+            _mappingInitializationStarted = true;
+        }
+        Initialize();
+    }
+
+    private static MappingData LoadMappings()
+    {
+        lock (MappingInitializationLock)
+        {
+            _mappingInitializationStarted = true;
+            if (_configuredMappings != null) return _configuredMappings;
+        }
+        return new MappingData();
     }
 
     /// <summary>
