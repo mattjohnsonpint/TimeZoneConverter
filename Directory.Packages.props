@@ -1,0 +1,24 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
+    <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
+    <PackageVersion Include="NodaTime" Version="3.3.5" />
+    <PackageVersion Include="Polyfill" Version="11.4.3" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="5.0.1" />
+    <PackageVersion Include="SharpCompress" Version="0.50.5" />
+    <PackageVersion Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+    <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
+    <PackageVersion Include="Verify.Xunit" Version="31.12.5" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
+    <PackageVersion Include="Xunit.SkippableFact" Version="1.5.85" />
+  </ItemGroup>
+
+</Project>
