@@ -96,7 +96,7 @@ public static class TZConvert
             IanaTerritoryZones.ToDictionary(
                 x => x.Key,
                 x => (IReadOnlyCollection<string>)x.Value
-                    .Select(zone => TryIanaToWindows(zone, out var winId)
+                    .Select(zone => TryIanaToWindowsMapping(zone, out var winId)
                         ? WindowsToIana(winId, x.Key)
                         : zone)
                     .Order()
@@ -109,6 +109,10 @@ public static class TZConvert
     /// </summary>
     /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
     /// <returns>A Windows time zone ID.</returns>
+    /// <remarks>
+    /// On Windows, the three new 2026 Canadian IDs fall back to their previous mappings until installed.
+    /// Availability is cached when the library initializes. These fallbacks retain the old seasonal rules.
+    /// </remarks>
     /// <exception cref="InvalidTimeZoneException">
     /// Thrown if the input string was not recognized or has no equivalent Windows
     /// zone.
@@ -130,7 +134,44 @@ public static class TZConvert
     /// <param name="ianaTimeZoneName">The IANA time zone name to convert.</param>
     /// <param name="windowsTimeZoneId">A Windows time zone ID.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+    /// <remarks>
+    /// On Windows, the three new 2026 Canadian IDs fall back to their previous mappings until installed.
+    /// Availability is cached when the library initializes. These fallbacks retain the old seasonal rules.
+    /// </remarks>
     public static bool TryIanaToWindows(string ianaTimeZoneName, [MaybeNullWhen(false)] out string windowsTimeZoneId)
+    {
+        if (!TryIanaToWindowsMapping(ianaTimeZoneName, out windowsTimeZoneId))
+        {
+            return false;
+        }
+
+        windowsTimeZoneId = ResolveWindowsTimeZoneId(windowsTimeZoneId, IsWindows, SystemTimeZones.Keys);
+        return true;
+    }
+
+    internal static string ResolveWindowsTimeZoneId(string windowsId, bool isWindows,
+        ICollection<string> installedIds)
+    {
+        if (!isWindows)
+        {
+            return windowsId;
+        }
+
+        // Preserve the previous mappings until the corresponding Windows updates are installed.
+        // These seasonal zones are not equivalent after the November 2026 permanent-DST changes.
+        var previousId = windowsId switch
+        {
+            "British Columbia Standard Time" => "Pacific Standard Time",
+            "Alberta Standard Time" => "Mountain Standard Time",
+            "Manitoba Standard Time" => "Central Standard Time",
+            _ => null
+        };
+
+        return previousId != null && !installedIds.Contains(windowsId) ? previousId : windowsId;
+    }
+
+    internal static bool TryIanaToWindowsMapping(string ianaTimeZoneName,
+        [MaybeNullWhen(false)] out string windowsTimeZoneId)
     {
         if (string.IsNullOrWhiteSpace(ianaTimeZoneName))
         {
@@ -501,7 +542,7 @@ public static class TZConvert
         }
 
         // try again with the golden zone
-        if (TryIanaToWindows(ianaTimeZoneName, out var windowsTimeZoneId) &&
+        if (TryIanaToWindowsMapping(ianaTimeZoneName, out var windowsTimeZoneId) &&
             TryWindowsToIana(windowsTimeZoneId, out var ianaGoldenZone) &&
             InverseRailsMap.TryGetValue(ianaGoldenZone, out railsTimeZoneNames!))
         {
