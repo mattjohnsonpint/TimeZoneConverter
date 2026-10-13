@@ -11,6 +11,8 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<PolyUseEmbeddedAttribute>true</PolyUseEmbeddedAttribute>
+	<Squash_InternalNamespacesToKeep>TimeZoneConverter</Squash_InternalNamespacesToKeep>
   </PropertyGroup>
 
   <PropertyGroup Label="Analysis rules">
@@ -19,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Polyfill" PrivateAssets="All" />
+    <PackageReference Include="Squash" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
