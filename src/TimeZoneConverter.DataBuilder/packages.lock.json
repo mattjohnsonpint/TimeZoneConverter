@@ -4,9 +4,9 @@
     "net10.0": {
       "Polyfill": {
         "type": "Direct",
-        "requested": "[11.4.3, )",
-        "resolved": "11.4.3",
-        "contentHash": "5wRvX7eIi9MYIfziPsSyxMVsV13LqKXT4REsp21SFHvH9HEaMOM8NjhDfxltjeXi8bleUX5t0Gcy0ZGywnlHtw=="
+        "requested": "[11.4.5, )",
+        "resolved": "11.4.5",
+        "contentHash": "dIAO1ecvukEGrfbJDEmVtkxM7uZtwHfLJxTwFft92L4DjEKeyNbAQiq8WiFHwefiOQdeaNDhkHM8j7VPKKggkA=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -19,6 +19,12 @@
         "requested": "[0.50.5, )",
         "resolved": "0.50.5",
         "contentHash": "wAEAxPV67rmS3IlIm+tvGNPJXEtZNqlwkZrwJZAvz0AagZP0qLtT4mM2hk8S+uO0Kx+wYoy/FsADQpHwsN5y3g=="
+      },
+      "Squash": {
+        "type": "Direct",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "okvmrO4/KoWW/7UUthzIwm8vetXnXhtyooTWRtVMjXxU8GYx35lN5vO7z+uYR5KYC/pm71h2mvn10OsMQ1SGFw=="
       }
     }
   }
