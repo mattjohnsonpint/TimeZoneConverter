@@ -16,9 +16,9 @@
       },
       "SharpCompress": {
         "type": "Direct",
-        "requested": "[0.50.5, )",
-        "resolved": "0.50.5",
-        "contentHash": "wAEAxPV67rmS3IlIm+tvGNPJXEtZNqlwkZrwJZAvz0AagZP0qLtT4mM2hk8S+uO0Kx+wYoy/FsADQpHwsN5y3g=="
+        "requested": "[0.50.6, )",
+        "resolved": "0.50.6",
+        "contentHash": "oZcOFo7qhDKtmuoKpVWhSFHlzKIOiZzhIBAE7Tgbd7Z30juzRXNfQSxQlotnGAI27N0R4DtVT9vbKBoXooyB9A=="
       },
       "Squash": {
         "type": "Direct",
