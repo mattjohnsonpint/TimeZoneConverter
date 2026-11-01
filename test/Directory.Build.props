@@ -7,6 +7,12 @@
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
   </PropertyGroup>
 
+  <!-- Renew annually while this project remains non-revenue-generating open source. -->
+  <PropertyGroup>
+    <Verify_SponsorshipExemption>OpenSource</Verify_SponsorshipExemption>
+    <Verify_SponsorshipExemptionUntil>2027-11</Verify_SponsorshipExemptionUntil>
+  </PropertyGroup>
+
   <!-- Avoid Windows-only RID inference so lockfiles are portable across build hosts. -->
   <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
