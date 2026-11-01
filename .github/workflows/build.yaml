@@ -93,12 +93,7 @@ jobs:
             echo "TZDIR=$zoneinfo_dir" >> "$GITHUB_ENV"
 
         - name: Restore
-          if: github.event.pull_request.user.login != 'dependabot[bot]'
-          run: dotnet restore --nologo --locked-mode
-
-        - name: Restore Dependabot updates
-          if: github.event.pull_request.user.login == 'dependabot[bot]'
-          run: dotnet restore --nologo --force-evaluate
+          run: dotnet restore TimeZoneConverter.sln --nologo --locked-mode
 
         - name: Build
           run: dotnet build -c Release --nologo --no-restore

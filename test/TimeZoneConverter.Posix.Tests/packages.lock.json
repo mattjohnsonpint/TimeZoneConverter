@@ -292,15 +292,15 @@
       "timezoneconverter.posix": {
         "type": "Project",
         "dependencies": {
-          "NodaTime": "[3.3.5, )",
-          "TimeZoneConverter": "[7.2.0, )"
+          "NodaTime": "[3.3.7, )",
+          "TimeZoneConverter": "[8.0.0, )"
         }
       },
       "NodaTime": {
         "type": "CentralTransitive",
-        "requested": "[3.3.5, )",
-        "resolved": "3.3.5",
-        "contentHash": "0qtGKHOYhQGCeUItP4RN8KJktsKD9j/B4IqmoecUL+ymReq69O71qEpZY6x0aQPZa5KDLXY41aEOOHZ9T6Uqgw==",
+        "requested": "[3.3.7, )",
+        "resolved": "3.3.7",
+        "contentHash": "4Rc3zup1sZqtlcgkWZOsjoVbhm+RkDvxrFDJfIxi7nr32ZgzVW+zCTBr827+KG/4r5owpchUjqx8tO4K2ZtpOw==",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.1.2"
         }
@@ -535,15 +535,15 @@
       "timezoneconverter.posix": {
         "type": "Project",
         "dependencies": {
-          "NodaTime": "[3.3.5, )",
-          "TimeZoneConverter": "[7.2.0, )"
+          "NodaTime": "[3.3.7, )",
+          "TimeZoneConverter": "[8.0.0, )"
         }
       },
       "NodaTime": {
         "type": "CentralTransitive",
-        "requested": "[3.3.5, )",
-        "resolved": "3.3.5",
-        "contentHash": "0qtGKHOYhQGCeUItP4RN8KJktsKD9j/B4IqmoecUL+ymReq69O71qEpZY6x0aQPZa5KDLXY41aEOOHZ9T6Uqgw=="
+        "requested": "[3.3.7, )",
+        "resolved": "3.3.7",
+        "contentHash": "4Rc3zup1sZqtlcgkWZOsjoVbhm+RkDvxrFDJfIxi7nr32ZgzVW+zCTBr827+KG/4r5owpchUjqx8tO4K2ZtpOw=="
       }
     },
     "net10.0/win-x64": {
@@ -745,15 +745,15 @@
       "timezoneconverter.posix": {
         "type": "Project",
         "dependencies": {
-          "NodaTime": "[3.3.5, )",
-          "TimeZoneConverter": "[7.2.0, )"
+          "NodaTime": "[3.3.7, )",
+          "TimeZoneConverter": "[8.0.0, )"
         }
       },
       "NodaTime": {
         "type": "CentralTransitive",
-        "requested": "[3.3.5, )",
-        "resolved": "3.3.5",
-        "contentHash": "0qtGKHOYhQGCeUItP4RN8KJktsKD9j/B4IqmoecUL+ymReq69O71qEpZY6x0aQPZa5KDLXY41aEOOHZ9T6Uqgw=="
+        "requested": "[3.3.7, )",
+        "resolved": "3.3.7",
+        "contentHash": "4Rc3zup1sZqtlcgkWZOsjoVbhm+RkDvxrFDJfIxi7nr32ZgzVW+zCTBr827+KG/4r5owpchUjqx8tO4K2ZtpOw=="
       }
     },
     "net8.0/win-x64": {
@@ -955,15 +955,15 @@
       "timezoneconverter.posix": {
         "type": "Project",
         "dependencies": {
-          "NodaTime": "[3.3.5, )",
-          "TimeZoneConverter": "[7.2.0, )"
+          "NodaTime": "[3.3.7, )",
+          "TimeZoneConverter": "[8.0.0, )"
         }
       },
       "NodaTime": {
         "type": "CentralTransitive",
-        "requested": "[3.3.5, )",
-        "resolved": "3.3.5",
-        "contentHash": "0qtGKHOYhQGCeUItP4RN8KJktsKD9j/B4IqmoecUL+ymReq69O71qEpZY6x0aQPZa5KDLXY41aEOOHZ9T6Uqgw=="
+        "requested": "[3.3.7, )",
+        "resolved": "3.3.7",
+        "contentHash": "4Rc3zup1sZqtlcgkWZOsjoVbhm+RkDvxrFDJfIxi7nr32ZgzVW+zCTBr827+KG/4r5owpchUjqx8tO4K2ZtpOw=="
       }
     },
     "net9.0/win-x64": {

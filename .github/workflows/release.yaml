@@ -31,10 +31,10 @@ jobs:
             cache-dependency-path: '**/packages.lock.json'
 
         - name: Update tzdata
-          run: sudo apt-get update && sudo apt-get install -y tzdata
+          run: sudo apt-get update && sudo apt-get install -y tzdata tzdata-legacy
 
         - name: Restore
-          run: dotnet restore --nologo --locked-mode
+          run: dotnet restore TimeZoneConverter.sln --nologo --locked-mode
 
         - name: Build
           run: dotnet build -c Release --nologo --no-restore
