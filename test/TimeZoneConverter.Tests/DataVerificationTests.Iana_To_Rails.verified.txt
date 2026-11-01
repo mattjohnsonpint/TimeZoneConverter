@@ -412,7 +412,7 @@
     Indiana (East)
   ],
   America/Inuvik: [
-    Alberta
+    Northwest Territories
   ],
   America/Iqaluit: [
     Eastern Time (US & Canada)
