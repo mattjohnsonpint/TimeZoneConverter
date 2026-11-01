@@ -16,13 +16,10 @@ jobs:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
-    # NOTE: use macos-15-intel because tzdata on macos-latest is outdated
-    # See https://github.com/actions/runner-images/issues/13237
-
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-15-intel]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
         - name: Checkout
@@ -50,7 +47,8 @@ jobs:
             SDK_DOWNLOAD_DIR: ${{ runner.temp }}/dotnet-sdk-downloads
           run: |
             mkdir -p "$SDK_DOWNLOAD_DIR"
-            curl --fail --show-error --location --retry 3 "https://builds.dotnet.microsoft.com/dotnet/Sdk/$SDK_VERSION/dotnet-sdk-$SDK_VERSION-osx-x64.tar.gz" --output "$SDK_DOWNLOAD_DIR/sdk.tar.gz"
+            sdk_arch=$(echo "$RUNNER_ARCH" | tr '[:upper:]' '[:lower:]')
+            curl --fail --show-error --location --retry 3 "https://builds.dotnet.microsoft.com/dotnet/Sdk/$SDK_VERSION/dotnet-sdk-$SDK_VERSION-osx-$sdk_arch.tar.gz" --output "$SDK_DOWNLOAD_DIR/sdk.tar.gz"
 
         - name: Install cached .NET SDK on macOS
           if: runner.os == 'macOS'
@@ -75,25 +73,29 @@ jobs:
           if: runner.os == 'Linux'
           run: | 
             sudo apt-get update
-            # Ubuntu 26.04 puts EST5EDT, CST6CDT, MST7MDT, and PST8PDT in tzdata-legacy.
             sudo apt-get install -y tzdata tzdata-legacy
-            for zone in EST5EDT CST6CDT MST7MDT PST8PDT; do
-              test -f "/usr/share/zoneinfo/$zone"
-            done
           env:
             DEBIAN_FRONTEND: noninteractive
 
-        - name: Check tzdata version on MacOS
+        - name: Update tzdata on macOS
           if: runner.os == 'macOS'
-          run: cat /usr/share/zoneinfo/+VERSION 
+          run: |
+            source_dir="$RUNNER_TEMP/tzdata-source"
+            zoneinfo_dir="$RUNNER_TEMP/zoneinfo"
+            mkdir -p "$source_dir" "$zoneinfo_dir"
+            curl --fail --show-error --location --retry 3 "https://data.iana.org/time-zones/tzdata-latest.tar.gz" --output "$source_dir/tzdata.tar.gz"
+            tar -xzf "$source_dir/tzdata.tar.gz" -C "$source_dir"
+            cd "$source_dir"
+            /usr/sbin/zic -b fat -d "$zoneinfo_dir" africa antarctica asia australasia europe northamerica southamerica etcetera factory backward
+            cp zone.tab zone1970.tab iso3166.tab "$zoneinfo_dir/"
+            cp version "$zoneinfo_dir/+VERSION"
+            cat "$zoneinfo_dir/+VERSION"
+            echo "TZDIR=$zoneinfo_dir" >> "$GITHUB_ENV"
 
         - name: Restore
           if: github.event.pull_request.user.login != 'dependabot[bot]'
           run: dotnet restore --nologo --locked-mode
 
-        # Dependabot can regenerate multi-target lockfiles for only one framework
-        # and leave centrally pinned transitive dependencies stale. Re-evaluate
-        # the full solution for its PRs; keep locked restore for all other builds.
         - name: Restore Dependabot updates
           if: github.event.pull_request.user.login == 'dependabot[bot]'
           run: dotnet restore --nologo --force-evaluate
