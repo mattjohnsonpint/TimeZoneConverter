@@ -35,8 +35,6 @@ public class TimeZoneInfoTests
     [MemberData(nameof(KnownWindowsTimeZones))]
     public void CanGetAllKnownWindowsTimeZones(string id)
     {
-        TestHelpers.SkipIfPendingWindowsTimeZoneUpdate(id);
-
         var result = TZConvert.TryGetTimeZoneInfo(id, out _);
         Assert.True(result, $"Windows time zone \"{id}\" or an equivalent was not found.");
     }
