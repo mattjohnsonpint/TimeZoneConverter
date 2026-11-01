@@ -220,11 +220,11 @@ public static class TZConvert
         return previousId != null && !installedIds.Contains(windowsId) ? previousId : windowsId;
     }
 
-    private static string? GetPreviousWindowsTimeZoneId(string windowsId) => windowsId switch
+    private static string? GetPreviousWindowsTimeZoneId(string windowsId) => windowsId.ToUpperInvariant() switch
     {
-        "British Columbia Standard Time" => "Pacific Standard Time",
-        "Alberta Standard Time" => "Mountain Standard Time",
-        "Manitoba Standard Time" => "Central Standard Time",
+        "BRITISH COLUMBIA STANDARD TIME" => "Pacific Standard Time",
+        "ALBERTA STANDARD TIME" => "Mountain Standard Time",
+        "MANITOBA STANDARD TIME" => "Central Standard Time",
         _ => null
     };
 
@@ -430,6 +430,10 @@ public static class TZConvert
     /// </summary>
     /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
     /// <returns>A <see cref="TimeZoneInfo" /> object.</returns>
+    /// <remarks>
+    /// On Windows, missing 2026 Canadian time zone IDs fall back to their previous Windows zones.
+    /// These fallbacks retain the old seasonal rules until the corresponding Windows updates are installed.
+    /// </remarks>
     public static TimeZoneInfo GetTimeZoneInfo(string windowsOrIanaTimeZoneId)
     {
         if (TryGetTimeZoneInfo(windowsOrIanaTimeZoneId, out var timeZoneInfo))
@@ -447,6 +451,10 @@ public static class TZConvert
     /// <param name="windowsOrIanaTimeZoneId">A valid Windows or IANA time zone identifier.</param>
     /// <param name="timeZoneInfo">A <see cref="TimeZoneInfo" /> object.</param>
     /// <returns><c>true</c> if successful, <c>false</c> otherwise.</returns>
+    /// <remarks>
+    /// On Windows, missing 2026 Canadian time zone IDs fall back to their previous Windows zones.
+    /// These fallbacks retain the old seasonal rules until the corresponding Windows updates are installed.
+    /// </remarks>
     public static bool TryGetTimeZoneInfo(string windowsOrIanaTimeZoneId,
         [MaybeNullWhen(false)] out TimeZoneInfo timeZoneInfo)
     {
@@ -463,14 +471,14 @@ public static class TZConvert
         }
 
         // Try a direct approach 
-        if (SystemTimeZones.TryGetValue(windowsOrIanaTimeZoneId, out timeZoneInfo))
+        if (TryGetSystemTimeZoneInfo(windowsOrIanaTimeZoneId, OperatingSystem.IsWindows(), SystemTimeZones, out timeZoneInfo))
         {
             return true;
         }
 
         if (OperatingSystem.IsWindows())
         {
-            // Convert to IANA and try again.
+            // Convert to Windows and try again.
             if (TryIanaToWindows(windowsOrIanaTimeZoneId, out var tzid) &&
                 SystemTimeZones.TryGetValue(tzid, out timeZoneInfo))
             {
@@ -515,6 +523,19 @@ public static class TZConvert
         }
 
         return false;
+    }
+
+    internal static bool TryGetSystemTimeZoneInfo(string timeZoneId, bool isWindows,
+        Dictionary<string, TimeZoneInfo> systemTimeZones, [MaybeNullWhen(false)] out TimeZoneInfo timeZoneInfo)
+    {
+        if (systemTimeZones.TryGetValue(timeZoneId, out timeZoneInfo))
+        {
+            return true;
+        }
+
+        // Only use the previous seasonal zone when the new Windows zone is not installed.
+        return isWindows && GetPreviousWindowsTimeZoneId(timeZoneId) is { } previousId &&
+               systemTimeZones.TryGetValue(previousId, out timeZoneInfo);
     }
 
     /// <summary>
