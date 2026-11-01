@@ -10,7 +10,7 @@
     <PackageVersion Include="NodaTime" Version="3.3.5" />
     <PackageVersion Include="Polyfill" Version="11.4.5" />
     <PackageVersion Include="Roslynator.Analyzers" Version="5.0.1" />
-    <PackageVersion Include="SharpCompress" Version="0.50.5" />
+    <PackageVersion Include="SharpCompress" Version="0.50.7" />
     <PackageVersion Include="Squash" Version="2.1.0" />
     <PackageVersion Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
