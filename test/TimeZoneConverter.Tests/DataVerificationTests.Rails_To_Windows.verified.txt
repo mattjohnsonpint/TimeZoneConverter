@@ -100,6 +100,7 @@
   New Caledonia: Central Pacific Standard Time,
   New Delhi: India Standard Time,
   Newfoundland: Newfoundland Standard Time,
+  Northwest Territories: Alberta Standard Time,
   Novosibirsk: N. Central Asia Standard Time,
   Nuku'alofa: Tonga Standard Time,
   Osaka: Tokyo Standard Time,
