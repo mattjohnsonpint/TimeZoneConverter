@@ -75,8 +75,11 @@ jobs:
           if: runner.os == 'Linux'
           run: | 
             sudo apt-get update
-            sudo apt-get install -y tzdata
-            sudo dpkg --remove --force-depends tzdata-legacy
+            # Ubuntu 26.04 puts EST5EDT, CST6CDT, MST7MDT, and PST8PDT in tzdata-legacy.
+            sudo apt-get install -y tzdata tzdata-legacy
+            for zone in EST5EDT CST6CDT MST7MDT PST8PDT; do
+              test -f "/usr/share/zoneinfo/$zone"
+            done
           env:
             DEBIAN_FRONTEND: noninteractive
 
@@ -85,7 +88,15 @@ jobs:
           run: cat /usr/share/zoneinfo/+VERSION 
 
         - name: Restore
+          if: github.event.pull_request.user.login != 'dependabot[bot]'
           run: dotnet restore --nologo --locked-mode
+
+        # Dependabot can regenerate multi-target lockfiles for only one framework
+        # and leave centrally pinned transitive dependencies stale. Re-evaluate
+        # the full solution for its PRs; keep locked restore for all other builds.
+        - name: Restore Dependabot updates
+          if: github.event.pull_request.user.login == 'dependabot[bot]'
+          run: dotnet restore --nologo --force-evaluate
 
         - name: Build
           run: dotnet build -c Release --nologo --no-restore
