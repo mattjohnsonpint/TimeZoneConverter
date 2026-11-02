@@ -293,7 +293,7 @@
         "type": "Project",
         "dependencies": {
           "NodaTime": "[3.3.7, )",
-          "TimeZoneConverter": "[8.0.0, )"
+          "TimeZoneConverter": "[8.0.1, )"
         }
       },
       "NodaTime": {
@@ -536,7 +536,7 @@
         "type": "Project",
         "dependencies": {
           "NodaTime": "[3.3.7, )",
-          "TimeZoneConverter": "[8.0.0, )"
+          "TimeZoneConverter": "[8.0.1, )"
         }
       },
       "NodaTime": {
@@ -746,7 +746,7 @@
         "type": "Project",
         "dependencies": {
           "NodaTime": "[3.3.7, )",
-          "TimeZoneConverter": "[8.0.0, )"
+          "TimeZoneConverter": "[8.0.1, )"
         }
       },
       "NodaTime": {
@@ -956,7 +956,7 @@
         "type": "Project",
         "dependencies": {
           "NodaTime": "[3.3.7, )",
-          "TimeZoneConverter": "[8.0.0, )"
+          "TimeZoneConverter": "[8.0.1, )"
         }
       },
       "NodaTime": {
