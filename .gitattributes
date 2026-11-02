@@ -1,0 +1,2 @@
+# Verify snapshots require LF line endings on every platform, including Windows.
+*.verified.txt text eol=lf working-tree-encoding=UTF-8
