@@ -14,7 +14,7 @@
     <PackageVersion Include="Squash" Version="2.1.0" />
     <PackageVersion Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
-    <PackageVersion Include="Verify.XunitV3" Version="31.12.5" />
+    <PackageVersion Include="Verify.XunitV3" Version="33.3.4" />
     <PackageVersion Include="xunit.v3" Version="4.0.2" />
   </ItemGroup>
 
