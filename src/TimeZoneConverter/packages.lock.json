@@ -25,9 +25,9 @@
       },
       "Squash": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "okvmrO4/KoWW/7UUthzIwm8vetXnXhtyooTWRtVMjXxU8GYx35lN5vO7z+uYR5KYC/pm71h2mvn10OsMQ1SGFw=="
+        "requested": "[2.2.0, )",
+        "resolved": "2.2.0",
+        "contentHash": "C6ocdFjN+fmK/1z5MidrK2+ARZEUhNU3J4thTD2XETHWY9iM15ZbgQZ142IIJ/m3lLfn9o3n4H1dPBIB8w7+FA=="
       },
       "System.Runtime.InteropServices.RuntimeInformation": {
         "type": "Direct",
@@ -71,9 +71,9 @@
       },
       "Squash": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "okvmrO4/KoWW/7UUthzIwm8vetXnXhtyooTWRtVMjXxU8GYx35lN5vO7z+uYR5KYC/pm71h2mvn10OsMQ1SGFw=="
+        "requested": "[2.2.0, )",
+        "resolved": "2.2.0",
+        "contentHash": "C6ocdFjN+fmK/1z5MidrK2+ARZEUhNU3J4thTD2XETHWY9iM15ZbgQZ142IIJ/m3lLfn9o3n4H1dPBIB8w7+FA=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
@@ -96,9 +96,9 @@
       },
       "Squash": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "okvmrO4/KoWW/7UUthzIwm8vetXnXhtyooTWRtVMjXxU8GYx35lN5vO7z+uYR5KYC/pm71h2mvn10OsMQ1SGFw=="
+        "requested": "[2.2.0, )",
+        "resolved": "2.2.0",
+        "contentHash": "C6ocdFjN+fmK/1z5MidrK2+ARZEUhNU3J4thTD2XETHWY9iM15ZbgQZ142IIJ/m3lLfn9o3n4H1dPBIB8w7+FA=="
       }
     },
     "net8.0": {
@@ -116,9 +116,9 @@
       },
       "Squash": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "okvmrO4/KoWW/7UUthzIwm8vetXnXhtyooTWRtVMjXxU8GYx35lN5vO7z+uYR5KYC/pm71h2mvn10OsMQ1SGFw=="
+        "requested": "[2.2.0, )",
+        "resolved": "2.2.0",
+        "contentHash": "C6ocdFjN+fmK/1z5MidrK2+ARZEUhNU3J4thTD2XETHWY9iM15ZbgQZ142IIJ/m3lLfn9o3n4H1dPBIB8w7+FA=="
       }
     },
     "net9.0": {
@@ -136,9 +136,9 @@
       },
       "Squash": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "okvmrO4/KoWW/7UUthzIwm8vetXnXhtyooTWRtVMjXxU8GYx35lN5vO7z+uYR5KYC/pm71h2mvn10OsMQ1SGFw=="
+        "requested": "[2.2.0, )",
+        "resolved": "2.2.0",
+        "contentHash": "C6ocdFjN+fmK/1z5MidrK2+ARZEUhNU3J4thTD2XETHWY9iM15ZbgQZ142IIJ/m3lLfn9o3n4H1dPBIB8w7+FA=="
       }
     }
   }
