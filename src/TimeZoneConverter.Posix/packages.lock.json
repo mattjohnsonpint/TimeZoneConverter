@@ -22,9 +22,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[11.4.5, )",
-        "resolved": "11.4.5",
-        "contentHash": "dIAO1ecvukEGrfbJDEmVtkxM7uZtwHfLJxTwFft92L4DjEKeyNbAQiq8WiFHwefiOQdeaNDhkHM8j7VPKKggkA=="
+        "requested": "[12.0.0, )",
+        "resolved": "12.0.0",
+        "contentHash": "7Q6tAh5ubKDoC7UNXdTkSktKdud1RexSkA2hfqkG6nBahFR8XYXgc4lZ6+yBzbBZJFxOdXn03DDJWRDQxDvYWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -89,9 +89,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[11.4.5, )",
-        "resolved": "11.4.5",
-        "contentHash": "dIAO1ecvukEGrfbJDEmVtkxM7uZtwHfLJxTwFft92L4DjEKeyNbAQiq8WiFHwefiOQdeaNDhkHM8j7VPKKggkA=="
+        "requested": "[12.0.0, )",
+        "resolved": "12.0.0",
+        "contentHash": "7Q6tAh5ubKDoC7UNXdTkSktKdud1RexSkA2hfqkG6nBahFR8XYXgc4lZ6+yBzbBZJFxOdXn03DDJWRDQxDvYWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -128,9 +128,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[11.4.5, )",
-        "resolved": "11.4.5",
-        "contentHash": "dIAO1ecvukEGrfbJDEmVtkxM7uZtwHfLJxTwFft92L4DjEKeyNbAQiq8WiFHwefiOQdeaNDhkHM8j7VPKKggkA=="
+        "requested": "[12.0.0, )",
+        "resolved": "12.0.0",
+        "contentHash": "7Q6tAh5ubKDoC7UNXdTkSktKdud1RexSkA2hfqkG6nBahFR8XYXgc4lZ6+yBzbBZJFxOdXn03DDJWRDQxDvYWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -157,9 +157,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[11.4.5, )",
-        "resolved": "11.4.5",
-        "contentHash": "dIAO1ecvukEGrfbJDEmVtkxM7uZtwHfLJxTwFft92L4DjEKeyNbAQiq8WiFHwefiOQdeaNDhkHM8j7VPKKggkA=="
+        "requested": "[12.0.0, )",
+        "resolved": "12.0.0",
+        "contentHash": "7Q6tAh5ubKDoC7UNXdTkSktKdud1RexSkA2hfqkG6nBahFR8XYXgc4lZ6+yBzbBZJFxOdXn03DDJWRDQxDvYWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
